@@ -5,9 +5,9 @@ The zero version of the model tries to keep the structures as flatt as possible 
 Any value in the dictionary can be replaced by string, that corresponds to a key translated later in the file.
 It enables keeping consistent numerical values for masses, and lineshape parametrizations.
 
-```
+```json
 {
-  # general information about the decay
+  //   general information about the decay
   "kinematics": {
     "names": ["p", "K", "π", "Lc"],
     "spins": ["1/2", "0", "0", "1/2"],
@@ -16,8 +16,8 @@ It enables keeping consistent numerical values for masses, and lineshape paramet
   },
 
 
-  # decay chains are given as a list
-  # that specifies
+  //   decay chains are given as a list
+  //   that specifies
   "chains": [
     {
       "weight": "1.1+1.3im",
@@ -71,7 +71,7 @@ It enables keeping consistent numerical values for masses, and lineshape paramet
     }
   ],
 
-  # lineshapes are translated to structures with parameters
+  //   lineshapes are translated to structures with parameters
   "BW_L1520": {
     "type": "BW",
     "mass": 1.52,
@@ -106,14 +106,14 @@ It enables keeping consistent numerical values for masses, and lineshape paramet
     ]
   },
 
-  # masses used in the construction
+  //   masses used in the construction
   "mp": 0.94,
   "mpi+": 0.14,
   "mK-": 0.49,
   "mLc": 2.3,
   "mSigma": 1.23,
 
-  # decay topologies
+  //   decay topologies
   "Lambda_decay_topology": [[2, 3], 1],
 
 }

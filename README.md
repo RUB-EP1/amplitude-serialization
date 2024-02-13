@@ -5,7 +5,7 @@ The zero version of the model tries to keep the structures as flatt as possible 
 Any value in the dictionary can be replaced by string, that corresponds to a key translated later in the file.
 It enables keeping consistent numerical values for masses, and lineshape parametrizations.
 
-```json
+```jsonc
 {
   //   general information about the decay
   "kinematics": {

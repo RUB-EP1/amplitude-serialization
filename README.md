@@ -5,7 +5,13 @@ The zero version of the model tries to keep the structures as flatt as possible 
 Any value in the dictionary can be replaced by string, that corresponds to a key translated later in the file.
 It enables keeping consistent numerical values for masses, and lineshape parametrizations.
 
-```jsonc
+[Detailed description of the format!](description.md)
+
+## Example 
+
+A realistic decay description for Lc2pKpi follows
+
+```json
 {
   //   general information about the decay
   "kinematics": {
@@ -15,7 +21,7 @@ It enables keeping consistent numerical values for masses, and lineshape paramet
     "masses": ["mp", "mK-", "mpi+", "mLc"]
   },
 
-
+  "reference_topology": [[3,1],2]
   //   decay chains are given as a list
   //   that specifies
   "chains": [
@@ -114,7 +120,6 @@ It enables keeping consistent numerical values for masses, and lineshape paramet
   "mSigma": 1.23,
 
   //   decay topologies
-  "Lambda_decay_topology": [[2, 3], 1],
-
+  "Lambda_decay_topology": [[2, 3], 1]
 }
 ```

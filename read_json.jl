@@ -31,8 +31,8 @@ function update2values(x, ref)
 		return ref[x]
 	end
 	if x isa Dict
-		_d = Dict{String,Any}()
-		for (k,v) in x
+		_d = Dict{String, Any}()
+		for (k, v) in x
 			_d[k] = update2values(v, ref)
 		end
 		return _d
@@ -57,7 +57,7 @@ md"""
 # ╔═╡ 77853a6b-47b9-43d6-a6ce-e979fcb45384
 ms = let
 	d = Dict(kinematics["indices"] .=> kinematics["masses"])
-	ThreeBodyMasses(d[1],d[2],d[3]; m0 = d[0])
+	ThreeBodyMasses(d[1], d[2], d[3]; m0 = d[0])
 end
 
 # ╔═╡ f839eb9a-808b-4fb0-aef6-5ce00afb8674
@@ -70,7 +70,7 @@ two_js = let
 end
 
 # ╔═╡ 25423d5b-cd2f-466f-a4fa-18d6e7f52ce7
-tbs = ThreeBodySystem(ms,two_js)
+tbs = ThreeBodySystem(ms, two_js)
 
 # ╔═╡ 47ad3993-6112-4d36-961c-6bf3257b6e4d
 md"""
@@ -164,11 +164,11 @@ git-tree-sha1 = "a1f44953f2382ebb937d60dafbe2deea4bd23249"
 uuid = "c3611d14-8923-5661-9e6a-0046d554d3a4"
 version = "0.10.0"
 
-    [deps.ColorVectorSpace.extensions]
-    SpecialFunctionsExt = "SpecialFunctions"
+	[deps.ColorVectorSpace.extensions]
+	SpecialFunctionsExt = "SpecialFunctions"
 
-    [deps.ColorVectorSpace.weakdeps]
-    SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
+	[deps.ColorVectorSpace.weakdeps]
+	SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 
 [[deps.Colors]]
 deps = ["ColorTypes", "FixedPointNumbers", "Reexport"]
@@ -183,8 +183,8 @@ uuid = "34da2185-b29b-5c13-b0c7-acf172513d20"
 version = "4.12.0"
 weakdeps = ["Dates", "LinearAlgebra"]
 
-    [deps.Compat.extensions]
-    CompatLinearAlgebraExt = "LinearAlgebra"
+	[deps.Compat.extensions]
+	CompatLinearAlgebraExt = "LinearAlgebra"
 
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -418,13 +418,13 @@ git-tree-sha1 = "f428ae552340899a935973270b8d98e5a31c49fe"
 uuid = "23fbe1c1-3f47-55db-b15f-69d7ec21a316"
 version = "0.16.1"
 
-    [deps.Latexify.extensions]
-    DataFramesExt = "DataFrames"
-    SymEngineExt = "SymEngine"
+	[deps.Latexify.extensions]
+	DataFramesExt = "DataFrames"
+	SymEngineExt = "SymEngine"
 
-    [deps.Latexify.weakdeps]
-    DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
-    SymEngine = "123dc426-2d89-5057-bbad-38513e3affd8"
+	[deps.Latexify.weakdeps]
+	DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+	SymEngine = "123dc426-2d89-5057-bbad-38513e3affd8"
 
 [[deps.LibCURL]]
 deps = ["LibCURL_jll", "MozillaCACerts_jll"]
@@ -511,15 +511,15 @@ git-tree-sha1 = "7d6dd4e9212aebaeed356de34ccf262a3cd415aa"
 uuid = "2ab3a3ac-af41-5b50-aa03-7779005ae688"
 version = "0.3.26"
 
-    [deps.LogExpFunctions.extensions]
-    LogExpFunctionsChainRulesCoreExt = "ChainRulesCore"
-    LogExpFunctionsChangesOfVariablesExt = "ChangesOfVariables"
-    LogExpFunctionsInverseFunctionsExt = "InverseFunctions"
+	[deps.LogExpFunctions.extensions]
+	LogExpFunctionsChainRulesCoreExt = "ChainRulesCore"
+	LogExpFunctionsChangesOfVariablesExt = "ChangesOfVariables"
+	LogExpFunctionsInverseFunctionsExt = "InverseFunctions"
 
-    [deps.LogExpFunctions.weakdeps]
-    ChainRulesCore = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
-    ChangesOfVariables = "9e997f8a-9a97-42d5-a9f1-ce6bfc15e2c0"
-    InverseFunctions = "3587e190-3f89-42d0-90ee-14403ec27112"
+	[deps.LogExpFunctions.weakdeps]
+	ChainRulesCore = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
+	ChangesOfVariables = "9e997f8a-9a97-42d5-a9f1-ce6bfc15e2c0"
+	InverseFunctions = "3587e190-3f89-42d0-90ee-14403ec27112"
 
 [[deps.Logging]]
 uuid = "56ddb016-857b-54e1-b83d-db4d58db5568"
@@ -674,19 +674,19 @@ git-tree-sha1 = "38a748946dca52a622e79eea6ed35c6737499109"
 uuid = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 version = "1.40.0"
 
-    [deps.Plots.extensions]
-    FileIOExt = "FileIO"
-    GeometryBasicsExt = "GeometryBasics"
-    IJuliaExt = "IJulia"
-    ImageInTerminalExt = "ImageInTerminal"
-    UnitfulExt = "Unitful"
+	[deps.Plots.extensions]
+	FileIOExt = "FileIO"
+	GeometryBasicsExt = "GeometryBasics"
+	IJuliaExt = "IJulia"
+	ImageInTerminalExt = "ImageInTerminal"
+	UnitfulExt = "Unitful"
 
-    [deps.Plots.weakdeps]
-    FileIO = "5789e2e9-d7fb-5bc7-8068-2c6fae9b9549"
-    GeometryBasics = "5c1252a2-5f33-56bf-86c9-59e7332b4326"
-    IJulia = "7073ff75-c697-5162-941a-fcdaad2a7d2a"
-    ImageInTerminal = "d8c32880-2388-543b-8c61-d9f865259254"
-    Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
+	[deps.Plots.weakdeps]
+	FileIO = "5789e2e9-d7fb-5bc7-8068-2c6fae9b9549"
+	GeometryBasics = "5c1252a2-5f33-56bf-86c9-59e7332b4326"
+	IJulia = "7073ff75-c697-5162-941a-fcdaad2a7d2a"
+	ImageInTerminal = "d8c32880-2388-543b-8c61-d9f865259254"
+	Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 
 [[deps.PolynomialRoots]]
 git-tree-sha1 = "5f807b5345093487f733e520a1b7395ee9324825"
@@ -699,15 +699,15 @@ git-tree-sha1 = "3aa2bb4982e575acd7583f01531f241af077b163"
 uuid = "f27b6e38-b328-58d1-80ce-0feddd5e7a45"
 version = "3.2.13"
 
-    [deps.Polynomials.extensions]
-    PolynomialsChainRulesCoreExt = "ChainRulesCore"
-    PolynomialsMakieCoreExt = "MakieCore"
-    PolynomialsMutableArithmeticsExt = "MutableArithmetics"
+	[deps.Polynomials.extensions]
+	PolynomialsChainRulesCoreExt = "ChainRulesCore"
+	PolynomialsMakieCoreExt = "MakieCore"
+	PolynomialsMutableArithmeticsExt = "MutableArithmetics"
 
-    [deps.Polynomials.weakdeps]
-    ChainRulesCore = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
-    MakieCore = "20f20a25-4f0e-4fdf-b5d1-57303727442b"
-    MutableArithmetics = "d8a4904e-b15c-11e9-3269-09a3773c0cb0"
+	[deps.Polynomials.weakdeps]
+	ChainRulesCore = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
+	MakieCore = "20f20a25-4f0e-4fdf-b5d1-57303727442b"
+	MutableArithmetics = "d8a4904e-b15c-11e9-3269-09a3773c0cb0"
 
 [[deps.PrecompileTools]]
 deps = ["Preferences"]
@@ -812,13 +812,13 @@ git-tree-sha1 = "f68dd04d131d9a8a8eb836173ee8f105c360b0c5"
 uuid = "90137ffa-7385-5640-81b9-e52037218182"
 version = "1.9.1"
 
-    [deps.StaticArrays.extensions]
-    StaticArraysChainRulesCoreExt = "ChainRulesCore"
-    StaticArraysStatisticsExt = "Statistics"
+	[deps.StaticArrays.extensions]
+	StaticArraysChainRulesCoreExt = "ChainRulesCore"
+	StaticArraysStatisticsExt = "Statistics"
 
-    [deps.StaticArrays.weakdeps]
-    ChainRulesCore = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
-    Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
+	[deps.StaticArrays.weakdeps]
+	ChainRulesCore = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
+	Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
 
 [[deps.StaticArraysCore]]
 git-tree-sha1 = "36b3d696ce6366023a0ea192b4cd442268995a0d"
@@ -879,8 +879,8 @@ uuid = "3bb67fe8-82b1-5028-8e26-92a6c54297fa"
 version = "0.10.2"
 weakdeps = ["Random", "Test"]
 
-    [deps.TranscodingStreams.extensions]
-    TestExt = ["Test", "Random"]
+	[deps.TranscodingStreams.extensions]
+	TestExt = ["Test", "Random"]
 
 [[deps.URIs]]
 git-tree-sha1 = "67db6cc7b3821e19ebe75791a9dd19c9b1188f2b"
@@ -911,13 +911,13 @@ git-tree-sha1 = "3c793be6df9dd77a0cf49d80984ef9ff996948fa"
 uuid = "1986cc42-f94f-5a68-af5c-568840ba703d"
 version = "1.19.0"
 
-    [deps.Unitful.extensions]
-    ConstructionBaseUnitfulExt = "ConstructionBase"
-    InverseFunctionsUnitfulExt = "InverseFunctions"
+	[deps.Unitful.extensions]
+	ConstructionBaseUnitfulExt = "ConstructionBase"
+	InverseFunctionsUnitfulExt = "InverseFunctions"
 
-    [deps.Unitful.weakdeps]
-    ConstructionBase = "187b0558-2788-49d3-abe0-74a17ed4e7c9"
-    InverseFunctions = "3587e190-3f89-42d0-90ee-14403ec27112"
+	[deps.Unitful.weakdeps]
+	ConstructionBase = "187b0558-2788-49d3-abe0-74a17ed4e7c9"
+	InverseFunctions = "3587e190-3f89-42d0-90ee-14403ec27112"
 
 [[deps.UnitfulLatexify]]
 deps = ["LaTeXStrings", "Latexify", "Unitful"]

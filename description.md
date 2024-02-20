@@ -17,11 +17,58 @@ The model description format delineates a structured, JSON-based specification d
 
 This document presents the specifications of the model description format in detail, outlining its structure, components, and applications. It is intended as a comprehensive guide for developers and theorists working at the intersection of computational and theoretical physics, ensuring that the tools and models they develop are both accurate and interoperable.
 
+## Amplitude model and observables
+
+In modeling, the Probability Density Function (PDF) serves as a fundamental concept for predicting and analyzing the outcomes of particle interactions. The PDF is a real, normalizable function that depends on kinematic variables and parameters, providing a quantitative framework to describe the likelihood of observing a particular configuration or outcome in a particle decay or collision event.
+
+### Observables
+
+Observables are measurable quantities derived from the model, offering insight into the underlying physics governing particle interactions. In the context of amplitude models, observables are calculated from the transition amplitudes, which represent the probability amplitudes for the system to transition from an initial to a final state. Two primary observables are defined in this framework:
+
+1. **Unpolarized Intensity:**
+   The unpolarized intensity is an observable that represents the overall likelihood of a transition without considering the polarization states of the particles involved. It is computed as the squared magnitude of the transition amplitude, summed over all spin projections. Mathematically, the unpolarized intensity ($I_{unpolarized}$) is given by:
+   
+   $$
+   I_{unpolarized}(\tau | \text{pars}) = \sum_{\text{helicities}} |A_{\text{helicities}}(\tau | \text{pars})|^2
+   $$
+
+   where $A_{\text{helicities}}(\tau | \text{pars})$ denotes the transition amplitude for a given set of helicities, $\tau$ represents the kinematic variables, and $\text{pars}$ symbolizes the model parameters. This observable is crucial for experiments where the polarization of the particles is not measured or considered.
+
+2. **Polarized Intensity:**
+   In contrast, the polarized intensity accounts for the polarization states of the particles involved in the interaction. It is computed by contracting the transition amplitude and its complex conjugate with the polarization matrix ($\rho$). This process involves summing over the final helicities while keeping the initial helicity states ($\lambda_0, \lambda_0'$) explicit in the calculation:
+   
+   $$
+   I_{polarized}(\tau | \text{pars}) = \sum_{\text{final\_helicities}} A^*_{\lambda_0, \text{final\_helicities}}(\tau | \text{pars}) \times \rho_{\lambda_0,\lambda_0'} \times A_{\lambda_0', \text{final\_helicities}}(\tau | \text{pars})
+   $$
+   
+   Here, $A^*_{\lambda_0', \text{final\_helicities}}$ represents the complex conjugate of the amplitude for initial helicity $\lambda_0'$ and a sum over final helicities. The polarization matrix $\rho_{\lambda_0,\lambda_0'}$ encapsulates the initial polarization states of the system, allowing for a detailed analysis of how polarization affects the transition probabilities.
+
+
+```json
+{
+    "distributions" : []
+    {
+        "type": "unpolarized_intensity",
+        "model": "my-amazing-model"
+    },
+    {
+        "name": "my-amazing-model",
+        "kinematics": {},
+        "reference_topology": {},
+        "chains": [
+            {},  # chain 1
+            {},  # chain 2
+        ]
+    }
+}
+```
+
+
 ## Model Structure Overview
 
-The model description format employs a JSON (JavaScript Object Notation) structure, offering a lightweight, text-based way to represent complex physical models. This structured format is designed to encapsulate the essential elements of particle physics models, including the characteristics of particles involved, the shapes of their interaction lines, and the overarching topology of particle interactions. The format's hierarchical nature allows for detailed specification of models while maintaining readability and ease of manipulation by software tools.
+The model description is designed to encapsulate all elements of transition models, including the characteristics of particles involved, the shapes of their interaction lines, and the overarching topology of particle interactions. The format's hierarchical nature allows for detailed specification of models while maintaining readability and ease of manipulation by software tools.
 
-### Mandatory Root-Level Components
+### Mandatory Top-Level Components
 
 The model description is organized around several mandatory root-level components, each serving a distinct purpose in defining the physical model:
 
@@ -48,20 +95,19 @@ The `kinematics` object within the model description format plays a crucial role
 
 - **`spins`:** The `spins` field lists the spin quantum numbers of the particles. They are specified as strings in units of the reduced Planck constant (ħ), with common values including `1/2` for fermions (e.g., protons, electrons) and `1`, `0` for bosons (e.g., photons, pi mesons).
 
-> [!TIP]
-> ### Examples of the `kinematics` sections
-> 
-> - In a model describing the three-body decay of a Lambda baryon (Lb) into a J/psi meson, a kaon (K), and a pion (pi), the `kinematics` object might include:
->   - `spins`: `["1/2", "1", "0", "0"]` for Lb, J/psi, K, and pi, respectively.
->   - `indices`: `[0, 1, 2, 3]` to uniquely identify each particle.
->   - `names`: `["Lb", "Jpsi", "K", "pi"]` for ease of reference.
->   - `masses`: `[5.62, 3.097, 0.493, 0.140]` representing the masses of Lb, J/psi, K, and pi.
->
-> - For a four-body decay of a B meson into a psi meson, a kaon, and two pions, the `kinematics` section could detail:
->   - `spins`: `["0", "1", "0", "0", "0"]` for B, psi, K, and the two pi mesons.
->   - `indices`: `[0, 1, 2, 3, 4]` to differentiate each particle within the model.
->   - `names`: `["B", "psi", "K", "pi", "pi"]`, noting that the pions are indistinguishable but separated by their indices.
->   - `masses`: `[5.279, 3.686, 0.493, 0.140, 0.140]`, listing the masses of B, psi, K, and the two pi mesons.
+### Examples of the `kinematics` sections
+
+- In a model describing the three-body decay of a Lambda baryon (Lb) into a J/psi meson, a kaon (K), and a pion (pi), the `kinematics` object might include:
+  - `spins`: `["1/2", "1", "0", "0"]` for Lb, J/psi, K, and pi, respectively.
+  - `indices`: `[0, 1, 2, 3]` to uniquely identify each particle.
+  - `names`: `["Lb", "Jpsi", "K", "pi"]` for ease of reference.
+  - `masses`: `[5.62, 3.097, 0.493, 0.140]` representing the masses of Lb, J/psi, K, and pi.
+
+- For a four-body decay of a B meson into a psi meson, a kaon, and two pions, the `kinematics` section could detail:
+  - `spins`: `["0", "1", "0", "0", "0"]` for B, psi, K, and the two pi mesons.
+  - `indices`: `[0, 1, 2, 3, 4]` to differentiate each particle within the model.
+  - `names`: `["B", "psi", "K", "pi", "pi"]`, noting that the pions are indistinguishable but separated by their indices.
+  - `masses`: `[5.279, 3.686, 0.493, 0.140, 0.140]`, listing the masses of B, psi, K, and the two pi mesons.
 
 
 ## Topology and Reference Topology
@@ -70,23 +116,24 @@ The `reference_topology` array within the model description format serves a pivo
 
 In the context of the conventional helicity formalism, the `reference_topology` array implicitly prescribes a method for defining helicities. It comes from the specification of a default quantization frame for each stage of the decay process. The helicity values employed in the indices of Wigner rotations `D_{λ1, λ2}` and couplings `H_{λ1, λ2}` are thus indicative of this frame. When considering a particle's helicity in any other frame, it must be treated as a superposition of the states defined by the default quantization.
 
-> [!TIP]
-> ### An example of four-body decay
-> 
-> As as example, let's look into an application of the conventional helicity formalism to a four-body decay topology, specifically `[[[3,1],4],2]`. This topology outlines the decay sequence and the respective frames that define the helicities of the involved particles. Understanding the relation between the decay frames and the helicity definitions is crucial for accurately computing decay amplitudes within this formalism.
-> 
-> In the given topology, the decay amplitude calculation involves a series of Wigner D-functions, each corresponding to rotations and boosts that define the helicity states of the particles:
-> 
-> ```
-> A ~ D(angles_[[3,1],4])_{τ, λ2} x D(angles_[3,1])_{ν, λ4} x D(angles_3)_{λ3, λ1}
-> ```
-> 
-> - `D(angles_[[3,1],4])_{τ, λ2}`: This function describes the transformation for particle 2's helicity (`λ2`) in the overall rest frame of the system (comprising particles 3, 1, 4, and 2). Here, particle 2's helicity is defined relative to the frame where all other particles are considered, emphasizing its position in the decay sequence.
-> 
-> - `D(angles_[3,1])_{ν, λ4}`: For particle 4, its helicity (`λ4`) is defined within the rest frame of the (3,1,4) system. This frame is obtained from the overall rest frame by applying a rotation and boost, signifying the progression of the decay sequence and the specific frame where particle 4's helicity is defined.
-> 
-> - `D(angles_3)_{λ3, λ1}`: The helicities of particles 3 (`λ3`) and 1 (`λ1`) are defined within the (3,1) rest frame. This frame is reached through successive transformations: first to the (3,1,4) system and then to the (3,1) subsystem. This sequence of boosts and rotations precisely defines the helicity states of particles 3 and 1 in relation to their specific interaction frame.
-> 
+### An example of four-body decay
+
+As as example, let's look into an application of the conventional helicity formalism to a four-body decay topology, specifically `[[[3,1],4],2]`. This topology outlines the decay sequence and the respective frames that define the helicities of the involved particles. Understanding the relation between the decay frames and the helicity definitions is crucial for accurately computing decay amplitudes within this formalism.
+
+In the given topology, the decay amplitude calculation involves a series of Wigner D-functions, each corresponding to rotations and boosts that define the helicity states of the particles:
+
+$$
+A = n_{j_0} D_{\tau, \lambda_2}^{j_0}(\text{angles}_{[[3,1],4]}) 
+\cdot n_{j_{[[3,1],4]}} D_{\nu, \lambda_4}^{j_{[[3,1],4]}}(\text{angles}_{[3,1]})
+\cdot n_{j_{[3,1]}} D_{\lambda_3, \lambda_1}^{j_{[3,1]}}(\text{angles}_3)
+$$
+
+- $D_{\tau, \lambda_2}^{j_0}(\text{angles}_{[[3,1],4]})$: This function describes the transformation for particle 2's helicity (`λ2`) in the overall rest frame of the system (comprising particles 3, 1, 4, and 2). Here, particle 2's helicity is defined relative to the frame where all other particles are considered, emphasizing its position in the decay sequence.
+
+- $D_{\nu, \lambda_4}^{j_{[[3,1],4]}}(\text{angles}_{[3,1]})$: For particle 4, its helicity (`λ4`) is defined within the rest frame of the (3,1,4) system. This frame is obtained from the overall rest frame by applying a rotation and boost, signifying the progression of the decay sequence and the specific frame where particle 4's helicity is defined.
+
+- $D_{\lambda_3, \lambda_1}^{j_{[3,1]}}(\text{angles}_3)$: The helicities of particles 3 (`λ3`) and 1 (`λ1`) are defined within the (3,1) rest frame. This frame is reached through successive transformations: first to the (3,1,4) system and then to the (3,1) subsystem. This sequence of boosts and rotations precisely defines the helicity states of particles 3 and 1 in relation to their specific interaction frame.
+
 
 ## Chains Section
 

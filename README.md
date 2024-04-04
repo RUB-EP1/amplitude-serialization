@@ -31,7 +31,7 @@ The block is followed by a description of decay chains,
 every chain contains five mandatory fields:
 - `"topology"`: defines nodes and edges of the decay graph, order of particles,
 - `"propagators"`: for every decay node(!) describes parametrization of the decay particle
-- `"vertices": for every node, describes parametrization of the coupling and form-factor
+- `"vertices"`: for every node, describes parametrization of the coupling and form-factor
 - `"weight"`: complex coefficient multiplying the chain
 - `"name"`: name of the chain
 

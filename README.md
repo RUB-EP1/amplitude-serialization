@@ -12,7 +12,13 @@ It enables keeping consistent numerical values for masses, and lineshape paramet
 A realistic decay description for Lc2pKpi amplitude is produced with [`ThreeBodyDecayIO.jl`](https://github.com/mmikhasenko/ThreeBodyDecaysIO.jl) using the default model of the Lc2ppiK decays, 
 [`Lc2ppiKSemileptonicModelLHCb.jl`](https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl).
 
-Includes the section the describes kinematics,
+For a description of a three body decay amplitude, one must provide several mandatory section at the root of the object,
+`"kinematics"`, `"chains"`, `"reference_topology"`, and `"validation"` sections.
+
+### Kinematics Overview
+
+The "kinematics" section specifies the initial state and final state particles involved in the decay processes:
+
 ```json
   "kinematics": {
     "spins": ["1/2", "0", "0", "1/2"],
@@ -21,29 +27,66 @@ Includes the section the describes kinematics,
     "masses": [0.938272046, 0.13957018, 0.493677, 2.28646]
   }
 ```
-the names of the particles in the text fields only used for clarity.
 
+The `indices` array serves as the primary identifier for particles. The `names` field gives optional labels, these are not identifiers , do not have to be unique. The order in all arrays of the kinematic section matters: the index 1 corresponds to the symbol "p" (proton), mass of `0.938272046`, and spin "1/2". The index zero is reserved for the decay particle in the initial state.
 
-The block is followed by a description of decay chains,
-```json
-  "chains": [{},{}]
-```
-every chain contains five mandatory fields:
+Spins are presented in conventional notation (e.g., "1/2") for familiarity. Most of implementations use Integers to store twice the value of the spin.
+
+### Decay chains
+
+Each decay chain is described by a JSON object containing five mandatory fields:
 - `"topology"`: defines nodes and edges of the decay graph, order of particles,
 - `"propagators"`: for every decay node(!) describes parametrization of the decay particle
 - `"vertices"`: for every node, describes parametrization of the coupling and form-factor
 - `"weight"`: complex coefficient multiplying the chain
 - `"name"`: name of the chain
 
-Spins of the final state particles are quantized in the frames defined by the reference topoloty,
+
+### Topology
+
+Tolopogy of a decay is a tree of intermediate decays given in a compact form using brackets.
+In this notation, each pair of brackets indicate the node and it's children.
+The name of the node is simply given by its decay in the same bracket notations.
+
+```json
+  "topology": [[1, 2], 3],
+```
+Here the 3-body decay process described by the notation `[[1,2],3]`,
+
+```
+      0
+      |
+  [[1,2],3]
+     /  \
+    /    3
+  [1,2]
+  /  \
+ /    2
+1
+```
+
+- The innermost pair `[1,2]` represents the decay of a parent particle into particles 1 and 2.
+- The next level `[[1,2],3]` indicates that the products of the first decay, along with particle 3 are combined into a new node.
+- The starting node is also associated with the initial state decay particle.
+
+Nodes of this example topology are `[1,2]` and `[[1,2],3]`.
+They are referenced when describing the decay vertices and propagators.
+The order matters, i.e. `[[1,2],3] != [[2,1],3] != [3,[2,1]]`.
+
+
+Spins of the final state particles are quantized in the frames defined by the `"reference_topology"`,
 i.e. there are no Wigner rotations for particles in the reference topology, while for the chains with different topology,
 quantization axes must be adjusted by using appropriate wigner rotations.
 
-```json
-  "reference_topology": [[1, 2], 3],
-```
+### Appendix
 
 The `appendix` gives definition to the text keys used elsewhere in the desciption. These definions are inserted recursively, while processing the json file.
+
+
+### Complex numbers
+
+The use of strings for complex numbers follows physics conventions for ease of reading.
+
 
 ```json
   "appendix": {
@@ -64,9 +107,15 @@ The `appendix` gives definition to the text keys used elsewhere in the desciptio
       "ma": 0.493677,
       "width": 0.07
     },
+  }
 ```
+The string values that are not expanded in the  `"appendix"` should be identifiers declared in the serialization document.
+
+### Validation Block
 
 The last block `validation` provides reference values of the amplitude for every chain at a single kinematic point.
+This section acts as a model integrity check, providing reference amplitudes for comparison against calculated values.
+
 
 <details>
   <summary>See the full example</summary>

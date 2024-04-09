@@ -5,7 +5,8 @@ The zero version of the model tries to keep the structures as flatt as possible 
 Any value in the dictionary can be replaced by string, that corresponds to a key translated later in the file.
 It enables keeping consistent numerical values for masses, and lineshape parametrizations.
 
-[Detailed description of the format!](description.md)
+- [Detailed description of the format!](description.md)
+- Notes on [HS3](HS3.md)
 
 ## Example 
 
@@ -864,12 +865,14 @@ This section acts as a model integrity check, providing reference amplitudes for
       "width": 0.117
     },
     "L(1520)_BW": {
-      "l": 2,
-      "mb": 0.938272046,
       "type": "BreitWigner",
-      "mass": 1.518467,
-      "ma": 0.493677,
-      "width": 0.015195
+      "parameters" : {
+        "l": 2,
+        "mass": "L_1520_mass",
+        "width": 0.015195,
+        "ma": 0.493677,
+        "mb": 0.938272046,
+      }
     },
     "L(1600)_BW": {
       "l": 1,

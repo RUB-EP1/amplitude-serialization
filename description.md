@@ -83,32 +83,47 @@ The model description is organized around several mandatory root-level component
 
 ### Purpose of the `Kinematics` Object
 
-The `kinematics` object within the model description format plays a crucial role in defining the physical characteristics of particles involved in a model. It serves as the foundation for constructing a decay model by specifying essential properties such as spin, and masses of all particles. All lists must have the same length, with the order that relates different particles.
+The `kinematics` object within the model description characterizes particles involved in a model.
+It species the main properties such as spin, and masses of all particles.
 
 ### Detailed Field Descriptions
 
-- **`names`:** Particle names in the `names` field provide a human-readable identifier for each particle. These names are not standartized and used only for verbose purpoves.
+- **`initial_state` and `final_state`:** These fields categorize particles as either initiating or resulting from the decay. Each entry includes:
+  - **`index`:** A unique identifier for each particle, with zero reserved for the initial state particle.
+  - **`name`:** A label for each particle, used for clarity and not as a standardized identifier.
+  - **`spin`:** The quantum spin number of the particle, represented in string format.
+  - **`mass`:** The mass of the particle, noted in GeV/c².
 
-- **`indices`:** This field assigns a unique index to each particle, facilitating their identification throughout the model. Indices are used to reference particles in other sections of the model description, ensuring clarity and consistency in specifying interactions and decay processes. The overall system or the mother particle is referenced as zero. The final state particles are numbered by intices 1:N, where N is the total number of particles.
+### Examples of the `kinematics` Sections
 
-- **`masses`:** The `masses` field specifies the mass of each particle in units of GeV/c^2.
+- **Three-body decay example (Lambda baryon to J/psi, kaon, and pion):**
+  ```json
+  "kinematics": {
+    "initial_state" : {
+      "index" : 0, "name" : "Lb",    "spin" : "1/2", "mass" : 5.62
+    },
+    "final_state" : [
+      {"index" : 1, "name" : "Jpsi", "spin" : "1", "mass" : 3.097},
+      {"index" : 2, "name" : "K",    "spin" : "0", "mass" : 0.493},
+      {"index" : 3, "name" : "pi",   "spin" : "0", "mass" : 0.140}
+    ]
+  }
+  ```
 
-- **`spins`:** The `spins` field lists the spin quantum numbers of the particles. They are specified as strings in units of the reduced Planck constant (ħ), with common values including `1/2` for fermions (e.g., protons, electrons) and `1`, `0` for bosons (e.g., photons, pi mesons).
-
-### Examples of the `kinematics` sections
-
-- In a model describing the three-body decay of a Lambda baryon (Lb) into a J/psi meson, a kaon (K), and a pion (pi), the `kinematics` object might include:
-  - `spins`: `["1/2", "1", "0", "0"]` for Lb, J/psi, K, and pi, respectively.
-  - `indices`: `[0, 1, 2, 3]` to uniquely identify each particle.
-  - `names`: `["Lb", "Jpsi", "K", "pi"]` for ease of reference.
-  - `masses`: `[5.62, 3.097, 0.493, 0.140]` representing the masses of Lb, J/psi, K, and pi.
-
-- For a four-body decay of a B meson into a psi meson, a kaon, and two pions, the `kinematics` section could detail:
-  - `spins`: `["0", "1", "0", "0", "0"]` for B, psi, K, and the two pi mesons.
-  - `indices`: `[0, 1, 2, 3, 4]` to differentiate each particle within the model.
-  - `names`: `["B", "psi", "K", "pi", "pi"]`, noting that the pions are indistinguishable but separated by their indices.
-  - `masses`: `[5.279, 3.686, 0.493, 0.140, 0.140]`, listing the masses of B, psi, K, and the two pi mesons.
-
+- **Four-body decay example (B meson to psi meson, kaon, and two pions):**
+  ```json
+  "kinematics": {
+    "initial_state" : {
+      "index" : 0, "name" : "B",    "spin" : "0", "mass" : 5.279
+    },
+    "final_state" : [
+      {"index" : 1, "name" : "psi", "spin" : "1", "mass" : 3.686},
+      {"index" : 2, "name" : "K",   "spin" : "0", "mass" : 0.493},
+      {"index" : 3, "name" : "pi",  "spin" : "0", "mass" : 0.140},
+      {"index" : 4, "name" : "pi",  "spin" : "0", "mass" : 0.140}
+    ]
+  }
+  ```
 
 ## Topology and Reference Topology
 

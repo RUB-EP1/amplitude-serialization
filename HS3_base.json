@@ -102,34 +102,32 @@
           "value": 4.6
         },
         {
+          "name": "L_1520_mass",
+          "value": 4.6
+        },
+        {
           "name": "cos_theta_12",
-          "min": -1,
-          "max": 1
+          "value": 0.6
         },
         {
           "name": "phi_12",
-          "min": -3.14,
-          "max": 3.14
+          "value": 0.3
         },
         {
           "name": "m_12",
-          "min": 1.0,
-          "max": 4.5
+          "value": 3.6
         },
         {
           "name": "cos_theta_12_3",
-          "min": -1,
-          "max": 1
+          "value": 0.7
         },
         {
           "name": "phi_12_3",
-          "min": -3.14,
-          "max": 3.14
+          "value": -0.2
         },
         {
           "name": "m_12_3",
-          "min": 2.0,
-          "max": 6.5
+          "value": 5.6
         }
       ]
     }

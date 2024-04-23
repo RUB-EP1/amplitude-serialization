@@ -18,19 +18,45 @@ For a description of a three body decay amplitude, one must provide several mand
 
 ### Kinematics Overview
 
-The "kinematics" section specifies the initial state and final state particles involved in the decay processes:
+The `kinematics` section details the particle states involved in decay processes:
 
+- `initial_state`: Specifies the decaying particle at the start of the process. Contains keys for `index` (unique identifier), `name` (label), `spin` (quantum spin number), and `mass` (in GeV/c²).
+- `final_state`: An array detailing each resulting particle from the decay. Each entry includes the same keys as `initial_state`, defining the properties of these particles.
+
+For example, the kinematics of the decay Lc2pKpi would look like,
 ```json
-  "kinematics": {
-    "spins": ["1/2", "0", "0", "1/2"],
-    "indices": [1, 2, 3, 0],
-    "names": ["p", "pi", "K", "Lc"],
-    "masses": [0.938272046, 0.13957018, 0.493677, 2.28646]
-  }
+"kinematics": {
+    "initial_state" : {
+        "index" : 0,
+        "name" : "Lc",
+        "spin" : "1/2",
+        "mass" : 2.28646
+    },
+    "final_state" : [
+    {
+        "index" : 1,
+        "name" : "p",
+        "spin" : "1/2",
+        "mass" : 0.938272046
+    },
+    {
+        "index" : 2,
+        "name" : "pi",
+        "spin" : "0",
+        "mass" : 0.13957018
+    },
+    {
+        "index" : 3,
+        "name" : "K",
+        "spin" : "0",
+        "mass" : 0.493677
+    }]
+}
 ```
 
-The `indices` array serves as the primary identifier for particles. The `names` field gives optional labels, these are not identifiers , do not have to be unique. The order in all arrays of the kinematic section matters: the index 1 corresponds to the symbol "p" (proton), mass of `0.938272046`, and spin "1/2". The index zero is reserved for the decay particle in the initial state.
-
+The `index` field serves as the primary identifier for particles.
+The `name` field gives an label, which is not identifiers, it does not have to be unique.
+The index zero is reserved for the decay particle in the initial state.
 Spins are presented in conventional notation (e.g., "1/2") for familiarity. Most of implementations use Integers to store twice the value of the spin.
 
 ### Decay chains

@@ -3,7 +3,7 @@
     {
       "name": "my_model_for_reaction_intensity",
       "type": "hadronic_cross_section_unpolarized_dist",
-      "model_description": {
+      "decay_description": {
         "kinematics": {
           "initial_state": {
             "index": 0,
@@ -32,13 +32,13 @@
             }
           ]
         },
-        "reference_topology": [[1, 2], 3],
+        "reference_topology": [[3, 1], 2],
         "chains": [
           {
             "propagators": [
               {
                 "spin": "1/2",
-                "node": [1, 2],
+                "node": [3, 1],
                 "parametrization": "L1405_Flatte"
               }
             ],
@@ -47,25 +47,25 @@
               {
                 "type": "helicity",
                 "helicities": ["1/2", "0"],
-                "node": [[1, 2], 3],
+                "node": [[3, 1], 2],
                 "formfactor": ""
               },
               {
                 "type": "parity",
                 "helicities": ["0", "1/2"],
                 "parity_factor": "+",
-                "node": [1, 2],
+                "node": [3, 1],
                 "formfactor": ""
               }
             ],
-            "topology": [[1, 2], 3],
+            "topology": [[3, 1], 2],
             "name": "L1405"
           },
           {
             "propagators": [
               {
                 "spin": "1/2",
-                "node": [1, 2],
+                "node": [3, 1],
                 "parametrization": "L1405_Flatte"
               }
             ],
@@ -74,25 +74,25 @@
               {
                 "type": "helicity",
                 "helicities": ["-1/2", "0"],
-                "node": [[1, 2], 3],
+                "node": [[3, 1], 2],
                 "formfactor": ""
               },
               {
                 "type": "parity",
                 "helicities": ["0", "1/2"],
                 "parity_factor": "+",
-                "node": [1, 2],
+                "node": [3, 1],
                 "formfactor": ""
               }
             ],
-            "topology": [[1, 2], 3],
+            "topology": [[3, 1], 2],
             "name": "L1405"
           },
           {
             "propagators": [
               {
                 "spin": "3/2",
-                "node": [1, 2],
+                "node": [3, 1],
                 "parametrization": "L1520_BW"
               }
             ],
@@ -101,25 +101,25 @@
               {
                 "type": "helicity",
                 "helicities": ["-1/2", "0"],
-                "node": [[1, 2], 3],
+                "node": [[3, 1], 2],
                 "formfactor": "BlattWeisskopf_resonance"
               },
               {
                 "type": "parity",
                 "helicities": ["0", "1/2"],
                 "parity_factor": "-",
-                "node": [1, 2],
+                "node": [3, 1],
                 "formfactor": "BlattWeisskopf_b_decay"
               }
             ],
-            "topology": [[1, 2], 3],
+            "topology": [[3, 1], 2],
             "name": "L1520"
           },
           {
             "propagators": [
               {
                 "spin": "3/2",
-                "node": [1, 2],
+                "node": [3, 1],
                 "parametrization": "L1520_BW"
               }
             ],
@@ -128,25 +128,25 @@
               {
                 "type": "helicity",
                 "helicities": ["1/2", "0"],
-                "node": [[1, 2], 3],
+                "node": [[3, 1], 2],
                 "formfactor": "BlattWeisskopf_resonance"
               },
               {
                 "type": "parity",
                 "helicities": ["0", "1/2"],
                 "parity_factor": "-",
-                "node": [1, 2],
+                "node": [3, 1],
                 "formfactor": "BlattWeisskopf_b_decay"
               }
             ],
-            "topology": [[1, 2], 3],
+            "topology": [[3, 1], 2],
             "name": "L1520"
           },
           {
             "propagators": [
               {
                 "spin": "1/2",
-                "node": [1, 2],
+                "node": [3, 1],
                 "parametrization": "L1600_BW"
               }
             ],
@@ -155,25 +155,25 @@
               {
                 "type": "helicity",
                 "helicities": ["1/2", "0"],
-                "node": [[1, 2], 3],
+                "node": [[3, 1], 2],
                 "formfactor": "BlattWeisskopf_resonance"
               },
               {
                 "type": "parity",
                 "helicities": ["0", "1/2"],
                 "parity_factor": "-",
-                "node": [1, 2],
+                "node": [3, 1],
                 "formfactor": "BlattWeisskopf_b_decay"
               }
             ],
-            "topology": [[1, 2], 3],
+            "topology": [[3, 1], 2],
             "name": "L1600"
           },
           {
             "propagators": [
               {
                 "spin": "1/2",
-                "node": [1, 2],
+                "node": [3, 1],
                 "parametrization": "L1600_BW"
               }
             ],
@@ -182,25 +182,25 @@
               {
                 "type": "helicity",
                 "helicities": ["-1/2", "0"],
-                "node": [[1, 2], 3],
+                "node": [[3, 1], 2],
                 "formfactor": "BlattWeisskopf_resonance"
               },
               {
                 "type": "parity",
                 "helicities": ["0", "1/2"],
                 "parity_factor": "-",
-                "node": [1, 2],
+                "node": [3, 1],
                 "formfactor": "BlattWeisskopf_b_decay"
               }
             ],
-            "topology": [[1, 2], 3],
+            "topology": [[3, 1], 2],
             "name": "L1600"
           },
           {
             "propagators": [
               {
                 "spin": "1/2",
-                "node": [1, 2],
+                "node": [3, 1],
                 "parametrization": "L1670_BW"
               }
             ],
@@ -209,25 +209,25 @@
               {
                 "type": "helicity",
                 "helicities": ["-1/2", "0"],
-                "node": [[1, 2], 3],
+                "node": [[3, 1], 2],
                 "formfactor": "BlattWeisskopf_resonance"
               },
               {
                 "type": "parity",
                 "helicities": ["0", "1/2"],
                 "parity_factor": "+",
-                "node": [1, 2],
+                "node": [3, 1],
                 "formfactor": "BlattWeisskopf_b_decay"
               }
             ],
-            "topology": [[1, 2], 3],
+            "topology": [[3, 1], 2],
             "name": "L1670"
           },
           {
             "propagators": [
               {
                 "spin": "1/2",
-                "node": [1, 2],
+                "node": [3, 1],
                 "parametrization": "L1670_BW"
               }
             ],
@@ -236,25 +236,25 @@
               {
                 "type": "helicity",
                 "helicities": ["1/2", "0"],
-                "node": [[1, 2], 3],
+                "node": [[3, 1], 2],
                 "formfactor": "BlattWeisskopf_resonance"
               },
               {
                 "type": "parity",
                 "helicities": ["0", "1/2"],
                 "parity_factor": "+",
-                "node": [1, 2],
+                "node": [3, 1],
                 "formfactor": "BlattWeisskopf_b_decay"
               }
             ],
-            "topology": [[1, 2], 3],
+            "topology": [[3, 1], 2],
             "name": "L1670"
           },
           {
             "propagators": [
               {
                 "spin": "3/2",
-                "node": [1, 2],
+                "node": [3, 1],
                 "parametrization": "L1690_BW"
               }
             ],
@@ -263,25 +263,25 @@
               {
                 "type": "helicity",
                 "helicities": ["-1/2", "0"],
-                "node": [[1, 2], 3],
+                "node": [[3, 1], 2],
                 "formfactor": "BlattWeisskopf_resonance"
               },
               {
                 "type": "parity",
                 "helicities": ["0", "1/2"],
                 "parity_factor": "-",
-                "node": [1, 2],
+                "node": [3, 1],
                 "formfactor": "BlattWeisskopf_b_decay"
               }
             ],
-            "topology": [[1, 2], 3],
+            "topology": [[3, 1], 2],
             "name": "L1690"
           },
           {
             "propagators": [
               {
                 "spin": "3/2",
-                "node": [1, 2],
+                "node": [3, 1],
                 "parametrization": "L1690_BW"
               }
             ],
@@ -290,25 +290,25 @@
               {
                 "type": "helicity",
                 "helicities": ["1/2", "0"],
-                "node": [[1, 2], 3],
+                "node": [[3, 1], 2],
                 "formfactor": "BlattWeisskopf_resonance"
               },
               {
                 "type": "parity",
                 "helicities": ["0", "1/2"],
                 "parity_factor": "-",
-                "node": [1, 2],
+                "node": [3, 1],
                 "formfactor": "BlattWeisskopf_b_decay"
               }
             ],
-            "topology": [[1, 2], 3],
+            "topology": [[3, 1], 2],
             "name": "L1690"
           },
           {
             "propagators": [
               {
                 "spin": "1/2",
-                "node": [1, 2],
+                "node": [3, 1],
                 "parametrization": "L2000_BW"
               }
             ],
@@ -317,25 +317,25 @@
               {
                 "type": "helicity",
                 "helicities": ["1/2", "0"],
-                "node": [[1, 2], 3],
+                "node": [[3, 1], 2],
                 "formfactor": "BlattWeisskopf_resonance"
               },
               {
                 "type": "parity",
                 "helicities": ["0", "1/2"],
                 "parity_factor": "+",
-                "node": [1, 2],
+                "node": [3, 1],
                 "formfactor": "BlattWeisskopf_b_decay"
               }
             ],
-            "topology": [[1, 2], 3],
+            "topology": [[3, 1], 2],
             "name": "L2000"
           },
           {
             "propagators": [
               {
                 "spin": "1/2",
-                "node": [1, 2],
+                "node": [3, 1],
                 "parametrization": "L2000_BW"
               }
             ],
@@ -344,18 +344,18 @@
               {
                 "type": "helicity",
                 "helicities": ["-1/2", "0"],
-                "node": [[1, 2], 3],
+                "node": [[3, 1], 2],
                 "formfactor": "BlattWeisskopf_resonance"
               },
               {
                 "type": "parity",
                 "helicities": ["0", "1/2"],
                 "parity_factor": "+",
-                "node": [1, 2],
+                "node": [3, 1],
                 "formfactor": "BlattWeisskopf_b_decay"
               }
             ],
-            "topology": [[1, 2], 3],
+            "topology": [[3, 1], 2],
             "name": "L2000"
           },
           {
@@ -524,7 +524,7 @@
             "propagators": [
               {
                 "spin": "0",
-                "node": [1, 2],
+                "node": [2, 3],
                 "parametrization": "K(700)_BuggBW"
               }
             ],
@@ -533,25 +533,25 @@
               {
                 "type": "helicity",
                 "helicities": ["0", "1/2"],
-                "node": [[1, 2], 3],
+                "node": [[2, 3], 1],
                 "formfactor": ""
               },
               {
                 "type": "parity",
                 "helicities": ["0", "0"],
                 "parity_factor": "+",
-                "node": [1, 2],
+                "node": [2, 3],
                 "formfactor": ""
               }
             ],
-            "topology": [[1, 2], 3],
+            "topology": [[2, 3], 1],
             "name": "K(700)"
           },
           {
             "propagators": [
               {
                 "spin": "0",
-                "node": [1, 2],
+                "node": [2, 3],
                 "parametrization": "K(700)_BuggBW"
               }
             ],
@@ -560,25 +560,25 @@
               {
                 "type": "helicity",
                 "helicities": ["0", "-1/2"],
-                "node": [[1, 2], 3],
+                "node": [[2, 3], 1],
                 "formfactor": ""
               },
               {
                 "type": "parity",
                 "helicities": ["0", "0"],
                 "parity_factor": "+",
-                "node": [1, 2],
+                "node": [2, 3],
                 "formfactor": ""
               }
             ],
-            "topology": [[1, 2], 3],
+            "topology": [[2, 3], 1],
             "name": "K(700)"
           },
           {
             "propagators": [
               {
                 "spin": "1",
-                "node": [1, 2],
+                "node": [2, 3],
                 "parametrization": "K(892)_BW"
               }
             ],
@@ -587,25 +587,25 @@
               {
                 "type": "helicity",
                 "helicities": ["-1", "-1/2"],
-                "node": [[1, 2], 3],
+                "node": [[2, 3], 1],
                 "formfactor": "BlattWeisskopf_resonance"
               },
               {
                 "type": "parity",
                 "helicities": ["0", "0"],
                 "parity_factor": "+",
-                "node": [1, 2],
+                "node": [2, 3],
                 "formfactor": "BlattWeisskopf_b_decay"
               }
             ],
-            "topology": [[1, 2], 3],
+            "topology": [[2, 3], 1],
             "name": "K(892)"
           },
           {
             "propagators": [
               {
                 "spin": "1",
-                "node": [1, 2],
+                "node": [2, 3],
                 "parametrization": "K(892)_BW"
               }
             ],
@@ -614,25 +614,25 @@
               {
                 "type": "helicity",
                 "helicities": ["0", "1/2"],
-                "node": [[1, 2], 3],
+                "node": [[2, 3], 1],
                 "formfactor": "BlattWeisskopf_resonance"
               },
               {
                 "type": "parity",
                 "helicities": ["0", "0"],
                 "parity_factor": "+",
-                "node": [1, 2],
+                "node": [2, 3],
                 "formfactor": "BlattWeisskopf_b_decay"
               }
             ],
-            "topology": [[1, 2], 3],
+            "topology": [[2, 3], 1],
             "name": "K(892)"
           },
           {
             "propagators": [
               {
                 "spin": "1",
-                "node": [1, 2],
+                "node": [2, 3],
                 "parametrization": "K(892)_BW"
               }
             ],
@@ -641,25 +641,25 @@
               {
                 "type": "helicity",
                 "helicities": ["0", "-1/2"],
-                "node": [[1, 2], 3],
+                "node": [[2, 3], 1],
                 "formfactor": "BlattWeisskopf_resonance"
               },
               {
                 "type": "parity",
                 "helicities": ["0", "0"],
                 "parity_factor": "+",
-                "node": [1, 2],
+                "node": [2, 3],
                 "formfactor": "BlattWeisskopf_b_decay"
               }
             ],
-            "topology": [[1, 2], 3],
+            "topology": [[2, 3], 1],
             "name": "K(892)"
           },
           {
             "propagators": [
               {
                 "spin": "1",
-                "node": [1, 2],
+                "node": [2, 3],
                 "parametrization": "K(892)_BW"
               }
             ],
@@ -668,25 +668,25 @@
               {
                 "type": "helicity",
                 "helicities": ["1", "1/2"],
-                "node": [[1, 2], 3],
+                "node": [[2, 3], 1],
                 "formfactor": "BlattWeisskopf_resonance"
               },
               {
                 "type": "parity",
                 "helicities": ["0", "0"],
                 "parity_factor": "+",
-                "node": [1, 2],
+                "node": [2, 3],
                 "formfactor": "BlattWeisskopf_b_decay"
               }
             ],
-            "topology": [[1, 2], 3],
+            "topology": [[2, 3], 1],
             "name": "K(892)"
           },
           {
             "propagators": [
               {
                 "spin": "0",
-                "node": [1, 2],
+                "node": [2, 3],
                 "parametrization": "K(1430)_BuggBW"
               }
             ],
@@ -695,25 +695,25 @@
               {
                 "type": "helicity",
                 "helicities": ["0", "1/2"],
-                "node": [[1, 2], 3],
+                "node": [[2, 3], 1],
                 "formfactor": ""
               },
               {
                 "type": "parity",
                 "helicities": ["0", "0"],
                 "parity_factor": "+",
-                "node": [1, 2],
+                "node": [2, 3],
                 "formfactor": ""
               }
             ],
-            "topology": [[1, 2], 3],
+            "topology": [[2, 3], 1],
             "name": "K(1430)"
           },
           {
             "propagators": [
               {
                 "spin": "0",
-                "node": [1, 2],
+                "node": [2, 3],
                 "parametrization": "K(1430)_BuggBW"
               }
             ],
@@ -722,18 +722,18 @@
               {
                 "type": "helicity",
                 "helicities": ["0", "-1/2"],
-                "node": [[1, 2], 3],
+                "node": [[2, 3], 1],
                 "formfactor": ""
               },
               {
                 "type": "parity",
                 "helicities": ["0", "0"],
                 "parity_factor": "+",
-                "node": [1, 2],
+                "node": [2, 3],
                 "formfactor": ""
               }
             ],
-            "topology": [[1, 2], 3],
+            "topology": [[2, 3], 1],
             "name": "K(1430)"
           }
         ],

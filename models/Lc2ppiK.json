@@ -834,14 +834,14 @@
     {
       "name": "K(700)_BuggBW",
       "gamma": 0.94106,
-      "type": "BuggBreitWignerMinL",
+      "type": "BreitWignerWidthExp",
       "mass": 0.824,
       "width": 0.478
     },
     {
       "name": "K(1430)_BuggBW",
       "gamma": 0.020981,
-      "type": "BuggBreitWignerMinL",
+      "type": "BreitWignerWidthExp",
       "mass": 1.375,
       "width": 0.19
     },

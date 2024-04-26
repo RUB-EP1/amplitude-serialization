@@ -40,7 +40,7 @@ Observables are measurable quantities derived from the model, offering insight i
    Here, $A^*_{\lambda_0', \text{final\_helicities}}$ represents the complex conjugate of the amplitude for initial helicity $\lambda_0'$ and a sum over final helicities. The polarization matrix $\rho_{\lambda_0,\lambda_0'}$ encapsulates the initial polarization states of the system, allowing for a detailed analysis of how polarization affects the transition probabilities.
 
 
-```json
+```jsonc
 {
     "distributions" : []
     {
@@ -52,8 +52,8 @@ Observables are measurable quantities derived from the model, offering insight i
         "kinematics": {},
         "reference_topology": {},
         "chains": [
-            {},  # chain 1
-            {},  # chain 2
+            {},  // chain 1
+            {},  // chain 2
         ]
     }
 }

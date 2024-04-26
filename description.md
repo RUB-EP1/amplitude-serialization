@@ -133,7 +133,7 @@ As as example, let's look into an application of the conventional helicity forma
 
 In the given topology, the decay amplitude calculation involves a series of Wigner D-functions, each corresponding to rotations and boosts that define the helicity states of the particles:
 
-$$A = n_{j_0} D_{\tau, \lambda_2}^{j_0}(\text{angles}_{[[3,1],4]}) \cdot n_{j_{[[3,1],4]}} D_{\nu, \lambda_4}^{j_{[[3,1],4]}}(\text{angles}_{[3,1]}) \cdot n_{j_{[3,1]}} D_{\lambda_3, \lambda_1}^{j_{[3,1]}}(\text{angles}_3)$$
+$$A = n_{j_0} D_{\tau, \lambda_2}^{j_0}(\text{angles}_{[[3,1],4]})$$
 
 - $D_{\tau, \lambda_2}^{j_0}(\text{angles}_{[[3,1],4]})$: This function describes the transformation for particle 2's helicity (`λ2`) in the overall rest frame of the system (comprising particles 3, 1, 4, and 2). Here, particle 2's helicity is defined relative to the frame where all other particles are considered, emphasizing its position in the decay sequence.
 

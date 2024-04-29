@@ -9,14 +9,14 @@ In parallel to development of the model description format, compatibility with H
 ## Support in ROOT, what is missing
 
 - Class: `RooAmplitudeModelPDF`
-    * Implementation of math
-    * Exporter: `RooAmplitudeModelPDF::Streamer`
-    * Importer: `RooAmplitudeModelPDF::Factory`
+  - Implementation of math
+  - Exporter: `RooAmplitudeModelPDF::Streamer`
+  - Importer: `RooAmplitudeModelPDF::Factory`
 - All lineshapes: `BreitWigner`, `BlattWeisskopf`
 
 ## Example of HS3 file
 
 - [HS3_base.json](HS3_base.json) give description of basic interfaces of the model variables and parameters consistently with HS3. It sets default value of variable, and describes a validation point in HS3 consistent way.
 - [HS3_extended.json](HS3_extended.json) prototypes
-    * adding jacobian (prior) for phase space generation,
-    * replacing phase space variables
+  - adding jacobian (prior) for phase space generation,
+  - replacing phase space variables

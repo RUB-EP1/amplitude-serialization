@@ -27,18 +27,17 @@ Observables are measurable quantities derived from the model, offering insight i
 
 1. **Unpolarized Intensity:**
    The unpolarized intensity is an observable that represents the overall likelihood of a transition without considering the polarization states of the particles involved. It is computed as the squared magnitude of the transition amplitude, summed over all spin projections. Mathematically, the unpolarized intensity ($I_{unpolarized}$) is given by:
-   
+
    $$I_{unpolarized}(\tau | \text{pars}) = \sum_{\text{helicities}} |A_{\text{helicities}}(\tau | \text{pars})|^2$$
 
    where $A_{\text{helicities}}(\tau | \text{pars})$ denotes the transition amplitude for a given set of helicities, $\tau$ represents the kinematic variables, and $\text{pars}$ symbolizes the model parameters. This observable is crucial for experiments where the polarization of the particles is not measured or considered.
 
 2. **Polarized Intensity:**
    In contrast, the polarized intensity accounts for the polarization states of the particles involved in the interaction. It is computed by contracting the transition amplitude and its complex conjugate with the polarization matrix ($\rho$). This process involves summing over the final helicities while keeping the initial helicity states ($\lambda_0, \lambda_0'$) explicit in the calculation:
-   
-   $$I_\text{polarized}(\tau | \text{pars}) = \sum_{\text{final\_helicities}} A^*_{\lambda_0, \text{final\_helicities}}(\tau | \text{pars}) \times \rho_{\lambda_0,\lambda_0'} \times A_{\lambda_0', \text{final\_helicities}}(\tau | \text{pars})$$
-   
-   Here, $A^*_{\lambda_0', \text{final\_helicities}}$ represents the complex conjugate of the amplitude for initial helicity $\lambda_0'$ and a sum over final helicities. The polarization matrix $\rho_{\lambda_0,\lambda_0'}$ encapsulates the initial polarization states of the system, allowing for a detailed analysis of how polarization affects the transition probabilities.
 
+   $$I_\text{polarized}(\tau | \text{pars}) = \sum_{\text{final\_helicities}} A^*_{\lambda_0, \text{final\_helicities}}(\tau | \text{pars}) \times \rho_{\lambda_0,\lambda_0'} \times A_{\lambda_0', \text{final\_helicities}}(\tau | \text{pars})$$
+
+   Here, $A^*_{\lambda_0', \text{final\_helicities}}$ represents the complex conjugate of the amplitude for initial helicity $\lambda_0'$ and a sum over final helicities. The polarization matrix $\rho_{\lambda_0,\lambda_0'}$ encapsulates the initial polarization states of the system, allowing for a detailed analysis of how polarization affects the transition probabilities.
 
 ```jsonc
 {
@@ -58,7 +57,6 @@ Observables are measurable quantities derived from the model, offering insight i
     }
 }
 ```
-
 
 ## Model Structure Overview
 
@@ -93,6 +91,7 @@ It species the main properties such as spin, and masses of all particles.
 ### Examples of the `kinematics` Sections
 
 - **Three-body decay example (Lambda baryon to J/psi, kaon, and pion):**
+
   ```json
   "kinematics": {
     "initial_state" : {
@@ -147,7 +146,6 @@ A &= n_{j_0} D_{\tau, \lambda_2}^{j_0}(\text{angles}_{[[3,1],4]}) \\
 
 - $D_{\lambda_3, \lambda_1}^{j_{[3,1]}}(\text{angles}_3)$: The helicities of particles 3 (`λ3`) and 1 (`λ1`) are defined within the (3,1) rest frame. This frame is reached through successive transformations: first to the (3,1,4) system and then to the (3,1) subsystem. This sequence of boosts and rotations precisely defines the helicity states of particles 3 and 1 in relation to their specific interaction frame.
 
-
 ## Chains Section
 
 The `chains` section is a main component of the model description format, outlining the specific interaction sequences and their properties within the model. Chains are components of the model, which are added linearly to each other. The `chains` fields contains a list, `[{}, {}, ...]`, with every element being a chain. The chain contains the field `topology` that describe the cascade decay, the field `propagators` that is a list of the lineshape descriptors, and the field `vertices` that specifies parametrization of every node in the decay-topology graph.
@@ -160,10 +158,9 @@ The `topology` field in each chain delineates the structural framework of the in
 
 Vertices define the points where interactions occur within a chain, specifying the change in particle states. Each vertex is characterized by:
 
-- **`node`:** Defines a node in the topology graph by specifying the particles involved in the interaction. 
+- **`node`:** Defines a node in the topology graph by specifying the particles involved in the interaction.
 
 - **`type`:** specify how the helicity coupling `H_{l1,l2}` is computed. Three types are defined `RecouplingLS`, `ParityRecoupling`, and `NoRecoupling`. These reflect different ways of relating various combinations of the helicity indices.
-
 
 ### Propagators
 
@@ -176,4 +173,3 @@ Vertices define the points where interactions occur within a chain, specifying t
 ### Weight
 
 The `weight` field in each chain represents the complex amplitude associated with the chain's specific sequence of interactions and propagations. This weight factors into the overall amplitude of the process being modeled, influencing the probability of the chain's occurrence. Weights are crucial for calculating cross sections, decay rates, and other observable quantities, directly impacting the model's predictive accuracy.
-

@@ -1,0 +1,44 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = [
+    "setuptools>=61.2",
+    "setuptools_scm",
+]
+
+[project]
+authors = [
+    {name = "Ilya Segal"},
+    {name = "Mikhail Mikhasenko"},
+    {name = "Remco de Boer"},
+]
+dependencies = ["pre-commit"]
+description = "Prototype for the amplitude model serialization format"
+dynamic = ["version"]
+license = {text = "MIT"}
+name = "amplitude-serialization"
+requires-python = ">= 3.8"
+
+[tool.pixi.project]
+channels = ["conda-forge"]
+platforms = [
+    "linux-64",
+    "osx-64",
+]
+
+[tool.pixi.dependencies]
+julia = ">=1.10.0"
+python = ">=3.8.0"
+
+[tool.tomlsort]
+all = false
+ignore_case = true
+in_place = true
+sort_first = [
+    "build-system",
+    "project",
+    "tool.setuptools",
+    "tool.setuptools_scm",
+]
+sort_table_keys = true
+spaces_indent_inline_array = 4
+trailing_comma_inline_array = true

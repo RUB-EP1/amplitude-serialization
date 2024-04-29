@@ -1,0 +1,3 @@
+*.egg-info/
+.pixi/
+node_modules/

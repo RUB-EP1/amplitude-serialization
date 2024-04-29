@@ -1,0 +1,14 @@
+{
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.formatOnSave": true,
+  "julia.executablePath": "${workspaceFolder}/.pixi/envs/default/bin/julia",
+  "python.defaultInterpreterPath": ".pixi/envs/default/bin/python"
+}

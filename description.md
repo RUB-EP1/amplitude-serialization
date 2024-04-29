@@ -158,12 +158,28 @@ The `topology` field in each chain delineates the structural framework of the in
 
 ### Vertices
 
-Vertices define the points where interactions occur within a chain, specifying the change in particle states. Each vertex is characterized by:
+Vertices define the nodes in the decay graphs, where one particle transits into two. The multiplicity of two should not be a limitation of the format, however, for format for listing more then two childen has not been developed yet.
+Each vertex is characterized by:
 
 - **`node`:** Defines a node in the topology graph by specifying the particles involved in the interaction. 
 
-- **`type`:** specify how the helicity coupling `H_{l1,l2}` is computed. Three types are defined `RecouplingLS`, `ParityRecoupling`, and `NoRecoupling`. These reflect different ways of relating various combinations of the helicity indices.
+- **`type`:** specify how the helicity recoupling factor `H_{l1,l2}` is computed.
+Three types are defined `RecouplingLS`, `ParityRecoupling`, and `NoRecoupling`.
+These reflect different ways of relating combinations of the helicity indices to an real factor, the recoupling coefficient.
 
+```math
+\begin{align}
+H^\text{no}(\lambda_a,\lambda_b|\lambda_a^0,\lambda_b^0) &= \delta_{\lambda_a,\lambda_a^0}\delta_{\lambda_b,\lambda_b^0}\,,
+H^\text{parity}(\lambda_a,\lambda_b|\lambda_a^0,\lambda_b^0, f) &=
+\delta_{\lambda_a,\lambda_a^0}\delta_{\lambda_b,\lambda_b^0} + f \delta_{\lambda_a,-\lambda_a^0}\delta_{\lambda_b,-\lambda_b^0}\,,
+H^\text{ls}(\lambda_a,\lambda_b|l,s,j_a,j_b,j) &= \sqrt{\frac{2l+1}{2j+1}}
+\left\langle j_a,\lambda_a; j_b,-\lambda_b|s,\lambda_a-\lambda_b\right\rangle
+\left\langle l,0; s,\lambda_a-\lambda_b|j,\lambda_a-\lambda_b\right\rangle\,.
+\end{align}
+```
+The `no recoupling` factor is one for a pair of selected helicities ($\lambda_a^0$ and $\lambda_b^0$) and zero for other combinations.
+The `parity recoupling` gives non-zero value for two combination of the helicity pair, the selected one and the opposite, controlled by the `parity factor`, $f$.
+Finally, the `ls recoupling` computed the value of the recoupling functions from Clebsh-Gordan coefficients. For spin half particles, this recoupling is equivalent to `parity recoupling` with $f = (-1)^l$.
 
 ### Propagators
 

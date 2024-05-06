@@ -161,12 +161,12 @@ Vertices define the nodes in the decay graphs, where one particle transits into 
 - **`node`:** Defines a node in the topology graph by specifying the particles involved in the interaction.
 
 - **`type`:** Specifes how the helicity recoupling factor `H_{l1,l2}` is computed.
-  Three types are defined: `RecouplingLS`, `ParityRecoupling`, and `NoRecoupling`.
+  Three types are defined: `ls`, `parity`, and `helicity`.
   These reflect different ways of relating combinations of the helicity indices to a real-valued factor, the recoupling coefficient.
 
   ```math
   \begin{align}
-  H^\text{no}(\lambda_a,\lambda_b|\lambda_a^0,\lambda_b^0) &= \delta_{\lambda_a,\lambda_a^0}\delta_{\lambda_b,\lambda_b^0}\,, \\
+  H^\text{helicity}(\lambda_a,\lambda_b|\lambda_a^0,\lambda_b^0) &= \delta_{\lambda_a,\lambda_a^0}\delta_{\lambda_b,\lambda_b^0}\,, \\
   H^\text{parity}(\lambda_a,\lambda_b|\lambda_a^0,\lambda_b^0, f) &=
   \delta_{\lambda_a,\lambda_a^0}\delta_{\lambda_b,\lambda_b^0} + f \delta_{\lambda_a,-\lambda_a^0}\delta_{\lambda_b,-\lambda_b^0}\,, \\
   H^\text{ls}(\lambda_a,\lambda_b|l,s,j_a,j_b,j) &= \sqrt{\frac{2l+1}{2j+1}}
@@ -175,7 +175,7 @@ Vertices define the nodes in the decay graphs, where one particle transits into 
   \end{align}
   ```
 
-  The `NoRecoupling` factor is $1$ for a pair of selected helicities ($\lambda_a^0$ and $\lambda_b^0$) and zero for other combinations. The `ParityRecoupling` is controlled by the controlled by the `parity factor`, $f$, and gives non-zero value for two combination of the helicity pair, the selected one and the opposite. Finally, the `RecouplingLS` computes the value of the recoupling functions from Clebsch–Gordan coefficients. For spin-half particles, this recoupling is equivalent to `ParityRecoupling`, with $f = (-1)^l$.
+  The `helicity` indicated no recoupling, the factor is $1$ for a pair of selected helicities ($\lambda_a^0$ and $\lambda_b^0$) and zero for other combinations. The `ParityRecoupling` is controlled by the controlled by the `parity factor`, $f$, and gives non-zero value for two combination of the helicity pair, the selected one and the opposite. Finally, the `RecouplingLS` computes the value of the recoupling functions from Clebsch–Gordan coefficients. For spin-half particles, this recoupling is equivalent to `ParityRecoupling`, with $f = (-1)^l$.
 
 ### Propagators
 

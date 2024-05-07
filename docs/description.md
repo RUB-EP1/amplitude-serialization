@@ -1,3 +1,5 @@
+# Format description
+
 ## Introduction
 
 ### Overview
@@ -39,7 +41,7 @@ Observables are measurable quantities derived from the model, offering insight i
 
    Here, $A^*_{\lambda_0', \text{final\_helicities}}$ represents the complex conjugate of the amplitude for initial helicity $\lambda_0'$ and a sum over final helicities. The polarization matrix $\rho_{\lambda_0,\lambda_0'}$ encapsulates the initial polarization states of the system, allowing for a detailed analysis of how polarization affects the transition probabilities.
 
-```jsonc
+```json
 {
     "distributions" : []
     {
@@ -132,7 +134,7 @@ As as example, let's look into an application of the conventional helicity forma
 
 In the given topology, the decay amplitude calculation involves a series of Wigner D-functions, each corresponding to rotations and boosts that define the helicity states of the particles:
 
-```math
+```{math}
 \begin{align}
 A &= n_{j_0} D_{\tau, \lambda_2}^{j_0}(\text{angles}_{[[3,1],4]}) \\
 &\quad \cdot n_{j_{[[3,1],4]}} D_{\nu, \lambda_4}^{j_{[[3,1],4]}}(\text{angles}_{[3,1]}) \\
@@ -164,7 +166,7 @@ Vertices define the nodes in the decay graphs, where one particle transits into 
   Three types are defined: `ls`, `parity`, and `helicity`.
   These reflect different ways of relating combinations of the helicity indices to a real-valued factor, the recoupling coefficient.
 
-  ```math
+  ```{math}
   \begin{align}
   H^\text{helicity}(\lambda_a,\lambda_b|\lambda_a^0,\lambda_b^0) &= \delta_{\lambda_a,\lambda_a^0}\delta_{\lambda_b,\lambda_b^0}\,, \\
   H^\text{parity}(\lambda_a,\lambda_b|\lambda_a^0,\lambda_b^0, f) &=

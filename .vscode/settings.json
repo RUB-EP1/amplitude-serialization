@@ -10,5 +10,9 @@
   },
   "editor.formatOnSave": true,
   "julia.executablePath": "${workspaceFolder}/.pixi/envs/default/bin/julia",
-  "python.defaultInterpreterPath": ".pixi/envs/default/bin/python"
+  "notebook.formatOnSave.enabled": true,
+  "python.defaultInterpreterPath": ".pixi/envs/default/bin/python",
+  "ruff.enable": true,
+  "ruff.importStrategy": "fromEnvironment",
+  "ruff.organizeImports": true
 }

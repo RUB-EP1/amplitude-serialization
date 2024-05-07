@@ -11,7 +11,7 @@ authors = [
     {name = "Mikhail Mikhasenko"},
     {name = "Remco de Boer"},
 ]
-dependencies = ["pre-commit"]
+dependencies = ["myst-nb", "pre-commit", "pydata-sphinx-theme", "ruff"]
 description = "Prototype for the amplitude model serialization format"
 dynamic = ["version"]
 license = {text = "MIT"}
@@ -28,6 +28,15 @@ platforms = [
 [tool.pixi.dependencies]
 julia = ">=1.10.0"
 python = ">=3.8.0"
+
+[tool.pixi.tasks]
+doc = """
+sphinx-build \
+    --fail-on-warning \
+    --keep-going \
+    -b html \
+    docs docs/_build/html
+"""
 
 [tool.tomlsort]
 all = false

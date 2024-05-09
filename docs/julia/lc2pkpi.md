@@ -10,6 +10,7 @@ kernelspec:
 ## Install packages
 
 ```{code-cell} julia
+:tags: [hide-input, remove-output]
 import Pkg
 Pkg.activate(@__DIR__)
 Pkg.instantiate()

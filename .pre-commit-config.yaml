@@ -39,3 +39,4 @@ repos:
       - id: toml-sort
         args:
           - --in-place
+        exclude: (?x)^(.*/Manifest\.toml|.*/Project\.toml)$

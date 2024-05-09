@@ -10,10 +10,18 @@ kernelspec:
 ## Install packages
 
 ```{code-cell} julia
+println("kernel is alive")
+```
+
+```{code-cell} julia
 :tags: [hide-input, hide-output, scroll-output]
 import Pkg
 Pkg.activate(@__DIR__)
 Pkg.instantiate()
+```
+
+```{code-cell} julia
+println("kernel is alive")
 ```
 
 ```{code-cell} julia
@@ -63,6 +71,10 @@ Built functions will be stored in workspace:
 
 ```{code-cell} julia
 workspace = Dict{String,Any}()
+```
+
+```{code-cell} julia
+println("kernel is alive")
 ```
 
 Build functions from JSON array:

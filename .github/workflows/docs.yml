@@ -13,9 +13,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Julia cache
+        uses: actions/cache@v4
+        with:
+          key: |
+            julia-${{hashFiles('Manifest.toml')}}-${{hashFiles('**/*.jl')}}
+          restore-keys: |
+            julia-${{hashFiles('Manifest.toml')}}
+            julia
+          path: |
+            ~/.julia/
       - uses: prefix-dev/setup-pixi@v0.6.0
         with:
           cache: true
+      - name: Jupyter cache
+        uses: actions/cache@v4
+        with:
+          key: |
+            jupyter-cache-${{hashFiles('pixi.lock')}}-${{hashFiles('docs/*/*.md')}}
+          restore-keys: |
+            jupyter-cache-${{hashFiles('pixi.lock')}}
+            jupyter-cache
+          path: |
+            docs/_build/.jupyter_cache
+            docs/_build/jupyter_execute
       - run: pixi run doc
       - if: always()
         uses: actions/upload-pages-artifact@v3

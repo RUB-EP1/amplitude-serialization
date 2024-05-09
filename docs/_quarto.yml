@@ -8,7 +8,7 @@ format:
     toc: true
 
 project:
-  output-dir: docs/_build/html
+  output-dir: _build/html
   type: website
 
 website:

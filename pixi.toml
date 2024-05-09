@@ -6,6 +6,8 @@ authors = [
 ]
 channels = ["conda-forge"]
 description = "Prototype for the amplitude model serialization format"
+documentation = "https://rub-ep1.github.io/amplitude-serialization"
+homepage = "https://rub-ep1.github.io/amplitude-serialization"
 license = "MIT"
 license-file = "LICENSE"
 name = "amplitude-serialization"
@@ -13,6 +15,7 @@ platforms = [
     "linux-64",
     "osx-64",
 ]
+repository = "https://github.com/RUB-EP1/amplitude-serialization"
 
 [dependencies]
 ipykernel = "*"

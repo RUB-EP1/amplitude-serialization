@@ -16,5 +16,11 @@
   "livePreview.defaultPreviewPath": "docs/_build/html",
   "notebook.formatOnSave.enabled": true,
   "python.defaultInterpreterPath": ".pixi/envs/default/bin/python",
-  "quarto.path": ".pixi/envs/default/bin/quarto"
+  "quarto.path": ".pixi/envs/default/bin/quarto",
+  "search.exclude": {
+    "**/*.code-search": true,
+    "**/bower_components": true,
+    "**/node_modules": true,
+    "**/pixi.lock": true
+  }
 }

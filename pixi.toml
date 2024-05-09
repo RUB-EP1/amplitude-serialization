@@ -1,0 +1,47 @@
+[project]
+authors = [
+    "Ilya Segal",
+    "Mikhail Mikhasenko",
+    "Remco de Boer",
+]
+channels = ["conda-forge"]
+description = "Prototype for the amplitude model serialization format"
+license = "MIT"
+license-file = "LICENSE"
+name = "amplitude-serialization"
+platforms = [
+    "linux-64",
+    "osx-64",
+]
+
+[dependencies]
+ipykernel = "*"
+juliaup = "*"
+jupyter-cache = "*"
+nbclient = "*"
+nbformat = "*"
+pre-commit = "*"
+python = ">=3.8.0*"
+quarto = "*"
+
+[tasks.doc]
+cmd = "quarto render"
+cwd = "docs"
+depends_on = ["install-julia"]
+
+[tasks.doclive]
+cmd = "quarto preview"
+cwd = "docs"
+depends_on = ["install-julia"]
+
+[tasks.install-julia]
+cmd = """
+juliaup add 1.10.3 && \
+juliaup default 1.10.3 && \
+julia --project -e '
+    using Pkg
+    Pkg.add("IJulia")
+    import IJulia
+    IJulia.installkernel("julia-amplitude-serialization")
+'
+"""

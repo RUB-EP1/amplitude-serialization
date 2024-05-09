@@ -1,30 +1,21 @@
 ---
-file_format: mystnb
-kernelspec:
-  language: julia
-  name: julia-amplitude-serialization-1.10
+jupyter: julia-amplitude-serialization-1.10
+error: true
 ---
 
-# Julia
+# $\Lambda_c \to p K \pi$
 
 ## Install packages
 
-```{code-cell} julia
-println("kernel is alive")
-```
 
-```{code-cell} julia
-:tags: [hide-input, hide-output, scroll-output]
+```{julia}
 import Pkg
 Pkg.activate(@__DIR__)
 Pkg.instantiate()
 ```
 
-```{code-cell} julia
-println("kernel is alive")
-```
 
-```{code-cell} julia
+```{julia}
 using ThreeBodyDecaysIO
 using ThreeBodyDecaysIO.ThreeBodyDecays
 using HadronicLineshapes
@@ -37,7 +28,7 @@ using Test
 
 ## Function definitions
 
-```{code-cell} julia
+```{julia}
 @with_kw struct BreitWignerWidthExpLikeBugg <: HadronicLineshapes.AbstractFlexFunc
     m::Float64
     Γ::Float64
@@ -61,7 +52,8 @@ end
 
 Get the JSON content
 
-```{code-cell} julia
+```{julia}
+
 input = open(joinpath(@__DIR__, "..", "..", "Lc2ppiK.json")) do io
     JSON.parse(io)
 end
@@ -69,17 +61,15 @@ end
 
 Built functions will be stored in workspace:
 
-```{code-cell} julia
+```{julia}
 workspace = Dict{String,Any}()
 ```
 
-```{code-cell} julia
-println("kernel is alive")
-```
+
 
 Build functions from JSON array:
 
-```{code-cell} julia
+```{julia}
 @unpack functions = input
 for fn in functions
     @unpack name, type = fn
@@ -90,7 +80,7 @@ end
 
 Build distributions from JSON array:
 
-```{code-cell} julia
+```{julia}
 @unpack distributions = input
 for dist in distributions
     @unpack name, type = dist
@@ -101,7 +91,7 @@ end
 
 Perform validation:
 
-```{code-cell} julia
+```{julia}
 @unpack misc, parameter_points = input
 @unpack amplitude_model_checksums = misc
 
@@ -126,7 +116,7 @@ end
 
 Plot the model:
 
-```{code-cell} julia
+```{julia}
 let
     model = workspace["my_model_for_reaction_intensity"].model
     plot(masses(model), Base.Fix1(unpolarized_intensity, model))

@@ -1,0 +1,27 @@
+execute:
+  cache: true
+  enabled: true
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+
+project:
+  output-dir: docs/_build/html
+  type: website
+
+website:
+  title: Amplitude model serialization
+  navbar:
+    left:
+      - href: index.md
+        text: Home
+      - description.md
+      - HS3.md
+      - menu:
+          - julia/lc2pkpi.qmd
+        text: Julia
+      - menu:
+          - python/lc2pkpi.qmd
+        text: Python

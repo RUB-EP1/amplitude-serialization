@@ -12,11 +12,11 @@ authors = [
     {name = "Remco de Boer"},
 ]
 dependencies = [
-    "myst-nb",
+    "ipykernel",
+    "jupyter-cache",
+    "nbclient",
+    "nbformat",
     "pre-commit",
-    "pydata-sphinx-theme",
-    "ruff",
-    "sphinx-autobuild",
 ]
 description = "Prototype for the amplitude model serialization format"
 dynamic = ["version"]
@@ -34,28 +34,16 @@ platforms = [
 [tool.pixi.dependencies]
 juliaup = "*"
 python = ">=3.8.0"
+quarto = "*"
 
 [tool.pixi.tasks.doc]
-cmd = """
-sphinx-build \
-    --builder html \
-    --keep-going \
-    docs docs/_build/html
-"""
+cmd = "quarto render"
+cwd = "docs"
 depends_on = ["install-julia"]
 
 [tool.pixi.tasks.doclive]
-cmd = """
-sphinx-autobuild \
-    --builder html \
-    --keep-going \
-    --open-browser \
-    --re-ignore '.*/.ipynb_checkpoints/.*' \
-    --re-ignore 'docs/_build/.*' \
-    --re-ignore 'docs/_static/.*' \
-    --watch=docs \
-    docs docs/_build/html
-"""
+cmd = "quarto preview"
+cwd = "docs"
 depends_on = ["install-julia"]
 
 [tool.pixi.tasks.install-julia]

@@ -37,7 +37,9 @@ Observables are measurable quantities derived from the model, offering insight i
 2. **Polarized Intensity:**
    In contrast, the polarized intensity accounts for the polarization states of the particles involved in the interaction. It is computed by contracting the transition amplitude and its complex conjugate with the polarization matrix ($\rho$). This process involves summing over the final helicities while keeping the initial helicity states ($\lambda_0, \lambda_0'$) explicit in the calculation:
 
-   $$I_\text{polarized}(\tau | \text{pars}) = \sum_{\text{final\_helicities}} A^*_{\lambda_0, \text{final\_helicities}}(\tau | \text{pars}) \times \rho_{\lambda_0,\lambda_0'} \times A_{\lambda_0', \text{final\_helicities}}(\tau | \text{pars})$$
+   $$
+   I_\text{polarized}(\tau | \text{pars}) = \sum_{\text{final\_helicities}} A^*_{\lambda_0, \text{final\_helicities}}(\tau | \text{pars}) \times \rho_{\lambda_0,\lambda_0'} \times A_{\lambda_0', \text{final\_helicities}}(\tau | \text{pars})
+   $$
 
    Here, $A^*_{\lambda_0', \text{final\_helicities}}$ represents the complex conjugate of the amplitude for initial helicity $\lambda_0'$ and a sum over final helicities. The polarization matrix $\rho_{\lambda_0,\lambda_0'}$ encapsulates the initial polarization states of the system, allowing for a detailed analysis of how polarization affects the transition probabilities.
 
@@ -134,13 +136,13 @@ As as example, let's look into an application of the conventional helicity forma
 
 In the given topology, the decay amplitude calculation involves a series of Wigner D-functions, each corresponding to rotations and boosts that define the helicity states of the particles:
 
-```{math}
+$$
 \begin{align}
 A &= n_{j_0} D_{\tau, \lambda_2}^{j_0}(\text{angles}_{[[3,1],4]}) \\
 &\quad \cdot n_{j_{[[3,1],4]}} D_{\nu, \lambda_4}^{j_{[[3,1],4]}}(\text{angles}_{[3,1]}) \\
 &\quad \cdot n_{j_{[3,1]}} D_{\lambda_3, \lambda_1}^{j_{[3,1]}}(\text{angles}_3)
 \end{align}
-```
+$$
 
 - $D_{\tau, \lambda_2}^{j_0}(\text{angles}_{[[3,1],4]})$: This function describes the transformation for particle 2's helicity (`λ2`) in the overall rest frame of the system (comprising particles 3, 1, 4, and 2). Here, particle 2's helicity is defined relative to the frame where all other particles are considered, emphasizing its position in the decay sequence.
 
@@ -166,7 +168,7 @@ Vertices define the nodes in the decay graphs, where one particle transits into 
   Three types are defined: `ls`, `parity`, and `helicity`.
   These reflect different ways of relating combinations of the helicity indices to a real-valued factor, the recoupling coefficient.
 
-  ```{math}
+  $$
   \begin{align}
   H^\text{helicity}(\lambda_a,\lambda_b|\lambda_a^0,\lambda_b^0) &= \delta_{\lambda_a,\lambda_a^0}\delta_{\lambda_b,\lambda_b^0}\,, \\
   H^\text{parity}(\lambda_a,\lambda_b|\lambda_a^0,\lambda_b^0, f) &=
@@ -175,7 +177,7 @@ Vertices define the nodes in the decay graphs, where one particle transits into 
   \left\langle j_a,\lambda_a; j_b,-\lambda_b|s,\lambda_a-\lambda_b\right\rangle
   \left\langle l,0; s,\lambda_a-\lambda_b|j,\lambda_a-\lambda_b\right\rangle\,.
   \end{align}
-  ```
+  $$
 
   The `helicity` indicated no recoupling, the factor is $1$ for a pair of selected helicities ($\lambda_a^0$ and $\lambda_b^0$) and zero for other combinations. The `ParityRecoupling` is controlled by the controlled by the `parity factor`, $f$, and gives non-zero value for two combination of the helicity pair, the selected one and the opposite. Finally, the `RecouplingLS` computes the value of the recoupling functions from Clebsch–Gordan coefficients. For spin-half particles, this recoupling is equivalent to `ParityRecoupling`, with $f = (-1)^l$.
 

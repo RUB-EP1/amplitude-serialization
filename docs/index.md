@@ -1013,10 +1013,3 @@ This section acts as a model integrity check, providing reference amplitudes for
 ```
 
 </details>
-
-```{toctree}
-description
-HS3
-python/lc2pkpi
-julia/lc2pkpi
-```

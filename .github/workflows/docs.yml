@@ -35,8 +35,7 @@ jobs:
             jupyter-cache-${{hashFiles('pixi.lock')}}
             jupyter-cache
           path: |
-            docs/_build/.jupyter_cache
-            docs/_build/jupyter_execute
+            **/.jupyter_cache
       - run: pixi run doc
       - if: always()
         uses: actions/upload-pages-artifact@v3

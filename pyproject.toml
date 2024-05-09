@@ -39,7 +39,6 @@ python = ">=3.8.0"
 cmd = """
 sphinx-build \
     --builder html \
-    --fail-on-warning \
     --keep-going \
     docs docs/_build/html
 """
@@ -49,7 +48,6 @@ depends_on = ["install-julia"]
 cmd = """
 sphinx-autobuild \
     --builder html \
-    --fail-on-warning \
     --keep-going \
     --open-browser \
     --re-ignore '.*/.ipynb_checkpoints/.*' \

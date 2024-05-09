@@ -55,7 +55,7 @@ end
 Get the JSON content
 
 ```{julia}
-input = open(joinpath(@__DIR__, "..", "..", "Lc2ppiK.json")) do io
+input = open(joinpath(@__DIR__, "..", "..", "models", "Lc2ppiK.json")) do io
     JSON.parse(io)
 end
 ```

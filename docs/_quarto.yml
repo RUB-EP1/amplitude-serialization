@@ -19,9 +19,11 @@ website:
         text: Home
       - description.md
       - HS3.md
-      - menu:
+  sidebar:
+    contents:
+      - section: Julia
+        contents:
           - julia/lc2pkpi.qmd
-        text: Julia
-      - menu:
+      - section: Python
+        contents:
           - python/lc2pkpi.qmd
-        text: Python

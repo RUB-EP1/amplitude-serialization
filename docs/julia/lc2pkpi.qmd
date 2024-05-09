@@ -1,6 +1,5 @@
 ---
 jupyter: julia-amplitude-serialization-1.10
-error: true
 ---
 
 # $\Lambda_c \to p K \pi$
@@ -9,6 +8,9 @@ error: true
 
 
 ```{julia}
+#| code-fold: true
+#| code-summary: Activate environment
+#| output: false
 import Pkg
 Pkg.activate(@__DIR__)
 Pkg.instantiate()
@@ -116,6 +118,7 @@ end
 Plot the model:
 
 ```{julia}
+#| code-fold: true
 let
     model = workspace["my_model_for_reaction_intensity"].model
     plot(masses(model), Base.Fix1(unpolarized_intensity, model))

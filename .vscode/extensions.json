@@ -1,13 +1,14 @@
 {
   "recommendations": [
+    "charliermarsh.ruff",
     "eamodio.gitlens",
     "editorconfig.editorconfig",
     "esbenp.prettier-vscode",
+    "executablebookproject.myst-highlight",
     "github.vscode-pull-request-github",
     "julialang.language-julia",
     "ms-python.python",
     "tamasfe.even-better-toml",
-    "yzhang.markdown-all-in-one",
-    "charliermarsh.ruff"
+    "yzhang.markdown-all-in-one"
   ]
 }

@@ -13,5 +13,6 @@ myst_enable_extensions = [
     "amsmath",
     "colon_fence",
 ]
+nb_execution_mode = "cache"
 nitpicky = True
 project = "Amplitude model serialization"

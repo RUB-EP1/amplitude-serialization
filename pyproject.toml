@@ -26,16 +26,29 @@ platforms = [
 ]
 
 [tool.pixi.dependencies]
-julia = ">=1.10.0"
+juliaup = "*"
 python = ">=3.8.0"
 
-[tool.pixi.tasks]
-doc = """
+[tool.pixi.tasks.doc]
+cmd = """
 sphinx-build \
     --fail-on-warning \
     --keep-going \
     -b html \
     docs docs/_build/html
+"""
+depends_on = ["install-julia"]
+
+[tool.pixi.tasks.install-julia]
+cmd = """
+juliaup add 1.10.3 && \
+juliaup default 1.10.3 && \
+julia --project -e '
+    using Pkg
+    Pkg.add("IJulia")
+    import IJulia
+    IJulia.installkernel("julia-amplitude-serialization")
+'
 """
 
 [tool.tomlsort]

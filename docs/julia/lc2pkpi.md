@@ -10,7 +10,7 @@ kernelspec:
 ## Install packages
 
 ```{code-cell} julia
-:tags: [hide-input, remove-output]
+:tags: [hide-input, hide-output, scroll-output]
 import Pkg
 Pkg.activate(@__DIR__)
 Pkg.instantiate()

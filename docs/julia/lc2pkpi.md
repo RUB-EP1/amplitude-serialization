@@ -5,7 +5,7 @@ kernelspec:
   name: julia-amplitude-serialization-1.10
 ---
 
-# Julia implementation
+# Julia
 
 ## Install packages
 

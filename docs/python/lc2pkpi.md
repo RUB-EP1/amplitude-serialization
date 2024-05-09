@@ -5,7 +5,7 @@ kernelspec:
   name: python3
 ---
 
-# Python implementation
+# Python
 
 ```{code-cell} python
 print("Hello, World!")

@@ -15,12 +15,21 @@ project:
 
 website:
   title: Amplitude model serialization
+  description: Prototype for the amplitude model serialization format
+  favicon: _images/favicon.ico
+  repo-actions: [edit, issue, source]
+  repo-subdir: docs
+  repo-url: https://github.com/RUB-EP1/amplitude-serialization
   navbar:
     left:
       - href: index.md
         text: Home
       - description.md
       - HS3.md
+    right:
+      - icon: github
+        href: https://github.com/RUB-EP1/amplitude-serialization
+        aria-label: GitHub
   sidebar:
     contents:
       - section: Julia

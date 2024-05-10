@@ -1,0 +1,31 @@
+[project]
+authors = [
+    "Ilya Segal",
+    "Mikhail Mikhasenko",
+    "Remco de Boer",
+]
+channels = ["conda-forge"]
+description = "Prototype for the amplitude model serialization format"
+documentation = "https://rub-ep1.github.io/amplitude-serialization"
+homepage = "https://rub-ep1.github.io/amplitude-serialization"
+license = "MIT"
+license-file = "LICENSE"
+name = "amplitude-serialization"
+platforms = [
+    "linux-64",
+    "osx-64",
+    "osx-arm64",
+]
+
+[dependencies]
+juliaup = "*"
+python = ">=3.8.0"
+
+[pypi-dependencies]
+pre-commit = "*"
+
+[tasks.install-julia]
+cmd = """
+juliaup add 1.10.3 && \
+juliaup default 1.10.3
+"""

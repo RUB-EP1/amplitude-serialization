@@ -2,10 +2,9 @@
 jupyter: julia-amplitude-serialization-1.10
 ---
 
-# $\Lambda_c \to p K \pi$
+# $\Lambda_c^+ \to p K^- \pi^+$
 
-## Install packages
-
+This page demostrates deserialization and evaluation of an amplitude model for the decay $\Lambda_c^+ \to p K^- \pi^+$. The amplitude analysis is performed based on roughly half a millon of $\Lambda_c^{\pm}$ decay candidates by the LHCb collaboration, [INSPIRE-HEP 2683025](https://inspirehep.net/literature/2683025). Detains on the mapped of the ampltude model onto the standard helicity formalism can be found in appendix of [INSPIRE-HEP 2623821](https://inspirehep.net/literature/2623821).
 
 ```{julia}
 #| code-fold: true
@@ -14,24 +13,32 @@ jupyter: julia-amplitude-serialization-1.10
 import Pkg
 Pkg.activate(@__DIR__)
 Pkg.instantiate()
-```
 
-
-```{julia}
 using ThreeBodyDecaysIO
 using ThreeBodyDecaysIO.ThreeBodyDecays
-using HadronicLineshapes
-using JSON
-using Parameters
-using DataFrames
+using ThreeBodyDecaysIO.HadronicLineshapes
+using ThreeBodyDecaysIO.Parameters
+using ThreeBodyDecaysIO.DataFrames
+using ThreeBodyDecaysIO.JSON
+using Measurements
+using Statistics
+using QuadGK
 using Plots
-using Test
+
+theme(:wong2, frame=:box, grid=false, minorticks=true,
+    guidefontvalign=:top, guidefonthalign=:right,
+    foreground_color_legend=nothing,
+    xlim=(:auto, :auto), ylim=(:auto, :auto),
+    lab="")
 ```
 
 ## Function definitions
 
+Non-standard lineshapes are used to model resonances that do not conform to a simple `BreitWigner` distributions, or a `MultichannelBreitWigner` has to be defined explicitly.
+The code below defines a new lineshape, and its deserialization method.
+
 ```{julia}
-@with_kw struct BreitWignerWidthExpLikeBugg <: HadronicLineshapes.AbstractFlexFunc
+struct BreitWignerWidthExpLikeBugg <: HadronicLineshapes.AbstractFlexFunc
     m::Float64
     Γ::Float64
     γ::Float64
@@ -50,38 +57,24 @@ function ThreeBodyDecaysIO.dict2instance(::Type{BreitWignerWidthExpLikeBugg}, di
 end
 ```
 
-## Implementation
+## Deserialization of Objects to a Workspace
 
-Get the JSON content
+Model components are deserialized from a JSON file into computational objects within a workspace for further manipulation. First, functions representing lineshapes and formfactors are built. Following this, distributions are processed and added to the workspace.
 
 ```{julia}
 input = open(joinpath(@__DIR__, "..", "..", "models", "Lc2ppiK.json")) do io
     JSON.parse(io)
 end
-```
 
-Built functions will be stored in workspace:
-
-```{julia}
 workspace = Dict{String,Any}()
-```
 
-
-
-Build functions from JSON array:
-
-```{julia}
 @unpack functions = input
 for fn in functions
     @unpack name, type = fn
     instance_type = eval(Symbol(type))
     workspace[name] = dict2instance(instance_type, fn)
 end
-```
 
-Build distributions from JSON array:
-
-```{julia}
 @unpack distributions = input
 for dist in distributions
     @unpack name, type = dist
@@ -90,37 +83,131 @@ for dist in distributions
 end
 ```
 
-Perform validation:
+## Validation
 
-```{julia}
-@unpack misc, parameter_points = input
-@unpack amplitude_model_checksums = misc
-
-# map(amplitude_model_checksums) do check_point_info
-let check_point_info = amplitude_model_checksums[1]
-    @unpack name, value, distribution = check_point_info
-    #
-    # pull distribution
-    dist = workspace[distribution]
-
-    # pull correct parameter point
-    parameter_points_dict = array2dict(parameter_points; key="name")
-    # find the point in the list of points
-    parameter_point = parameter_points_dict[name]
-    # compute, compare
-    _parameters = array2dict(parameter_point["parameters"];
-        key="name", apply=v -> v["value"])
-    @assert value ≈ dist(_parameters) "Check-point validation failed with $distribution 🥕"
-    return "🟢"
-end
-```
-
-Plot the model:
+The integrity of the model is checked by validating the value of distributions at a few phase space points.
+The table lists the validation checkes and their status ("🟢" or "🔴").
 
 ```{julia}
 #| code-fold: true
+#| code-summary: A loop over validation points
 let
-    model = workspace["my_model_for_reaction_intensity"].model
-    plot(masses(model), Base.Fix1(unpolarized_intensity, model))
+    @unpack misc, parameter_points = input
+    @unpack amplitude_model_checksums = misc
+
+    map(amplitude_model_checksums) do check_point_info
+        @unpack name, value, distribution = check_point_info
+        #
+        # pull distribution
+        dist = workspace[distribution]
+
+        # pull correct parameter point
+        parameter_points_dict = array2dict(parameter_points; key="name")
+        # find the point in the list of points
+        parameter_point = parameter_points_dict[name]
+        # compute, compare
+        _parameters = array2dict(parameter_point["parameters"];
+            key="name", apply=v -> v["value"])
+        # 
+        # @assert value ≈ dist(_parameters) "Check-point validation failed with $distribution 🥕"
+        status = (value ≈ dist(_parameters)) ? "🟢" : "🔴"
+        (; Distribution=distribution,
+            Point=name, Status=status)
+    end |> DataFrame
+end
+```
+
+## Visualization
+
+The model descibing the decay is fetched from the workspace
+
+```{julia}
+model_dist = [v for (k, v) in workspace if v isa HadronicUnpolarizedIntensity] |> first;
+```
+
+### Dalitz plot
+
+The Dalitz plot shows the probability distribution across two dimensional phase space of the decay.
+
+```{julia}
+#| code-fold: true
+#| code-summary: Dalitz plot plotting
+let iσx = 2, iσy = 1
+    xlab = ((i, j) = ij_from_k(iσx);
+    "m²($i$j) [GeV²]")
+    ylab = ((i, j) = ij_from_k(iσy);
+    "m²($i$j) [GeV²]")
+    model = model_dist.model
+
+    plot(masses(model), Base.Fix1(unpolarized_intensity, model);
+        iσx, iσy, xlab, ylab)
+end
+```
+
+
+c
+The projection of the model onto a mass variable is shown by black line.
+Contributions from individual resonances are shown by the colored lines.
+
+```{julia}
+#| code-fold: true
+#| code-summary: Computation of projections
+let k = 2
+    i, j = ij_from_k(k)
+    xlab = "m($i$j) [GeV]"
+    model = model_dist.model
+    # 
+    mlims = sqrt.(lims(k, masses(model)))
+    mv = range(mlims..., 150) |> shift_by_half
+    # 
+    plot()
+    plot!(mv, lab="Total") do m
+        I = Base.Fix1(unpolarized_intensity, model)
+        m * quadgk(projection_integrand(I, masses(model), m^2; k), 0, 1)[1]
+    end
+    chain_names = Set(model.names) |> collect |> sort
+    for name in chain_names
+        _model = model[model.names.==name]
+        plot!(mv, lab=name) do m
+            I = Base.Fix1(unpolarized_intensity, _model)
+            m * quadgk(projection_integrand(I, masses(_model), m^2; k), 0, 1)[1]
+        end
+    end
+    plot!(; xlab)
+end
+```
+
+## Fit Fractions
+
+The contribution of different resonances to the overall decay process is quantitatively assessed using numerical evaluation on a finite-size sample. Statistical uncertainty in the reported values only reflects the precision of these calculations. For a understanding of model uncertainties, refer to the original publications.
+
+```{julia}
+#| code-fold: true
+#| code-summary: Computation of fit fractions
+#| output: true
+let
+    model = model_dist.model
+    ms = masses(model)
+    # 
+    x2 = rand(10000, 2)
+    data = map(eachslice(x2; dims=1)) do (x, y)
+        σ1 = lims1(ms)[1] + x * diff(lims1(ms) |> collect)[1]
+        σ2 = lims2(ms)[1] + y * diff(lims2(ms) |> collect)[1]
+        σs = Invariants(ms; σ1, σ2)
+    end
+    filter!(data) do σs
+        Kibble(σs, ms^2) < 0
+    end
+    # 
+    chain_names = Set(model.names) |> collect |> sort
+    _int_i = map(chain_names) do name
+        _calv = unpolarized_intensity.(model[model.names.==name] |> Ref, data)
+        _value = mean(_calv)
+        _err = sqrt(cov(_calv, _calv) / length(data))
+        _value ± _err
+    end
+    _int0 = sum(unpolarized_intensity.(model |> Ref, data)) / length(data)
+    ff = round.(_int_i ./ _int0 .* 100; digits=2)
+    DataFrame("Resonance" => chain_names, "Fit Franction [%]" => ff)
 end
 ```

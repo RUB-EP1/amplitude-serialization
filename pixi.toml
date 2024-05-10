@@ -14,6 +14,7 @@ name = "amplitude-serialization"
 platforms = [
     "linux-64",
     "osx-64",
+    "osx-arm64",
 ]
 repository = "https://github.com/RUB-EP1/amplitude-serialization"
 

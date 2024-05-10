@@ -1,4 +1,4 @@
-name: Build HTML pages
+name: Documentation
 
 on:
   pull_request:

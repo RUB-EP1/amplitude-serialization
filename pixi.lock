@@ -1473,6 +1473,7 @@ packages:
   constrains:
   - libgomp 13.2.0 h77fa898_7
   license: GPL-3.0-only WITH GCC-exception-3.1
+  license_family: GPL
   size: 775806
   timestamp: 1715016057793
 - kind: conda
@@ -1487,6 +1488,7 @@ packages:
   depends:
   - _libgcc_mutex 0.1 conda_forge
   license: GPL-3.0-only WITH GCC-exception-3.1
+  license_family: GPL
   size: 422336
   timestamp: 1715015995979
 - kind: conda
@@ -1591,6 +1593,7 @@ packages:
   sha256: 35f1e08be0a84810c9075f5bd008495ac94e6c5fe306dfe4b34546f11fed850f
   md5: 53ebd4c833fa01cb2c6353e99f905406
   license: GPL-3.0-only WITH GCC-exception-3.1
+  license_family: GPL
   size: 3837704
   timestamp: 1715016117360
 - kind: conda
@@ -2335,6 +2338,7 @@ packages:
   - python_abi 3.12.* *_cp312
   - zeromq >=4.3.5,<4.4.0a0
   license: BSD-3-Clause
+  license_family: BSD
   size: 461684
   timestamp: 1715024520808
 - kind: conda
@@ -2353,6 +2357,7 @@ packages:
   - python_abi 3.12.* *_cp312
   - zeromq >=4.3.5,<4.4.0a0
   license: BSD-3-Clause
+  license_family: BSD
   size: 446747
   timestamp: 1715024631161
 - kind: conda
@@ -2508,6 +2513,7 @@ packages:
   - python >=3.12,<3.13.0a0
   - python_abi 3.12.* *_cp312
   license: MIT
+  license_family: MIT
   size: 922258
   timestamp: 1715090163612
 - kind: conda
@@ -2544,6 +2550,7 @@ packages:
   constrains:
   - __osx >=10.12
   license: MIT
+  license_family: MIT
   size: 300350
   timestamp: 1715090344206
 - kind: conda
@@ -2591,6 +2598,7 @@ packages:
   - python_abi 3.12.* *_cp312
   - typing-extensions >=4.6.0
   license: MIT
+  license_family: MIT
   size: 3425201
   timestamp: 1714952825869
 - kind: conda
@@ -2627,6 +2635,7 @@ packages:
   - python_abi 3.12.* *_cp312
   - typing-extensions >=4.6.0
   license: MIT
+  license_family: MIT
   size: 3495546
   timestamp: 1714952762974
 - kind: conda

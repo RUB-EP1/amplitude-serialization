@@ -16,16 +16,36 @@ platforms = [
     "osx-64",
     "osx-arm64",
 ]
+repository = "https://github.com/RUB-EP1/amplitude-serialization"
 
 [dependencies]
+ipykernel = "*"
 juliaup = "*"
-python = ">=3.8.0"
-
-[pypi-dependencies]
+jupyter-cache = "*"
+nbclient = "*"
+nbformat = "*"
 pre-commit = "*"
+python = ">=3.8.0"
+quarto = "*"
+
+[tasks.doc]
+cmd = "quarto render"
+cwd = "docs"
+depends_on = ["install-julia"]
+
+[tasks.doclive]
+cmd = "quarto preview"
+cwd = "docs"
+depends_on = ["install-julia"]
 
 [tasks.install-julia]
 cmd = """
 juliaup add 1.10.3 && \
-juliaup default 1.10.3
+juliaup default 1.10.3 && \
+julia --project -e '
+    using Pkg
+    Pkg.add("IJulia")
+    import IJulia
+    IJulia.installkernel("julia-amplitude-serialization")
+'
 """

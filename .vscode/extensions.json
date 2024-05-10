@@ -6,6 +6,9 @@
     "github.vscode-pull-request-github",
     "julialang.language-julia",
     "ms-python.python",
+    "ms-toolsai.jupyter",
+    "ms-vscode.live-server",
+    "quarto.quarto",
     "tamasfe.even-better-toml",
     "yzhang.markdown-all-in-one"
   ]

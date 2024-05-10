@@ -1,0 +1,40 @@
+execute:
+  cache: true
+  enabled: true
+
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    toc: true
+
+project:
+  output-dir: _build/html
+  type: website
+
+website:
+  title: Amplitude model serialization
+  description: Prototype for the amplitude model serialization format
+  favicon: _images/favicon.ico
+  repo-actions: [edit, issue, source]
+  repo-subdir: docs
+  repo-url: https://github.com/RUB-EP1/amplitude-serialization
+  navbar:
+    left:
+      - href: index.md
+        text: Home
+      - description.md
+      - HS3.md
+    right:
+      - icon: github
+        href: https://github.com/RUB-EP1/amplitude-serialization
+        aria-label: GitHub
+  sidebar:
+    contents:
+      - section: Julia
+        contents:
+          - julia/lc2pkpi.qmd
+      - section: Python
+        contents:
+          - python/lc2pkpi.qmd

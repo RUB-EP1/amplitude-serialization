@@ -14,6 +14,7 @@ repos:
       - id: check-case-conflict
       - id: check-json
       - id: check-merge-conflict
+      - id: check-toml
       - id: check-yaml
       - id: end-of-file-fixer
       - id: mixed-line-ending
@@ -35,3 +36,4 @@ repos:
       - id: toml-sort
         args:
           - --in-place
+        exclude: (?x)^(.*/Manifest\.toml|.*/Project\.toml)$

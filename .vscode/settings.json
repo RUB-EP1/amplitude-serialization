@@ -14,7 +14,6 @@
   "editor.formatOnSave": true,
   "julia.executablePath": "${workspaceFolder}/.pixi/envs/default/bin/julia",
   "livePreview.defaultPreviewPath": "docs/_build/html",
-  "notebook.formatOnSave.enabled": true,
   "python.defaultInterpreterPath": ".pixi/envs/default/bin/python",
   "quarto.path": ".pixi/envs/default/bin/quarto",
   "search.exclude": {

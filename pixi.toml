@@ -17,8 +17,14 @@ platforms = [
 ]
 
 [dependencies]
-julia = ">=1.10.0"
+juliaup = "*"
 python = ">=3.8.0"
 
 [pypi-dependencies]
 pre-commit = "*"
+
+[tasks.install-julia]
+cmd = """
+juliaup add 1.10.3 && \
+juliaup default 1.10.3
+"""

@@ -5,5 +5,5 @@ jupyter: python3
 # Test
 
 ```{python}
-print("Hello, World!")
+print("Test to see if Python kernel is alive")
 ```

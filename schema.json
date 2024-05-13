@@ -71,20 +71,7 @@
         },
         "type": {
           "description": "Common lineshape type. Use custom to your own expression.",
-          "enum": [
-            "custom",
-            "BlattWeisskopf",
-            "BreitWigner",
-            "BreitWignerWidthExpLikeBugg",
-            "MultichannelBreitWigner"
-          ],
-          "enumDescriptions": [
-            "Custom mathematical expression",
-            "Blatt-Weisskopf barrier factor.",
-            "Standard Breit–Wigner lineshape.",
-            "Breit–Wigner lineshape with an exponential slope.",
-            "Multichannel Breit–Wigner lineshape (Flatté)."
-          ]
+          "type": "string"
         },
         "channels": {
           "type": "array",
@@ -187,7 +174,7 @@
           "description": "A label for each particle, used for clarity and not as a standardized identifier."
         },
         "spin": {
-          "description": "The quantum spin number of the particle, represented in string format",
+          "description": "The spin quantum number of the particle, represented in string format",
           "$ref": "#/definitions/Spin"
         }
       },
@@ -211,9 +198,9 @@
           "description": "Specifies how the helicity recoupling factor H_{l1,l2} is computed. Each option reflects different ways of relating combinations of the helicity indices to a real-valued factor, the recoupling coefficient.",
           "enum": ["ls", "parity", "helicity"],
           "enumDescriptions": [
-            "Recoupling with LS computes the value of the recoupling functions from Clebsch–Gordan coefficients. For spin-half particles, this recoupling scales with the parity factor, with f = (-1)^l.",
+            "Recoupling with LS computes the value of the recoupling functions from Clebsch–Gordan coefficients.",
             "Parity recoupling is controlled by the parity factor and gives a non-zero value for two combination of the helicity pair, the selected one and the opposite.",
-            "No recoupling. The factor is 1 for a pair of selected helicities and zero for other combinations. Easiest to implement with a Kronecker-Delta."
+            "No recoupling. The factor is 1 for a pair of selected helicities and zero for other combinations."
           ]
         },
         "helicities": {
@@ -239,10 +226,6 @@
       },
       "additionalProperties": false,
       "allOf": [
-        {
-          "if": { "properties": { "type": { "const": "ls" } } },
-          "then": { "required": ["parity_factor"] }
-        },
         {
           "if": { "properties": { "type": { "const": "parity" } } },
           "then": { "required": ["parity_factor"] }

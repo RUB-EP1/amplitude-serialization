@@ -2,46 +2,45 @@
 
 ## Introduction
 
-### Overview
+The Amplitude Model Serialization Format defines a structured, JSON-based specification that is designed to facilitate reproducibility and validation of theoretical frameworks within the hadron physics community. It provides a standardized, minimal approach to describing particle kinematics, lineshapes, and interaction chains.
 
-The model description format delineates a structured, JSON-based specification designed to facilitate the reproducibility and validation of theoretical frameworks within the physics community. It provides a standardized approach to describing particle kinematics, lineshapes, and interaction chains, crucial for interpreting results from amplitude analyses (AmAn) and ensuring the accuracy and consistency of theoretical models. This document targets framework developers and experts engaged in high-energy physics, computational physics, and related fields.
+This document targets framework developers and experts engaged in high-energy physics, computational physics, and related fields. The format is designed to be extensible, allowing for the incorporation of new features and enhancements as the field evolves. Feedback can be provided via [our issues page](https://github.com/RUB-EP1/amplitude-serialization/issues) or the [discussions page](https://github.com/RUB-EP1/amplitude-serialization/discussions).
 
 ### Objectives
 
-- **Reproducibility and Open Science:** By standardizing model descriptions, this format aims to enhance the reproducibility of computational experiments and theoretical analyses. It supports open science initiatives by making it easier for researchers to share, validate, and build upon each other's work.
-- **Inference from Amplitude Analysis Results:** The format is designed to facilitate the interpretation of AmAn results by the theory community. By providing a clear and comprehensive model description, it helps bridge the gap between experimental data and theoretical insights.
+- **Reproducibility and Open Science**<br>
+  By standardizing model descriptions, this format aims to enhance the reproducibility of computational experiments and theoretical analyses. It supports open science initiatives by making it easier for researchers to share, validate, and build upon each other's work.
+- **Inference from amplitude analysis results**<br>
+  The format is designed to facilitate the interpretation of amplitude analysis results by the theory community. By providing a clear and comprehensive model description, it helps bridge the gap between experimental data and theoretical insights.
 
-- **Correctness/Validity Check for New Frameworks:** As new computational frameworks and models are developed, this format serves as a benchmark for validating their correctness. It ensures that new tools and approaches adhere to established standards, fostering innovation while maintaining scientific rigor.
+- **Correctness/Validity check for new Frameworks**<br>
+  As new computational frameworks and models are developed, this format serves as a benchmark check for validating their correctness. It ensures that new tools and approaches adhere to established standards, fostering innovation while maintaining scientific rigor.
 
-- **Integration with Monte Carlo (MC) Generators:** The format is compatible with MC generators, enabling seamless integration and simulation workflows. This compatibility is critical for testing theoretical models against experimental data and for conducting high-fidelity simulations.
+- **Integration with Monte Carlo (MC) generators**<br>
+  The format is compatible with MC generators, enabling seamless integration and simulation workflows. This compatibility is critical for testing theoretical models against experimental data and for conducting high-fidelity simulations.
 
-- **Benchmark for New GPU/CPU Extensions:** The structured nature of the model description format makes it an ideal benchmark for new GPU and CPU extensions aimed at computational physics applications. By providing a common material for benchmarking, it aids in evaluating the performance enhancements offered by new hardware and software technologies.
+- **Benchmark for new computational devices**<br>
+  The structured nature of the model description format makes it an ideal benchmark for new processing units (GPU, CPU, ...) or accelerated computation techniques. By providing a common material for benchmarking, it aids in evaluating the performance enhancements offered by new hardware and software technologies.
 
 This document presents the specifications of the model description format in detail, outlining its structure, components, and applications. It is intended as a comprehensive guide for developers and theorists working at the intersection of computational and theoretical physics, ensuring that the tools and models they develop are both accurate and interoperable.
 
 ## Amplitude model and observables
 
-In modeling, the Probability Density Function (PDF) serves as a fundamental concept for predicting and analyzing the outcomes of particle interactions. The PDF is a real, normalizable function that depends on kinematic variables and parameters, providing a quantitative framework to describe the likelihood of observing a particular configuration or outcome in a particle decay or collision event.
+In modeling, the Probability Density Function (PDF) serves as a fundamental concept for predicting and analyzing the outcomes of particle interactions. PDFs are real, normalizable functions that depends on kinematic variables and parameters, providing a quantitative framework to describe the likelihood of observing a particular configuration or outcome in a particle decay or collision event.
 
 ### Observables
 
-Observables are measurable quantities derived from the model, offering insight into the underlying physics governing particle interactions. In the context of amplitude models, observables are calculated from the transition amplitudes, which represent the probability amplitudes for the system to transition from an initial to a final state. Two primary observables are defined in this framework:
+Observables are measurable quantities derived from the model that offer insight into the underlying physics governing particle interactions. In the context of amplitude models, observables are calculated from transition amplitudes, which represent the probability amplitudes of the system to transition from an initial to a final state. Two primary observables are defined in this framework:
 
-1. **Unpolarized Intensity:**
-   The unpolarized intensity is an observable that represents the overall likelihood of a transition without considering the polarization states of the particles involved. It is computed as the squared magnitude of the transition amplitude, summed over all spin projections. Mathematically, the unpolarized intensity ($I_{unpolarized}$) is given by:
+#### Unpolarized Intensity
 
-   $$I_{unpolarized}(\tau | \text{pars}) = \sum_{\text{helicities}} |A_{\text{helicities}}(\tau | \text{pars})|^2$$
+The unpolarized intensity is an observable that represents the overall likelihood of a transition without considering the polarization states of the particles involved. It is computed as the squared magnitude of the transition amplitude, summed over all spin projections. Mathematically, the unpolarized is given by
 
-   where $A_{\text{helicities}}(\tau | \text{pars})$ denotes the transition amplitude for a given set of helicities, $\tau$ represents the kinematic variables, and $\text{pars}$ symbolizes the model parameters. This observable is crucial for experiments where the polarization of the particles is not measured or considered.
+$$
+I_\text{unpolarized}(\tau | \text{pars}) = \sum_{\text{helicities}} |A_{\text{helicities}}(\tau | \text{pars})|^2,
+$$
 
-2. **Polarized Intensity:**
-   In contrast, the polarized intensity accounts for the polarization states of the particles involved in the interaction. It is computed by contracting the transition amplitude and its complex conjugate with the polarization matrix ($\rho$). This process involves summing over the final helicities while keeping the initial helicity states ($\lambda_0, \lambda_0'$) explicit in the calculation:
-
-   $$
-   I_\text{polarized}(\tau | \text{pars}) = \sum_{\text{final\_helicities}} A^*_{\lambda_0, \text{final\_helicities}}(\tau | \text{pars}) \times \rho_{\lambda_0,\lambda_0'} \times A_{\lambda_0', \text{final\_helicities}}(\tau | \text{pars})
-   $$
-
-   Here, $A^*_{\lambda_0', \text{final\_helicities}}$ represents the complex conjugate of the amplitude for initial helicity $\lambda_0'$ and a sum over final helicities. The polarization matrix $\rho_{\lambda_0,\lambda_0'}$ encapsulates the initial polarization states of the system, allowing for a detailed analysis of how polarization affects the transition probabilities.
+where $A_{\text{helicities}}(\tau | \text{pars})$ denotes the transition amplitude for a given set of helicities, $\tau$ represents the kinematic variables, and $\text{pars}$ symbolizes the model parameters. This observable is crucial for experiments where the polarization of the particles is not measured or considered.
 
 ```json
 {
@@ -61,6 +60,16 @@ Observables are measurable quantities derived from the model, offering insight i
     }
 }
 ```
+
+#### Polarized Intensity
+
+In contrast, the polarized intensity accounts for the polarization states of the particles involved in the interaction. It is computed by contracting the transition amplitude and its complex conjugate with the polarization matrix ($\rho$). This process involves summing over the final helicities while keeping the initial helicity states ($\lambda_0, \lambda_0'$) explicit in the calculation:
+
+$$
+I_\text{polarized}(\tau | \text{pars}) = \sum_{\text{final\_helicities}} A^*_{\lambda_0, \text{final\_helicities}}(\tau | \text{pars}) \times \rho_{\lambda_0,\lambda_0'} \times A_{\lambda_0', \text{final\_helicities}}(\tau | \text{pars})\,.
+$$
+
+Here, $A^*_{\lambda_0', \text{final\_helicities}}$ represents the complex conjugate of the amplitude for initial helicity $\lambda_0'$ and a sum over final helicities. The polarization matrix $\rho_{\lambda_0,\lambda_0'}$ encapsulates the initial polarization states of the system, allowing for a detailed analysis of how polarization affects the transition probabilities.
 
 ## Model Structure Overview
 

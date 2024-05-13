@@ -4,7 +4,7 @@ jupyter: julia-amplitude-serialization-1.10
 
 # $\Lambda_c^+ \to p K^- \pi^+$
 
-This page demonstrates deserialization and evaluation of an amplitude model for the decay $\Lambda_c^+ \to p K^- \pi^+$. The amplitude analysis is performed based on roughly half a million of $\Lambda_c^{\pm}$ decay candidates by the LHCb collaboration, [INSPIRE-HEP 2683025](https://inspirehep.net/literature/2683025). Detains on the mapped of the amplitude model onto the standard helicity formalism can be found in appendix of [INSPIRE-HEP 2623821](https://inspirehep.net/literature/2623821).
+This page demonstrates deserialization and evaluation of an amplitude model for the decay $\Lambda_c^+ \to p K^- \pi^+$. The amplitude analysis is performed based on roughly half a million of $\Lambda_c^{\pm}$ decay candidates by the LHCb collaboration, [INSPIRE-HEP 2683025](https://inspirehep.net/literature/2683025). Details on the mapped of the amplitude model onto the standard helicity formalism can be found in appendix of [INSPIRE-HEP 2623821](https://inspirehep.net/literature/2623821).
 
 ```{julia}
 #| code-fold: true
@@ -34,8 +34,8 @@ theme(:wong2, frame=:box, grid=false, minorticks=true,
 
 ## Function definitions
 
-Non-standard lineshapes are used to model resonances that do not conform to a simple `BreitWigner` distributions, or a `MultichannelBreitWigner` has to be defined explicitly.
-The code below defines a new lineshape, and its deserialization method.
+The model contains non-standard lineshapes that do not conform to a simple `BreitWigner` or `MultichannelBreitWigner` distribution, so they have to be defined explicitly.
+The code below defines a new lineshape and implements its deserialization method (specializing `dict2instance()` using [multiple dispatch](https://docs.julialang.org/en/v1/manual/methods/#man-method-specializations)).
 
 ```{julia}
 struct BreitWignerWidthExpLikeBugg <: HadronicLineshapes.AbstractFlexFunc
@@ -144,8 +144,6 @@ let iσx = 2, iσy = 1
 end
 ```
 
-
-c
 The projection of the model onto a mass variable is shown by black line.
 Contributions from individual resonances are shown by the colored lines.
 

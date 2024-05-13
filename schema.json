@@ -36,7 +36,7 @@
               },
               "parametrization": {
                 "type": "string",
-                "description": "Lineshape parametrization. Should be a key under \"functions\" section."
+                "description": "Lineshape parametrization. Should match the \"name\" of one of the function definitions under the \"functions\" section."
               }
             },
             "required": ["spin", "node", "parametrization"],

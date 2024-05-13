@@ -12,6 +12,12 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.formatOnSave": true,
+  "json.schemas": [
+    {
+      "fileMatch": ["models/*.json"],
+      "url": "./schema.json"
+    }
+  ],
   "julia.executablePath": "${workspaceFolder}/.pixi/envs/default/bin/julia",
   "livePreview.defaultPreviewPath": "docs/_build/html",
   "python.defaultInterpreterPath": ".pixi/envs/default/bin/python",

@@ -135,15 +135,19 @@ It species the main properties such as spin, and masses of all particles.
 
 ## Topology and Reference Topology
 
-The `reference_topology` array within the model description format serves a pivotal role in defining how helicity amplitude is computed. By specifying the reference topology, one sets quantization axes for particle helicities. Helicity, the projection of a particle's spin along its direction of motion, is a quantity whose precise definition is contingent upon the frame of reference in which it is evaluated. Accurate determination of helicity states is crucial for computing the correct amplitude values, however, the choice does not affect the value of the `unpolarized_intensity` upon a few exceptions.
+The `reference_topology` array serves a pivotal role in defining how helicity amplitudes are computed. The reference topology can be used to fix the quantization axes for particle helicities. Since helicity is the projection of a particle's spin along its direction of motion, its precise definition depends upon the frame of reference in which it is evaluated. This can be problematic in decays that consist of multiple decay topologies. Accurate determination of helicity states is therefore crucial for computing the correct amplitude values, even if the choice does not always affect the value of the `unpolarized_intensity`.
 
-In the context of the conventional helicity formalism, the `reference_topology` array implicitly prescribes a method for defining helicities. It comes from the specification of a default quantization frame for each stage of the decay process. The helicity values employed in the indices of Wigner rotations `D_{λ1, λ2}` and couplings `H_{λ1, λ2}` are thus indicative of this frame. When considering a particle's helicity in any other frame, it must be treated as a superposition of the states defined by the default quantization.
+In the context of the conventional helicity formalism, the `reference_topology` array implicitly prescribes a method for defining helicities, as it can be used to define a default quantization frame for each stage (decay node) in the decay process.
+When considering the helicity of a particle in any other frame, it must be treated as a superposition of the states with regard to the default quantization.
+The helicity values employed in the indices of Wigner rotations `D_{λ1, λ2}` and couplings `H_{λ1, λ2}` are thus indicative of this frame.
 
 ### An example of four-body decay
 
-As as example, let's look into an application of the conventional helicity formalism to a four-body decay topology, specifically `[[[3,1],4],2]`. This topology outlines the decay sequence and the respective frames that define the helicities of the involved particles. Understanding the relation between the decay frames and the helicity definitions is crucial for accurately computing decay amplitudes within this formalism.
+Understanding the relation between the decay frames and the helicity definitions is crucial for accurately computing decay amplitudes within the conventional helicity formalism.
+As an example, let's investigate a four-body decay topology, specifically `[[[3,1],4],2]`.
+This topology outlines the decay sequence and the respective frames that define the helicities of the involved particles.
 
-In the given topology, the decay amplitude calculation involves a series of Wigner D-functions, each corresponding to rotations and boosts that define the helicity states of the particles:
+In the given topology, the decay amplitude calculation involves a series of Wigner&nbsp;$D$-functions, each corresponding to rotations and boosts that define the helicity frames of the particles:
 
 $$
 \begin{align}
@@ -153,11 +157,15 @@ A &= n_{j_0} D_{\tau, \lambda_2}^{j_0}(\text{angles}_{[[3,1],4]}) \\
 \end{align}
 $$
 
-- $D_{\tau, \lambda_2}^{j_0}(\text{angles}_{[[3,1],4]})$: This function describes the transformation for particle 2's helicity (`λ2`) in the overall rest frame of the system (comprising particles 3, 1, 4, and 2). Here, particle 2's helicity is defined relative to the frame where all other particles are considered, emphasizing its position in the decay sequence.
+- $D_{\tau, \lambda_2}^{j_0}(\text{angles}_{[[3,1],4]})$ describes the transformation for the helicity of particle&nbsp;`2`, $\lambda_2$, in the overall rest frame of the system (comprising particles `3`, `1`, `4`, and `2`).
+  Here, $\lambda_2$ is defined relative to the frame where all other particles are considered, emphasizing its position in the decay sequence.
 
-- $D_{\nu, \lambda_4}^{j_{[[3,1],4]}}(\text{angles}_{[3,1]})$: For particle 4, its helicity (`λ4`) is defined within the rest frame of the (3,1,4) system. This frame is obtained from the overall rest frame by applying a rotation and boost, signifying the progression of the decay sequence and the specific frame where particle 4's helicity is defined.
+- $D_{\nu, \lambda_4}^{j_{[[3,1],4]}}(\text{angles}_{[3,1]})$: For particle `4`, its helicity, $\lambda_4$, is defined within the rest frame of the `[3,1,4]` system.
+  This frame is obtained from the overall rest frame by applying a rotation and boost, signifying the progression of the decay sequence and the specific frame where particle `4`'s helicity is defined.
 
-- $D_{\lambda_3, \lambda_1}^{j_{[3,1]}}(\text{angles}_3)$: The helicities of particles 3 (`λ3`) and 1 (`λ1`) are defined within the (3,1) rest frame. This frame is reached through successive transformations: first to the (3,1,4) system and then to the (3,1) subsystem. This sequence of boosts and rotations precisely defines the helicity states of particles 3 and 1 in relation to their specific interaction frame.
+- $D_{\lambda_3, \lambda_1}^{j_{[3,1]}}(\text{angles}_3)$: The helicities of particles `3` and `1`, $\lambda_3$ and $\lambda_1$, are defined within the `[3,1]` rest frame.
+  This frame is reached through successive transformations: first to the `[3,1,4]` system and then to the `[3,1]` subsystem.
+  This sequence of boosts and rotations precisely defines the helicity states of particles `3` and `1` in relation to their specific interaction frame.
 
 ## Chains Section
 

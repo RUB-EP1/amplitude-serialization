@@ -11,7 +11,7 @@ using JSON
 md"""
 # Example of Serialized Model
 
-The notebook prototypes the way to desctibe model in a dictionary that can be mapped into a readable dictionary.
+The notebook prototypes the way to describe model in a dictionary that can be mapped into a readable dictionary.
 """
 
 # ╔═╡ ce089b5b-c3ea-4926-b03f-f2d8b969e475

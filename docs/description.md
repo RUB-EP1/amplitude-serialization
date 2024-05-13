@@ -72,7 +72,7 @@ The model description is organized around several mandatory root-level component
 
 - **`kinematics`:** This section contains information about the particles involved in the model, including their spins, indices for identification, names, and masses. It establishes the foundational elements of the model by specifying the properties of each particle.
 
-- **`reference_topology`:** This array defines the basic interaction structure or topology of the model which is used to define the reference quanzation axes. It outlines the decay chain for which the amplitude is written without a need for the alignment rotations. All other chains that have different decay topology must be aligned to the reference one.
+- **`reference_topology`:** This array defines the basic interaction structure or topology of the model which is used to define the reference quantization axes. It outlines the decay chain for which the amplitude is written without a need for the alignment rotations. All other chains that have different decay topology must be aligned to the reference one.
 
 - **`chains`:** The chains section lists specific interactions within the model, detailing the propagators, vertices with parametrization scheme and a complex coupling. Each chain is a cascade of decays that follows the chain topology. For every node one specifies the vertex propertied,
   and a parametrization (the lineshape) of an intermediate resonance that ends on the node.
@@ -164,7 +164,7 @@ Vertices define the nodes in the decay graphs, where one particle transits into 
 
 - **`node`:** Defines a node in the topology graph by specifying the particles involved in the interaction.
 
-- **`type`:** Specifes how the helicity recoupling factor `H_{l1,l2}` is computed.
+- **`type`:** Specifies how the helicity recoupling factor `H_{l1,l2}` is computed.
   Three types are defined: `ls`, `parity`, and `helicity`.
   These reflect different ways of relating combinations of the helicity indices to a real-valued factor, the recoupling coefficient.
 
@@ -183,7 +183,7 @@ Vertices define the nodes in the decay graphs, where one particle transits into 
 
 ### Propagators
 
-- **`type`:** The `type` field within each propagator specifies the mathematical or physical model used to describe the propagation of a particle between interactions. This type is directly linked to the `lineshapes` section, where the detailed characteristics of each propagator type (e.g., resonance models like Breit-Wigner or Flatte) are defined. The `type` essentially dictates how the propagator influences the chain's overall amplitude, based on its lineshape parameters.
+- **`type`:** The `type` field within each propagator specifies the mathematical or physical model used to describe the propagation of a particle between interactions. This type is directly linked to the `lineshapes` section, where the detailed characteristics of each propagator type (e.g., resonance models like Breit-Wigner or Flatté) are defined. The `type` essentially dictates how the propagator influences the chain's overall amplitude, based on its lineshape parameters.
 
 - **`spin`:** The `spin` value of a propagator indicates the spin of the particle as it propagates. This is crucial for determining the angular momentum conservation and spin-related effects in the interaction, influencing the selection rules and possible transitions within the chain.
 

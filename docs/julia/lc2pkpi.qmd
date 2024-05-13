@@ -4,7 +4,7 @@ jupyter: julia-amplitude-serialization-1.10
 
 # $\Lambda_c^+ \to p K^- \pi^+$
 
-This page demostrates deserialization and evaluation of an amplitude model for the decay $\Lambda_c^+ \to p K^- \pi^+$. The amplitude analysis is performed based on roughly half a millon of $\Lambda_c^{\pm}$ decay candidates by the LHCb collaboration, [INSPIRE-HEP 2683025](https://inspirehep.net/literature/2683025). Detains on the mapped of the ampltude model onto the standard helicity formalism can be found in appendix of [INSPIRE-HEP 2623821](https://inspirehep.net/literature/2623821).
+This page demonstrates deserialization and evaluation of an amplitude model for the decay $\Lambda_c^+ \to p K^- \pi^+$. The amplitude analysis is performed based on roughly half a million of $\Lambda_c^{\pm}$ decay candidates by the LHCb collaboration, [INSPIRE-HEP 2683025](https://inspirehep.net/literature/2683025). Detains on the mapped of the amplitude model onto the standard helicity formalism can be found in appendix of [INSPIRE-HEP 2623821](https://inspirehep.net/literature/2623821).
 
 ```{julia}
 #| code-fold: true
@@ -59,7 +59,7 @@ end
 
 ## Deserialization of Objects to a Workspace
 
-Model components are deserialized from a JSON file into computational objects within a workspace for further manipulation. First, functions representing lineshapes and formfactors are built. Following this, distributions are processed and added to the workspace.
+Model components are deserialized from a JSON file into computational objects within a workspace for further manipulation. First, functions representing lineshapes and form factors are built. Following this, distributions are processed and added to the workspace.
 
 ```{julia}
 input = open(joinpath(@__DIR__, "..", "..", "models", "Lc2ppiK.json")) do io
@@ -86,7 +86,7 @@ end
 ## Validation
 
 The integrity of the model is checked by validating the value of distributions at a few phase space points.
-The table lists the validation checkes and their status ("🟢" or "🔴").
+The table lists the validation checks and their status ("🟢" or "🔴").
 
 ```{julia}
 #| code-fold: true
@@ -119,7 +119,7 @@ end
 
 ## Visualization
 
-The model descibing the decay is fetched from the workspace
+The model describing the decay is fetched from the workspace
 
 ```{julia}
 model_dist = [v for (k, v) in workspace if v isa HadronicUnpolarizedIntensity] |> first;
@@ -201,13 +201,13 @@ let
     #
     chain_names = Set(model.names) |> collect |> sort
     _int_i = map(chain_names) do name
-        _calv = unpolarized_intensity.(model[model.names.==name] |> Ref, data)
-        _value = mean(_calv)
-        _err = sqrt(cov(_calv, _calv) / length(data))
+        _intensities = unpolarized_intensity.(model[model.names.==name] |> Ref, data)
+        _value = mean(_intensities)
+        _err = sqrt(cov(_intensities, _intensities) / length(data))
         _value ± _err
     end
     _int0 = sum(unpolarized_intensity.(model |> Ref, data)) / length(data)
     ff = round.(_int_i ./ _int0 .* 100; digits=2)
-    DataFrame("Resonance" => chain_names, "Fit Franction [%]" => ff)
+    DataFrame("Resonance" => chain_names, "Fit Fraction [%]" => ff)
 end
 ```

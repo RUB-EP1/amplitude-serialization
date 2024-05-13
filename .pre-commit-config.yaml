@@ -25,7 +25,7 @@ repos:
     hooks:
       - id: check-jsonschema
         args: ["--schemafile", "schema.json"]
-        files: ^models/.*\.json$
+        files: ^models/.*\.(json|yaml|yml)$
         exclude: ^models/HS3.*\.json$
 
   - repo: https://github.com/pre-commit/mirrors-prettier

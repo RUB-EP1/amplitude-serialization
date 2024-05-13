@@ -27,5 +27,8 @@
     "**/bower_components": true,
     "**/node_modules": true,
     "**/pixi.lock": true
+  },
+  "yaml.schemas": {
+    "./schema.json": ["models/*.yaml", "models/*.yml"]
   }
 }

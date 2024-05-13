@@ -26,7 +26,7 @@ This document presents the specifications of the model description format in det
 
 ## Amplitude model and observables
 
-In modeling, the Probability Density Function (PDF) serves as a fundamental concept for predicting and analyzing the outcomes of particle interactions. PDFs are real, normalizable functions that depends on kinematic variables and parameters, providing a quantitative framework to describe the likelihood of observing a particular configuration or outcome in a particle decay or collision event.
+In modeling, the Probability Density Function (PDF) serves as a fundamental concept for predicting and analyzing the outcomes of particle interactions. PDFs are real-valued, normalizable functions that depends on kinematic variables and parameters, providing a quantitative framework to describe the likelihood of observing a particular configuration or outcome in a particle decay or collision event.
 
 ### Observables
 
@@ -79,11 +79,11 @@ The model description is designed to encapsulate all elements of transition mode
 
 The model description is organized around several mandatory root-level components, each serving a distinct purpose in defining the physical model:
 
-- **`kinematics`:** This section contains information about the particles involved in the model, including their spins, indices for identification, names, and masses. It establishes the foundational elements of the model by specifying the properties of each particle.
+- **[`kinematics`](#kinematics-section):** This section contains information about the particles involved in the model, including their spins, indices for identification, names, and masses. It establishes the foundational elements of the model by specifying the properties of each particle.
 
-- **`reference_topology`:** This array defines the basic interaction structure or topology of the model which is used to define the reference quantization axes. It outlines the decay chain for which the amplitude is written without a need for the alignment rotations. All other chains that have different decay topology must be aligned to the reference one.
+- **[`reference_topology`](#topology-and-reference-topology):** This array defines the basic interaction structure or topology of the model which is used to define the reference quantization axes. It outlines the decay chain for which the amplitude is written without a need for the alignment rotations. All other chains that have different decay topology must be aligned to the reference one.
 
-- **`chains`:** The chains section lists specific interactions within the model, detailing the propagators, vertices with parametrization scheme and a complex coupling. Each chain is a cascade of decays that follows the chain topology. For every node one specifies the vertex propertied,
+- **[`chains`](#chains-section):** The chains section lists specific interactions within the model, detailing the propagators, vertices with parametrization scheme and a complex coupling. Each chain is a cascade of decays that follows the chain topology. For every node one specifies the vertex propertied,
   and a parametrization (the lineshape) of an intermediate resonance that ends on the node.
 
 ## Kinematics Section

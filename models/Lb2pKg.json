@@ -2266,11 +2266,8 @@
     },
     {
       "name": "LNR3O_NR",
-      "l": 2,
-      "mb": 0.938272046,
       "type": "NonResonant",
-      "mass": 3.5,
-      "width": 1.0
+      "mass": 3.5
     },
     {
       "name": "BlattWeisskopf_resonance_l0",

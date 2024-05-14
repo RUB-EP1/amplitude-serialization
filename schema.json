@@ -378,7 +378,8 @@
             "properties": {
               "name": {
                 "description": "Parameter point over which to evaluate the distribution.",
-                "enum": ["validation_point"]
+                "type": "string",
+                "pattern": "^validation_point[0-9]*$"
               },
               "distribution": {
                 "type": "string",

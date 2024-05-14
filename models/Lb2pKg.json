@@ -1953,14 +1953,14 @@
                 "l": "0",
                 "s": "1/2",
                 "node": [[1, 2], 3],
-                "formfactor": "BarrierFactor_l0"
+                "formfactor": "MomentumPower0"
               },
               {
                 "type": "ls",
                 "l": "2",
                 "s": "1/2",
                 "node": [1, 2],
-                "formfactor": "BarrierFactor_l2"
+                "formfactor": "MomentumPower2"
               }
             ],
             "topology": [[1, 2], 3],
@@ -1981,14 +1981,14 @@
                 "l": "1",
                 "s": "1/2",
                 "node": [[1, 2], 3],
-                "formfactor": "BarrierFactor_l1"
+                "formfactor": "MomentumPower1"
               },
               {
                 "type": "ls",
                 "l": "2",
                 "s": "1/2",
                 "node": [1, 2],
-                "formfactor": "BarrierFactor_l2"
+                "formfactor": "MomentumPower2"
               }
             ],
             "topology": [[1, 2], 3],
@@ -2009,14 +2009,14 @@
                 "l": "1",
                 "s": "3/2",
                 "node": [[1, 2], 3],
-                "formfactor": "BarrierFactor_l1"
+                "formfactor": "MomentumPower1"
               },
               {
                 "type": "ls",
                 "l": "2",
                 "s": "1/2",
                 "node": [1, 2],
-                "formfactor": "BarrierFactor_l2"
+                "formfactor": "MomentumPower2"
               }
             ],
             "topology": [[1, 2], 3],
@@ -2037,14 +2037,14 @@
                 "l": "2",
                 "s": "3/2",
                 "node": [[1, 2], 3],
-                "formfactor": "BarrierFactor_l2"
+                "formfactor": "MomentumPower2"
               },
               {
                 "type": "ls",
                 "l": "2",
                 "s": "1/2",
                 "node": [1, 2],
-                "formfactor": "BarrierFactor_l2"
+                "formfactor": "MomentumPower2"
               }
             ],
             "topology": [[1, 2], 3],
@@ -2065,14 +2065,14 @@
                 "l": "2",
                 "s": "5/2",
                 "node": [[1, 2], 3],
-                "formfactor": "BarrierFactor_l2"
+                "formfactor": "MomentumPower2"
               },
               {
                 "type": "ls",
                 "l": "2",
                 "s": "1/2",
                 "node": [1, 2],
-                "formfactor": "BarrierFactor_l2"
+                "formfactor": "MomentumPower2"
               }
             ],
             "topology": [[1, 2], 3],
@@ -2093,14 +2093,14 @@
                 "l": "3",
                 "s": "5/2",
                 "node": [[1, 2], 3],
-                "formfactor": "BarrierFactor_l3"
+                "formfactor": "MomentumPower3"
               },
               {
                 "type": "ls",
                 "l": "2",
                 "s": "1/2",
                 "node": [1, 2],
-                "formfactor": "BarrierFactor_l2"
+                "formfactor": "MomentumPower2"
               }
             ],
             "topology": [[1, 2], 3],
@@ -2348,27 +2348,23 @@
       "l": 6
     },
     {
-      "name": "BarrierFactor_l0",
-      "type": "BlattWeisskopf",
-      "radius": 0.0,
+      "name": "MomentumPower0",
+      "type": "MomentumPower",
       "l": 0
     },
     {
-      "name": "BarrierFactor_l1",
-      "type": "BlattWeisskopf",
-      "radius": 0.0,
+      "name": "MomentumPower1",
+      "type": "MomentumPower",
       "l": 1
     },
     {
-      "name": "BarrierFactor_l2",
-      "type": "BlattWeisskopf",
-      "radius": 0.0,
+      "name": "MomentumPower2",
+      "type": "MomentumPower",
       "l": 2
     },
     {
-      "name": "BarrierFactor_l3",
-      "type": "BlattWeisskopf",
-      "radius": 0.0,
+      "name": "MomentumPower3",
+      "type": "MomentumPower",
       "l": 3
     }
   ],

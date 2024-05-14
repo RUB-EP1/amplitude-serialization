@@ -186,11 +186,11 @@
     },
     "Vertex": {
       "type": "object",
-      "required": ["type", "helicities", "node"],
+      "required": ["type", "node"],
       "properties": {
         "type": {
           "description": "Specifies how the helicity recoupling factor H_{l1,l2} is computed. Each option reflects different ways of relating combinations of the helicity indices to a real-valued factor, the recoupling coefficient.",
-          "enum": ["ls", "parity", "helicity"],
+          "enum": ["helicity", "ls", "parity"],
           "enumDescriptions": [
             "Recoupling with LS computes the value of the recoupling functions from Clebsch–Gordan coefficients.",
             "Parity recoupling is controlled by the parity factor and gives a non-zero value for two combination of the helicity pair, the selected one and the opposite.",
@@ -212,6 +212,15 @@
           "description": "Factor that is is required for parity couplings and LS couplings. Gives a non-zero value for two combination of the helicity pair, the selected one and the opposite.",
           "enum": ["-", "+"]
         },
+        "l": {
+          "description": "Angular momentum of the vertex.",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "type": "string"
+        },
+        "s": {
+          "description": "Coupled spin of the vertex.",
+          "$ref": "#/definitions/Spin"
+        },
         "formfactor": {
           "description": "Optional form factor for the vertex. Should be a lineshape that is defined under \"functions\" section.",
           "default": "",
@@ -221,8 +230,16 @@
       "additionalProperties": false,
       "allOf": [
         {
+          "if": { "properties": { "type": { "const": "helicity" } } },
+          "then": { "required": ["helicities"] }
+        },
+        {
+          "if": { "properties": { "type": { "const": "ls" } } },
+          "then": { "required": ["l", "s"] }
+        },
+        {
           "if": { "properties": { "type": { "const": "parity" } } },
-          "then": { "required": ["parity_factor"] }
+          "then": { "required": ["helicities", "parity_factor"] }
         }
       ]
     }

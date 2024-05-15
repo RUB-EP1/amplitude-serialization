@@ -2,4 +2,5 @@
 *.html
 *.ipynb
 /.quarto/
+execute-results/
 site_libs/

@@ -34,8 +34,8 @@ website:
     contents:
       - section: Julia
         contents:
-          - julia/lb2pkg.qmd
           - julia/lc2pkpi.qmd
+          - julia/lb2pkg.qmd
       - section: Python
         contents:
           - python/lc2pkpi.qmd

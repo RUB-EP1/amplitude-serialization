@@ -1,3 +1,5 @@
 .jupyter_cache/
+*.html
 *.ipynb
 /.quarto/
+site_libs/

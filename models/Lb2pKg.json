@@ -9,20 +9,20 @@
             "index": 0,
             "name": "Lb",
             "spin": "1/2",
-            "mass": 5.6196
+            "mass": 5.62
           },
           "final_state": [
             {
               "index": 1,
               "name": "p",
               "spin": "1/2",
-              "mass": 0.938272046
+              "mass": 0.938
             },
             {
               "index": 2,
               "name": "K",
               "spin": "0",
-              "mass": 0.493677
+              "mass": 0.493
             },
             {
               "index": 3,
@@ -42,7 +42,7 @@
                 "parametrization": "L1405_Flatte"
               }
             ],
-            "weight": "2.2615419999999995 - 1.7992479999999997i",
+            "weight": "-0.018329 - 0.700486i",
             "vertices": [
               {
                 "type": "ls",
@@ -70,7 +70,7 @@
                 "parametrization": "L1405_Flatte"
               }
             ],
-            "weight": "-1.8662079999999999 - 1.0409729999999997i",
+            "weight": "-0.251873 + 1.21282i",
             "vertices": [
               {
                 "type": "ls",
@@ -98,7 +98,7 @@
                 "parametrization": "L1405_Flatte"
               }
             ],
-            "weight": "1.319608331904584 + 0.7360790673321034i",
+            "weight": "0.178101 - 0.85759i",
             "vertices": [
               {
                 "type": "ls",
@@ -126,7 +126,7 @@
                 "parametrization": "L1405_Flatte"
               }
             ],
-            "weight": "-1.5991516841381865 + 1.2722604618363327i",
+            "weight": "0.0129606 + 0.495318i",
             "vertices": [
               {
                 "type": "ls",
@@ -154,7 +154,7 @@
                 "parametrization": "L1520_BW"
               }
             ],
-            "weight": "0.1787061055481877 - 0.0029077827979407263i",
+            "weight": "-0.08633726789283988 + 0.0627382536719026i",
             "vertices": [
               {
                 "type": "ls",
@@ -182,7 +182,7 @@
                 "parametrization": "L1520_BW"
               }
             ],
-            "weight": "0.23981694894606595 + 0.035455988278427664i",
+            "weight": "-0.0699907 + 0.106367i",
             "vertices": [
               {
                 "type": "ls",
@@ -210,7 +210,7 @@
                 "parametrization": "L1520_BW"
               }
             ],
-            "weight": "-0.07241774473290369 + 0.9195480730863396i",
+            "weight": "0.167673 - 0.226747i",
             "vertices": [
               {
                 "type": "ls",
@@ -238,7 +238,7 @@
                 "parametrization": "L1520_BW"
               }
             ],
-            "weight": "-0.2501855961577325 + 0.4451666988733546i",
+            "weight": "-0.269593 - 0.0268418i",
             "vertices": [
               {
                 "type": "ls",
@@ -266,7 +266,7 @@
                 "parametrization": "L1520_BW"
               }
             ],
-            "weight": "0.21659486538591105 - 0.15055623295778503i",
+            "weight": "0.0255124 + 0.0557096i",
             "vertices": [
               {
                 "type": "ls",
@@ -294,7 +294,7 @@
                 "parametrization": "L1520_BW"
               }
             ],
-            "weight": "0.20288824824430146 - 0.2800886910287802i",
+            "weight": "-0.108059 + 0.154864i",
             "vertices": [
               {
                 "type": "ls",
@@ -322,7 +322,7 @@
                 "parametrization": "L1600_BW"
               }
             ],
-            "weight": "2.284312320810868 + 3.3342947994153125i",
+            "weight": "0.379811 - 0.866708i",
             "vertices": [
               {
                 "type": "ls",
@@ -350,7 +350,7 @@
                 "parametrization": "L1600_BW"
               }
             ],
-            "weight": "-2.3740723898115097 + 0.2018514690632694i",
+            "weight": "-1.04782 + 1.10797i",
             "vertices": [
               {
                 "type": "ls",
@@ -378,7 +378,7 @@
                 "parametrization": "L1600_BW"
               }
             ],
-            "weight": "1.6787226858634705 - 0.14273054256710435i",
+            "weight": "0.740919 - 0.783451i",
             "vertices": [
               {
                 "type": "ls",
@@ -406,7 +406,7 @@
                 "parametrization": "L1600_BW"
               }
             ],
-            "weight": "-1.6152527323933445 - 2.357702463141606i",
+            "weight": "-0.268567 + 0.612855i",
             "vertices": [
               {
                 "type": "ls",
@@ -434,7 +434,7 @@
                 "parametrization": "L1670_BW"
               }
             ],
-            "weight": "-0.16420699999999996 + 0.07874799999999998i",
+            "weight": "-0.040225 + 0.105106i",
             "vertices": [
               {
                 "type": "ls",
@@ -462,7 +462,7 @@
                 "parametrization": "L1670_BW"
               }
             ],
-            "weight": "0.3361199999999999 + 0.20572699999999997i",
+            "weight": "0.012169 - 0.116263i",
             "vertices": [
               {
                 "type": "ls",
@@ -490,7 +490,7 @@
                 "parametrization": "L1670_BW"
               }
             ],
-            "weight": "-0.2376727312924222 - 0.14547095677316477i",
+            "weight": "-0.00860478 + 0.0822104i",
             "vertices": [
               {
                 "type": "ls",
@@ -518,7 +518,7 @@
                 "parametrization": "L1670_BW"
               }
             ],
-            "weight": "0.11611188321829932 - 0.05568324480487821i",
+            "weight": "0.0284434 - 0.0743212i",
             "vertices": [
               {
                 "type": "ls",
@@ -546,7 +546,7 @@
                 "parametrization": "L1690_BW"
               }
             ],
-            "weight": "-0.1638425144881511 - 0.027239780101902436i",
+            "weight": "-0.284137 + 0.277812i",
             "vertices": [
               {
                 "type": "ls",
@@ -574,7 +574,7 @@
                 "parametrization": "L1690_BW"
               }
             ],
-            "weight": "0.8340596165977585 + 0.6936591443585243i",
+            "weight": "0.154803 + 0.0301292i",
             "vertices": [
               {
                 "type": "ls",
@@ -602,7 +602,7 @@
                 "parametrization": "L1690_BW"
               }
             ],
-            "weight": "0.5733385625572381 + 0.1544300099436635i",
+            "weight": "-0.308839 - 0.0497668i",
             "vertices": [
               {
                 "type": "ls",
@@ -630,7 +630,7 @@
                 "parametrization": "L1690_BW"
               }
             ],
-            "weight": "1.040432591231551 + 0.7879720195135104i",
+            "weight": "-0.11852 + 0.0194431i",
             "vertices": [
               {
                 "type": "ls",
@@ -658,7 +658,7 @@
                 "parametrization": "L1690_BW"
               }
             ],
-            "weight": "-0.4689318637438509 - 0.2829606731711704i",
+            "weight": "-0.172277 + 0.200588i",
             "vertices": [
               {
                 "type": "ls",
@@ -686,7 +686,7 @@
                 "parametrization": "L1690_BW"
               }
             ],
-            "weight": "0.4305584791475875 + 0.4655463300187793i",
+            "weight": "0.21833 + 0.0390459i",
             "vertices": [
               {
                 "type": "ls",
@@ -714,7 +714,7 @@
                 "parametrization": "L1800_BW"
               }
             ],
-            "weight": "0.9999999999999999 + 0.0i",
+            "weight": "1.0 + 0.0i",
             "vertices": [
               {
                 "type": "ls",
@@ -742,7 +742,7 @@
                 "parametrization": "L1800_BW"
               }
             ],
-            "weight": "0.32073699999999994 - 4.406508999999999i",
+            "weight": "-0.783846 + 0.907078i",
             "vertices": [
               {
                 "type": "ls",
@@ -770,7 +770,7 @@
                 "parametrization": "L1800_BW"
               }
             ],
-            "weight": "-0.22679530767742956 + 3.1158723952595504i",
+            "weight": "0.554263 - 0.641401i",
             "vertices": [
               {
                 "type": "ls",
@@ -798,7 +798,7 @@
                 "parametrization": "L1800_BW"
               }
             ],
-            "weight": "-0.7071067811865472 + 0.0i",
+            "weight": "-0.707107 + 0.0i",
             "vertices": [
               {
                 "type": "ls",
@@ -826,7 +826,7 @@
                 "parametrization": "L1810_BW"
               }
             ],
-            "weight": "-0.7590164181414873 - 0.3568902236001055i",
+            "weight": "0.106627 + 0.225718i",
             "vertices": [
               {
                 "type": "ls",
@@ -854,7 +854,7 @@
                 "parametrization": "L1810_BW"
               }
             ],
-            "weight": "0.09230907043911411 - 0.19521309566812706i",
+            "weight": "0.0783291 - 0.312209i",
             "vertices": [
               {
                 "type": "ls",
@@ -882,7 +882,7 @@
                 "parametrization": "L1810_BW"
               }
             ],
-            "weight": "-0.06527236967252424 + 0.13803650372335083i",
+            "weight": "-0.055387 + 0.220765i",
             "vertices": [
               {
                 "type": "ls",
@@ -910,7 +910,7 @@
                 "parametrization": "L1810_BW"
               }
             ],
-            "weight": "0.5367056562997696 + 0.2523594972468178i",
+            "weight": "-0.0753965 - 0.159607i",
             "vertices": [
               {
                 "type": "ls",
@@ -938,7 +938,7 @@
                 "parametrization": "L1820_BW"
               }
             ],
-            "weight": "-0.25761604922941317 - 0.04587128030229186i",
+            "weight": "0.532177 - 0.0588207i",
             "vertices": [
               {
                 "type": "ls",
@@ -966,7 +966,7 @@
                 "parametrization": "L1820_BW"
               }
             ],
-            "weight": "-0.42822618862999434 - 1.1175887875910098i",
+            "weight": "0.0935783 - 0.239319i",
             "vertices": [
               {
                 "type": "ls",
@@ -994,7 +994,7 @@
                 "parametrization": "L1820_BW"
               }
             ],
-            "weight": "-0.13782512304728772 - 0.8422685044813712i",
+            "weight": "-0.104502 + 0.207622i",
             "vertices": [
               {
                 "type": "ls",
@@ -1022,7 +1022,7 @@
                 "parametrization": "L1820_BW"
               }
             ],
-            "weight": "0.30661460758138337 - 1.1008683952340275i",
+            "weight": "0.354879 + 0.0095247i",
             "vertices": [
               {
                 "type": "ls",
@@ -1050,7 +1050,7 @@
                 "parametrization": "L1820_BW"
               }
             ],
-            "weight": "-0.28409816112852415 + 0.2077829900075715i",
+            "weight": "0.365898 - 0.0513427i",
             "vertices": [
               {
                 "type": "ls",
@@ -1078,7 +1078,7 @@
                 "parametrization": "L1820_BW"
               }
             ],
-            "weight": "-0.3274610999276565 - 0.7467049015473368i",
+            "weight": "0.101661 - 0.246654i",
             "vertices": [
               {
                 "type": "ls",
@@ -1106,7 +1106,7 @@
                 "parametrization": "L1830_BW"
               }
             ],
-            "weight": "-0.2002653785600497 + 0.20813410177287145i",
+            "weight": "0.111666 - 2.68328e-6i",
             "vertices": [
               {
                 "type": "ls",
@@ -1134,7 +1134,7 @@
                 "parametrization": "L1830_BW"
               }
             ],
-            "weight": "-0.36595980454716615 - 0.1456574680543363i",
+            "weight": "-0.115665 - 0.0944135i",
             "vertices": [
               {
                 "type": "ls",
@@ -1162,7 +1162,7 @@
                 "parametrization": "L1830_BW"
               }
             ],
-            "weight": "0.3200457263379719 + 0.2396823376538205i",
+            "weight": "0.163526 - 0.30452i",
             "vertices": [
               {
                 "type": "ls",
@@ -1190,7 +1190,7 @@
                 "parametrization": "L1830_BW"
               }
             ],
-            "weight": "-0.28545599079402767 - 0.18768391847784938i",
+            "weight": "-0.216621 + 0.00236978i",
             "vertices": [
               {
                 "type": "ls",
@@ -1218,7 +1218,7 @@
                 "parametrization": "L1830_BW"
               }
             ],
-            "weight": "-0.10372413693990794 + 0.21610488311193665i",
+            "weight": "-0.141864 - 0.000532145i",
             "vertices": [
               {
                 "type": "ls",
@@ -1246,7 +1246,7 @@
                 "parametrization": "L1830_BW"
               }
             ],
-            "weight": "-0.37774833978283734 - 0.17546038108722728i",
+            "weight": "-0.133338 - 0.0108992i",
             "vertices": [
               {
                 "type": "ls",
@@ -1274,7 +1274,7 @@
                 "parametrization": "L1890_BW"
               }
             ],
-            "weight": "0.5389610950906693 - 1.0669617726710425i",
+            "weight": "-0.21894 + 0.189466i",
             "vertices": [
               {
                 "type": "ls",
@@ -1302,7 +1302,7 @@
                 "parametrization": "L1890_BW"
               }
             ],
-            "weight": "0.7460104486274528 + 0.13157062079481627i",
+            "weight": "0.159494 + 0.224365i",
             "vertices": [
               {
                 "type": "ls",
@@ -1330,7 +1330,7 @@
                 "parametrization": "L1890_BW"
               }
             ],
-            "weight": "-0.8364252328333558 + 0.019747111257092772i",
+            "weight": "-0.826594 + 0.369277i",
             "vertices": [
               {
                 "type": "ls",
@@ -1358,7 +1358,7 @@
                 "parametrization": "L1890_BW"
               }
             ],
-            "weight": "0.2919319674633116 + 2.243260984620678i",
+            "weight": "0.526391 - 0.444572i",
             "vertices": [
               {
                 "type": "ls",
@@ -1386,7 +1386,7 @@
                 "parametrization": "L1890_BW"
               }
             ],
-            "weight": "0.3044072261290513 - 1.5430200125689373i",
+            "weight": "-0.338652 + 0.28941i",
             "vertices": [
               {
                 "type": "ls",
@@ -1414,7 +1414,7 @@
                 "parametrization": "L1890_BW"
               }
             ],
-            "weight": "0.834851769296486 + 0.0914845802273212i",
+            "weight": "0.394411 + 0.0441396i",
             "vertices": [
               {
                 "type": "ls",
@@ -1442,7 +1442,7 @@
                 "parametrization": "L2100_BW"
               }
             ],
-            "weight": "0.6811896666666667 - 0.40513466666666664i",
+            "weight": "-1.75088 + 0.370785i",
             "vertices": [
               {
                 "type": "ls",
@@ -1470,7 +1470,7 @@
                 "parametrization": "L2100_BW"
               }
             ],
-            "weight": "0.7091103333333333 + 1.5402046666666664i",
+            "weight": "-0.352509 + 0.704247i",
             "vertices": [
               {
                 "type": "ls",
@@ -1498,7 +1498,7 @@
                 "parametrization": "L2100_BW"
               }
             ],
-            "weight": "0.19807766666666665 + 1.0452593333333333i",
+            "weight": "0.314525 - 0.584756i",
             "vertices": [
               {
                 "type": "ls",
@@ -1526,35 +1526,7 @@
                 "parametrization": "L2100_BW"
               }
             ],
-            "weight": "-0.7996766666666667 + 2.167724333333333i",
-            "vertices": [
-              {
-                "type": "ls",
-                "l": "4",
-                "s": "7/2",
-                "node": [[1, 2], 3],
-                "formfactor": "BlattWeisskopf_b_decay_l4"
-              },
-              {
-                "type": "ls",
-                "l": "4",
-                "s": "1/2",
-                "node": [1, 2],
-                "formfactor": "BlattWeisskopf_resonance_l4"
-              }
-            ],
-            "topology": [[1, 2], 3],
-            "name": "L2100"
-          },
-          {
-            "propagators": [
-              {
-                "spin": "7/2",
-                "node": [1, 2],
-                "parametrization": "L2100_BW"
-              }
-            ],
-            "weight": "0.7334657683006988 - 0.722246144357622i",
+            "weight": "-1.53781 + 0.325664i",
             "vertices": [
               {
                 "type": "ls",
@@ -1582,7 +1554,7 @@
                 "parametrization": "L2100_BW"
               }
             ],
-            "weight": "0.5893375068756963 + 1.1760961873278304i",
+            "weight": "-0.362776 + 0.717389i",
             "vertices": [
               {
                 "type": "ls",
@@ -1610,7 +1582,7 @@
                 "parametrization": "L2110_BW"
               }
             ],
-            "weight": "-0.5738215053134057 + 0.5447303357548315i",
+            "weight": "0.940355 - 0.551072i",
             "vertices": [
               {
                 "type": "ls",
@@ -1638,7 +1610,7 @@
                 "parametrization": "L2110_BW"
               }
             ],
-            "weight": "-1.6639043063456418 - 1.6594654915746214i",
+            "weight": "0.293906 - 0.737049i",
             "vertices": [
               {
                 "type": "ls",
@@ -1666,7 +1638,7 @@
                 "parametrization": "L2110_BW"
               }
             ],
-            "weight": "-0.08229344877935303 - 0.8834704116841071i",
+            "weight": "-0.289903 + 0.6641i",
             "vertices": [
               {
                 "type": "ls",
@@ -1694,7 +1666,7 @@
                 "parametrization": "L2110_BW"
               }
             ],
-            "weight": "0.06403927659089939 - 2.606881444660322i",
+            "weight": "0.188439 - 0.0919761i",
             "vertices": [
               {
                 "type": "ls",
@@ -1722,7 +1694,7 @@
                 "parametrization": "L2110_BW"
               }
             ],
-            "weight": "-0.4944131334300535 + 1.0386705091208868i",
+            "weight": "0.744621 - 0.440494i",
             "vertices": [
               {
                 "type": "ls",
@@ -1750,7 +1722,7 @@
                 "parametrization": "L2110_BW"
               }
             ],
-            "weight": "-1.3737208465399549 - 1.190858452549667i",
+            "weight": "0.310724 - 0.765157i",
             "vertices": [
               {
                 "type": "ls",
@@ -1778,7 +1750,7 @@
                 "parametrization": "L2350_BW"
               }
             ],
-            "weight": "-0.03912923776526843 - 0.1484153412322692i",
+            "weight": "0.268649 + 0.18873i",
             "vertices": [
               {
                 "type": "ls",
@@ -1806,91 +1778,7 @@
                 "parametrization": "L2350_BW"
               }
             ],
-            "weight": "0.11812430551060878 - 0.1639139288776i",
-            "vertices": [
-              {
-                "type": "ls",
-                "l": "4",
-                "s": "7/2",
-                "node": [[1, 2], 3],
-                "formfactor": "BlattWeisskopf_b_decay_l4"
-              },
-              {
-                "type": "ls",
-                "l": "5",
-                "s": "1/2",
-                "node": [1, 2],
-                "formfactor": "BlattWeisskopf_resonance_l5"
-              }
-            ],
-            "topology": [[1, 2], 3],
-            "name": "L2350"
-          },
-          {
-            "propagators": [
-              {
-                "spin": "9/2",
-                "node": [1, 2],
-                "parametrization": "L2350_BW"
-              }
-            ],
-            "weight": "0.1189414012544145 - 0.5143331271479781i",
-            "vertices": [
-              {
-                "type": "ls",
-                "l": "4",
-                "s": "9/2",
-                "node": [[1, 2], 3],
-                "formfactor": "BlattWeisskopf_b_decay_l4"
-              },
-              {
-                "type": "ls",
-                "l": "5",
-                "s": "1/2",
-                "node": [1, 2],
-                "formfactor": "BlattWeisskopf_resonance_l5"
-              }
-            ],
-            "topology": [[1, 2], 3],
-            "name": "L2350"
-          },
-          {
-            "propagators": [
-              {
-                "spin": "9/2",
-                "node": [1, 2],
-                "parametrization": "L2350_BW"
-              }
-            ],
-            "weight": "0.2452402823392156 - 0.07215166475745884i",
-            "vertices": [
-              {
-                "type": "ls",
-                "l": "0",
-                "s": "1/2",
-                "node": [[1, 2], 3],
-                "formfactor": "BlattWeisskopf_b_decay_l0"
-              },
-              {
-                "type": "ls",
-                "l": "5",
-                "s": "1/2",
-                "node": [1, 2],
-                "formfactor": "BlattWeisskopf_resonance_l5"
-              }
-            ],
-            "topology": [[1, 2], 3],
-            "name": "L2350"
-          },
-          {
-            "propagators": [
-              {
-                "spin": "9/2",
-                "node": [1, 2],
-                "parametrization": "L2350_BW"
-              }
-            ],
-            "weight": "-0.035320825594352574 - 0.13397021466756734i",
+            "weight": "0.242501 + 0.170361i",
             "vertices": [
               {
                 "type": "ls",
@@ -1918,7 +1806,7 @@
                 "parametrization": "L2350_BW"
               }
             ],
-            "weight": "0.09044150258962932 - 0.07796846595501146i",
+            "weight": "-1.38778e-16 - 8.32667e-17i",
             "vertices": [
               {
                 "type": "ls",
@@ -1946,7 +1834,7 @@
                 "parametrization": "LNR3O_NR"
               }
             ],
-            "weight": "0.505570050363152 + 0.3447283391008056i",
+            "weight": "0.205143 - 1.84147i",
             "vertices": [
               {
                 "type": "ls",
@@ -1974,91 +1862,7 @@
                 "parametrization": "LNR3O_NR"
               }
             ],
-            "weight": "-3.9400148334715945 + 0.04170982319789908i",
-            "vertices": [
-              {
-                "type": "ls",
-                "l": "1",
-                "s": "1/2",
-                "node": [[1, 2], 3],
-                "formfactor": "MomentumPower1"
-              },
-              {
-                "type": "ls",
-                "l": "2",
-                "s": "1/2",
-                "node": [1, 2],
-                "formfactor": "MomentumPower2"
-              }
-            ],
-            "topology": [[1, 2], 3],
-            "name": "LNR30"
-          },
-          {
-            "propagators": [
-              {
-                "spin": "3/2",
-                "node": [1, 2],
-                "parametrization": "LNR3O_NR"
-              }
-            ],
-            "weight": "3.365161111252803 - 0.02084820339501704i",
-            "vertices": [
-              {
-                "type": "ls",
-                "l": "1",
-                "s": "3/2",
-                "node": [[1, 2], 3],
-                "formfactor": "MomentumPower1"
-              },
-              {
-                "type": "ls",
-                "l": "2",
-                "s": "1/2",
-                "node": [1, 2],
-                "formfactor": "MomentumPower2"
-              }
-            ],
-            "topology": [[1, 2], 3],
-            "name": "LNR30"
-          },
-          {
-            "propagators": [
-              {
-                "spin": "3/2",
-                "node": [1, 2],
-                "parametrization": "LNR3O_NR"
-              }
-            ],
-            "weight": "-2.4054666736984323 - 0.834854315156962i",
-            "vertices": [
-              {
-                "type": "ls",
-                "l": "2",
-                "s": "3/2",
-                "node": [[1, 2], 3],
-                "formfactor": "MomentumPower2"
-              },
-              {
-                "type": "ls",
-                "l": "2",
-                "s": "1/2",
-                "node": [1, 2],
-                "formfactor": "MomentumPower2"
-              }
-            ],
-            "topology": [[1, 2], 3],
-            "name": "LNR30"
-          },
-          {
-            "propagators": [
-              {
-                "spin": "3/2",
-                "node": [1, 2],
-                "parametrization": "LNR3O_NR"
-              }
-            ],
-            "weight": "1.1786518912328119 + 0.5352301050523212i",
+            "weight": "0.152905 - 1.37255i",
             "vertices": [
               {
                 "type": "ls",
@@ -2086,7 +1890,7 @@
                 "parametrization": "LNR3O_NR"
               }
             ],
-            "weight": "-4.058434037084272 + 0.038038067798339015i",
+            "weight": "0.0 + 0.0i",
             "vertices": [
               {
                 "type": "ls",
@@ -2147,121 +1951,121 @@
     {
       "name": "L1520_BW",
       "l": 2,
-      "mb": 0.938272046,
+      "mb": 0.938,
       "type": "BreitWigner",
       "d": 1.5,
-      "mass": 1.518467,
-      "ma": 0.493677,
-      "width": 0.015195
+      "mass": 1.519,
+      "ma": 0.493,
+      "width": 0.016
     },
     {
       "name": "L1600_BW",
       "l": 1,
-      "mb": 0.938272046,
+      "mb": 0.938,
       "type": "BreitWigner",
       "d": 1.5,
-      "mass": 1.63,
-      "ma": 0.493677,
-      "width": 0.25
+      "mass": 1.6,
+      "ma": 0.493,
+      "width": 0.2
     },
     {
       "name": "L1670_BW",
       "l": 0,
-      "mb": 0.938272046,
+      "mb": 0.938,
       "type": "BreitWigner",
       "d": 1.5,
-      "mass": 1.67,
-      "ma": 0.493677,
+      "mass": 1.674,
+      "ma": 0.493,
       "width": 0.03
     },
     {
       "name": "L1690_BW",
       "l": 2,
-      "mb": 0.938272046,
+      "mb": 0.938,
       "type": "BreitWigner",
       "d": 1.5,
       "mass": 1.69,
-      "ma": 0.493677,
+      "ma": 0.493,
       "width": 0.07
     },
     {
       "name": "L1800_BW",
       "l": 0,
-      "mb": 0.938272046,
+      "mb": 0.938,
       "type": "BreitWigner",
       "d": 1.5,
       "mass": 1.8,
-      "ma": 0.493677,
+      "ma": 0.493,
       "width": 0.2
     },
     {
       "name": "L1810_BW",
       "l": 1,
-      "mb": 0.938272046,
+      "mb": 0.938,
       "type": "BreitWigner",
       "d": 1.5,
       "mass": 1.79,
-      "ma": 0.493677,
+      "ma": 0.493,
       "width": 0.11
     },
     {
       "name": "L1820_BW",
       "l": 3,
-      "mb": 0.938272046,
+      "mb": 0.938,
       "type": "BreitWigner",
       "d": 1.5,
       "mass": 1.82,
-      "ma": 0.493677,
+      "ma": 0.493,
       "width": 0.08
     },
     {
       "name": "L1830_BW",
       "l": 2,
-      "mb": 0.938272046,
+      "mb": 0.938,
       "type": "BreitWigner",
       "d": 1.5,
       "mass": 1.825,
-      "ma": 0.493677,
+      "ma": 0.493,
       "width": 0.09
     },
     {
       "name": "L1890_BW",
       "l": 1,
-      "mb": 0.938272046,
+      "mb": 0.938,
       "type": "BreitWigner",
       "d": 1.5,
       "mass": 1.89,
-      "ma": 0.493677,
+      "ma": 0.493,
       "width": 0.12
     },
     {
       "name": "L2100_BW",
       "l": 4,
-      "mb": 0.938272046,
+      "mb": 0.938,
       "type": "BreitWigner",
       "d": 1.5,
       "mass": 2.1,
-      "ma": 0.493677,
+      "ma": 0.493,
       "width": 0.2
     },
     {
       "name": "L2110_BW",
       "l": 3,
-      "mb": 0.938272046,
+      "mb": 0.938,
       "type": "BreitWigner",
       "d": 1.5,
       "mass": 2.09,
-      "ma": 0.493677,
+      "ma": 0.493,
       "width": 0.25
     },
     {
       "name": "L2350_BW",
       "l": 5,
-      "mb": 0.938272046,
+      "mb": 0.938,
       "type": "BreitWigner",
       "d": 1.5,
       "mass": 2.35,
-      "ma": 0.493677,
+      "ma": 0.493,
       "width": 0.15
     },
     {
@@ -2353,11 +2157,6 @@
       "l": 0
     },
     {
-      "name": "MomentumPower1",
-      "type": "MomentumPower",
-      "l": 1
-    },
-    {
       "name": "MomentumPower2",
       "type": "MomentumPower",
       "l": 2
@@ -2416,17 +2215,17 @@
       {
         "name": "validation_point1",
         "distribution": "Lb2pKg_model",
-        "value": 100.09146203771249
+        "value": 100.10209548443457
       },
       {
         "name": "validation_point2",
         "distribution": "Lb2pKg_model",
-        "value": 16.638566783307887
+        "value": 20.87899076783355
       },
       {
         "name": "validation_point3",
         "distribution": "Lb2pKg_model",
-        "value": 3.946965083381133
+        "value": 3.947305652216316
       }
     ]
   },
@@ -2456,7 +2255,7 @@
         },
         {
           "name": "m_12_3",
-          "value": 5.6196
+          "value": 5.62
         }
       ]
     },
@@ -2485,7 +2284,7 @@
         },
         {
           "name": "m_12_3",
-          "value": 5.6196
+          "value": 5.62
         }
       ]
     },
@@ -2514,7 +2313,7 @@
         },
         {
           "name": "m_12_3",
-          "value": 5.6196
+          "value": 5.62
         }
       ]
     }

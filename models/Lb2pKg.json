@@ -77,7 +77,7 @@
                 "l": "1",
                 "s": "1/2",
                 "node": [[1, 2], 3],
-                "formfactor": ""
+                "formfactor": "BlattWeisskopf_b_decay_l1"
               },
               {
                 "type": "ls",
@@ -105,7 +105,7 @@
                 "l": "1",
                 "s": "3/2",
                 "node": [[1, 2], 3],
-                "formfactor": ""
+                "formfactor": "BlattWeisskopf_b_decay_l1"
               },
               {
                 "type": "ls",
@@ -133,7 +133,7 @@
                 "l": "2",
                 "s": "3/2",
                 "node": [[1, 2], 3],
-                "formfactor": ""
+                "formfactor": "BlattWeisskopf_b_decay_l2"
               },
               {
                 "type": "ls",

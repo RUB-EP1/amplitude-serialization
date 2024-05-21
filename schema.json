@@ -4,6 +4,15 @@
   "description": "This schema describes the serialization format of an amplitude model for hadron physics.",
   "additionalProperties": false,
   "definitions": {
+    "AngularMomentum": {
+      "anyOf": [
+        { "type": "integer", "minimum": 0 },
+        {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        }
+      ]
+    },
     "ComplexNumber": {
       "anyOf": [
         { "type": "number" },
@@ -83,8 +92,7 @@
               "mb": { "type": "number" },
               "l": {
                 "description": "Orbital angular momentum of the decay.",
-                "type": "integer",
-                "minimum": 0
+                "$ref": "#/definitions/AngularMomentum"
               },
               "d": { "type": "number" }
             },
@@ -99,8 +107,7 @@
         },
         "l": {
           "description": "Orbital angular momentum of the decay.",
-          "type": "integer",
-          "minimum": 0
+          "$ref": "#/definitions/AngularMomentum"
         },
         "mass": {
           "description": "Position of the resonance in GeV.",
@@ -213,9 +220,8 @@
           "enum": ["-", "+"]
         },
         "l": {
-          "description": "Angular momentum of the vertex.",
-          "pattern": "^(0|[1-9][0-9]*)$",
-          "type": "string"
+          "description": "Orbital angular momentum of the vertex.",
+          "$ref": "#/definitions/AngularMomentum"
         },
         "s": {
           "description": "Coupled spin of the vertex.",

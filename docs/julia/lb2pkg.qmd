@@ -35,7 +35,7 @@ theme(:wong2, frame=:box, grid=false, minorticks=true,
 ## Function definitions
 
 Non-standard lineshapes are used to model resonances that do not conform to a simple `BreitWigner` distributions, or a `MultichannelBreitWigner` has to be defined explicitly.
-The code below defines a new lineshape, and its deserialization method.
+The code below defines a new `NonResonant` lineshape, and its deserialization method. In this case this is just a constant.
 
 ```{julia}
 struct NonResonant <: HadronicLineshapes.AbstractFlexFunc
@@ -80,7 +80,7 @@ end
 ## Validation
 
 The integrity of the model is checked by validating the value of distributions at a few phase space points.
-The table lists the validation checkes and their status ("🟢" or "🔴").
+The table lists the validation checkes and their status ("🟢" ($<10^{-12}$), "🟡" ($<10^{-2}$) or "🔴" $\ge10^{-2}$) for the difference between the reference and computed values.
 
 ```{julia}
 #| code-fold: true
@@ -103,7 +103,7 @@ df = let
         _parameters = array2dict(parameter_point["parameters"];
             key="name", apply=v -> v["value"])
         #
-        function label_diff(diff; levels=[1e-2, 1e-4])
+        function label_diff(diff; levels=[1e-2, 1e-12])
             _diff = abs(diff)
             _diff < levels[2] && return '🟢'
             _diff < levels[1] && return '🟡'
@@ -123,32 +123,58 @@ The model descibing the decay is fetched from the workspace
 
 ```{julia}
 model_dist = [v for (k, v) in workspace if v isa HadronicUnpolarizedIntensity] |> first;
+model = model_dist.model
 ```
 
 ### Dalitz plot
 
-The Dalitz plot shows the probability distribution across two dimensional phase space of the decay.
+The Dalitz plot shows the probability distribution across two dimensional phase space of the decay in the range of mass $m_{pK^{-}}$ from $1.5$ to $2.5 GeV/c^2$.
 
 ```{julia}
 #| code-fold: true
 #| code-summary: Dalitz plot plotting
-let iσx = 3, iσy = 2
-    xlab = ((i, j) = ij_from_k(iσx);
-    "m²($i$j) [GeV²]")
-    ylab = ((i, j) = ij_from_k(iσy);
-    "m²($i$j) [GeV²]")
-    model = model_dist.model
+let
+    ms = masses(model)
+    #
+    σ3v = range(lims3(ms)[1], 2.5^2, 100)[2:end-1]
+    σ2v = range(5, 27, 30)[2:end-1]
+    #
+    _model = model
+    f(σs) = Kibble(σs, ms^2) > 0 ? NaN : unpolarized_intensity(model, σs)
 
-    plot(masses(model), Base.Fix1(unpolarized_intensity, model);
-        iσx, iσy, xlab, ylab)
+    calv = [
+        f(Invariants(ms; σ3, σ2)) for σ2 in σ2v, σ3 in σ3v]
+    heatmap(σ3v, σ2v, calv)
 end
 ```
 
-Test that the NonResonant part is implemented correctly.
+The projection of the model onto a mass variable is shown by black line.
+Contributions from individual resonances are shown by the colored lines.
 
 ```{julia}
-let
+#| code-fold: true
+#| code-summary: Computation of projections
+let k = 3
+    i, j = ij_from_k(k)
+    xlab = "m($i$j) [GeV]"
     model = model_dist.model
-    @assert model.chains[74].Xlineshape(3.5^2) == 1.0 "Not computed / normalized correctly"
+    #
+    mlims = (sqrt(lims(3, masses(model))[1]), 2.5)
+    mv = range(mlims..., 200) |> shift_by_half
+    #
+    plot()
+    plot!(mv, lab="Total") do m
+        I = Base.Fix1(unpolarized_intensity, model)
+        m * quadgk(projection_integrand(I, masses(model), m^2; k), 0, 1)[1]
+    end
+    chain_names = Set(model.names) |> collect |> sort
+    for name in chain_names
+        _model = model[model.names.==name]
+        plot!(mv, lab=name) do m
+            I = Base.Fix1(unpolarized_intensity, _model)
+            m * quadgk(projection_integrand(I, masses(_model), m^2; k), 0, 1)[1]
+        end
+    end
+    plot!(; xlab)
 end
 ```

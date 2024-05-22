@@ -1964,7 +1964,7 @@
               }
             ],
             "topology": [[1, 2], 3],
-            "name": "LNR3O"
+            "name": "LNR"
           },
           {
             "propagators": [
@@ -1992,7 +1992,7 @@
               }
             ],
             "topology": [[1, 2], 3],
-            "name": "LNR3O"
+            "name": "LNR"
           },
           {
             "propagators": [
@@ -2020,7 +2020,7 @@
               }
             ],
             "topology": [[1, 2], 3],
-            "name": "LNR3O"
+            "name": "LNR"
           },
           {
             "propagators": [
@@ -2048,7 +2048,7 @@
               }
             ],
             "topology": [[1, 2], 3],
-            "name": "LNR3O"
+            "name": "LNR"
           },
           {
             "propagators": [
@@ -2076,7 +2076,7 @@
               }
             ],
             "topology": [[1, 2], 3],
-            "name": "LNR3O"
+            "name": "LNR"
           },
           {
             "propagators": [
@@ -2104,7 +2104,7 @@
               }
             ],
             "topology": [[1, 2], 3],
-            "name": "LNR3O"
+            "name": "LNR"
           }
         ]
       },

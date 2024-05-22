@@ -2110,12 +2110,12 @@
       },
       "variables": [
         {
-          "mass_phi_costheta": ["m_12", "phi_12", "cos_theta_12"],
-          "node": [1, 2]
+          "node": [1, 2],
+          "mass_phi_costheta": ["m_12", "phi_12", "cos_theta_12"]
         },
         {
-          "mass_phi_costheta": ["m_12_3", "phi_12_3", "cos_theta_12_3"],
-          "node": [[1, 2], 3]
+          "node": [[1, 2], 3],
+          "mass_phi_costheta": ["m_12_3", "phi_12_3", "cos_theta_12_3"]
         }
       ]
     }

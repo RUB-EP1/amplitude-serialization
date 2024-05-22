@@ -2221,6 +2221,7 @@
     },
     {
       "type": "Constant",
+      "mass": 3.5,
       "name": "LNR30_NR"
     },
     {

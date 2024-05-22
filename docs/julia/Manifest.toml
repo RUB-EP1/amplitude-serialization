@@ -2,7 +2,7 @@
 
 julia_version = "1.10.3"
 manifest_format = "2.0"
-project_hash = "e40973e8a6fbb9a08333ee74ae05bd4d2aa9d2f4"
+project_hash = "3f243dcd69360dee01195d9e17b4a5d3b99713b4"
 
 [[deps.ArgTools]]
 uuid = "0dad84c5-d112-42e6-8d28-ef12dabb789f"
@@ -276,11 +276,11 @@ version = "1.10.8"
 
 [[deps.HadronicLineshapes]]
 deps = ["Parameters", "QuadGK", "StaticArrays"]
-git-tree-sha1 = "a8ad741e2299f02a9f52378060d66befd4bdd8f7"
+git-tree-sha1 = "37b311e2c93c093f16f64aeef9115e810f6eada4"
 repo-rev = "main"
 repo-url = "https://github.com/mmikhasenko/HadronicLineshapes.jl"
 uuid = "49c9d978-1f9d-4e96-a984-0a9783c0b9bf"
-version = "0.3.0"
+version = "0.3.2"
 
 [[deps.HarfBuzz_jll]]
 deps = ["Artifacts", "Cairo_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll", "Graphite2_jll", "JLLWrappers", "Libdl", "Libffi_jll", "Pkg"]
@@ -899,11 +899,11 @@ version = "0.11.2"
 
 [[deps.ThreeBodyDecaysIO]]
 deps = ["DataFrames", "HadronicLineshapes", "JSON", "OrderedCollections", "Parameters", "ThreeBodyDecays"]
-git-tree-sha1 = "553720fbc7779bc22d7d20207b9a7f140df803ac"
+git-tree-sha1 = "2abb4602d66c5e17b7a242132b3464b4cc272506"
 repo-rev = "main"
 repo-url = "https://github.com/mmikhasenko/ThreeBodyDecaysIO.jl"
 uuid = "418e7ecf-680e-4cb5-ad61-5e2f006aefac"
-version = "0.2.1"
+version = "0.2.2"
 
 [[deps.TranscodingStreams]]
 git-tree-sha1 = "5d54d076465da49d6746c647022f3b3674e64156"

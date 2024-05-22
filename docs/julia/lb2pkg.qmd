@@ -38,16 +38,14 @@ Non-standard lineshapes are used to model resonances that do not conform to a si
 The code below defines a new `NonResonant` lineshape, and its deserialization method. In this case this is just a constant.
 
 ```{julia}
-struct NonResonant <: HadronicLineshapes.AbstractFlexFunc
+struct Constant <: HadronicLineshapes.AbstractFlexFunc
     m::Float64
 end
-function (BW::NonResonant)(σ)
-    @unpack m = BW
-    1.0
-end
-function ThreeBodyDecaysIO.dict2instance(::Type{NonResonant}, dict)
+(X::Constant)(σ) = 1
+
+function ThreeBodyDecaysIO.dict2instance(::Type{Constant}, dict)
     @unpack mass = dict
-    return NonResonant(mass)
+    return Constant(mass)
 end
 ```
 

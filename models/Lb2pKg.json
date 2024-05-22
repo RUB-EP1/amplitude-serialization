@@ -42,7 +42,7 @@
                 "parametrization": "L1405_Flatte"
               }
             ],
-            "weight": "-0.018328999999999998 - 0.7004859999999999i",
+            "weight": "2.2615419999999995 - 1.7992479999999997i",
             "vertices": [
               {
                 "type": "ls",
@@ -70,7 +70,7 @@
                 "parametrization": "L1405_Flatte"
               }
             ],
-            "weight": "-0.25187299999999996 + 1.2128159999999997i",
+            "weight": "-1.8662079999999999 - 1.0409729999999997i",
             "vertices": [
               {
                 "type": "ls",
@@ -98,7 +98,7 @@
                 "parametrization": "L1405_Flatte"
               }
             ],
-            "weight": "0.17810110629779918 - 0.8575904179315432i",
+            "weight": "1.319608331904584 + 0.7360790673321034i",
             "vertices": [
               {
                 "type": "ls",
@@ -126,7 +126,7 @@
                 "parametrization": "L1405_Flatte"
               }
             ],
-            "weight": "0.012960560192368215 + 0.4953184007262399i",
+            "weight": "-1.5991516841381865 + 1.2722604618363327i",
             "vertices": [
               {
                 "type": "ls",
@@ -154,14 +154,14 @@
                 "parametrization": "L1520_BW"
               }
             ],
-            "weight": "-0.08633726789283988 + 0.0627382536719026i",
+            "weight": "0.1787061055481877 - 0.0029077827979407263i",
             "vertices": [
               {
                 "type": "ls",
                 "l": "0",
                 "s": "1/2",
                 "node": [[1, 2], 3],
-                "formfactor": "BlattWeisskopf_b_decay_l0"
+                "formfactor": ""
               },
               {
                 "type": "ls",
@@ -182,7 +182,7 @@
                 "parametrization": "L1520_BW"
               }
             ],
-            "weight": "-0.06999071655012541 + 0.106367070408092i",
+            "weight": "0.23981694894606595 + 0.035455988278427664i",
             "vertices": [
               {
                 "type": "ls",
@@ -210,7 +210,7 @@
                 "parametrization": "L1520_BW"
               }
             ],
-            "weight": "0.1676728989336082 - 0.22674668440398418i",
+            "weight": "-0.07241774473290369 + 0.9195480730863396i",
             "vertices": [
               {
                 "type": "ls",
@@ -238,7 +238,7 @@
                 "parametrization": "L1520_BW"
               }
             ],
-            "weight": "-0.2695933245616441 - 0.026841760001907473i",
+            "weight": "-0.2501855961577325 + 0.4451666988733546i",
             "vertices": [
               {
                 "type": "ls",
@@ -266,7 +266,7 @@
                 "parametrization": "L1520_BW"
               }
             ],
-            "weight": "0.025512441520548074 + 0.055709586667302545i",
+            "weight": "0.21659486538591105 - 0.15055623295778503i",
             "vertices": [
               {
                 "type": "ls",
@@ -294,7 +294,7 @@
                 "parametrization": "L1520_BW"
               }
             ],
-            "weight": "-0.10805896631120285 + 0.1548635614679949i",
+            "weight": "0.20288824824430146 - 0.2800886910287802i",
             "vertices": [
               {
                 "type": "ls",
@@ -322,14 +322,14 @@
                 "parametrization": "L1600_BW"
               }
             ],
-            "weight": "0.37981102928693367 - 0.8667084091528899i",
+            "weight": "2.284312320810868 + 3.3342947994153125i",
             "vertices": [
               {
                 "type": "ls",
                 "l": "0",
                 "s": "1/2",
                 "node": [[1, 2], 3],
-                "formfactor": "BlattWeisskopf_b_decay_l0"
+                "formfactor": ""
               },
               {
                 "type": "ls",
@@ -350,7 +350,7 @@
                 "parametrization": "L1600_BW"
               }
             ],
-            "weight": "-1.0478174150949835 + 1.1079674981899665i",
+            "weight": "-2.3740723898115097 + 0.2018514690632694i",
             "vertices": [
               {
                 "type": "ls",
@@ -378,7 +378,7 @@
                 "parametrization": "L1600_BW"
               }
             ],
-            "weight": "0.7409187996590221 - 0.7834513313044188i",
+            "weight": "1.6787226858634705 - 0.14273054256710435i",
             "vertices": [
               {
                 "type": "ls",
@@ -406,7 +406,7 @@
                 "parametrization": "L1600_BW"
               }
             ],
-            "weight": "-0.2685669543782332 + 0.6128553934234132i",
+            "weight": "-1.6152527323933445 - 2.357702463141606i",
             "vertices": [
               {
                 "type": "ls",
@@ -431,24 +431,24 @@
               {
                 "spin": "1/2",
                 "node": [1, 2],
-                "parametrization": "L1670_BW"
+                "parametrization": "L1680_BW"
               }
             ],
-            "weight": "-0.04022499999999999 + 0.10510599999999999i",
+            "weight": "-0.16420699999999996 + 0.07874799999999998i",
             "vertices": [
               {
                 "type": "ls",
                 "l": "0",
                 "s": "1/2",
                 "node": [[1, 2], 3],
-                "formfactor": "BlattWeisskopf_b_decay_l0"
+                "formfactor": ""
               },
               {
                 "type": "ls",
                 "l": "0",
                 "s": "1/2",
                 "node": [1, 2],
-                "formfactor": "BlattWeisskopf_resonance_l0"
+                "formfactor": ""
               }
             ],
             "topology": [[1, 2], 3],
@@ -459,10 +459,10 @@
               {
                 "spin": "1/2",
                 "node": [1, 2],
-                "parametrization": "L1670_BW"
+                "parametrization": "L1680_BW"
               }
             ],
-            "weight": "0.012168999999999998 - 0.11626299999999999i",
+            "weight": "0.3361199999999999 + 0.20572699999999997i",
             "vertices": [
               {
                 "type": "ls",
@@ -476,7 +476,7 @@
                 "l": "0",
                 "s": "1/2",
                 "node": [1, 2],
-                "formfactor": "BlattWeisskopf_resonance_l0"
+                "formfactor": ""
               }
             ],
             "topology": [[1, 2], 3],
@@ -487,10 +487,10 @@
               {
                 "spin": "1/2",
                 "node": [1, 2],
-                "parametrization": "L1670_BW"
+                "parametrization": "L1680_BW"
               }
             ],
-            "weight": "-0.008604782420259091 + 0.08221035570109153i",
+            "weight": "-0.2376727312924222 - 0.14547095677316477i",
             "vertices": [
               {
                 "type": "ls",
@@ -504,7 +504,7 @@
                 "l": "0",
                 "s": "1/2",
                 "node": [1, 2],
-                "formfactor": "BlattWeisskopf_resonance_l0"
+                "formfactor": ""
               }
             ],
             "topology": [[1, 2], 3],
@@ -515,10 +515,10 @@
               {
                 "spin": "1/2",
                 "node": [1, 2],
-                "parametrization": "L1670_BW"
+                "parametrization": "L1680_BW"
               }
             ],
-            "weight": "0.02844337027322886 - 0.07432116534339323i",
+            "weight": "0.11611188321829932 - 0.05568324480487821i",
             "vertices": [
               {
                 "type": "ls",
@@ -532,7 +532,7 @@
                 "l": "0",
                 "s": "1/2",
                 "node": [1, 2],
-                "formfactor": "BlattWeisskopf_resonance_l0"
+                "formfactor": ""
               }
             ],
             "topology": [[1, 2], 3],
@@ -546,14 +546,14 @@
                 "parametrization": "L1690_BW"
               }
             ],
-            "weight": "-0.2841371579008983 + 0.2778122160197423i",
+            "weight": "-0.1638425144881511 - 0.027239780101902436i",
             "vertices": [
               {
                 "type": "ls",
                 "l": "0",
                 "s": "1/2",
                 "node": [[1, 2], 3],
-                "formfactor": "BlattWeisskopf_b_decay_l0"
+                "formfactor": ""
               },
               {
                 "type": "ls",
@@ -574,7 +574,7 @@
                 "parametrization": "L1690_BW"
               }
             ],
-            "weight": "0.15480298608231044 + 0.030129227142427665i",
+            "weight": "0.8340596165977585 + 0.6936591443585243i",
             "vertices": [
               {
                 "type": "ls",
@@ -602,7 +602,7 @@
                 "parametrization": "L1690_BW"
               }
             ],
-            "weight": "-0.30883900084833843 - 0.04976682333442632i",
+            "weight": "0.5733385625572381 + 0.1544300099436635i",
             "vertices": [
               {
                 "type": "ls",
@@ -630,7 +630,7 @@
                 "parametrization": "L1690_BW"
               }
             ],
-            "weight": "-0.11851965265220783 + 0.01944305827795617i",
+            "weight": "1.040432591231551 + 0.7879720195135104i",
             "vertices": [
               {
                 "type": "ls",
@@ -658,7 +658,7 @@
                 "parametrization": "L1690_BW"
               }
             ],
-            "weight": "-0.17227678244926423 + 0.20058798057401478i",
+            "weight": "-0.4689318637438509 - 0.2829606731711704i",
             "vertices": [
               {
                 "type": "ls",
@@ -686,7 +686,7 @@
                 "parametrization": "L1690_BW"
               }
             ],
-            "weight": "0.2183296669494464 + 0.039045941111475524i",
+            "weight": "0.4305584791475875 + 0.4655463300187793i",
             "vertices": [
               {
                 "type": "ls",
@@ -721,14 +721,14 @@
                 "l": "0",
                 "s": "1/2",
                 "node": [[1, 2], 3],
-                "formfactor": "BlattWeisskopf_b_decay_l0"
+                "formfactor": ""
               },
               {
                 "type": "ls",
                 "l": "0",
                 "s": "1/2",
                 "node": [1, 2],
-                "formfactor": "BlattWeisskopf_resonance_l0"
+                "formfactor": ""
               }
             ],
             "topology": [[1, 2], 3],
@@ -742,7 +742,7 @@
                 "parametrization": "L1800_BW"
               }
             ],
-            "weight": "-0.7838459999999999 + 0.9070779999999999i",
+            "weight": "0.32073699999999994 - 4.406508999999999i",
             "vertices": [
               {
                 "type": "ls",
@@ -756,7 +756,7 @@
                 "l": "0",
                 "s": "1/2",
                 "node": [1, 2],
-                "formfactor": "BlattWeisskopf_resonance_l0"
+                "formfactor": ""
               }
             ],
             "topology": [[1, 2], 3],
@@ -770,7 +770,7 @@
                 "parametrization": "L1800_BW"
               }
             ],
-            "weight": "0.5542628220059502 - 0.6414010048651309i",
+            "weight": "-0.22679530767742956 + 3.1158723952595504i",
             "vertices": [
               {
                 "type": "ls",
@@ -784,7 +784,7 @@
                 "l": "0",
                 "s": "1/2",
                 "node": [1, 2],
-                "formfactor": "BlattWeisskopf_resonance_l0"
+                "formfactor": ""
               }
             ],
             "topology": [[1, 2], 3],
@@ -812,7 +812,7 @@
                 "l": "0",
                 "s": "1/2",
                 "node": [1, 2],
-                "formfactor": "BlattWeisskopf_resonance_l0"
+                "formfactor": ""
               }
             ],
             "topology": [[1, 2], 3],
@@ -826,14 +826,14 @@
                 "parametrization": "L1810_BW"
               }
             ],
-            "weight": "0.10662677976474766 + 0.22571797449103012i",
+            "weight": "-0.7590164181414873 - 0.3568902236001055i",
             "vertices": [
               {
                 "type": "ls",
                 "l": "0",
                 "s": "1/2",
                 "node": [[1, 2], 3],
-                "formfactor": "BlattWeisskopf_b_decay_l0"
+                "formfactor": ""
               },
               {
                 "type": "ls",
@@ -854,7 +854,7 @@
                 "parametrization": "L1810_BW"
               }
             ],
-            "weight": "0.07832911102095653 - 0.31220908626752036i",
+            "weight": "0.09230907043911411 - 0.19521309566812706i",
             "vertices": [
               {
                 "type": "ls",
@@ -882,7 +882,7 @@
                 "parametrization": "L1810_BW"
               }
             ],
-            "weight": "-0.05538704556723228 + 0.22076516204781937i",
+            "weight": "-0.06527236967252424 + 0.13803650372335083i",
             "vertices": [
               {
                 "type": "ls",
@@ -910,7 +910,7 @@
                 "parametrization": "L1810_BW"
               }
             ],
-            "weight": "-0.0753965190277376 - 0.15960671039829954i",
+            "weight": "0.5367056562997696 + 0.2523594972468178i",
             "vertices": [
               {
                 "type": "ls",
@@ -938,7 +938,7 @@
                 "parametrization": "L1820_BW"
               }
             ],
-            "weight": "0.532177001712776 - 0.058820721112061i",
+            "weight": "-0.25761604922941317 - 0.04587128030229186i",
             "vertices": [
               {
                 "type": "ls",
@@ -966,7 +966,7 @@
                 "parametrization": "L1820_BW"
               }
             ],
-            "weight": "0.09357833404998953 - 0.2393187890910365i",
+            "weight": "-0.42822618862999434 - 1.1175887875910098i",
             "vertices": [
               {
                 "type": "ls",
@@ -994,7 +994,7 @@
                 "parametrization": "L1820_BW"
               }
             ],
-            "weight": "-0.1045018852844292 + 0.2076223104200097i",
+            "weight": "-0.13782512304728772 - 0.8422685044813712i",
             "vertices": [
               {
                 "type": "ls",
@@ -1022,7 +1022,7 @@
                 "parametrization": "L1820_BW"
               }
             ],
-            "weight": "0.3548787809622967 + 0.009524704719832527i",
+            "weight": "0.30661460758138337 - 1.1008683952340275i",
             "vertices": [
               {
                 "type": "ls",
@@ -1050,7 +1050,7 @@
                 "parametrization": "L1820_BW"
               }
             ],
-            "weight": "0.36589791657344073 - 0.051342734808286286i",
+            "weight": "-0.28409816112852415 + 0.2077829900075715i",
             "vertices": [
               {
                 "type": "ls",
@@ -1078,7 +1078,7 @@
                 "parametrization": "L1820_BW"
               }
             ],
-            "weight": "0.10166058337656558 - 0.24665422440548i",
+            "weight": "-0.3274610999276565 - 0.7467049015473368i",
             "vertices": [
               {
                 "type": "ls",
@@ -1106,7 +1106,7 @@
                 "parametrization": "L1830_BW"
               }
             ],
-            "weight": "0.1116656570875755 - 2.6832815729997478e-6i",
+            "weight": "-0.2002653785600497 + 0.20813410177287145i",
             "vertices": [
               {
                 "type": "ls",
@@ -1134,7 +1134,7 @@
                 "parametrization": "L1830_BW"
               }
             ],
-            "weight": "-0.11566508827213164 - 0.09441349821397363i",
+            "weight": "-0.36595980454716615 - 0.1456574680543363i",
             "vertices": [
               {
                 "type": "ls",
@@ -1162,7 +1162,7 @@
                 "parametrization": "L1830_BW"
               }
             ],
-            "weight": "0.16352588726253714 - 0.30452025915659536i",
+            "weight": "0.3200457263379719 + 0.2396823376538205i",
             "vertices": [
               {
                 "type": "ls",
@@ -1190,7 +1190,7 @@
                 "parametrization": "L1830_BW"
               }
             ],
-            "weight": "-0.21662132138826964 + 0.0023697848425542774i",
+            "weight": "-0.28545599079402767 - 0.18768391847784938i",
             "vertices": [
               {
                 "type": "ls",
@@ -1218,7 +1218,7 @@
                 "parametrization": "L1830_BW"
               }
             ],
-            "weight": "0.14186419162183592 - 0.0005321449944320643i",
+            "weight": "-0.10372413693990794 + 0.21610488311193665i",
             "vertices": [
               {
                 "type": "ls",
@@ -1246,7 +1246,7 @@
                 "parametrization": "L1830_BW"
               }
             ],
-            "weight": "-0.13333785582282792 - 0.01089919992087811i",
+            "weight": "-0.37774833978283734 - 0.17546038108722728i",
             "vertices": [
               {
                 "type": "ls",
@@ -1274,14 +1274,14 @@
                 "parametrization": "L1890_BW"
               }
             ],
-            "weight": "-0.218939882330744 + 0.18946615108861356i",
+            "weight": "0.5389610950906693 - 1.0669617726710425i",
             "vertices": [
               {
                 "type": "ls",
                 "l": "0",
                 "s": "1/2",
                 "node": [[1, 2], 3],
-                "formfactor": "BlattWeisskopf_b_decay_l0"
+                "formfactor": ""
               },
               {
                 "type": "ls",
@@ -1302,7 +1302,7 @@
                 "parametrization": "L1890_BW"
               }
             ],
-            "weight": "0.1594941665641725 + 0.2243652428103189i",
+            "weight": "0.7460104486274528 + 0.13157062079481627i",
             "vertices": [
               {
                 "type": "ls",
@@ -1330,7 +1330,7 @@
                 "parametrization": "L1890_BW"
               }
             ],
-            "weight": "-0.8265935350993258 + 0.36927727362556906i",
+            "weight": "-0.8364252328333558 + 0.019747111257092772i",
             "vertices": [
               {
                 "type": "ls",
@@ -1358,7 +1358,7 @@
                 "parametrization": "L1890_BW"
               }
             ],
-            "weight": "0.5263910250298727 - 0.44457183163166486i",
+            "weight": "0.2919319674633116 + 2.243260984620678i",
             "vertices": [
               {
                 "type": "ls",
@@ -1386,7 +1386,7 @@
                 "parametrization": "L1890_BW"
               }
             ],
-            "weight": "-0.3386518283024075 + 0.28941034163368384i",
+            "weight": "0.3044072261290513 - 1.5430200125689373i",
             "vertices": [
               {
                 "type": "ls",
@@ -1414,7 +1414,7 @@
                 "parametrization": "L1890_BW"
               }
             ],
-            "weight": "0.39441111118383027 + 0.0441395536955167i",
+            "weight": "0.834851769296486 + 0.0914845802273212i",
             "vertices": [
               {
                 "type": "ls",
@@ -1442,7 +1442,7 @@
                 "parametrization": "L2100_BW"
               }
             ],
-            "weight": "-1.7508759999999999 + 0.37078466666666665i",
+            "weight": "0.6811896666666667 - 0.40513466666666664i",
             "vertices": [
               {
                 "type": "ls",
@@ -1470,7 +1470,7 @@
                 "parametrization": "L2100_BW"
               }
             ],
-            "weight": "-0.35250866666666664 + 0.7042470000000001i",
+            "weight": "0.7091103333333333 + 1.5402046666666664i",
             "vertices": [
               {
                 "type": "ls",
@@ -1498,7 +1498,7 @@
                 "parametrization": "L2100_BW"
               }
             ],
-            "weight": "0.314525 - 0.5847559999999999i",
+            "weight": "0.19807766666666665 + 1.0452593333333333i",
             "vertices": [
               {
                 "type": "ls",
@@ -1526,7 +1526,35 @@
                 "parametrization": "L2100_BW"
               }
             ],
-            "weight": "-1.5378120145114527 + 0.32566390492337804i",
+            "weight": "-0.7996766666666667 + 2.167724333333333i",
+            "vertices": [
+              {
+                "type": "ls",
+                "l": "4",
+                "s": "7/2",
+                "node": [[1, 2], 3],
+                "formfactor": "BlattWeisskopf_b_decay_l4"
+              },
+              {
+                "type": "ls",
+                "l": "4",
+                "s": "1/2",
+                "node": [1, 2],
+                "formfactor": "BlattWeisskopf_resonance_l4"
+              }
+            ],
+            "topology": [[1, 2], 3],
+            "name": "L2100"
+          },
+          {
+            "propagators": [
+              {
+                "spin": "7/2",
+                "node": [1, 2],
+                "parametrization": "L2100_BW"
+              }
+            ],
+            "weight": "0.7334657683006988 - 0.722246144357622i",
             "vertices": [
               {
                 "type": "ls",
@@ -1554,7 +1582,7 @@
                 "parametrization": "L2100_BW"
               }
             ],
-            "weight": "-0.3627763385571885 + 0.7173890330820119i",
+            "weight": "0.5893375068756963 + 1.1760961873278304i",
             "vertices": [
               {
                 "type": "ls",
@@ -1582,7 +1610,7 @@
                 "parametrization": "L2110_BW"
               }
             ],
-            "weight": "0.940355198765415 - 0.5510722016474533i",
+            "weight": "-0.5738215053134057 + 0.5447303357548315i",
             "vertices": [
               {
                 "type": "ls",
@@ -1610,7 +1638,7 @@
                 "parametrization": "L2110_BW"
               }
             ],
-            "weight": "0.29390593014092115 - 0.7370488646626976i",
+            "weight": "-1.6639043063456418 - 1.6594654915746214i",
             "vertices": [
               {
                 "type": "ls",
@@ -1638,7 +1666,7 @@
                 "parametrization": "L2110_BW"
               }
             ],
-            "weight": "-0.2899025304428074 + 0.6641002095140247i",
+            "weight": "-0.08229344877935303 - 0.8834704116841071i",
             "vertices": [
               {
                 "type": "ls",
@@ -1666,7 +1694,7 @@
                 "parametrization": "L2110_BW"
               }
             ],
-            "weight": "0.18843947952137238 - 0.09197614264890341i",
+            "weight": "0.06403927659089939 - 2.606881444660322i",
             "vertices": [
               {
                 "type": "ls",
@@ -1694,7 +1722,7 @@
                 "parametrization": "L2110_BW"
               }
             ],
-            "weight": "0.7446212569650814 - 0.44049359212543326i",
+            "weight": "-0.4944131334300535 + 1.0386705091208868i",
             "vertices": [
               {
                 "type": "ls",
@@ -1722,7 +1750,7 @@
                 "parametrization": "L2110_BW"
               }
             ],
-            "weight": "0.3107235198021572 - 0.7651566439001244i",
+            "weight": "-1.3737208465399549 - 1.190858452549667i",
             "vertices": [
               {
                 "type": "ls",
@@ -1750,7 +1778,7 @@
                 "parametrization": "L2350_BW"
               }
             ],
-            "weight": "0.26864871859819944 + 0.18873042311576196i",
+            "weight": "-0.03912923776526843 - 0.1484153412322692i",
             "vertices": [
               {
                 "type": "ls",
@@ -1778,7 +1806,91 @@
                 "parametrization": "L2350_BW"
               }
             ],
-            "weight": "0.24250138969422358 + 0.17036146727951615i",
+            "weight": "0.11812430551060878 - 0.1639139288776i",
+            "vertices": [
+              {
+                "type": "ls",
+                "l": "4",
+                "s": "7/2",
+                "node": [[1, 2], 3],
+                "formfactor": "BlattWeisskopf_b_decay_l4"
+              },
+              {
+                "type": "ls",
+                "l": "5",
+                "s": "1/2",
+                "node": [1, 2],
+                "formfactor": "BlattWeisskopf_resonance_l5"
+              }
+            ],
+            "topology": [[1, 2], 3],
+            "name": "L2350"
+          },
+          {
+            "propagators": [
+              {
+                "spin": "9/2",
+                "node": [1, 2],
+                "parametrization": "L2350_BW"
+              }
+            ],
+            "weight": "0.1189414012544145 - 0.5143331271479781i",
+            "vertices": [
+              {
+                "type": "ls",
+                "l": "4",
+                "s": "9/2",
+                "node": [[1, 2], 3],
+                "formfactor": "BlattWeisskopf_b_decay_l4"
+              },
+              {
+                "type": "ls",
+                "l": "5",
+                "s": "1/2",
+                "node": [1, 2],
+                "formfactor": "BlattWeisskopf_resonance_l5"
+              }
+            ],
+            "topology": [[1, 2], 3],
+            "name": "L2350"
+          },
+          {
+            "propagators": [
+              {
+                "spin": "9/2",
+                "node": [1, 2],
+                "parametrization": "L2350_BW"
+              }
+            ],
+            "weight": "0.2452402823392156 - 0.07215166475745884i",
+            "vertices": [
+              {
+                "type": "ls",
+                "l": "5",
+                "s": "9/2",
+                "node": [[1, 2], 3],
+                "formfactor": "BlattWeisskopf_b_decay_l5"
+              },
+              {
+                "type": "ls",
+                "l": "5",
+                "s": "1/2",
+                "node": [1, 2],
+                "formfactor": "BlattWeisskopf_resonance_l5"
+              }
+            ],
+            "topology": [[1, 2], 3],
+            "name": "L2350"
+          },
+          {
+            "propagators": [
+              {
+                "spin": "9/2",
+                "node": [1, 2],
+                "parametrization": "L2350_BW"
+              }
+            ],
+            "weight": "-0.06869380093363936 - 0.12415161673711585i",
             "vertices": [
               {
                 "type": "ls",
@@ -1806,7 +1918,7 @@
                 "parametrization": "L2350_BW"
               }
             ],
-            "weight": "-1.3877787807814457e-16 - 8.326672684688674e-17i",
+            "weight": "0.09044150258962935 - 0.07796846595501147i",
             "vertices": [
               {
                 "type": "ls",
@@ -1831,17 +1943,17 @@
               {
                 "spin": "3/2",
                 "node": [1, 2],
-                "parametrization": "LNR3O_NR"
+                "parametrization": "LNR30_NR"
               }
             ],
-            "weight": "0.2051431372461677 - 1.8414654838016378i",
+            "weight": "0.505570050363152 + 0.3447283391008056i",
             "vertices": [
               {
                 "type": "ls",
                 "l": "0",
                 "s": "1/2",
                 "node": [[1, 2], 3],
-                "formfactor": "MomentumPower0"
+                "formfactor": ""
               },
               {
                 "type": "ls",
@@ -1852,17 +1964,101 @@
               }
             ],
             "topology": [[1, 2], 3],
-            "name": "LNR30"
+            "name": "LNR3O"
           },
           {
             "propagators": [
               {
                 "spin": "3/2",
                 "node": [1, 2],
-                "parametrization": "LNR3O_NR"
+                "parametrization": "LNR30_NR"
               }
             ],
-            "weight": "0.15290466666666683 - 1.3725473333333347i",
+            "weight": "-3.9400148334715945 + 0.04170982319789908i",
+            "vertices": [
+              {
+                "type": "ls",
+                "l": "1",
+                "s": "1/2",
+                "node": [[1, 2], 3],
+                "formfactor": "MomentumPower1"
+              },
+              {
+                "type": "ls",
+                "l": "2",
+                "s": "1/2",
+                "node": [1, 2],
+                "formfactor": "MomentumPower2"
+              }
+            ],
+            "topology": [[1, 2], 3],
+            "name": "LNR3O"
+          },
+          {
+            "propagators": [
+              {
+                "spin": "3/2",
+                "node": [1, 2],
+                "parametrization": "LNR30_NR"
+              }
+            ],
+            "weight": "3.365161111252803 - 0.02084820339501704i",
+            "vertices": [
+              {
+                "type": "ls",
+                "l": "1",
+                "s": "3/2",
+                "node": [[1, 2], 3],
+                "formfactor": "MomentumPower1"
+              },
+              {
+                "type": "ls",
+                "l": "2",
+                "s": "1/2",
+                "node": [1, 2],
+                "formfactor": "MomentumPower2"
+              }
+            ],
+            "topology": [[1, 2], 3],
+            "name": "LNR3O"
+          },
+          {
+            "propagators": [
+              {
+                "spin": "3/2",
+                "node": [1, 2],
+                "parametrization": "LNR30_NR"
+              }
+            ],
+            "weight": "-2.4054666736984323 - 0.834854315156962i",
+            "vertices": [
+              {
+                "type": "ls",
+                "l": "2",
+                "s": "3/2",
+                "node": [[1, 2], 3],
+                "formfactor": "MomentumPower2"
+              },
+              {
+                "type": "ls",
+                "l": "2",
+                "s": "1/2",
+                "node": [1, 2],
+                "formfactor": "MomentumPower2"
+              }
+            ],
+            "topology": [[1, 2], 3],
+            "name": "LNR3O"
+          },
+          {
+            "propagators": [
+              {
+                "spin": "3/2",
+                "node": [1, 2],
+                "parametrization": "LNR30_NR"
+              }
+            ],
+            "weight": "1.1786518912328119 + 0.5352301050523212i",
             "vertices": [
               {
                 "type": "ls",
@@ -1880,17 +2076,17 @@
               }
             ],
             "topology": [[1, 2], 3],
-            "name": "LNR30"
+            "name": "LNR3O"
           },
           {
             "propagators": [
               {
                 "spin": "3/2",
                 "node": [1, 2],
-                "parametrization": "LNR3O_NR"
+                "parametrization": "LNR30_NR"
               }
             ],
-            "weight": "0.0 + 0.0i",
+            "weight": "-4.058434037084272 + 0.038038067798339015i",
             "vertices": [
               {
                 "type": "ls",
@@ -1908,10 +2104,9 @@
               }
             ],
             "topology": [[1, 2], 3],
-            "name": "LNR30"
+            "name": "LNR3O"
           }
-        ],
-        "appendix": {}
+        ]
       },
       "variables": [
         {
@@ -1922,11 +2117,182 @@
           "node": [[1, 2], 3],
           "mass_phi_costheta": ["m_12_3", "phi_12_3", "cos_theta_12_3"]
         }
-      ],
-      "parameters": []
+      ]
     }
   ],
   "functions": [
+    {
+      "type": "BreitWigner",
+      "mass": 1.89,
+      "width": 0.12,
+      "ma": 0.938,
+      "mb": 0.493,
+      "l": 1,
+      "d": 1.5,
+      "name": "L1890_BW"
+    },
+    {
+      "type": "BlattWeisskopf",
+      "l": 5,
+      "radius": 1.5,
+      "name": "BlattWeisskopf_resonance_l5"
+    },
+    {
+      "type": "BreitWigner",
+      "mass": 1.8,
+      "width": 0.2,
+      "ma": 0.938,
+      "mb": 0.493,
+      "l": 0,
+      "d": 1.5,
+      "name": "L1800_BW"
+    },
+    {
+      "type": "BlattWeisskopf",
+      "l": 1,
+      "radius": 5.0,
+      "name": "BlattWeisskopf_b_decay_l1"
+    },
+    {
+      "type": "BreitWigner",
+      "mass": 1.519,
+      "width": 0.016,
+      "ma": 0.938,
+      "mb": 0.493,
+      "l": 2,
+      "d": 1.5,
+      "name": "L1520_BW"
+    },
+    {
+      "type": "BlattWeisskopf",
+      "l": 4,
+      "radius": 5.0,
+      "name": "BlattWeisskopf_b_decay_l4"
+    },
+    {
+      "type": "MomentumPower",
+      "l": 2,
+      "name": "MomentumPower2"
+    },
+    {
+      "type": "BreitWigner",
+      "mass": 2.09,
+      "width": 0.25,
+      "ma": 0.938,
+      "mb": 0.493,
+      "l": 3,
+      "d": 1.5,
+      "name": "L2110_BW"
+    },
+    {
+      "type": "BreitWigner",
+      "mass": 1.674,
+      "width": 0.03,
+      "ma": 0.938,
+      "mb": 0.493,
+      "l": 0,
+      "d": 1.5,
+      "name": "L1680_BW"
+    },
+    {
+      "type": "BreitWigner",
+      "mass": 2.35,
+      "width": 0.15,
+      "ma": 0.938,
+      "mb": 0.493,
+      "l": 5,
+      "d": 1.5,
+      "name": "L2350_BW"
+    },
+    {
+      "type": "BreitWigner",
+      "mass": 1.6,
+      "width": 0.2,
+      "ma": 0.938,
+      "mb": 0.493,
+      "l": 1,
+      "d": 1.5,
+      "name": "L1600_BW"
+    },
+    {
+      "type": "MomentumPower",
+      "l": 3,
+      "name": "MomentumPower3"
+    },
+    {
+      "type": "Constant",
+      "mass": 3.5,
+      "name": "LNR30_NR"
+    },
+    {
+      "type": "BreitWigner",
+      "mass": 1.79,
+      "width": 0.11,
+      "ma": 0.938,
+      "mb": 0.493,
+      "l": 1,
+      "d": 1.5,
+      "name": "L1810_BW"
+    },
+    {
+      "type": "BreitWigner",
+      "mass": 1.82,
+      "width": 0.08,
+      "ma": 0.938,
+      "mb": 0.493,
+      "l": 3,
+      "d": 1.5,
+      "name": "L1820_BW"
+    },
+    {
+      "type": "BlattWeisskopf",
+      "l": 3,
+      "radius": 5.0,
+      "name": "BlattWeisskopf_b_decay_l3"
+    },
+    {
+      "type": "BreitWigner",
+      "mass": 1.825,
+      "width": 0.09,
+      "ma": 0.938,
+      "mb": 0.493,
+      "l": 2,
+      "d": 1.5,
+      "name": "L1830_BW"
+    },
+    {
+      "type": "BreitWigner",
+      "mass": 2.1,
+      "width": 0.2,
+      "ma": 0.938,
+      "mb": 0.493,
+      "l": 4,
+      "d": 1.5,
+      "name": "L2100_BW"
+    },
+    {
+      "type": "MomentumPower",
+      "l": 1,
+      "name": "MomentumPower1"
+    },
+    {
+      "type": "BlattWeisskopf",
+      "l": 3,
+      "radius": 1.5,
+      "name": "BlattWeisskopf_resonance_l3"
+    },
+    {
+      "type": "BlattWeisskopf",
+      "l": 5,
+      "radius": 5.0,
+      "name": "BlattWeisskopf_b_decay_l5"
+    },
+    {
+      "type": "BlattWeisskopf",
+      "l": 2,
+      "radius": 1.5,
+      "name": "BlattWeisskopf_resonance_l2"
+    },
     {
       "name": "L1405_Flatte",
       "type": "MultichannelBreitWigner",
@@ -1949,222 +2315,38 @@
       ]
     },
     {
-      "name": "L1520_BW",
-      "l": 2,
-      "mb": 0.938,
       "type": "BreitWigner",
-      "d": 1.5,
-      "mass": 1.519,
-      "ma": 0.493,
-      "width": 0.016
-    },
-    {
-      "name": "L1600_BW",
-      "l": 1,
-      "mb": 0.938,
-      "type": "BreitWigner",
-      "d": 1.5,
-      "mass": 1.6,
-      "ma": 0.493,
-      "width": 0.2
-    },
-    {
-      "name": "L1670_BW",
-      "l": 0,
-      "mb": 0.938,
-      "type": "BreitWigner",
-      "d": 1.5,
-      "mass": 1.674,
-      "ma": 0.493,
-      "width": 0.03
-    },
-    {
-      "name": "L1690_BW",
-      "l": 2,
-      "mb": 0.938,
-      "type": "BreitWigner",
-      "d": 1.5,
       "mass": 1.69,
-      "ma": 0.493,
-      "width": 0.07
-    },
-    {
-      "name": "L1800_BW",
-      "l": 0,
-      "mb": 0.938,
-      "type": "BreitWigner",
-      "d": 1.5,
-      "mass": 1.8,
-      "ma": 0.493,
-      "width": 0.2
-    },
-    {
-      "name": "L1810_BW",
-      "l": 1,
-      "mb": 0.938,
-      "type": "BreitWigner",
-      "d": 1.5,
-      "mass": 1.79,
-      "ma": 0.493,
-      "width": 0.11
-    },
-    {
-      "name": "L1820_BW",
-      "l": 3,
-      "mb": 0.938,
-      "type": "BreitWigner",
-      "d": 1.5,
-      "mass": 1.82,
-      "ma": 0.493,
-      "width": 0.08
-    },
-    {
-      "name": "L1830_BW",
+      "width": 0.07,
+      "ma": 0.938,
+      "mb": 0.493,
       "l": 2,
-      "mb": 0.938,
-      "type": "BreitWigner",
       "d": 1.5,
-      "mass": 1.825,
-      "ma": 0.493,
-      "width": 0.09
+      "name": "L1690_BW"
     },
     {
-      "name": "L1890_BW",
-      "l": 1,
-      "mb": 0.938,
-      "type": "BreitWigner",
-      "d": 1.5,
-      "mass": 1.89,
-      "ma": 0.493,
-      "width": 0.12
-    },
-    {
-      "name": "L2100_BW",
+      "type": "BlattWeisskopf",
       "l": 4,
-      "mb": 0.938,
-      "type": "BreitWigner",
-      "d": 1.5,
-      "mass": 2.1,
-      "ma": 0.493,
-      "width": 0.2
-    },
-    {
-      "name": "L2110_BW",
-      "l": 3,
-      "mb": 0.938,
-      "type": "BreitWigner",
-      "d": 1.5,
-      "mass": 2.09,
-      "ma": 0.493,
-      "width": 0.25
-    },
-    {
-      "name": "L2350_BW",
-      "l": 5,
-      "mb": 0.938,
-      "type": "BreitWigner",
-      "d": 1.5,
-      "mass": 2.35,
-      "ma": 0.493,
-      "width": 0.15
-    },
-    {
-      "name": "LNR3O_NR",
-      "type": "NonResonant",
-      "mass": 3.5
-    },
-    {
-      "name": "BlattWeisskopf_resonance_l0",
-      "type": "BlattWeisskopf",
       "radius": 1.5,
-      "l": 0
+      "name": "BlattWeisskopf_resonance_l4"
     },
     {
-      "name": "BlattWeisskopf_resonance_l1",
       "type": "BlattWeisskopf",
+      "l": 2,
+      "radius": 5.0,
+      "name": "BlattWeisskopf_b_decay_l2"
+    },
+    {
+      "type": "BlattWeisskopf",
+      "l": 1,
       "radius": 1.5,
-      "l": 1
+      "name": "BlattWeisskopf_resonance_l1"
     },
     {
-      "name": "BlattWeisskopf_resonance_l2",
       "type": "BlattWeisskopf",
-      "radius": 1.5,
-      "l": 2
-    },
-    {
-      "name": "BlattWeisskopf_resonance_l3",
-      "type": "BlattWeisskopf",
-      "radius": 1.5,
-      "l": 3
-    },
-    {
-      "name": "BlattWeisskopf_resonance_l4",
-      "type": "BlattWeisskopf",
-      "radius": 1.5,
-      "l": 4
-    },
-    {
-      "name": "BlattWeisskopf_resonance_l5",
-      "type": "BlattWeisskopf",
-      "radius": 1.5,
-      "l": 5
-    },
-    {
-      "name": "BlattWeisskopf_b_decay_l0",
-      "type": "BlattWeisskopf",
+      "l": 6,
       "radius": 5.0,
-      "l": 0
-    },
-    {
-      "name": "BlattWeisskopf_b_decay_l1",
-      "type": "BlattWeisskopf",
-      "radius": 5.0,
-      "l": 1
-    },
-    {
-      "name": "BlattWeisskopf_b_decay_l2",
-      "type": "BlattWeisskopf",
-      "radius": 5.0,
-      "l": 2
-    },
-    {
-      "name": "BlattWeisskopf_b_decay_l3",
-      "type": "BlattWeisskopf",
-      "radius": 5.0,
-      "l": 3
-    },
-    {
-      "name": "BlattWeisskopf_b_decay_l4",
-      "type": "BlattWeisskopf",
-      "radius": 5.0,
-      "l": 4
-    },
-    {
-      "name": "BlattWeisskopf_b_decay_l5",
-      "type": "BlattWeisskopf",
-      "radius": 5.0,
-      "l": 5
-    },
-    {
-      "name": "BlattWeisskopf_b_decay_l6",
-      "type": "BlattWeisskopf",
-      "radius": 5.0,
-      "l": 6
-    },
-    {
-      "name": "MomentumPower0",
-      "type": "MomentumPower",
-      "l": 0
-    },
-    {
-      "name": "MomentumPower2",
-      "type": "MomentumPower",
-      "l": 2
-    },
-    {
-      "name": "MomentumPower3",
-      "type": "MomentumPower",
-      "l": 3
+      "name": "BlattWeisskopf_b_decay_l6"
     }
   ],
   "domains": [
@@ -2215,17 +2397,17 @@
       {
         "name": "validation_point1",
         "distribution": "Lb2pKg_model",
-        "value": 100.10209548443457
+        "value": 645.6877782510138
       },
       {
         "name": "validation_point2",
         "distribution": "Lb2pKg_model",
-        "value": 20.87899076783355
+        "value": 33.3131321180587
       },
       {
         "name": "validation_point3",
         "distribution": "Lb2pKg_model",
-        "value": 3.947305652216316
+        "value": 38.286728742769384
       }
     ]
   },

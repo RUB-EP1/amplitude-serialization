@@ -38,4 +38,4 @@ website:
           - julia/lb2pkg.qmd
       - section: Python
         contents:
-          - python/lc2pkpi.qmd
+          - python/lc2pkpi.ipynb

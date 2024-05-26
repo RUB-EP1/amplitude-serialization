@@ -28,6 +28,9 @@ pre-commit = "*"
 python = ">=3.8.0"
 quarto = "*"
 
+[pypi-dependencies]
+ampform-dpd = {version = "==0.2.1rc0"}
+
 [tasks.doc]
 cmd = "quarto render"
 cwd = "docs"

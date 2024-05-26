@@ -21,6 +21,7 @@ repository = "https://github.com/RUB-EP1/amplitude-serialization"
 [dependencies]
 black = ">=24.4.2,<24.5"
 ipykernel = "*"
+ipywidgets = ">=8.1.2,<8.2"
 isort = ">=5.13.2,<5.14"
 juliaup = "*"
 jupyter-cache = "*"

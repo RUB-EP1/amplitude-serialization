@@ -24,6 +24,7 @@ using Measurements
 using Statistics
 using QuadGK
 using Plots
+using LaTeXStrings
 
 theme(:wong2, frame=:box, grid=false, minorticks=true,
     guidefontvalign=:top, guidefonthalign=:right,
@@ -38,16 +39,14 @@ Non-standard lineshapes are used to model resonances that do not conform to a si
 The code below defines a new `NonResonant` lineshape, and its deserialization method. In this case this is just a constant.
 
 ```{julia}
-struct NonResonant <: HadronicLineshapes.AbstractFlexFunc
+struct Constant <: HadronicLineshapes.AbstractFlexFunc
     m::Float64
 end
-function (BW::NonResonant)(σ)
-    @unpack m = BW
-    1.0
-end
-function ThreeBodyDecaysIO.dict2instance(::Type{NonResonant}, dict)
+(X::Constant)(σ) = 1
+
+function ThreeBodyDecaysIO.dict2instance(::Type{Constant}, dict)
     @unpack mass = dict
-    return NonResonant(mass)
+    return Constant(mass)
 end
 ```
 
@@ -80,7 +79,8 @@ end
 ## Validation
 
 The integrity of the model is checked by validating the value of distributions at a few phase space points.
-The table lists the validation checkes and their status ("🟢" ($<10^{-12}$), "🟡" ($<10^{-2}$) or "🔴" $\ge10^{-2}$) for the difference between the reference and computed values.
+The table lists the validation checkes and their status. The marks "🟢", "🟡", and "🔴" indicate
+an accuracy of $<10^{-12}$, $<10^{-2}$, or $\ge10^{-2}$, respectively, for the difference between the reference and computed values.
 
 ```{julia}
 #| code-fold: true
@@ -136,17 +136,23 @@ The Dalitz plot shows the probability distribution across two dimensional phase 
 let
     ms = masses(model)
     #
-    σ3v = range(lims3(ms)[1], 2.5^2, 100)[2:end-1]
-    σ2v = range(5, 27, 30)[2:end-1]
+    σ3v = range(1.9, 2.5^2, 100)
+    σ2v = range(5, 27, 80)
     #
     _model = model
     f(σs) = Kibble(σs, ms^2) > 0 ? NaN : unpolarized_intensity(model, σs)
 
-    calv = [
-        f(Invariants(ms; σ3, σ2)) for σ2 in σ2v, σ3 in σ3v]
-    heatmap(σ3v, σ2v, calv)
+    calv = [f(Invariants(ms; σ3, σ2)) for σ2 in σ2v, σ3 in σ3v]
+    heatmap(σ3v, σ2v, calv, colorbar=false, c=:speed)
+    plot!(border32(masses(model)),
+        l=(3, :black),
+        xlim=(σ3v[1], σ3v[end]), ylim=(σ2v[1], σ2v[end]),
+        xlab=L"m_{pK^-}^2\,\, [\textrm{GeV}^2]",
+        ylab=L"m_{p\gamma}^2\,\, [\textrm{GeV}^2]")
 end
 ```
+
+
 
 The projection of the model onto a mass variable is shown by black line.
 Contributions from individual resonances are shown by the colored lines.
@@ -156,25 +162,27 @@ Contributions from individual resonances are shown by the colored lines.
 #| code-summary: Computation of projections
 let k = 3
     i, j = ij_from_k(k)
-    xlab = "m($i$j) [GeV]"
     model = model_dist.model
     #
     mlims = (sqrt(lims(3, masses(model))[1]), 2.5)
     mv = range(mlims..., 200) |> shift_by_half
     #
     plot()
-    plot!(mv, lab="Total") do m
+    plot!(mv, lab=L"\textrm{Total}") do m
         I = Base.Fix1(unpolarized_intensity, model)
-        m * quadgk(projection_integrand(I, masses(model), m^2; k), 0, 1)[1]
+        m * quadgk(projection_integrand(I, masses(model), m^2; k), 0, 1)[1] / 1e3
     end
     chain_names = Set(model.names) |> collect |> sort
     for name in chain_names
         _model = model[model.names.==name]
-        plot!(mv, lab=name) do m
+        lab = replace(name, "L" => "\\varLambda(\\textrm{") * "})"
+        plot!(mv, lab=latexstring(lab)) do m
             I = Base.Fix1(unpolarized_intensity, _model)
-            m * quadgk(projection_integrand(I, masses(_model), m^2; k), 0, 1)[1]
+            m * quadgk(projection_integrand(I, masses(_model), m^2; k), 0, 1)[1] / 1e3
         end
     end
-    plot!(; xlab)
+    plot!(;
+        xlab=L"m_{pK^-}\,\, [\textrm{GeV}]",
+        ylab=L"\textrm{d} N /\textrm{d} m_{pK^-}\,\, [\textrm{GeV}^{-1}]")
 end
 ```

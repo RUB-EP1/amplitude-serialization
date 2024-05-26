@@ -19,14 +19,24 @@ platforms = [
 repository = "https://github.com/RUB-EP1/amplitude-serialization"
 
 [dependencies]
+black = ">=24.4.2,<24.5"
 ipykernel = "*"
+isort = ">=5.13.2,<5.14"
 juliaup = "*"
 jupyter-cache = "*"
+jupyterlab = ">=4.2.1,<4.3"
+jupyterlab-git = ">=0.50.0,<0.51"
+jupyterlab-lsp = ">=5.1.0,<5.2"
+jupyterlab_code_formatter = ">=2.2.1,<2.3"
 nbclient = "*"
 nbformat = "*"
 pre-commit = "*"
 python = ">=3.8.0"
+python-lsp-ruff = ">=2.2.0,<2.3"
+python-lsp-server = ">=1.11.0,<1.12"
 quarto = "*"
+rope = ">=1.13.0,<1.14"
+ruff = ">=0.4.5,<0.5"
 
 [pypi-dependencies]
 ampform-dpd = {version = "==0.2.1rc0"}

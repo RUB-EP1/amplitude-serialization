@@ -135,7 +135,7 @@ It species the main properties such as spin, and masses of all particles.
 
 ## Topology and Reference Topology
 
-Purpose of the `reference_topology` is two folded. First, it defines how kinematics of the decay is parametrized, i.e. which combination of masses and angles is used to describe the phase space. Second, the `reference_topology` plays crucial role in defining how helicity amplitudes are computed. The reference topology is used to fix the quantization axes for particle helicities. Since helicity is the projection of a particle's spin along its direction of motion, its precise definition depends upon the frame of reference in which it is evaluated. 
+Purpose of the `reference_topology` is two folded. First, it defines how kinematics of the decay is parametrized, i.e. which combination of masses and angles is used to describe the phase space. Second, the `reference_topology` plays crucial role in defining how helicity amplitudes are computed. The reference topology is used to fix the quantization axes for particle helicities. Since helicity is the projection of a particle's spin along its direction of motion, its precise definition depends upon the frame of reference in which it is evaluated.
 As the `reference_topology` unambiguously defines the path to traverse the decay graph from initial to the final states, it sets a frame for each helicity, where it is defined. The helicity values employed in the indices of Wigner rotations `D_{λ1, λ2}` and couplings `H_{λ1, λ2}` are thus indicative of this frame.
 
 ### An example of four-body decay
@@ -149,16 +149,16 @@ The decay amplitude reads as a series of Wigner&nbsp;$D$-functions, each corresp
 $$
 \begin{align}
 A &= n_{j_0} D_{m_0, \tau-\lambda_2}^{j_0}(\text{angles}_{[[3,1],4]}) \,\, H_{\tau,\lambda_2} \\
-% 
+%
 &\quad \cdot n_{j_{[[3,1],4]}} D_{\tau, \nu-\lambda_4}^{j_{[[3,1],4]}}(\text{angles}_{[3,1]}) \\
-% 
+%
 &\quad \cdot n_{j_{[3,1]}} D_{\nu, \lambda_3-\lambda_1}^{j_{[3,1]}}(\text{angles}_3) \,\, H_{\lambda_3,\lambda_1}
 \end{align}
 $$
 
 - $D_{m_0, \tau - \lambda_2}^{j_0}(\text{angles}_{[[3,1],4]})$ describes the decay of particle 0 into a system `[3,1,4]`, and a particle&nbsp;`2` with helicities $\nu$, and $\lambda_2$, respectively. The decay is considered in the overall rest frame of the system (comprising particles `3`, `1`, `4`, and `2`).
-Here is the first appearence of the $\lambda_2$, hence the helicity state of particle&nbsp;`2` is defined from its rest frame by boost-z and rotation to the total center of momentum.
-The index $m_0$ is the spin projection of the decaying particle (0). It's a canontical state as the particle is at rest.
+  Here is the first appearence of the $\lambda_2$, hence the helicity state of particle&nbsp;`2` is defined from its rest frame by boost-z and rotation to the total center of momentum.
+  The index $m_0$ is the spin projection of the decaying particle (0). It's a canontical state as the particle is at rest.
 
 - $D_{\tau,\nu-\lambda_4}^{j_{[[3,1],4]}}(\text{angles}_{[3,1]})$: For particle `4`, its helicity, $\lambda_4$, is defined within the rest frame of the `[3,1,4]` system. This frame is obtained from the overall rest frame by applying a rotation and boost, signifying the progression of the decay sequence.
 
@@ -200,7 +200,6 @@ Vertices define the nodes in the decay graphs, where one particle transits into 
       \left\langle l,0; s,\lambda_a-\lambda_b|j,\lambda_a-\lambda_b\right\rangle
     \end{multline}
     $$
-
 
 ### Propagators
 

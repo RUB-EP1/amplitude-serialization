@@ -169,25 +169,32 @@ end
 The model descibing the decay is fetched from the workspace
 
 ```{julia}
-model_name = [k for (k, v) in workspace if v isa HadronicUnpolarizedIntensity] |> first;
-model_dist = workspace[model_name]
+model_names = [k for (k, v) in workspace if v isa HadronicUnpolarizedIntensity]
 ```
 
 ### Dalitz plot
 
-The Dalitz plot shows the probability distribution across two dimensional phase space of the decay.
+The Dalitz plot shows the probability distribution across two dimensional phase space of the decay. Below the distribution is shown for all models in the file
 
 ```{julia}
 #| code-fold: true
 #| code-summary: Dalitz plot plotting
 let iσx = 3, iσy = 1
-    xlab = ((i, j) = ij_from_k(iσx);
-    "m²($i$j) [GeV²]")
-    ylab = ((i, j) = ij_from_k(iσy);
-    "m²($i$j) [GeV²]")
-    model = model_dist.model
+    Nmodels = length(model_names)
+    Nx, Ny = 2, div(Nmodels + 1, 2)
+    plot(
+        map(model_names) do model_name
+            model = workspace[model_name].model
+            # 
+            xlab = ((i, j) = ij_from_k(iσx);
+            "m²($i$j) [GeV²]")
+            ylab = ((i, j) = ij_from_k(iσy);
+            "m²($i$j) [GeV²]")
 
-    plot(masses(model), Base.Fix1(unpolarized_intensity, model);
-        iσx, iσy, xlab, ylab, title=model_name, aspect_ratio=1)
+            plot(masses(model), Base.Fix1(unpolarized_intensity, model);
+                iσx, iσy, xlab, ylab, title=model_name, aspect_ratio=1)
+        end...,
+        layout=grid(Ny, Nx),
+        size=(500 * Nx, 500 * Ny))
 end
 ```

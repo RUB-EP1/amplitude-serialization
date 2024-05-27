@@ -94,7 +94,9 @@
                 "description": "Orbital angular momentum between particles in the decay.",
                 "$ref": "#/definitions/AngularMomentum"
               },
-              "d": { "type": "Size of the potential well for Blatt-Weisskopf factor." }
+              "d": {
+                "type": "Size of the potential well for Blatt-Weisskopf factor."
+              }
             },
             "required": ["gsq", "ma", "mb", "l", "d"],
             "additionalProperties": false

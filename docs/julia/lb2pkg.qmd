@@ -10,7 +10,7 @@ This page demostrates deserialization and evaluation of an amplitude model for t
 #| code-fold: true
 #| code-summary: Activate environment
 #| output: false
-import Pkg
+using Pkg: Pkg
 Pkg.activate(@__DIR__)
 Pkg.instantiate()
 
@@ -40,13 +40,11 @@ The code below defines a new `NonResonant` lineshape, and its deserialization me
 
 ```{julia}
 struct Constant <: HadronicLineshapes.AbstractFlexFunc
-    m::Float64
 end
 (X::Constant)(σ) = 1
 
 function ThreeBodyDecaysIO.dict2instance(::Type{Constant}, dict)
-    @unpack mass = dict
-    return Constant(mass)
+    return Constant()
 end
 ```
 
@@ -103,14 +101,8 @@ df = let
         _parameters = array2dict(parameter_point["parameters"];
             key="name", apply=v -> v["value"])
         #
-        function label_diff(diff; levels=[1e-2, 1e-12])
-            _diff = abs(diff)
-            _diff < levels[2] && return '🟢'
-            _diff < levels[1] && return '🟡'
-            return '🔴'
-        end
         computed_value = dist(_parameters)
-        status = label_diff(value - computed_value)
+        status = label_diff(value - computed_value; levels=[1e-2, 1e-12])
         (; Distribution=distribution, Reference=value, Computed_value=computed_value,
             Point=name, Status=status)
     end |> DataFrame

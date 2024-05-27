@@ -3,12 +3,14 @@ eachslice
 guidefonthalign
 guidefontvalign
 joinpath
+latexstring
 lims
 minorticks
 mlims
 Mmap
 quadgk
 struct
+textrm
 xlab
 xlim
 ylab

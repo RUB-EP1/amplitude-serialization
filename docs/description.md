@@ -157,8 +157,8 @@ A &= n_{j_0} D_{m_0, \tau-\lambda_2}^{j_0}(\text{angles}_{[[3,1],4]}) \,\, H_{\t
 $$
 
 - $D_{m_0, \tau - \lambda_2}^{j_0}(\text{angles}_{[[3,1],4]})$ describes the decay of particle 0 into a system `[3,1,4]`, and a particle&nbsp;`2` with helicities $\nu$, and $\lambda_2$, respectively. The decay is considered in the overall rest frame of the system (comprising particles `3`, `1`, `4`, and `2`).
-  Here is the first appearence of the $\lambda_2$, hence the helicity state of particle&nbsp;`2` is defined from its rest frame by boost-z and rotation to the total center of momentum.
-  The index $m_0$ is the spin projection of the decaying particle (0). It's a canontical state as the particle is at rest.
+  Here is the first appearance of the $\lambda_2$, hence the helicity state of particle&nbsp;`2` is defined from its rest frame by boost-z and rotation to the total center of momentum.
+  The index $m_0$ is the spin projection of the decaying particle (0). It's a canonical state as the particle is at rest.
 
 - $D_{\tau,\nu-\lambda_4}^{j_{[[3,1],4]}}(\text{angles}_{[3,1]})$: For particle `4`, its helicity, $\lambda_4$, is defined within the rest frame of the `[3,1,4]` system. This frame is obtained from the overall rest frame by applying a rotation and boost, signifying the progression of the decay sequence.
 

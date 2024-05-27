@@ -54,17 +54,17 @@
           "uniqueItems": true
         },
         "topology": {
-          "description": "Structure of this decay chain that illustrates the hierarchical sequence of interactions and propagations. This can be used as a visual and logical map of how particles transform and interact within the model.",
+          "description": "Structure of this decay chain represented as nasted particle grouping into intermediate subsystems.",
           "$ref": "#/definitions/Topology"
         },
         "vertices": {
-          "description": "Vertices define the nodes in the decay graphs, where one particle transits into two.",
+          "description": "Vertices define the nodes in the decay graphs denoted by groupping of particle indices.",
           "type": "array",
           "items": { "$ref": "#/definitions/Vertex" },
           "uniqueItems": true
         },
         "weight": {
-          "description": "The weight in each chain represents the strength of the complex amplitude associated with the chain’s specific sequence of interactions and propagations. It influences the probability of the chain’s occurrence and is crucial for calculating cross sections, decay rates, and other observable quantities. A weight can be complex to introduce a phase to the amplitude.",
+          "description": "The weight in each chain gives the complex coefficient that multiplies the decay matrix element of the chain’s specific sequence of interactions and propagations. It influences the probability of the chain’s occurrence and interference with other decay chains. The weight is a complex number.",
           "$ref": "#/definitions/ComplexNumber"
         }
       },
@@ -75,11 +75,11 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Identifier that can be used elsewhere in the model to insert this function.",
+          "description": "Identifier that can be used elsewhere to reference this function.",
           "type": "string"
         },
         "type": {
-          "description": "Common lineshape type. Use custom to your own expression.",
+          "description": "Common type defines mathematical expression of the object.",
           "type": "string"
         },
         "channels": {
@@ -91,10 +91,10 @@
               "ma": { "type": "number" },
               "mb": { "type": "number" },
               "l": {
-                "description": "Orbital angular momentum of the decay.",
+                "description": "Orbital angular momentum between particles in the decay.",
                 "$ref": "#/definitions/AngularMomentum"
               },
-              "d": { "type": "number" }
+              "d": { "type": "Size of the potential well for Blatt-Weisskopf factor." }
             },
             "required": ["gsq", "ma", "mb", "l", "d"],
             "additionalProperties": false
@@ -110,12 +110,12 @@
           "$ref": "#/definitions/AngularMomentum"
         },
         "mass": {
-          "description": "Position of the resonance in GeV.",
+          "description": "Nominal mass of the resonance in GeV.",
           "type": "number",
           "minimum": 0
         },
         "width": {
-          "description": "Width of the resonance in GeV.",
+          "description": "Nominal width of the resonance in GeV.",
           "type": "number",
           "minimum": 0
         },
@@ -133,8 +133,12 @@
           "then": { "required": ["radius", "l"] }
         },
         {
+          "if": { "properties": { "type": { "const": "MomentumPower" } } },
+          "then": { "required": ["l"] }
+        },
+        {
           "if": { "properties": { "type": { "const": "BreitWigner" } } },
-          "then": { "required": ["mass", "width", "ma", "mb"] }
+          "then": { "required": ["mass", "width", "ma", "mb", "l", "d"] }
         },
         {
           "if": {
@@ -196,11 +200,11 @@
       "required": ["type", "node"],
       "properties": {
         "type": {
-          "description": "Specifies how the helicity recoupling factor H_{l1,l2} is computed. Each option reflects different ways of relating combinations of the helicity indices to a real-valued factor, the recoupling coefficient.",
+          "description": "Specifies how the helicity recoupling factor H_{lam1,lam2} is computed. Each option reflects different ways of relating combinations of the helicity indices to a real-valued factor, the recoupling coefficient.",
           "enum": ["helicity", "ls", "parity"],
           "enumDescriptions": [
-            "Recoupling with LS computes the value of the recoupling functions from Clebsch–Gordan coefficients.",
-            "Parity recoupling is controlled by the parity factor and gives a non-zero value for two combination of the helicity pair, the selected one and the opposite.",
+            "Recoupling with LS computes the value of the recoupling functions using Clebsch-Gordan coefficients.",
+            "Parity` recoupling is controlled by the parity factor and gives a non-zero value for two combination of the helicity pair, the selected one and the opposite.",
             "No recoupling. The factor is 1 for a pair of selected helicities and zero for other combinations."
           ]
         },
@@ -220,7 +224,7 @@
           "enum": ["-", "+"]
         },
         "l": {
-          "description": "Orbital angular momentum of the vertex.",
+          "description": "Orbital angular momentum of particles in the decay the vertex.",
           "$ref": "#/definitions/AngularMomentum"
         },
         "s": {
@@ -228,7 +232,7 @@
           "$ref": "#/definitions/Spin"
         },
         "formfactor": {
-          "description": "Optional form factor for the vertex. Should be a lineshape that is defined under \"functions\" section.",
+          "description": "Optional form-factor for the vertex. The form-factor is a function of three arguments, (mX^2, mA^2, mB^2) for X->[A,B] vertex, that is defined under \"functions\" section.",
           "default": "",
           "type": "string"
         }
@@ -271,7 +275,7 @@
                 "description": "Definition of the initial and final state of the decay.",
                 "properties": {
                   "initial_state": {
-                    "description": "Initial state of the decay. In the current format description, the index of this state should be must.",
+                    "description": "Initial state of the decay.",
                     "$ref": "#/definitions/State"
                   },
                   "final_state": {
@@ -286,7 +290,7 @@
               },
               "reference_topology": {
                 "$ref": "#/definitions/Topology",
-                "description": "Definition of the basic interaction structure (topology) of the model, which is used to define the reference quantization axes. It outlines the decay chain for which the amplitude is written without a need for the alignment rotations. All other chains that have different decay topology must be aligned to this reference topology."
+                "description": "Definition of the basic decay structure (topology) of the model, which is used to define 1) parametrization of the decay kinematics, and 2) reference quantization axes. It outlines the decay chain for which the amplitude is written without a need for the alignment rotations. All other chains that have different decay topology must be aligned to this reference topology."
               },
               "appendix": { "type": "object" }
             },
@@ -382,7 +386,7 @@
           "description": "A list of checksums that can be used to validate whether the computational implementation of the serialized amplitude model is correct.",
           "items": {
             "properties": {
-              "name": {
+              "point": {
                 "description": "Parameter point over which to evaluate the distribution.",
                 "type": "string",
                 "pattern": "^validation_point[0-9]*$"
@@ -419,16 +423,6 @@
             "uniqueItems": true
           }
         },
-        "allOf": [
-          {
-            "if": {
-              "properties": { "name": { "const": "validation_point" } }
-            },
-            "then": {
-              "required": ["parameters"]
-            }
-          }
-        ],
         "required": ["name"],
         "additionalProperties": false
       },

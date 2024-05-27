@@ -2,9 +2,10 @@
 jupyter: julia-amplitude-serialization-1.10
 ---
 
-# $\Lambda_c^+ \to p K^- \pi^+$
+# $X\to \pi^-\pi^+\pi^-$
 
-This page demostrates deserialization and evaluation of an amplitude model for the decay $\Lambda_c^+ \to p K^- \pi^+$. The amplitude analysis is performed based on roughly half a millon of $\Lambda_c^{\pm}$ decay candidates by the LHCb collaboration, [INSPIRE-HEP 2683025](https://inspirehep.net/literature/2683025). Detains on the mapped of the ampltude model onto the standard helicity formalism can be found in appendix of [INSPIRE-HEP 2623821](https://inspirehep.net/literature/2623821).
+This page demostrates deserialization and evaluation the aprtial wave analysis of diffractively produced $3\pi$ system. The analysis is performed independently in bins of $3\pi$ mass, and transferred momentum. The total number of bins is 100.
+For every bin, the model includes about 170 decay chains (about 88 waves, symmetrized for two $\pi^+\pi^-$ pairs). The main paper descibing details of the analysis is [INSPIRE-HEP 1391643](https://inspirehep.net/literature/1391643).
 
 ```{julia}
 #| code-fold: true

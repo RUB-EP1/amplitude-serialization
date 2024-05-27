@@ -185,7 +185,7 @@ let iσx = 3, iσy = 1
     plot(
         map(model_names) do model_name
             model = workspace[model_name].model
-            # 
+            #
             xlab = ((i, j) = ij_from_k(iσx);
             "m²($i$j) [GeV²]")
             ylab = ((i, j) = ij_from_k(iσy);

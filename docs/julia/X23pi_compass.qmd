@@ -85,7 +85,7 @@ function (bw::KatchaevSigma)(σ)
     for i = 1:length(poles)
         M00 += residues[i] / (σ - poles[i])
     end
-    # 
+    #
     mK = 0.493677
     mK0 = 0.497614
     scale = (σ / (4 * ((mK + mK0) / 2.0)^2)) - 1.0

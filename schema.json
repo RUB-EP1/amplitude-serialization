@@ -95,8 +95,9 @@
                 "$ref": "#/definitions/AngularMomentum"
               },
               "d": {
-                "type": "Size of the potential well for Blatt-Weisskopf factor."
-              }
+                 "description": "Size of the potential well for Blatt-Weisskopf factor.",
+                 "type": "number"
+                }
             },
             "required": ["gsq", "ma", "mb", "l", "d"],
             "additionalProperties": false

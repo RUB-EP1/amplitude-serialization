@@ -200,6 +200,6 @@ let iσx = 3, iσy = 1
                 iσx, iσy, xlab, ylab, title=model_name[13:end], aspect_ratio=1)
         end...,
         layout=grid(Ny, Nx),
-        size=(300 * Nx, 300 * Ny))
+        size=(350 * Nx, 350 * Ny))
 end
 ```

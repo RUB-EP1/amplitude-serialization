@@ -108,6 +108,9 @@ end
 Model components are deserialized from a JSON file into computational objects within a workspace for further manipulation. First, functions representing lineshapes and formfactors are built. Following this, distributions are processed and added to the workspace.
 
 ```{julia}
+#| code-fold: true
+#| code-summary: All `functions` and `distribubution` are parsed here
+#| output: false
 input = open(joinpath(@__DIR__, "..", "..", "models", "X23pi_compass.json")) do io
     JSON.parse(io)
 end
@@ -138,6 +141,7 @@ an accuracy of $<10^{-10}$, $<10^{-2}$, or $\ge10^{-2}$, respectively, for the d
 ```{julia}
 #| code-fold: true
 #| code-summary: A loop over validation points
+#| output: false
 let
     @unpack misc, parameter_points = input
     @unpack amplitude_model_checksums = misc
@@ -158,7 +162,7 @@ let
             key="name", apply=v -> v["value"])
         #
         computed_value = dist(_parameters)
-        status = label_diff(value - computed_value)
+        status = label_diff(value - computed_value; levels=[1e-3, 1e-10])
         (; Distribution=distribution,
             Point=point, computed_value, value, Status=status)
     end |> DataFrame
@@ -193,9 +197,9 @@ let iσx = 3, iσy = 1
             "m²($i$j) [GeV²]")
 
             plot(masses(model), Base.Fix1(unpolarized_intensity, model);
-                iσx, iσy, xlab, ylab, title=model_name, aspect_ratio=1)
+                iσx, iσy, xlab, ylab, title=model_name[13:end], aspect_ratio=1)
         end...,
         layout=grid(Ny, Nx),
-        size=(500 * Nx, 500 * Ny))
+        size=(300 * Nx, 300 * Ny))
 end
 ```

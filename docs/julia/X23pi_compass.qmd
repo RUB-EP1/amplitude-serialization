@@ -141,7 +141,6 @@ an accuracy of $<10^{-10}$, $<10^{-2}$, or $\ge10^{-2}$, respectively, for the d
 ```{julia}
 #| code-fold: true
 #| code-summary: A loop over validation points
-#| output: false
 let
     @unpack misc, parameter_points = input
     @unpack amplitude_model_checksums = misc
@@ -150,7 +149,6 @@ let
         @unpack point, value, distribution = check_point_info
         #
         # pull distribution
-        @show distribution
         dist = workspace[distribution]
 
         # pull correct parameter point

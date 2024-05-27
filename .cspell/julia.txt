@@ -1,0 +1,15 @@
+compat
+eachslice
+guidefonthalign
+guidefontvalign
+joinpath
+lims
+minorticks
+mlims
+Mmap
+quadgk
+struct
+xlab
+xlim
+ylab
+ylim

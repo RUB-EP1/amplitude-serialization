@@ -1,3 +1,4 @@
+# cspell:ignore pkpi subdir
 execute:
   cache: true
   enabled: true

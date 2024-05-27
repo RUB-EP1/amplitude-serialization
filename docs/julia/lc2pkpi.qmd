@@ -86,7 +86,7 @@ end
 ## Validation
 
 The integrity of the model is checked by validating the value of distributions at a few phase space points.
-The table lists the validation checkes and their status. The marks "🟢", "🟡", and "🔴" indicate
+The table lists the validation checks and their status. The marks "🟢", "🟡", and "🔴" indicate
 an accuracy of $<10^{-10}$, $<10^{-2}$, or $\ge10^{-2}$, respectively, for the difference between the reference and computed values.
 
 ```{julia}

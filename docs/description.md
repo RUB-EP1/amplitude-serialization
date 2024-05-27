@@ -135,11 +135,8 @@ It species the main properties such as spin, and masses of all particles.
 
 ## Topology and Reference Topology
 
-The `reference_topology` array serves a pivotal role in defining how helicity amplitudes are computed. The reference topology can be used to fix the quantization axes for particle helicities. Since helicity is the projection of a particle's spin along its direction of motion, its precise definition depends upon the frame of reference in which it is evaluated. This can be problematic in decays that consist of multiple decay topologies. Accurate determination of helicity states is therefore crucial for computing the correct amplitude values, even if the choice does not always affect the value of the `unpolarized_intensity`.
-
-In the context of the conventional helicity formalism, the `reference_topology` array implicitly prescribes a method for defining helicities, as it can be used to define a default quantization frame for each stage (decay node) in the decay process.
-When considering the helicity of a particle in any other frame, it must be treated as a superposition of the states with regard to the default quantization.
-The helicity values employed in the indices of Wigner rotations `D_{λ1, λ2}` and couplings `H_{λ1, λ2}` are thus indicative of this frame.
+Purpose of the `reference_topology` is two folded. First, it defines how kinematics of the decay is parametrized, i.e. which combination of masses and angles is used to describe the phase space. Second, the `reference_topology` plays crucial role in defining how helicity amplitudes are computed. The reference topology is used to fix the quantization axes for particle helicities. Since helicity is the projection of a particle's spin along its direction of motion, its precise definition depends upon the frame of reference in which it is evaluated. 
+As the `reference_topology` unambiguously defines the path to traverse the decay graph from initial to the final states, it sets a frame for each helicity, where it is defined. The helicity values employed in the indices of Wigner rotations `D_{λ1, λ2}` and couplings `H_{λ1, λ2}` are thus indicative of this frame.
 
 ### An example of four-body decay
 
@@ -147,25 +144,25 @@ Understanding the relation between the decay frames and the helicity definitions
 As an example, let's investigate a four-body decay topology, specifically `[[[3,1],4],2]`.
 This topology outlines the decay sequence and the respective frames that define the helicities of the involved particles.
 
-In the given topology, the decay amplitude calculation involves a series of Wigner&nbsp;$D$-functions, each corresponding to rotations and boosts that define the helicity frames of the particles:
+The decay amplitude reads as a series of Wigner&nbsp;$D$-functions, each corresponding to a spacial rotation in the reads frame of particle system indicated by the node of the graph:
 
 $$
 \begin{align}
-A &= n_{j_0} D_{\tau, \lambda_2}^{j_0}(\text{angles}_{[[3,1],4]}) \\
-&\quad \cdot n_{j_{[[3,1],4]}} D_{\nu, \lambda_4}^{j_{[[3,1],4]}}(\text{angles}_{[3,1]}) \\
-&\quad \cdot n_{j_{[3,1]}} D_{\lambda_3, \lambda_1}^{j_{[3,1]}}(\text{angles}_3)
+A &= n_{j_0} D_{m_0, \tau-\lambda_2}^{j_0}(\text{angles}_{[[3,1],4]}) \,\, H_{\tau,\lambda_2} \\
+% 
+&\quad \cdot n_{j_{[[3,1],4]}} D_{\tau, \nu-\lambda_4}^{j_{[[3,1],4]}}(\text{angles}_{[3,1]}) \\
+% 
+&\quad \cdot n_{j_{[3,1]}} D_{\nu, \lambda_3-\lambda_1}^{j_{[3,1]}}(\text{angles}_3) \,\, H_{\lambda_3,\lambda_1}
 \end{align}
 $$
 
-- $D_{\tau, \lambda_2}^{j_0}(\text{angles}_{[[3,1],4]})$ describes the transformation for the helicity of particle&nbsp;`2`, $\lambda_2$, in the overall rest frame of the system (comprising particles `3`, `1`, `4`, and `2`).
-  Here, $\lambda_2$ is defined relative to the frame where all other particles are considered, emphasizing its position in the decay sequence.
+- $D_{m_0, \tau - \lambda_2}^{j_0}(\text{angles}_{[[3,1],4]})$ describes the decay of particle 0 into a system `[3,1,4]`, and a particle&nbsp;`2` with helicities $\nu$, and $\lambda_2$, respectively. The decay is considered in the overall rest frame of the system (comprising particles `3`, `1`, `4`, and `2`).
+Here is the first appearence of the $\lambda_2$, hence the helicity state of particle&nbsp;`2` is defined from its rest frame by boost-z and rotation to the total center of momentum.
+The index $m_0$ is the spin projection of the decaying particle (0). It's a canontical state as the particle is at rest.
 
-- $D_{\nu, \lambda_4}^{j_{[[3,1],4]}}(\text{angles}_{[3,1]})$: For particle `4`, its helicity, $\lambda_4$, is defined within the rest frame of the `[3,1,4]` system.
-  This frame is obtained from the overall rest frame by applying a rotation and boost, signifying the progression of the decay sequence and the specific frame where particle `4`'s helicity is defined.
+- $D_{\tau,\nu-\lambda_4}^{j_{[[3,1],4]}}(\text{angles}_{[3,1]})$: For particle `4`, its helicity, $\lambda_4$, is defined within the rest frame of the `[3,1,4]` system. This frame is obtained from the overall rest frame by applying a rotation and boost, signifying the progression of the decay sequence.
 
-- $D_{\lambda_3, \lambda_1}^{j_{[3,1]}}(\text{angles}_3)$: The helicities of particles `3` and `1`, $\lambda_3$ and $\lambda_1$, are defined within the `[3,1]` rest frame.
-  This frame is reached through successive transformations: first to the `[3,1,4]` system and then to the `[3,1]` subsystem.
-  This sequence of boosts and rotations precisely defines the helicity states of particles `3` and `1` in relation to their specific interaction frame.
+- $D_{\nu, \lambda_3-\lambda_1}^{j_{[3,1]}}(\text{angles}_3)$: The helicities of particles `3` and `1`, $\lambda_3$ and $\lambda_1$, are defined within the `[3,1]` rest frame. This frame is reached through successive transformations, starting from the overall center-of-momentum frame, first, to the `[3,1,4]` system and then to the `[3,1]` subsystem.
 
 ## Chains Section
 
@@ -189,7 +186,7 @@ Vertices define the nodes in the decay graphs, where one particle transits into 
     $$
     H^\text{helicity}(\lambda_a,\lambda_b|\lambda_a^0,\lambda_b^0) = \delta_{\lambda_a,\lambda_a^0}\delta_{\lambda_b,\lambda_b^0}
     $$
-  - `parity` is controlled by the controlled by the `parity factor`, $f$, and gives a non-zero value for two combination of the helicity pair.
+  - `parity` recoupling is non-zero value for two combination of the helicity pair, the selected one ($\lambda_a^0$ and $\lambda_b^0$), and the opposite ($-\lambda_a^0$ and $-\lambda_b^0$). The recoupling coefficient for the former is 1, while for the latter is equal to the `parity factor`.
     $$
     H^\text{parity}(\lambda_a,\lambda_b|\lambda_a^0,\lambda_b^0, f) =
       \delta_{\lambda_a,\lambda_a^0}\delta_{\lambda_b,\lambda_b^0} + f \delta_{\lambda_a,-\lambda_a^0}\delta_{\lambda_b,-\lambda_b^0}
@@ -203,7 +200,7 @@ Vertices define the nodes in the decay graphs, where one particle transits into 
       \left\langle l,0; s,\lambda_a-\lambda_b|j,\lambda_a-\lambda_b\right\rangle
     \end{multline}
     $$
-    For spin-half particles, this recoupling is equivalent to the `parity` recoupling, with $f = (-1)^l$.
+
 
 ### Propagators
 

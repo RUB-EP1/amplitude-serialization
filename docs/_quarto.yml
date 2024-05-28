@@ -37,7 +37,7 @@ website:
         contents:
           - julia/lc2ppik-lhcb-2683025.qmd
           - julia/lb2pkg-lhcb-2765817.qmd
-          - julia/X23pi_compass.qmd
+          - julia/x2pipipi-compass-1391643.qmd
       - section: Python
         contents:
           - python/lc2ppik-lhcb-2683025.qmd

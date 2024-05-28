@@ -4,6 +4,10 @@ jupyter: julia-amplitude-serialization-1.10
 
 # $\Lambda_b^0 \to p K^- \gamma$
 
+::: {.callout-note appearance="simple"}
+Model definition: [`lb2pkg-lhcb-2765817.json`](https://github.com/RUB-EP1/amplitude-serialization/blob/main/models/lb2pkg-lhcb-2765817.json).
+:::
+
 This page demonstrates deserialization and evaluation of an amplitude model for the decay $\Lambda_b^0 \to p K^- \gamma$. The resonant structure is studied using proton-proton collision data recorded at centre-of-mass energies of $7$, $8$, and $13$ TeV collected with the LHCb detector, [INSPIRE-HEP 2765817](https://inspirehep.net/literature/2765817).
 
 ```{julia}

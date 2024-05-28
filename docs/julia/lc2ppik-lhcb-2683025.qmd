@@ -4,6 +4,10 @@ jupyter: julia-amplitude-serialization-1.10
 
 # $\Lambda_c^+ \to p K^- \pi^+$
 
+::: {.callout-note appearance="simple"}
+Model definition: [`lc2ppik-lhcb-2683025.json`](https://github.com/RUB-EP1/amplitude-serialization/blob/main/models/lc2ppik-lhcb-2683025.json).
+:::
+
 This page demonstrates deserialization and evaluation of an amplitude model for the decay $\Lambda_c^+ \to p K^- \pi^+$. The amplitude analysis is performed based on roughly half a million of $\Lambda_c^{\pm}$ decay candidates by the LHCb collaboration, [INSPIRE-HEP 2683025](https://inspirehep.net/literature/2683025). Details on the mapped of the amplitude model onto the standard helicity formalism can be found in appendix of [INSPIRE-HEP 2623821](https://inspirehep.net/literature/2623821).
 
 ```{julia}

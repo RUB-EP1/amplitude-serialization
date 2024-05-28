@@ -3,6 +3,11 @@ jupyter: python3
 ---
 
 # $\Lambda_c^+ \to p K^- \pi^+$c
+
+::: {.callout-note appearance="simple"}
+Model definition: [`lc2ppik-lhcb-2683025.json`](https://github.com/RUB-EP1/amplitude-serialization/blob/main/models/lc2ppik-lhcb-2683025.json).
+:::
+
 This notebooks illustrates the use of the [`ampform_dpd.io.serialization`](https://ampform-dpd.rtfd.io/0.2.1rc1/api/ampform_dpd.io.serialization.html) module for the decay $\Lambda_c^+ \to p K^- \pi^+$. The corresponding model was optimized to a data sample of roughly half a million $\Lambda_c^{\pm}$ decay candidates by the LHCb collaboration, [INSPIRE-HEP 2683025](https://inspirehep.net/literature/2683025).
 
 ::: {.callout-warning}

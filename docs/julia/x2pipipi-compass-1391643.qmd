@@ -4,6 +4,10 @@ jupyter: julia-amplitude-serialization-1.10
 
 # $X\to \pi^-\pi^+\pi^-$
 
+::: {.callout-note appearance="simple"}
+Model definition: [`x2pipipi-compass-1391643.json`](https://github.com/RUB-EP1/amplitude-serialization/blob/main/models/x2pipipi-compass-1391643.json).
+:::
+
 This page demonstrates deserialization and evaluation the a partial wave analysis of diffractively produced $3\pi$ system. The analysis is performed independently in bins of $3\pi$ mass, and transferred momentum. The total number of bins is 100.
 For every bin, the model includes about 170 decay chains (about 88 waves, symmetrized for two $\pi^+\pi^-$ pairs). The main paper describing details of the analysis is [INSPIRE-HEP 1391643](https://inspirehep.net/literature/1391643).
 

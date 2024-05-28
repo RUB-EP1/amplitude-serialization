@@ -25,6 +25,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import sympy as sp
 from ampform.dynamics import BlattWeisskopfSquared
+from ampform.dynamics.form_factor import FormFactor
 from ampform.dynamics.phasespace import BreakupMomentumSquared
 from ampform.kinematics.phasespace import Kallen
 from ampform.sympy import perform_cached_doit
@@ -35,7 +36,6 @@ from ampform_dpd.dynamics import (
     BuggBreitWigner,
     ChannelArguments,
     EnergyDependentWidth,
-    FormFactor,
     MultichannelBreitWigner,
     P,
     SimpleBreitWigner,

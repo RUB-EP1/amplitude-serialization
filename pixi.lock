@@ -262,6 +262,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/rope-1.13.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/rpds-py-0.18.1-py312h4413252_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/ruff-0.4.5-py312h5715c7c_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/scipy-1.12.0-py312heda63a1_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/send2trash-1.8.3-pyh0d859eb_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/setuptools-70.0.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/sip-6.7.12-py312h30efb56_0.conda
@@ -335,7 +336,6 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/c2/b0/72ba53411cfdd0ce6d94c6a27e04e89c1893bfedf7a48912171c43a7d3b6/particle-0.24.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ec/8e/4d62f54339aac758c0689e684714743e979896d6683f76f4866d9ea9c5ac/python_constraint2-2.0.0b5.tar.gz
       - pypi: https://files.pythonhosted.org/packages/d1/57/89ed192ffbb7ac3f22836e29447e7391f7b5ccc9e85270930154f4f93327/qrules-0.10.2-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/88/ab/6ecdc526d509d33814835447bbbeedbebdec7cca46ef495a61b00a35b4bf/scipy-1.13.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/d2/05/e6600db80270777c4a64238a98d442f0fd07cc8915be2a1c16da7f2b9e74/sympy-1.12-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ee/31/fc8717d8a350bf3296ee038930f0ba852723587767fd333df145faac1a10/tensorwaves-0.4.12-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/18/eb/fdb7eb9e48b7b02554e1664afd3bd3f117f6b6d6c5881438a0b055554f9b/tqdm-4.66.4-py3-none-any.whl
@@ -531,6 +531,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/rope-1.13.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/rpds-py-0.18.1-py312ha47ea1c_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/ruff-0.4.5-py312h8b25c6c_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-64/scipy-1.12.0-py312h8adb940_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/send2trash-1.8.3-pyh31c8845_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/setuptools-70.0.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/six-1.16.0-pyh6c4a22f_0.tar.bz2
@@ -585,7 +586,6 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/c2/b0/72ba53411cfdd0ce6d94c6a27e04e89c1893bfedf7a48912171c43a7d3b6/particle-0.24.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ec/8e/4d62f54339aac758c0689e684714743e979896d6683f76f4866d9ea9c5ac/python_constraint2-2.0.0b5.tar.gz
       - pypi: https://files.pythonhosted.org/packages/d1/57/89ed192ffbb7ac3f22836e29447e7391f7b5ccc9e85270930154f4f93327/qrules-0.10.2-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/f2/7b/fb6b46fbee30fc7051913068758414f2721003a89dd9a707ad49174e3843/scipy-1.13.1-cp312-cp312-macosx_10_9_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/d2/05/e6600db80270777c4a64238a98d442f0fd07cc8915be2a1c16da7f2b9e74/sympy-1.12-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ee/31/fc8717d8a350bf3296ee038930f0ba852723587767fd333df145faac1a10/tensorwaves-0.4.12-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/18/eb/fdb7eb9e48b7b02554e1664afd3bd3f117f6b6d6c5881438a0b055554f9b/tqdm-4.66.4-py3-none-any.whl
@@ -781,6 +781,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/rope-1.13.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/rpds-py-0.18.1-py312h552d48e_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/ruff-0.4.5-py312h3402d49_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/scipy-1.12.0-py312h9d7df2b_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/send2trash-1.8.3-pyh31c8845_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/setuptools-70.0.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/six-1.16.0-pyh6c4a22f_0.tar.bz2
@@ -835,7 +836,6 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/c2/b0/72ba53411cfdd0ce6d94c6a27e04e89c1893bfedf7a48912171c43a7d3b6/particle-0.24.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ec/8e/4d62f54339aac758c0689e684714743e979896d6683f76f4866d9ea9c5ac/python_constraint2-2.0.0b5.tar.gz
       - pypi: https://files.pythonhosted.org/packages/d1/57/89ed192ffbb7ac3f22836e29447e7391f7b5ccc9e85270930154f4f93327/qrules-0.10.2-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/ae/00/48c2f661e2816ccf2ecd77982f6605b2950afe60f60a52b4cbbc2504aa8f/scipy-1.13.1.tar.gz
       - pypi: https://files.pythonhosted.org/packages/d2/05/e6600db80270777c4a64238a98d442f0fd07cc8915be2a1c16da7f2b9e74/sympy-1.12-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ee/31/fc8717d8a350bf3296ee038930f0ba852723587767fd333df145faac1a10/tensorwaves-0.4.12-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/18/eb/fdb7eb9e48b7b02554e1664afd3bd3f117f6b6d6c5881438a0b055554f9b/tqdm-4.66.4-py3-none-any.whl
@@ -3399,8 +3399,8 @@ packages:
 - kind: pypi
   name: jaxlib
   version: 0.4.28
-  url: https://files.pythonhosted.org/packages/09/5a/a6691029a30bbb51ede633b5289b4a1c7dd58fe7a109c7a103f7554c9069/jaxlib-0.4.28-cp312-cp312-macosx_11_0_arm64.whl
-  sha256: 8dd8bffe3853702f63cd924da0ee25734a4d19cd5c926be033d772ba7d1c175d
+  url: https://files.pythonhosted.org/packages/de/2c/598e797189e4bbc19a041be8ca048ada903c1fbf9129a4f912edd2657858/jaxlib-0.4.28-cp312-cp312-macosx_10_14_x86_64.whl
+  sha256: d6c09a545329722461af056e735146d2c8c74c22ac7426a845eb69f326b4f7a0
   requires_dist:
   - scipy>=1.9
   - numpy>=1.22
@@ -3441,8 +3441,8 @@ packages:
 - kind: pypi
   name: jaxlib
   version: 0.4.28
-  url: https://files.pythonhosted.org/packages/de/2c/598e797189e4bbc19a041be8ca048ada903c1fbf9129a4f912edd2657858/jaxlib-0.4.28-cp312-cp312-macosx_10_14_x86_64.whl
-  sha256: d6c09a545329722461af056e735146d2c8c74c22ac7426a845eb69f326b4f7a0
+  url: https://files.pythonhosted.org/packages/09/5a/a6691029a30bbb51ede633b5289b4a1c7dd58fe7a109c7a103f7554c9069/jaxlib-0.4.28-cp312-cp312-macosx_11_0_arm64.whl
+  sha256: 8dd8bffe3853702f63cd924da0ee25734a4d19cd5c926be033d772ba7d1c175d
   requires_dist:
   - scipy>=1.9
   - numpy>=1.22
@@ -8504,123 +8504,88 @@ packages:
   - pkg:pypi/ruff
   size: 6161835
   timestamp: 1716663954141
-- kind: pypi
+- kind: conda
   name: scipy
-  version: 1.13.1
-  url: https://files.pythonhosted.org/packages/ae/00/48c2f661e2816ccf2ecd77982f6605b2950afe60f60a52b4cbbc2504aa8f/scipy-1.13.1.tar.gz
-  sha256: 095a87a0312b08dfd6a6155cbbd310a8c51800fc931b8c0b84003014b874ed3c
-  requires_dist:
-  - numpy>=1.22.4,<2.3
-  - pytest ; extra == 'test'
-  - pytest-cov ; extra == 'test'
-  - pytest-timeout ; extra == 'test'
-  - pytest-xdist ; extra == 'test'
-  - asv ; extra == 'test'
-  - mpmath ; extra == 'test'
-  - gmpy2 ; extra == 'test'
-  - threadpoolctl ; extra == 'test'
-  - scikit-umfpack ; extra == 'test'
-  - pooch ; extra == 'test'
-  - hypothesis>=6.30 ; extra == 'test'
-  - array-api-strict ; extra == 'test'
-  - sphinx>=5.0.0 ; extra == 'doc'
-  - pydata-sphinx-theme>=0.15.2 ; extra == 'doc'
-  - sphinx-design>=0.4.0 ; extra == 'doc'
-  - matplotlib>=3.5 ; extra == 'doc'
-  - numpydoc ; extra == 'doc'
-  - jupytext ; extra == 'doc'
-  - myst-nb ; extra == 'doc'
-  - pooch ; extra == 'doc'
-  - jupyterlite-sphinx>=0.12.0 ; extra == 'doc'
-  - jupyterlite-pyodide-kernel ; extra == 'doc'
-  - mypy ; extra == 'dev'
-  - typing-extensions ; extra == 'dev'
-  - types-psutil ; extra == 'dev'
-  - pycodestyle ; extra == 'dev'
-  - ruff ; extra == 'dev'
-  - cython-lint>=0.12.2 ; extra == 'dev'
-  - rich-click ; extra == 'dev'
-  - doit>=0.36.0 ; extra == 'dev'
-  - pydevtool ; extra == 'dev'
-  requires_python: '>=3.9'
-- kind: pypi
+  version: 1.12.0
+  build: py312h8adb940_2
+  build_number: 2
+  subdir: osx-64
+  url: https://conda.anaconda.org/conda-forge/osx-64/scipy-1.12.0-py312h8adb940_2.conda
+  sha256: 69223fd64afed23fab2290dbb7e84f33e6453c7b19ada7c8e559cd9e04625ad9
+  md5: b16a9767f5f4b0a0ec8fb566e2c586f7
+  depends:
+  - libblas >=3.9.0,<4.0a0
+  - libcblas >=3.9.0,<4.0a0
+  - libcxx >=15
+  - libgfortran 5.*
+  - libgfortran5 >=12.3.0
+  - libgfortran5 >=13.2.0
+  - liblapack >=3.9.0,<4.0a0
+  - numpy >=1.26.3,<1.28
+  - numpy >=1.26.3,<2.0a0
+  - python >=3.12,<3.13.0a0
+  - python_abi 3.12.* *_cp312
+  license: BSD-3-Clause
+  license_family: BSD
+  purls:
+  - pkg:pypi/scipy
+  size: 16515913
+  timestamp: 1706043405302
+- kind: conda
   name: scipy
-  version: 1.13.1
-  url: https://files.pythonhosted.org/packages/88/ab/6ecdc526d509d33814835447bbbeedbebdec7cca46ef495a61b00a35b4bf/scipy-1.13.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
-  sha256: de3ade0e53bc1f21358aa74ff4830235d716211d7d077e340c7349bc3542e884
-  requires_dist:
-  - numpy<2.3,>=1.22.4
-  - pytest ; extra == 'test'
-  - pytest-cov ; extra == 'test'
-  - pytest-timeout ; extra == 'test'
-  - pytest-xdist ; extra == 'test'
-  - asv ; extra == 'test'
-  - mpmath ; extra == 'test'
-  - gmpy2 ; extra == 'test'
-  - threadpoolctl ; extra == 'test'
-  - scikit-umfpack ; extra == 'test'
-  - pooch ; extra == 'test'
-  - hypothesis>=6.30 ; extra == 'test'
-  - array-api-strict ; extra == 'test'
-  - sphinx>=5.0.0 ; extra == 'doc'
-  - pydata-sphinx-theme>=0.15.2 ; extra == 'doc'
-  - sphinx-design>=0.4.0 ; extra == 'doc'
-  - matplotlib>=3.5 ; extra == 'doc'
-  - numpydoc ; extra == 'doc'
-  - jupytext ; extra == 'doc'
-  - myst-nb ; extra == 'doc'
-  - pooch ; extra == 'doc'
-  - jupyterlite-sphinx>=0.12.0 ; extra == 'doc'
-  - jupyterlite-pyodide-kernel ; extra == 'doc'
-  - mypy ; extra == 'dev'
-  - typing-extensions ; extra == 'dev'
-  - types-psutil ; extra == 'dev'
-  - pycodestyle ; extra == 'dev'
-  - ruff ; extra == 'dev'
-  - cython-lint>=0.12.2 ; extra == 'dev'
-  - rich-click ; extra == 'dev'
-  - doit>=0.36.0 ; extra == 'dev'
-  - pydevtool ; extra == 'dev'
-  requires_python: '>=3.9'
-- kind: pypi
+  version: 1.12.0
+  build: py312h9d7df2b_2
+  build_number: 2
+  subdir: osx-arm64
+  url: https://conda.anaconda.org/conda-forge/osx-arm64/scipy-1.12.0-py312h9d7df2b_2.conda
+  sha256: c03f8f87df62b0da27f282f71ffff00ffb15a726061f145fbbb04dc964da7f33
+  md5: ecf0b30bef6d14ffdf83cfcc7f93fa23
+  depends:
+  - libblas >=3.9.0,<4.0a0
+  - libcblas >=3.9.0,<4.0a0
+  - libcxx >=15
+  - libgfortran 5.*
+  - libgfortran5 >=12.3.0
+  - libgfortran5 >=13.2.0
+  - liblapack >=3.9.0,<4.0a0
+  - numpy >=1.26.3,<1.28
+  - numpy >=1.26.3,<2.0a0
+  - python >=3.12,<3.13.0a0
+  - python >=3.12,<3.13.0a0 *_cpython
+  - python_abi 3.12.* *_cp312
+  license: BSD-3-Clause
+  license_family: BSD
+  purls:
+  - pkg:pypi/scipy
+  size: 15547334
+  timestamp: 1706043853757
+- kind: conda
   name: scipy
-  version: 1.13.1
-  url: https://files.pythonhosted.org/packages/f2/7b/fb6b46fbee30fc7051913068758414f2721003a89dd9a707ad49174e3843/scipy-1.13.1-cp312-cp312-macosx_10_9_x86_64.whl
-  sha256: 5d72782f39716b2b3509cd7c33cdc08c96f2f4d2b06d51e52fb45a19ca0c86a1
-  requires_dist:
-  - numpy<2.3,>=1.22.4
-  - pytest ; extra == 'test'
-  - pytest-cov ; extra == 'test'
-  - pytest-timeout ; extra == 'test'
-  - pytest-xdist ; extra == 'test'
-  - asv ; extra == 'test'
-  - mpmath ; extra == 'test'
-  - gmpy2 ; extra == 'test'
-  - threadpoolctl ; extra == 'test'
-  - scikit-umfpack ; extra == 'test'
-  - pooch ; extra == 'test'
-  - hypothesis>=6.30 ; extra == 'test'
-  - array-api-strict ; extra == 'test'
-  - sphinx>=5.0.0 ; extra == 'doc'
-  - pydata-sphinx-theme>=0.15.2 ; extra == 'doc'
-  - sphinx-design>=0.4.0 ; extra == 'doc'
-  - matplotlib>=3.5 ; extra == 'doc'
-  - numpydoc ; extra == 'doc'
-  - jupytext ; extra == 'doc'
-  - myst-nb ; extra == 'doc'
-  - pooch ; extra == 'doc'
-  - jupyterlite-sphinx>=0.12.0 ; extra == 'doc'
-  - jupyterlite-pyodide-kernel ; extra == 'doc'
-  - mypy ; extra == 'dev'
-  - typing-extensions ; extra == 'dev'
-  - types-psutil ; extra == 'dev'
-  - pycodestyle ; extra == 'dev'
-  - ruff ; extra == 'dev'
-  - cython-lint>=0.12.2 ; extra == 'dev'
-  - rich-click ; extra == 'dev'
-  - doit>=0.36.0 ; extra == 'dev'
-  - pydevtool ; extra == 'dev'
-  requires_python: '>=3.9'
+  version: 1.12.0
+  build: py312heda63a1_2
+  build_number: 2
+  subdir: linux-64
+  url: https://conda.anaconda.org/conda-forge/linux-64/scipy-1.12.0-py312heda63a1_2.conda
+  sha256: ec8a9d8699d4d42a6c190596a5e2757206328803cee2a00bb11d0e36decb9a37
+  md5: 17729ab9bbb780e93458c7857afffcab
+  depends:
+  - libblas >=3.9.0,<4.0a0
+  - libcblas >=3.9.0,<4.0a0
+  - libgcc-ng >=12
+  - libgfortran-ng
+  - libgfortran5 >=12.3.0
+  - liblapack >=3.9.0,<4.0a0
+  - libstdcxx-ng >=12
+  - numpy >=1.26.3,<1.28
+  - numpy >=1.26.3,<2.0a0
+  - python >=3.12,<3.13.0a0
+  - python_abi 3.12.* *_cp312
+  license: BSD-3-Clause
+  license_family: BSD
+  purls:
+  - pkg:pypi/scipy
+  size: 17083471
+  timestamp: 1706042601027
 - kind: conda
   name: send2trash
   version: 1.8.3

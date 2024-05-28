@@ -1,0 +1,48 @@
+{
+  "dictionaries": ["physics", "project"],
+  "dictionaryDefinitions": [
+    {
+      "addWords": true,
+      "name": "julia",
+      "path": "./.cspell/julia.txt"
+    },
+    {
+      "addWords": true,
+      "name": "project",
+      "path": "./.cspell/project.txt"
+    },
+    {
+      "addWords": true,
+      "name": "physics",
+      "path": "./.cspell/physics.txt"
+    }
+  ],
+  "enableFiletypes": ["julia", "quarto"],
+  "ignorePaths": [
+    ".cspell.json",
+    ".cspell/*.txt",
+    ".editorconfig",
+    ".github/workflows",
+    ".gitignore",
+    ".pre-commit-config.yaml",
+    ".taplo.toml",
+    ".vscode/*.json",
+    "json_options.jl",
+    "Manifest.toml",
+    "models/*.json",
+    "pixi.lock",
+    "pixi.toml",
+    "Project.toml",
+    "pyproject.toml",
+    "read_json.jl"
+  ],
+  "language": "en-US",
+  "languageSettings": [
+    {
+      "dictionaries": ["julia", "physics", "project"],
+      "languageId": ["julia", "quarto", "text"]
+    }
+  ],
+  "version": "0.2",
+  "ignoreWords": ["formfactor", "pdfs"]
+}

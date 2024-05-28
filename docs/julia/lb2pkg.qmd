@@ -4,7 +4,7 @@ jupyter: julia-amplitude-serialization-1.10
 
 # $\Lambda_b^0 \to p K^- \gamma$
 
-This page demostrates deserialization and evaluation of an amplitude model for the decay $\Lambda_b^0 \to p K^- \gamma$. The resonant structure is studied using proton-proton collision data recorded at centre-of-mass energies of $7$, $8$, and $13$ TeV collected with the LHCb detector, [INSPIRE-HEP 2765817](https://inspirehep.net/literature/2765817).
+This page demonstrates deserialization and evaluation of an amplitude model for the decay $\Lambda_b^0 \to p K^- \gamma$. The resonant structure is studied using proton-proton collision data recorded at centre-of-mass energies of $7$, $8$, and $13$ TeV collected with the LHCb detector, [INSPIRE-HEP 2765817](https://inspirehep.net/literature/2765817).
 
 ```{julia}
 #| code-fold: true
@@ -50,7 +50,7 @@ end
 
 ## Deserialization of Objects to a Workspace
 
-Model components are deserialized from a JSON file into computational objects within a workspace for further manipulation. First, functions representing lineshapes and formfactors are built. Following this, distributions are processed and added to the workspace.
+Model components are deserialized from a JSON file into computational objects within a workspace for further manipulation. First, functions representing lineshapes and form factors are built. Following this, distributions are processed and added to the workspace.
 
 ```{julia}
 input = open(joinpath(@__DIR__, "..", "..", "models", "Lb2pKg.json")) do io
@@ -77,7 +77,7 @@ end
 ## Validation
 
 The integrity of the model is checked by validating the value of distributions at a few phase space points.
-The table lists the validation checkes and their status. The marks "🟢", "🟡", and "🔴" indicate
+The table lists the validation checks and their status. The marks "🟢", "🟡", and "🔴" indicate
 an accuracy of $<10^{-12}$, $<10^{-2}$, or $\ge10^{-2}$, respectively, for the difference between the reference and computed values.
 
 ```{julia}
@@ -111,7 +111,7 @@ end
 
 ## Visualization
 
-The model descibing the decay is fetched from the workspace
+The model describing the decay is fetched from the workspace
 
 ```{julia}
 model_dist = [v for (k, v) in workspace if v isa HadronicUnpolarizedIntensity] |> first;

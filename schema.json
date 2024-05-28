@@ -54,11 +54,11 @@
           "uniqueItems": true
         },
         "topology": {
-          "description": "Structure of this decay chain represented as nasted particle grouping into intermediate subsystems.",
+          "description": "Structure of this decay chain represented as nested particle grouping into intermediate subsystems.",
           "$ref": "#/definitions/Topology"
         },
         "vertices": {
-          "description": "Vertices define the nodes in the decay graphs denoted by groupping of particle indices.",
+          "description": "Vertices define the nodes in the decay graphs denoted by grouping of particle indices.",
           "type": "array",
           "items": { "$ref": "#/definitions/Vertex" },
           "uniqueItems": true

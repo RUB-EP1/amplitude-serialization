@@ -19,11 +19,16 @@ platforms = [
 repository = "https://github.com/RUB-EP1/amplitude-serialization"
 
 [dependencies]
+juliaup = "*"
+python = ">=3.8.0"
+quarto = "*"
+
+[pypi-dependencies]
+ampform-dpd = {version = "==0.2.1rc0"}
 black = "*"
 ipykernel = "*"
 ipywidgets = "*"
 isort = "*"
-juliaup = "*"
 jupyter-cache = "*"
 jupyterlab = ">=4"
 jupyterlab-git = "*"
@@ -34,15 +39,10 @@ nbclient = "*"
 nbformat = "*"
 pandas = "*"
 pre-commit = "*"
-python = ">=3.8.0"
 python-lsp-ruff = "*"
 python-lsp-server = "*"
-quarto = "*"
 rope = "*"
 ruff = "*"
-
-[pypi-dependencies]
-ampform-dpd = {version = "==0.2.1rc0"}
 
 [tasks.doc]
 cmd = "quarto render"

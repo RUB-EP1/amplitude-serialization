@@ -147,7 +147,7 @@ This section acts as a model integrity check, providing reference amplitudes for
   <summary>See the full example</summary>
 
 ```json
-{{< include ../models/Lc2ppiK.json >}}
+{{< include ../models/lc2ppik-lhcb-2683025.json >}}
 ```
 
 </details>

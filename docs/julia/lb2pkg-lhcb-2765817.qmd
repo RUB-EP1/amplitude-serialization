@@ -53,7 +53,7 @@ end
 Model components are deserialized from a JSON file into computational objects within a workspace for further manipulation. First, functions representing lineshapes and form-factors are built. Following this, distributions are processed and added to the workspace.
 
 ```{julia}
-input = open(joinpath(@__DIR__, "..", "..", "models", "Lb2pKg.json")) do io
+input = open(joinpath(@__DIR__, "..", "..", "models", "lb2pkg-lhcb-2765817.json")) do io
     JSON.parse(io)
 end
 

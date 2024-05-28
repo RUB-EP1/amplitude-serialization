@@ -111,7 +111,7 @@ Model components are deserialized from a JSON file into computational objects wi
 #| code-fold: true
 #| code-summary: All `functions` and `distributution` are parsed here
 #| output: false
-input = open(joinpath(@__DIR__, "..", "..", "models", "X23pi_compass.json")) do io
+input = open(joinpath(@__DIR__, "..", "..", "models", "x2pipipi-compass-1391643.json")) do io
     JSON.parse(io)
 end
 

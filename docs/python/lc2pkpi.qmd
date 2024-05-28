@@ -6,8 +6,9 @@ jupyter: python3
 # $\Lambda_c^+ \to p K^- \pi^+$c
 This notebooks illustrates the use of the [`ampform_dpd.io.serialization`](https://ampform-dpd.rtfd.io/0.2.1rc1/api/ampform_dpd.io.serialization.html) module for the decay $\Lambda_c^+ \to p K^- \pi^+$. The corresponding model was optimized to a datasample of roughly half a millon $\Lambda_c^{\pm}$ decay candidates by the LHCb collaboration, [INSPIRE-HEP 2683025](https://inspirehep.net/literature/2683025).
 
-> [!WARNING]
-> The {mode}`ampform_dpd.io.serialization` module is a preview feature.
+::: {.callout-warning}
+The [`ampform_dpd.io.serialization`](https://ampform-dpd.readthedocs.io/0.2.1rc0/api/ampform_dpd.io.serializatoin/) module is a preview feature. This notebook illustrates the deserialization of the amplitude model JSON file to symbolic expressions. Keep an eye on [ComPWA/ampform-dpd#133](https://github.com/ComPWA/ampform-dpd/issues/133) for a list of tracked issues.
+:::
 
 ## Import model
 
@@ -107,7 +108,8 @@ Math(aslatex(DECAY, with_jp=True))
 
 ## Dynamics
 
-:::{seealso} [RUB-EP1/amplitude-serialization#22](https://github.com/RUB-EP1/amplitude-serialization/issues/22)
+::: {.callout.tip}
+See also [RUB-EP1/amplitude-serialization#22](https://github.com/RUB-EP1/amplitude-serialization/issues/22) about serialization of custom lineshapes.
 :::
 
 ```{python}
@@ -391,7 +393,7 @@ for s, s_expr in tqdm(MODEL.invariants.items()):
 
 ### Validation
 
-:::{error}
+::: {.callout-warning}
 The following serves as a numerical check on whether the amplitude model has been deserialized correctly. For now, this is not the case, see [ComPWA/ampform-dpd#133](https://github.com/ComPWA/ampform-dpd/issues/133) for updates.
 :::
 
@@ -425,6 +427,10 @@ for distribution_name, checksum in checksums.items():
         array.append((distribution_name, point_name, computed, expected, status))
 pd.DataFrame(array, columns=["Distribution", "Point", "Computed", "Expected", "Status"])
 ```
+
+::: {.callout-warning}
+See [ComPWA/ampform-dpd#133](https://github.com/ComPWA/ampform-dpd/issues/133).
+:::
 
 ### Dalitz plot
 

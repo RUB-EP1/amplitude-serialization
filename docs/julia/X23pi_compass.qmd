@@ -4,8 +4,8 @@ jupyter: julia-amplitude-serialization-1.10
 
 # $X\to \pi^-\pi^+\pi^-$
 
-This page demostrates deserialization and evaluation the aprtial wave analysis of diffractively produced $3\pi$ system. The analysis is performed independently in bins of $3\pi$ mass, and transferred momentum. The total number of bins is 100.
-For every bin, the model includes about 170 decay chains (about 88 waves, symmetrized for two $\pi^+\pi^-$ pairs). The main paper descibing details of the analysis is [INSPIRE-HEP 1391643](https://inspirehep.net/literature/1391643).
+This page demonstrates deserialization and evaluation the a partial wave analysis of diffractively produced $3\pi$ system. The analysis is performed independently in bins of $3\pi$ mass, and transferred momentum. The total number of bins is 100.
+For every bin, the model includes about 170 decay chains (about 88 waves, symmetrized for two $\pi^+\pi^-$ pairs). The main paper describing details of the analysis is [INSPIRE-HEP 1391643](https://inspirehep.net/literature/1391643).
 
 ```{julia}
 #| code-fold: true
@@ -105,11 +105,11 @@ end
 
 ## Deserialization of Objects to a Workspace
 
-Model components are deserialized from a JSON file into computational objects within a workspace for further manipulation. First, functions representing lineshapes and formfactors are built. Following this, distributions are processed and added to the workspace.
+Model components are deserialized from a JSON file into computational objects within a workspace for further manipulation. First, functions representing lineshapes and form factors are built. Following this, distributions are processed and added to the workspace.
 
 ```{julia}
 #| code-fold: true
-#| code-summary: All `functions` and `distribubution` are parsed here
+#| code-summary: All `functions` and `distributution` are parsed here
 #| output: false
 input = open(joinpath(@__DIR__, "..", "..", "models", "X23pi_compass.json")) do io
     JSON.parse(io)
@@ -135,7 +135,7 @@ end
 ## Validation
 
 The integrity of the model is checked by validating the value of distributions at a few phase space points.
-The table lists the validation checkes and their status. The marks "🟢", "🟡", and "🔴" indicate
+The table lists the validation checks and their status. The marks "🟢", "🟡", and "🔴" indicate
 an accuracy of $<10^{-10}$, $<10^{-2}$, or $\ge10^{-2}$, respectively, for the difference between the reference and computed values.
 
 ```{julia}
@@ -169,7 +169,7 @@ end
 
 ## Visualization
 
-The model descibing the decay is fetched from the workspace
+The model describing the decay is fetched from the workspace
 
 ```{julia}
 model_names = [k for (k, v) in workspace if v isa HadronicUnpolarizedIntensity]
@@ -183,8 +183,8 @@ The Dalitz plot shows the probability distribution across two dimensional phase 
 #| code-fold: true
 #| code-summary: Dalitz plot plotting
 let iσx = 3, iσy = 1
-    Nmodels = length(model_names)
-    Nx, Ny = 2, div(Nmodels + 1, 2)
+    n_models = length(model_names)
+    Nx, Ny = 2, div(n_models + 1, 2)
     plot(
         map(model_names) do model_name
             model = workspace[model_name].model

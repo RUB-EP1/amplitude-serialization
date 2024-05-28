@@ -1,5 +1,13 @@
 name: Documentation
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: |-
+    ${{ github.ref != format('refs/heads/{0}', github.event.repository.default_branch) }}
+
+env:
+  PYTHONHASHSEED: "0"
+
 on:
   pull_request:
     branches:
@@ -36,6 +44,16 @@ jobs:
             jupyter-cache
           path: |
             **/.jupyter_cache
+      - name: General caches
+        uses: actions/cache@v4
+        with:
+          key: |
+            home-cache-${{hashFiles('pixi.lock')}}-${{hashFiles('docs/*/*.md')}}
+          restore-keys: |
+            home-cache-${{hashFiles('pixi.lock')}}
+            home-cache
+          path: |
+            ~/.cache
       - run: pixi run doc
       - if: always()
         uses: actions/upload-pages-artifact@v3

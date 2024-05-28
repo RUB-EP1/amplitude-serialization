@@ -40,6 +40,7 @@ python-lsp-server = ">=1.11.0,<1.12"
 quarto = "*"
 rope = ">=1.13.0,<1.14"
 ruff = ">=0.4.5,<0.5"
+scipy = "<1.13"
 
 [pypi-dependencies]
 ampform-dpd = {version = "==0.2.1rc0"}

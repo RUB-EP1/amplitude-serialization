@@ -4,13 +4,13 @@ jupyter: julia-amplitude-serialization-1.10
 
 # $\Lambda_b^0 \to p K^- \gamma$
 
-This page demostrates deserialization and evaluation of an amplitude model for the decay $\Lambda_b^0 \to p K^- \gamma$. The resonant structure is studied using proton-proton collision data recorded at centre-of-mass energies of $7$, $8$, and $13$ TeV collected with the LHCb detector, [INSPIRE-HEP 2765817](https://inspirehep.net/literature/2765817).
+This page demonstrates deserialization and evaluation of an amplitude model for the decay $\Lambda_b^0 \to p K^- \gamma$. The resonant structure is studied using proton-proton collision data recorded at centre-of-mass energies of $7$, $8$, and $13$ TeV collected with the LHCb detector, [INSPIRE-HEP 2765817](https://inspirehep.net/literature/2765817).
 
 ```{julia}
 #| code-fold: true
 #| code-summary: Activate environment
 #| output: false
-import Pkg
+using Pkg: Pkg
 Pkg.activate(@__DIR__)
 Pkg.instantiate()
 
@@ -40,19 +40,17 @@ The code below defines a new `NonResonant` lineshape, and its deserialization me
 
 ```{julia}
 struct Constant <: HadronicLineshapes.AbstractFlexFunc
-    m::Float64
 end
 (X::Constant)(σ) = 1
 
 function ThreeBodyDecaysIO.dict2instance(::Type{Constant}, dict)
-    @unpack mass = dict
-    return Constant(mass)
+    return Constant()
 end
 ```
 
 ## Deserialization of Objects to a Workspace
 
-Model components are deserialized from a JSON file into computational objects within a workspace for further manipulation. First, functions representing lineshapes and formfactors are built. Following this, distributions are processed and added to the workspace.
+Model components are deserialized from a JSON file into computational objects within a workspace for further manipulation. First, functions representing lineshapes and form-factors are built. Following this, distributions are processed and added to the workspace.
 
 ```{julia}
 input = open(joinpath(@__DIR__, "..", "..", "models", "Lb2pKg.json")) do io
@@ -79,7 +77,7 @@ end
 ## Validation
 
 The integrity of the model is checked by validating the value of distributions at a few phase space points.
-The table lists the validation checkes and their status. The marks "🟢", "🟡", and "🔴" indicate
+The table lists the validation checks and their status. The marks "🟢", "🟡", and "🔴" indicate
 an accuracy of $<10^{-12}$, $<10^{-2}$, or $\ge10^{-2}$, respectively, for the difference between the reference and computed values.
 
 ```{julia}
@@ -103,14 +101,8 @@ df = let
         _parameters = array2dict(parameter_point["parameters"];
             key="name", apply=v -> v["value"])
         #
-        function label_diff(diff; levels=[1e-2, 1e-12])
-            _diff = abs(diff)
-            _diff < levels[2] && return '🟢'
-            _diff < levels[1] && return '🟡'
-            return '🔴'
-        end
         computed_value = dist(_parameters)
-        status = label_diff(value - computed_value)
+        status = label_diff(value - computed_value; levels=[1e-2, 1e-12])
         (; Distribution=distribution, Reference=value, Computed_value=computed_value,
             Point=name, Status=status)
     end |> DataFrame
@@ -119,7 +111,7 @@ end
 
 ## Visualization
 
-The model descibing the decay is fetched from the workspace
+The model describing the decay is fetched from the workspace
 
 ```{julia}
 model_dist = [v for (k, v) in workspace if v isa HadronicUnpolarizedIntensity] |> first;
@@ -142,8 +134,8 @@ let
     _model = model
     f(σs) = Kibble(σs, ms^2) > 0 ? NaN : unpolarized_intensity(model, σs)
 
-    calv = [f(Invariants(ms; σ3, σ2)) for σ2 in σ2v, σ3 in σ3v]
-    heatmap(σ3v, σ2v, calv, colorbar=false, c=:speed)
+    values = [f(Invariants(ms; σ3, σ2)) for σ2 in σ2v, σ3 in σ3v]
+    heatmap(σ3v, σ2v, values, colorbar=false, c=:speed)
     plot!(border32(masses(model)),
         l=(3, :black),
         xlim=(σ3v[1], σ3v[end]), ylim=(σ2v[1], σ2v[end]),

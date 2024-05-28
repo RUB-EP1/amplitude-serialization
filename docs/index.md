@@ -72,7 +72,7 @@ Each decay chain is described by a JSON object containing five mandatory fields:
 
 ### Topology
 
-Tolopogy of a decay is a tree of intermediate decays given in a compact form using brackets.
+Topology of a decay is a tree of intermediate decays given in a compact form using brackets.
 In this notation, each pair of brackets indicate the node and it's children.
 The name of the node is simply given by its decay in the same bracket notations.
 
@@ -108,7 +108,7 @@ quantization axes must be adjusted by using appropriate wigner rotations.
 
 ### Appendix
 
-The `appendix` gives definition to the text keys used elsewhere in the desciption. These definions are inserted recursively, while processing the json file.
+The `appendix` gives definition to the text keys used elsewhere in the description. These definitions are inserted recursively, while processing the json file.
 
 ### Complex numbers
 

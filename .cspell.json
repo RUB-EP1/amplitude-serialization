@@ -15,6 +15,11 @@
       "addWords": true,
       "name": "physics",
       "path": "./.cspell/physics.txt"
+    },
+    {
+      "addWords": true,
+      "name": "python",
+      "path": "./.cspell/python.txt"
     }
   ],
   "enableFiletypes": ["julia", "quarto"],
@@ -25,6 +30,7 @@
     ".github/workflows",
     ".gitignore",
     ".pre-commit-config.yaml",
+    ".prettierignore",
     ".taplo.toml",
     ".vscode/*.json",
     "json_options.jl",
@@ -41,6 +47,10 @@
   "languageSettings": [
     {
       "dictionaries": ["julia", "physics", "project"],
+      "languageId": ["julia", "quarto", "text"]
+    },
+    {
+      "dictionaries": ["physics", "project", "python"],
       "languageId": ["julia", "quarto", "text"]
     }
   ],

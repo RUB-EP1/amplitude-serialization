@@ -20,6 +20,7 @@ repository = "https://github.com/RUB-EP1/amplitude-serialization"
 
 [dependencies]
 juliaup = "*"
+pkg-config = ">=0.29.2,<0.30"
 python = ">=3.8.0"
 quarto = "*"
 

@@ -48,11 +48,13 @@ ampform-dpd = {version = "==0.2.1rc0"}
 cmd = "quarto render"
 cwd = "docs"
 depends_on = ["install-julia"]
+env = {PYTHONHASHSEED = "0"}
 
 [tasks.doclive]
 cmd = "quarto preview"
 cwd = "docs"
 depends_on = ["install-julia"]
+env = {PYTHONHASHSEED = "0"}
 
 [tasks.install-julia]
 cmd = """

@@ -1,9 +1,5 @@
-calv
-colorbar
-latexstring
 Mikhasenko
 Misha
 multline
 pdfs
 semileptonic
-textrm

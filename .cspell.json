@@ -36,6 +36,7 @@
     "pyproject.toml",
     "read_json.jl"
   ],
+  "ignoreWords": ["formfactor"],
   "language": "en-US",
   "languageSettings": [
     {

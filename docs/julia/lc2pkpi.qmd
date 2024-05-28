@@ -86,7 +86,8 @@ end
 ## Validation
 
 The integrity of the model is checked by validating the value of distributions at a few phase space points.
-The table lists the validation checks and their status ("🟢" or "🔴").
+The table lists the validation checks and their status. The marks "🟢", "🟡", and "🔴" indicate
+an accuracy of $<10^{-10}$, $<10^{-2}$, or $\ge10^{-2}$, respectively, for the difference between the reference and computed values.
 
 ```{julia}
 #| code-fold: true
@@ -109,8 +110,8 @@ let
         _parameters = array2dict(parameter_point["parameters"];
             key="name", apply=v -> v["value"])
         #
-        # @assert value ≈ dist(_parameters) "Check-point validation failed with $distribution 🥕"
-        status = (value ≈ dist(_parameters)) ? "🟢" : "🔴"
+        computed_value = dist(_parameters)
+        status = label_diff(value - computed_value; levels=[1e-2, 1e-10])
         (; Distribution=distribution,
             Point=name, Status=status)
     end |> DataFrame

@@ -20,6 +20,13 @@ repos:
       - id: mixed-line-ending
       - id: trailing-whitespace
 
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.28.3
+    hooks:
+      - id: check-jsonschema
+        args: ["--schemafile", "schema.json"]
+        files: ^models/.*\.(json|yaml|yml)$
+
   - repo: https://github.com/streetsidesoftware/cspell-cli
     rev: v8.8.0
     hooks:

@@ -1,14 +1,17 @@
+coeffs
 colorbar
 compat
 eachslice
 guidefonthalign
 guidefontvalign
 joinpath
+Kallen
 latexstring
 lims
 minorticks
 mlims
 Mmap
+nonpole
 quadgk
 struct
 textrm

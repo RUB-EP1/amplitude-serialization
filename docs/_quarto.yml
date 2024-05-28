@@ -1,4 +1,4 @@
-# cspell:ignore pkpi subdir
+# cspell:ignore ppiK lhcb subdir
 execute:
   cache: true
   enabled: true

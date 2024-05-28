@@ -36,6 +36,7 @@
     "pyproject.toml",
     "read_json.jl"
   ],
+  "ignoreWords": ["formfactor"],
   "language": "en-US",
   "languageSettings": [
     {
@@ -43,6 +44,5 @@
       "languageId": ["julia", "quarto", "text"]
     }
   ],
-  "version": "0.2",
-  "ignoreWords": ["formfactor", "pdfs"]
+  "version": "0.2"
 }

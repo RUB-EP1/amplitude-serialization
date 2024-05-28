@@ -1,8 +1,5 @@
-calv
-colorbar
-latexstring
 Mikhasenko
 Misha
 multline
-Semileptonic
-textrm
+pdfs
+semileptonic

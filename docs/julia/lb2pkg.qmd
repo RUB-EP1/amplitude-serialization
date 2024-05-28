@@ -50,7 +50,7 @@ end
 
 ## Deserialization of Objects to a Workspace
 
-Model components are deserialized from a JSON file into computational objects within a workspace for further manipulation. First, functions representing lineshapes and form factors are built. Following this, distributions are processed and added to the workspace.
+Model components are deserialized from a JSON file into computational objects within a workspace for further manipulation. First, functions representing lineshapes and form-factors are built. Following this, distributions are processed and added to the workspace.
 
 ```{julia}
 input = open(joinpath(@__DIR__, "..", "..", "models", "Lb2pKg.json")) do io
@@ -134,8 +134,8 @@ let
     _model = model
     f(σs) = Kibble(σs, ms^2) > 0 ? NaN : unpolarized_intensity(model, σs)
 
-    calv = [f(Invariants(ms; σ3, σ2)) for σ2 in σ2v, σ3 in σ3v]
-    heatmap(σ3v, σ2v, calv, colorbar=false, c=:speed)
+    values = [f(Invariants(ms; σ3, σ2)) for σ2 in σ2v, σ3 in σ3v]
+    heatmap(σ3v, σ2v, values, colorbar=false, c=:speed)
     plot!(border32(masses(model)),
         l=(3, :black),
         xlim=(σ3v[1], σ3v[end]), ylim=(σ2v[1], σ2v[end]),

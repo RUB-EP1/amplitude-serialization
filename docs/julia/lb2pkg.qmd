@@ -48,6 +48,10 @@ function ThreeBodyDecaysIO.dict2instance(::Type{Constant}, dict)
     @unpack mass = dict
     return Constant(mass)
 end
+
+# type piracy, not good
+(bw::HadronicLineshapes.BreitWigner)(x::Dict) = bw(first(values(x)))
+(bw::HadronicLineshapes.MultichannelBreitWigner)(x::Dict) = bw(first(values(x)))
 ```
 
 ## Deserialization of Objects to a Workspace
@@ -110,7 +114,12 @@ df = let
             return '🔴'
         end
         computed_value = dist(_parameters)
-        status = label_diff(value - computed_value)
+        #
+        tonumber(X::Number) = X
+        tonumber(X::String) = string2complex(X)
+        reference_value = tonumber(value)
+        status = label_diff( - computed_value)
+        #
         (; Distribution=distribution, Reference=value, Computed_value=computed_value,
             Point=name, Status=status)
     end |> DataFrame

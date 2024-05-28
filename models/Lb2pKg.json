@@ -2422,9 +2422,69 @@
         "value": 38.286728742769384
       },
       {
-        "name": "L1520_BW",
-        "distribution": "L1520_BW",
-        "value": 0.000
+        "name" : "L1405_Flatte",
+        "distribution" : "L1405_Flatte",
+        "value": "-0.740197550450631 + 0.23636822774611727i"
+      },
+      {
+        "name" : "L1890_BW",
+        "distribution" : "L1890_BW",
+        "value": "2.198693289424333 + 1.0366413279995204i"
+      },
+      {
+        "name" : "L1800_BW",
+        "distribution" : "L1800_BW",
+        "value": "0.3117344649326182 + 2.7741995686483376i"
+      },
+      {
+        "name" : "L1520_BW",
+        "distribution" : "L1520_BW",
+        "value": "-0.6431712763866598 + 0.5539481728042333i"
+      },
+      {
+        "name" : "L2110_BW",
+        "distribution" : "L2110_BW",
+        "value": "0.8540683809737195 + 0.0415635681035755i"
+      },
+      {
+        "name" : "L1680_BW",
+        "distribution" : "L1680_BW",
+        "value": "-2.4613302416589518 + 0.36109808787606623i"
+      },
+      {
+        "name" : "L2350_BW",
+        "distribution" : "L2350_BW",
+        "value": "0.43057041569422266 + 0.00019710073244917788i"
+      },
+      {
+        "name" : "L1600_BW",
+        "distribution" : "L1600_BW",
+        "value": "-0.6293313194817324 + 0.7663369213404696i"
+      },
+      {
+        "name" : "L1810_BW",
+        "distribution" : "L1810_BW",
+        "value": "0.1064360891979254 + 5.093985975099388i"
+      },
+      {
+        "name" : "L1820_BW",
+        "distribution" : "L1820_BW",
+        "value": "4.647408096395898 + 4.443944768616481i"
+      },
+      {
+        "name" : "L1830_BW",
+        "distribution" : "L1830_BW",
+        "value": "3.824528421578999 + 3.827749839464702i"
+      },
+      {
+        "name" : "L2100_BW",
+        "distribution" : "L2100_BW",
+        "value": "0.8262246387007841 + 0.013532417439695257i"
+      },
+      {
+        "name" : "L1690_BW",
+        "distribution" : "L1690_BW",
+        "value": "-1.8597288296334098 + 1.396126484908448i"
       }
     ]
   },
@@ -2517,11 +2577,119 @@
       ]
     },
     {
+      "name": "L1405_Flatte",
+      "parameters": [
+        {
+          "name": "m_12^2",
+          "value": 3.2
+        }
+      ]
+    },
+    {
+      "name": "L1890_BW",
+      "parameters": [
+        {
+          "name": "m_12^2",
+          "value": 3.2
+        }
+      ]
+    },
+    {
+      "name": "L1800_BW",
+      "parameters": [
+        {
+          "name": "m_12^2",
+          "value": 3.2
+        }
+      ]
+    },
+    {
       "name": "L1520_BW",
       "parameters": [
         {
           "name": "m_12^2",
-          "value": 1
+          "value": 3.2
+        }
+      ]
+    },
+    {
+      "name": "L2110_BW",
+      "parameters": [
+        {
+          "name": "m_12^2",
+          "value": 3.2
+        }
+      ]
+    },
+    {
+      "name": "L1680_BW",
+      "parameters": [
+        {
+          "name": "m_12^2",
+          "value": 3.2
+        }
+      ]
+    },
+    {
+      "name": "L2350_BW",
+      "parameters": [
+        {
+          "name": "m_12^2",
+          "value": 3.2
+        }
+      ]
+    },
+    {
+      "name": "L1600_BW",
+      "parameters": [
+        {
+          "name": "m_12^2",
+          "value": 3.2
+        }
+      ]
+    },
+    {
+      "name": "L1810_BW",
+      "parameters": [
+        {
+          "name": "m_12^2",
+          "value": 3.2
+        }
+      ]
+    },
+    {
+      "name": "L1820_BW",
+      "parameters": [
+        {
+          "name": "m_12^2",
+          "value": 3.2
+        }
+      ]
+    },
+    {
+      "name": "L1830_BW",
+      "parameters": [
+        {
+          "name": "m_12^2",
+          "value": 3.2
+        }
+      ]
+    },
+    {
+      "name": "L2100_BW",
+      "parameters": [
+        {
+          "name": "m_12^2",
+          "value": 3.2
+        }
+      ]
+    },
+    {
+      "name": "L1690_BW",
+      "parameters": [
+        {
+          "name": "m_12^2",
+          "value": 3.2
         }
       ]
     }

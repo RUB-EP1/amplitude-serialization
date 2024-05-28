@@ -941,6 +941,56 @@
         "name": "validation_point",
         "distribution": "my_model_for_reaction_intensity",
         "value": 9345.853380852355
+      },
+      {
+        "name" : "L1405_Flatte",
+        "distribution" : "L1405_Flatte",
+        "value": "-0.7480602620708737 + 0.22521439829964163i"
+      },
+      {
+        "name" : "L1690_BW",
+        "distribution" : "L1690_BW",
+        "value": "-1.856393035564509 + 1.3970917949874666i"
+      },
+      {
+        "name" : "D1232_BW",
+        "distribution" : "D1232_BW",
+        "value": "-0.37559145211964445 + 0.2867197317591275i"
+      },
+      {
+        "name" : "L1520_BW",
+        "distribution" : "L1520_BW",
+        "value": "-0.6519026717262323 + 0.5513711741076602i"
+      },
+      {
+        "name" : "L1600_BW",
+        "distribution" : "L1600_BW",
+        "value": "-0.5711605382444855 + 0.8517294114907099i"
+      },
+      {
+        "name" : "L2000_BW",
+        "distribution" : "L2000_BW",
+        "value": "1.1399027771220511 + 0.46329136172829i"
+      },
+      {
+        "name" : "D1600_BW",
+        "distribution" : "D1600_BW",
+        "value": "-0.7542612203250671 + 0.953349114487552i"
+      },
+      {
+        "name" : "D1700_BW",
+        "distribution" : "D1700_BW",
+        "value": "-0.32420527030886465 + 0.9152170090261661i"
+      },
+      {
+        "name" : "K892_BW",
+        "distribution" : "K892_BW",
+        "value": "-0.41335521508052786 + 0.03881648026453681i"
+      },
+      {
+        "name" : "L1670_BW",
+        "distribution" : "L1670_BW",
+        "value": "-2.383989898030206 + 0.34006358781864954i"
       }
     ]
   },
@@ -971,6 +1021,96 @@
         {
           "name": "m_31_2",
           "value": 2.28646
+        }
+      ]
+    },
+    {
+      "name": "L1405_Flatte",
+      "parameters": [
+        {
+          "name": "m_12^2",
+          "value": 3.2
+        }
+      ]
+    },
+    {
+      "name": "L1690_BW",
+      "parameters": [
+        {
+          "name": "m_12^2",
+          "value": 3.2
+        }
+      ]
+    },
+    {
+      "name": "D1232_BW",
+      "parameters": [
+        {
+          "name": "m_12^2",
+          "value": 3.2
+        }
+      ]
+    },
+    {
+      "name": "L1520_BW",
+      "parameters": [
+        {
+          "name": "m_12^2",
+          "value": 3.2
+        }
+      ]
+    },
+    {
+      "name": "L1600_BW",
+      "parameters": [
+        {
+          "name": "m_12^2",
+          "value": 3.2
+        }
+      ]
+    },
+    {
+      "name": "L2000_BW",
+      "parameters": [
+        {
+          "name": "m_12^2",
+          "value": 3.2
+        }
+      ]
+    },
+    {
+      "name": "D1600_BW",
+      "parameters": [
+        {
+          "name": "m_12^2",
+          "value": 3.2
+        }
+      ]
+    },
+    {
+      "name": "D1700_BW",
+      "parameters": [
+        {
+          "name": "m_12^2",
+          "value": 3.2
+        }
+      ]
+    },
+    {
+      "name": "K892_BW",
+      "parameters": [
+        {
+          "name": "m_12^2",
+          "value": 3.2
+        }
+      ]
+    },
+    {
+      "name": "L1670_BW",
+      "parameters": [
+        {
+          "name": "m_12^2",
+          "value": 3.2
         }
       ]
     }

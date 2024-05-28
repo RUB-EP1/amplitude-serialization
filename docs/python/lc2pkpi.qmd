@@ -3,7 +3,7 @@ jupyter: python3
 ---
 
 # $\Lambda_c^+ \to p K^- \pi^+$c
-This notebooks illustrates the use of the [`ampform_dpd.io.serialization`](https://ampform-dpd.rtfd.io/0.2.1rc1/api/ampform_dpd.io.serialization.html) module for the decay $\Lambda_c^+ \to p K^- \pi^+$. The corresponding model was optimized to a datasample of roughly half a millon $\Lambda_c^{\pm}$ decay candidates by the LHCb collaboration, [INSPIRE-HEP 2683025](https://inspirehep.net/literature/2683025).
+This notebooks illustrates the use of the [`ampform_dpd.io.serialization`](https://ampform-dpd.rtfd.io/0.2.1rc1/api/ampform_dpd.io.serialization.html) module for the decay $\Lambda_c^+ \to p K^- \pi^+$. The corresponding model was optimized to a data sample of roughly half a million $\Lambda_c^{\pm}$ decay candidates by the LHCb collaboration, [INSPIRE-HEP 2683025](https://inspirehep.net/literature/2683025).
 
 ::: {.callout-warning}
 The [`ampform_dpd.io.serialization`](https://ampform-dpd.readthedocs.io/0.2.1rc0/api/ampform_dpd.io.serializatoin/) module is a preview feature. This notebook illustrates the deserialization of the amplitude model JSON file to symbolic expressions. Keep an eye on [ComPWA/ampform-dpd#133](https://github.com/ComPWA/ampform-dpd/issues/133) for a list of tracked issues.

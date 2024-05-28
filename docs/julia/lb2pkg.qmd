@@ -118,7 +118,7 @@ df = let
         tonumber(X::Number) = X
         tonumber(X::String) = string2complex(X)
         reference_value = tonumber(value)
-        status = label_diff( - computed_value)
+        status = label_diff(reference_value - computed_value)
         #
         (; Distribution=distribution, Reference=value, Computed_value=computed_value,
             Point=name, Status=status)

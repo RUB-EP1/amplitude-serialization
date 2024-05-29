@@ -101,7 +101,7 @@ let
     @unpack amplitude_model_checksums = misc
 
     map(amplitude_model_checksums) do check_point_info
-        @unpack name, value, distribution = check_point_info
+        @unpack point, value, distribution = check_point_info
         #
         # pull distribution
         dist = workspace[distribution]
@@ -109,7 +109,7 @@ let
         # pull correct parameter point
         parameter_points_dict = array2dict(parameter_points; key="name")
         # find the point in the list of points
-        parameter_point = parameter_points_dict[name]
+        parameter_point = parameter_points_dict[point]
         # compute, compare
         _parameters = array2dict(parameter_point["parameters"];
             key="name", apply=v -> v["value"])
@@ -128,7 +128,7 @@ let
         status = label_diff(reference_value - computed_value)
         #
         (; Distribution=distribution,
-            Point=name, Status=status)
+            Point=point, Status=status)
     end |> DataFrame
 end
 ```

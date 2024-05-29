@@ -2123,7 +2123,7 @@
   "functions": [
     {
       "type": "BreitWigner",
-      "x": "m_12^2",
+      "x": "m_12_sq",
       "mass": 1.89,
       "width": 0.12,
       "ma": 0.938,
@@ -2140,7 +2140,7 @@
     },
     {
       "type": "BreitWigner",
-      "x": "m_12^2",
+      "x": "m_12_sq",
       "mass": 1.8,
       "width": 0.2,
       "ma": 0.938,
@@ -2157,7 +2157,7 @@
     },
     {
       "type": "BreitWigner",
-      "x": "m_12^2",
+      "x": "m_12_sq",
       "mass": 1.519,
       "width": 0.016,
       "ma": 0.938,
@@ -2179,7 +2179,7 @@
     },
     {
       "type": "BreitWigner",
-      "x": "m_12^2",
+      "x": "m_12_sq",
       "mass": 2.09,
       "width": 0.25,
       "ma": 0.938,
@@ -2190,7 +2190,7 @@
     },
     {
       "type": "BreitWigner",
-      "x": "m_12^2",
+      "x": "m_12_sq",
       "mass": 1.674,
       "width": 0.03,
       "ma": 0.938,
@@ -2201,7 +2201,7 @@
     },
     {
       "type": "BreitWigner",
-      "x": "m_12^2",
+      "x": "m_12_sq",
       "mass": 2.35,
       "width": 0.15,
       "ma": 0.938,
@@ -2212,7 +2212,7 @@
     },
     {
       "type": "BreitWigner",
-      "x": "m_12^2",
+      "x": "m_12_sq",
       "mass": 1.6,
       "width": 0.2,
       "ma": 0.938,
@@ -2233,7 +2233,7 @@
     },
     {
       "type": "BreitWigner",
-      "x": "m_12^2",
+      "x": "m_12_sq",
       "mass": 1.79,
       "width": 0.11,
       "ma": 0.938,
@@ -2244,7 +2244,7 @@
     },
     {
       "type": "BreitWigner",
-      "x": "m_12^2",
+      "x": "m_12_sq",
       "mass": 1.82,
       "width": 0.08,
       "ma": 0.938,
@@ -2261,7 +2261,7 @@
     },
     {
       "type": "BreitWigner",
-      "x": "m_12^2",
+      "x": "m_12_sq",
       "mass": 1.825,
       "width": 0.09,
       "ma": 0.938,
@@ -2272,7 +2272,7 @@
     },
     {
       "type": "BreitWigner",
-      "x": "m_12^2",
+      "x": "m_12_sq",
       "mass": 2.1,
       "width": 0.2,
       "ma": 0.938,
@@ -2307,6 +2307,7 @@
     {
       "name": "L1405_Flatte",
       "type": "MultichannelBreitWigner",
+      "x": "m_12_sq",
       "mass": 1.405,
       "channels": [
         {
@@ -2327,7 +2328,7 @@
     },
     {
       "type": "BreitWigner",
-      "x": "m_12^2",
+      "x": "m_12_sq",
       "mass": 1.69,
       "width": 0.07,
       "ma": 0.938,
@@ -2407,82 +2408,82 @@
   "misc": {
     "amplitude_model_checksums": [
       {
-        "name": "validation_point1",
+        "point": "validation_point1",
         "distribution": "Lb2pKg_model",
         "value": 645.6877782510138
       },
       {
-        "name": "validation_point2",
+        "point": "validation_point2",
         "distribution": "Lb2pKg_model",
         "value": 33.3131321180587
       },
       {
-        "name": "validation_point3",
+        "point": "validation_point3",
         "distribution": "Lb2pKg_model",
         "value": 38.286728742769384
       },
       {
-        "name" : "L1405_Flatte",
+        "point" : "validation_point_m12sq",
         "distribution" : "L1405_Flatte",
         "value": "-0.740197550450631 + 0.23636822774611727i"
       },
       {
-        "name" : "L1890_BW",
+        "point" : "validation_point_m12sq",
         "distribution" : "L1890_BW",
         "value": "2.198693289424333 + 1.0366413279995204i"
       },
       {
-        "name" : "L1800_BW",
+        "point" : "validation_point_m12sq",
         "distribution" : "L1800_BW",
         "value": "0.3117344649326182 + 2.7741995686483376i"
       },
       {
-        "name" : "L1520_BW",
+        "point" : "validation_point_m12sq",
         "distribution" : "L1520_BW",
         "value": "-0.6431712763866598 + 0.5539481728042333i"
       },
       {
-        "name" : "L2110_BW",
+        "point" : "validation_point_m12sq",
         "distribution" : "L2110_BW",
         "value": "0.8540683809737195 + 0.0415635681035755i"
       },
       {
-        "name" : "L1680_BW",
+        "point" : "validation_point_m12sq",
         "distribution" : "L1680_BW",
         "value": "-2.4613302416589518 + 0.36109808787606623i"
       },
       {
-        "name" : "L2350_BW",
+        "point" : "validation_point_m12sq",
         "distribution" : "L2350_BW",
         "value": "0.43057041569422266 + 0.00019710073244917788i"
       },
       {
-        "name" : "L1600_BW",
+        "point" : "validation_point_m12sq",
         "distribution" : "L1600_BW",
         "value": "-0.6293313194817324 + 0.7663369213404696i"
       },
       {
-        "name" : "L1810_BW",
+        "point" : "validation_point_m12sq",
         "distribution" : "L1810_BW",
         "value": "0.1064360891979254 + 5.093985975099388i"
       },
       {
-        "name" : "L1820_BW",
+        "point" : "validation_point_m12sq",
         "distribution" : "L1820_BW",
         "value": "4.647408096395898 + 4.443944768616481i"
       },
       {
-        "name" : "L1830_BW",
+        "point" : "validation_point_m12sq",
         "distribution" : "L1830_BW",
         "value": "3.824528421578999 + 3.827749839464702i"
       },
       {
-        "name" : "L2100_BW",
+        "point" : "validation_point_m12sq",
         "distribution" : "L2100_BW",
         "value": "0.8262246387007841 + 0.013532417439695257i"
       },
       {
-        "name" : "L1690_BW",
+        "point" : "validation_point_m12sq",
         "distribution" : "L1690_BW",
         "value": "-1.8597288296334098 + 1.396126484908448i"
       }
@@ -2577,118 +2578,10 @@
       ]
     },
     {
-      "name": "L1405_Flatte",
+      "name": "validation_point_m12sq",
       "parameters": [
         {
-          "name": "m_12^2",
-          "value": 3.2
-        }
-      ]
-    },
-    {
-      "name": "L1890_BW",
-      "parameters": [
-        {
-          "name": "m_12^2",
-          "value": 3.2
-        }
-      ]
-    },
-    {
-      "name": "L1800_BW",
-      "parameters": [
-        {
-          "name": "m_12^2",
-          "value": 3.2
-        }
-      ]
-    },
-    {
-      "name": "L1520_BW",
-      "parameters": [
-        {
-          "name": "m_12^2",
-          "value": 3.2
-        }
-      ]
-    },
-    {
-      "name": "L2110_BW",
-      "parameters": [
-        {
-          "name": "m_12^2",
-          "value": 3.2
-        }
-      ]
-    },
-    {
-      "name": "L1680_BW",
-      "parameters": [
-        {
-          "name": "m_12^2",
-          "value": 3.2
-        }
-      ]
-    },
-    {
-      "name": "L2350_BW",
-      "parameters": [
-        {
-          "name": "m_12^2",
-          "value": 3.2
-        }
-      ]
-    },
-    {
-      "name": "L1600_BW",
-      "parameters": [
-        {
-          "name": "m_12^2",
-          "value": 3.2
-        }
-      ]
-    },
-    {
-      "name": "L1810_BW",
-      "parameters": [
-        {
-          "name": "m_12^2",
-          "value": 3.2
-        }
-      ]
-    },
-    {
-      "name": "L1820_BW",
-      "parameters": [
-        {
-          "name": "m_12^2",
-          "value": 3.2
-        }
-      ]
-    },
-    {
-      "name": "L1830_BW",
-      "parameters": [
-        {
-          "name": "m_12^2",
-          "value": 3.2
-        }
-      ]
-    },
-    {
-      "name": "L2100_BW",
-      "parameters": [
-        {
-          "name": "m_12^2",
-          "value": 3.2
-        }
-      ]
-    },
-    {
-      "name": "L1690_BW",
-      "parameters": [
-        {
-          "name": "m_12^2",
+          "name": "m_12_sq",
           "value": 3.2
         }
       ]

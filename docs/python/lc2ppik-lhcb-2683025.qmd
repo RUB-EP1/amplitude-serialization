@@ -403,7 +403,7 @@ The following serves as a numerical check on whether the amplitude model has bee
 
 ```{python}
 checksums = {
-    misc_key: {checksum["name"]: checksum["value"] for checksum in misc_value}
+    misc_key: {checksum["point"]: checksum["value"] for checksum in misc_value}
     for misc_key, misc_value in MODEL_DEFINITION["misc"].items()
     if "checksum" in misc_key
 }

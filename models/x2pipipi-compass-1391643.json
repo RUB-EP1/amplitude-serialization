@@ -985,9 +985,8 @@
       "name": "R(1274)"
     },
     {
-      "type": "BreitWignerRho3XQrt",
-      "mass": 1.69,
-      "width": 0.19,
+      "type": "generic_function",
+      "expression": "sqrt(sqrt(σ)) / (1.69^2 - σ - 1im * 1.69 * 0.19)",
       "name": "R(1690)"
     },
     {
@@ -998,11 +997,8 @@
       "name": "R(600)"
     },
     {
-      "type": "BreitWignerRhoNoSqrt",
-      "mass": 0.7685,
-      "width": 0.1507,
-      "mπ": 0.13956755,
-      "d": 4.94,
+      "type": "generic_function",
+      "expression": "1 / (0.7685^2 - σ - i * 0.7685 * 0.1507 * sqrt(σ / 4 - 0.13956755^2)^3 / sqrt(0.7685^2 / 4 - 0.13956755^2)^3 * (1+sqrt(0.7685^2 / 4 - 0.13956755^2)^2*4.94^2) / (1+sqrt(σ / 4 - 0.13956755^2)^2*4.94^2))",
       "name": "R(768)"
     },
     {

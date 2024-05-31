@@ -43,39 +43,6 @@ Non-standard lineshapes are used to model resonances that do not conform to a si
 The code below defines a new lineshape, and its deserialization method.
 
 ```{julia}
-@with_kw struct BreitWignerRhoNoSqrt <: HadronicLineshapes.AbstractFlexFunc
-    m::Float64
-    Γ::Float64
-    mπ::Float64
-    d::Float64
-end
-function (bw::BreitWignerRhoNoSqrt)(σ)
-    @unpack m, Γ, mπ, d = bw
-    p, p0 = sqrt(σ / 4 - mπ^2), sqrt(m^2 / 4 - mπ^2)
-    ff = BlattWeisskopf{1}(d)
-    mΓ = m * Γ * p / p0 * ff(p)^2 / ff(p0)^2
-    1 / (m^2 - σ - 1im * mΓ)
-end
-function ThreeBodyDecaysIO.dict2instance(::Type{BreitWignerRhoNoSqrt}, dict)
-    @unpack mass, width, mπ, d = dict
-    return BreitWignerRhoNoSqrt(mass, width, mπ, d)
-end
-
-
-@with_kw struct BreitWignerRho3XQrt <: HadronicLineshapes.AbstractFlexFunc
-    m::Float64
-    Γ::Float64
-end
-function (bw::BreitWignerRho3XQrt)(σ)
-    @unpack m, Γ = bw
-    sqrt(sqrt(σ)) / (m^2 - σ - 1im * m * Γ)
-end
-function ThreeBodyDecaysIO.dict2instance(::Type{BreitWignerRho3XQrt}, dict)
-    @unpack mass, width = dict
-    return BreitWignerRho3XQrt(mass, width)
-end
-
-
 @with_kw struct KatchaevSigma <: HadronicLineshapes.AbstractFlexFunc
     poles::Vector{Float64}
     residues::Vector{Float64}

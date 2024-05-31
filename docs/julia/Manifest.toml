@@ -276,7 +276,7 @@ version = "1.10.8"
 
 [[deps.HadronicLineshapes]]
 deps = ["Parameters", "QuadGK", "StaticArrays"]
-git-tree-sha1 = "be308739b5e513ab30b120aed74f7a86f029dd4e"
+git-tree-sha1 = "bad0c37beb3c481eaafbffc3df166852a9eb462f"
 repo-rev = "main"
 repo-url = "https://github.com/mmikhasenko/HadronicLineshapes.jl"
 uuid = "49c9d978-1f9d-4e96-a984-0a9783c0b9bf"
@@ -669,9 +669,9 @@ version = "1.0.0"
 
 [[deps.Polynomials]]
 deps = ["LinearAlgebra", "RecipesBase", "Setfield", "SparseArrays"]
-git-tree-sha1 = "89620a0b5458dca4bf9ea96174fa6422b3adf6f9"
+git-tree-sha1 = "25e7f73d679e5214971620886d3416c1f5991ecc"
 uuid = "f27b6e38-b328-58d1-80ce-0feddd5e7a45"
-version = "4.0.8"
+version = "4.0.9"
 
     [deps.Polynomials.extensions]
     PolynomialsChainRulesCoreExt = "ChainRulesCore"
@@ -898,17 +898,17 @@ uuid = "e6563dab-9ca1-5843-bde3-2ccf38d63843"
 version = "0.11.3"
 
 [[deps.ThreeBodyDecaysIO]]
-deps = ["DataFrames", "HadronicLineshapes", "JSON", "OrderedCollections", "Parameters", "ThreeBodyDecays"]
-git-tree-sha1 = "f6e8270e4ac158bfac8e510229f2b1954779d625"
+deps = ["DataFrames", "HadronicLineshapes", "JSON", "MacroTools", "OrderedCollections", "Parameters", "ThreeBodyDecays"]
+git-tree-sha1 = "4041ce33cd94168dc44c82b73fec44b922e65785"
 repo-rev = "main"
 repo-url = "https://github.com/mmikhasenko/ThreeBodyDecaysIO.jl"
 uuid = "418e7ecf-680e-4cb5-ad61-5e2f006aefac"
-version = "0.3.0"
+version = "0.3.3"
 
 [[deps.TranscodingStreams]]
-git-tree-sha1 = "5d54d076465da49d6746c647022f3b3674e64156"
+git-tree-sha1 = "a947ea21087caba0a798c5e494d0bb78e3a1a3a0"
 uuid = "3bb67fe8-82b1-5028-8e26-92a6c54297fa"
-version = "0.10.8"
+version = "0.10.9"
 weakdeps = ["Random", "Test"]
 
     [deps.TranscodingStreams.extensions]

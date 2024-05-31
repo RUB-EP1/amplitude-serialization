@@ -108,7 +108,7 @@ To sample from the model using the kinematic variables defined in `variable` sec
 The priors are given in the list of distributions.
 
 ```jsonc
-"distibutions": [
+"distributions": [
   {},
   {
     "name": "my_prior_dist",

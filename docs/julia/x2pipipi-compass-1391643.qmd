@@ -48,7 +48,7 @@ The code below defines a new lineshape, and its deserialization method.
     residues::Vector{Float64}
     nonpole_expansion_coeffs::Vector{Float64}
 end
-function (bw::KatchaevSigma)(σ)
+function (bw::KatchaevSigma)(σ::Number)
     mπ = 0.13956755
     mπ2 = mπ^2
 
@@ -74,11 +74,7 @@ function ThreeBodyDecaysIO.dict2instance(::Type{KatchaevSigma}, dict)
 end
 
 # type piracy, not good
-(bw::HadronicLineshapes.BreitWigner)(x::Dict) = bw(first(values(x)))
-(bw::HadronicLineshapes.MultichannelBreitWigner)(x::Dict) = bw(first(values(x)))
-(bw::KatchaevSigma)(x::Dict) = bw(first(values(x)))
-(bw::BreitWignerRho3XQrt)(x::Dict) = bw(first(values(x)))
-(bw::BreitWignerRhoNoSqrt)(x::Dict) = bw(first(values(x)))
+(bw::HadronicLineshapes.AbstractFlexFunc)(x::AbstractDict) = bw(first(values(x)))
 ```
 
 ## Deserialization of Objects to a Workspace

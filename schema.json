@@ -391,8 +391,7 @@
             "properties": {
               "point": {
                 "description": "Parameter point over which to evaluate the distribution.",
-                "type": "string",
-                "pattern": "^validation_point[0-9]*$"
+                "type": "string"
               },
               "distribution": {
                 "type": "string",
@@ -401,7 +400,7 @@
               "value": {
                 "description": "The resulting checksum value ('non-normalized intensity').",
                 "minimum": 0,
-                "type": "number"
+                "$ref": "#/definitions/ComplexNumber"
               }
             },
             "uniqueItems": true

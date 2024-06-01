@@ -72,6 +72,13 @@ function ThreeBodyDecaysIO.dict2instance(::Type{KatchaevSigma}, dict)
     @unpack poles, residues, nonpole_expansion_coeffs = dict
     return KatchaevSigma(poles, residues, nonpole_expansion_coeffs)
 end
+
+# type piracy, not good
+(bw::HadronicLineshapes.BreitWigner)(x::Dict) = bw(first(values(x)))
+(bw::HadronicLineshapes.MultichannelBreitWigner)(x::Dict) = bw(first(values(x)))
+(bw::KatchaevSigma)(x::Dict) = bw(first(values(x)))
+(bw::BreitWignerRho3XQrt)(x::Dict) = bw(first(values(x)))
+(bw::BreitWignerRhoNoSqrt)(x::Dict) = bw(first(values(x)))
 ```
 
 ## Deserialization of Objects to a Workspace
@@ -131,7 +138,12 @@ let
             key="name", apply=v -> v["value"])
         #
         computed_value = dist(_parameters)
-        status = label_diff(value - computed_value; levels=[1e-3, 1e-10])
+        #
+        tonumber(X::Number) = X
+        tonumber(X::String) = string2complex(X)
+        reference_value = tonumber(value)
+        status = label_diff(reference_value - computed_value)
+        #
         (; Distribution=distribution,
             Point=point, computed_value, value, Status=status)
     end |> DataFrame

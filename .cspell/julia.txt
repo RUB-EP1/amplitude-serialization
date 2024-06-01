@@ -15,6 +15,7 @@ nonpole
 quadgk
 struct
 textrm
+tonumber
 xlab
 xlim
 ylab

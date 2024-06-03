@@ -52,7 +52,7 @@ function ThreeBodyDecaysIO.dict2instance(::Type{Constant}, dict)
 end
 
 # type piracy, not good
-(bw::HadronicLineshapes.BreitWigner)(x::AbstractDict) = bw(first(values(x)))
+(bw::HadronicLineshapes.AbstractFlexFunc)(x::AbstractDict) = bw(first(values(x)))
 ```
 
 ## Deserialization of Objects to a Workspace

@@ -47,7 +47,7 @@ struct BreitWignerWidthExpLikeBugg <: HadronicLineshapes.AbstractFlexFunc
     Γ::Float64
     γ::Float64
 end
-function (BW::BreitWignerWidthExpLikeBugg)(σ)
+function (BW::BreitWignerWidthExpLikeBugg)(σ::Number)
     mK = 0.493677
     mπ = 0.13957018
     σA = mK^2 - mπ^2 / 2
@@ -56,13 +56,9 @@ function (BW::BreitWignerWidthExpLikeBugg)(σ)
     1 / (m^2 - σ - 1im * m * Γt)
 end
 function ThreeBodyDecaysIO.dict2instance(::Type{BreitWignerWidthExpLikeBugg}, dict)
-    @unpack mass, width, slope = dict
-    return BreitWignerWidthExpLikeBugg(mass, width, slope)
+    @unpack mass, width, slope, x = dict
+    return NamedArgFunc(BreitWignerWidthExpLikeBugg(mass, width, slope), [x])
 end
-
-# type piracy, not good
-(bw::HadronicLineshapes.BreitWigner)(x::Dict) = bw(first(values(x)))
-(bw::HadronicLineshapes.MultichannelBreitWigner)(x::Dict) = bw(first(values(x)))
 ```
 
 ## Deserialization of Objects to a Workspace

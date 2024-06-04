@@ -45,15 +45,12 @@ The code below defines a new `NonResonant` lineshape, and its deserialization me
 ```{julia}
 struct Constant <: HadronicLineshapes.AbstractFlexFunc
 end
-(X::Constant)(σ) = 1
+(X::Constant)(σ::Number) = 1
 
-function ThreeBodyDecaysIO.dict2instance(::Type{Constant}, dict)
-    return Constant()
+import ThreeBodyDecaysIO: dict2instance
+function dict2instance(::Type{Constant}, dict)
+    return NamedArgFunc(Constant(), [""])
 end
-
-# type piracy, not good
-(bw::HadronicLineshapes.BreitWigner)(x::Dict) = bw(first(values(x)))
-(bw::HadronicLineshapes.MultichannelBreitWigner)(x::Dict) = bw(first(values(x)))
 ```
 
 ## Deserialization of Objects to a Workspace
@@ -78,7 +75,7 @@ end
 for dist in distributions
     @unpack name, type = dist
     instance_type = eval(Symbol(type))
-    workspace[name] = dict2instance(instance_type, distributions[1]; workspace)
+    workspace[name] = dict2instance(instance_type, dist; workspace)
 end
 ```
 

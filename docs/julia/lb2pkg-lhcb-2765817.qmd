@@ -50,9 +50,6 @@ end
 function ThreeBodyDecaysIO.dict2instance(::Type{Constant}, dict)
     return Constant()
 end
-
-# type piracy, not good
-(bw::HadronicLineshapes.AbstractFlexFunc)(x::AbstractDict) = bw(first(values(x)))
 ```
 
 ## Deserialization of Objects to a Workspace

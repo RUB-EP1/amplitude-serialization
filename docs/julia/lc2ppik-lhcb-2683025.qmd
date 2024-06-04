@@ -59,9 +59,6 @@ function ThreeBodyDecaysIO.dict2instance(::Type{BreitWignerWidthExpLikeBugg}, di
     @unpack mass, width, slope = dict
     return BreitWignerWidthExpLikeBugg(mass, width, slope)
 end
-
-# type piracy, not good
-(bw::HadronicLineshapes.AbstractFlexFunc)(x::AbstractDict) = bw(first(values(x)))
 ```
 
 ## Deserialization of Objects to a Workspace

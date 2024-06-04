@@ -72,9 +72,6 @@ function ThreeBodyDecaysIO.dict2instance(::Type{KatchaevSigma}, dict)
     @unpack poles, residues, nonpole_expansion_coeffs = dict
     return KatchaevSigma(poles, residues, nonpole_expansion_coeffs)
 end
-
-# type piracy, not good
-(bw::HadronicLineshapes.AbstractFlexFunc)(x::AbstractDict) = bw(first(values(x)))
 ```
 
 ## Deserialization of Objects to a Workspace

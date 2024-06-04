@@ -69,8 +69,10 @@ function (bw::KatchaevSigma)(σ::Number)
     return 1.0 / (M00 - 1im * rho00)
 end
 function ThreeBodyDecaysIO.dict2instance(::Type{KatchaevSigma}, dict)
-    @unpack poles, residues, nonpole_expansion_coeffs = dict
-    return KatchaevSigma(poles, residues, nonpole_expansion_coeffs)
+    @unpack poles, residues, nonpole_expansion_coeffs, x = dict
+    return NamedArgFunc(;
+      f=KatchaevSigma(poles, residues, nonpole_expansion_coeffs),
+      variable_names=[x])
 end
 ```
 

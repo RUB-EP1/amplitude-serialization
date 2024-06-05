@@ -417,7 +417,23 @@ checksum_points = {
 }
 checksum_points
 ```
+```{python}
+def sigma1_of_sigma2_cos_theta(sigma2, cos_theta, masses):
+    # Define the masses
+    m0, m1, m2, m3 = masses
 
+    def Kallen(x, y, z):
+        return (x**2 + y**2 + z**2 - 2*(x*y + y*z + z*x))
+
+    # Calculations
+    EE4sigma = (sigma2 + m1**2 - m3**2) * (sigma2 + m0**2 - m2**2)
+    p2q24sigma = Kallen(sigma2, m3**2, m1**2) * Kallen(m0**2, sigma2, m2**2)
+
+    # Calculate σi
+    sigma1_expr = m0**2 + m1**2 - (EE4sigma - sp.sqrt(p2q24sigma) * cos_theta) / (2 * sigma2)
+
+    return sigma1_expr
+```
 ```{python}
 #| code-fold: true
 array = []
@@ -426,8 +442,15 @@ for distribution_name, checksum in checksums.items():
         parameters = checksum_points[point_name]
         if len(parameters) < 6:
             continue
-        s1 = parameters["m_31_2"] ** 2
         s2 = parameters["m_31"] ** 2
+        cos_theta_31 = parameters["cos_theta_31"]
+        s1 = float(sigma1_of_sigma2_cos_theta(
+            s2,
+            cos_theta_31,
+            list(MODEL.masses.values())
+        ))
+        print({"point_name": point_name, "s1": s1, "s2": s2})
+        # checked correct here, julia gives 0.7980703453578917
         computed = intensity_funcs[3]({"sigma1": s1, "sigma2": s2})
         status = "🟢" if computed == expected else "🔴"
         array.append((distribution_name, point_name, computed, expected, status))

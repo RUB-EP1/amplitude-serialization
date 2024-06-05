@@ -2,7 +2,7 @@
 jupyter: python3
 ---
 
-# $\Lambda_c^+ \to p K^- \pi^+$c
+# $\Lambda_c^+ \to p K^- \pi^+$
 
 ::: {.callout-note appearance="simple"}
 Model definition: [`lc2ppik-lhcb-2683025.json`](https://github.com/RUB-EP1/amplitude-serialization/blob/main/models/lc2ppik-lhcb-2683025.json).

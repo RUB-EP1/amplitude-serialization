@@ -36,30 +36,6 @@ theme(:wong2, frame=:box, grid=false, minorticks=true,
     lab="")
 ```
 
-## Function definitions
-
-The model contains non-standard lineshapes that do not conform to a simple `BreitWigner` or `MultichannelBreitWigner` distribution, so they have to be defined explicitly.
-The code below defines a new lineshape and implements its deserialization method (specializing `dict2instance()` using [multiple dispatch](https://docs.julialang.org/en/v1/manual/methods/#man-method-specializations)).
-
-```{julia}
-struct BreitWignerWidthExpLikeBugg <: HadronicLineshapes.AbstractFlexFunc
-    m::Float64
-    Γ::Float64
-    γ::Float64
-end
-function (BW::BreitWignerWidthExpLikeBugg)(σ::Number)
-    mK = 0.493677
-    mπ = 0.13957018
-    σA = mK^2 - mπ^2 / 2
-    @unpack m, Γ, γ = BW
-    Γt = (σ - σA) / (m^2 - σA) * Γ * exp(-γ * σ)
-    1 / (m^2 - σ - 1im * m * Γt)
-end
-function ThreeBodyDecaysIO.dict2instance(::Type{BreitWignerWidthExpLikeBugg}, dict)
-    @unpack mass, width, slope, x = dict
-    return NamedArgFunc(BreitWignerWidthExpLikeBugg(mass, width, slope), [x])
-end
-```
 
 ## Deserialization of Objects to a Workspace
 

@@ -976,6 +976,7 @@
   "functions": [
     {
       "type": "BreitWigner",
+      "x": "m_12_sq",
       "mass": 1.274,
       "width": 0.185,
       "ma": 0.13956755,
@@ -985,28 +986,23 @@
       "name": "R(1274)"
     },
     {
-      "type": "BreitWignerRho3XQrt",
-      "mass": 1.69,
-      "width": 0.19,
+      "type": "generic_function",
+      "expression": "sqrt(sqrt(m_12_sq)) / (1.69^2 - m_12_sq - 1im * 1.69 * 0.19)",
       "name": "R(1690)"
     },
     {
-      "type": "KatchaevSigma",
-      "poles": [-0.0073999, 0.9828001],
-      "residues": [0.1131, 0.0],
-      "nonpole_expansion_coeffs": [0.0337, -0.3185, -0.0942, -0.5927],
+      "type": "generic_function",
+      "expression": "1.0 / (0.1131 / (m_12_sq + 0.0073999) + 0.0337 - 0.3185 * (m_12_sq / 0.982657846681 - 1.0) - 0.0942 * (m_12_sq / 0.982657846681 - 1.0)^2 -0.5927 * (m_12_sq / 0.982657846681 - 1.0)^3 - i * sqrt(1 - 4*0.13956755^2 / m_12_sq))",
       "name": "R(600)"
     },
     {
-      "type": "BreitWignerRhoNoSqrt",
-      "mass": 0.7685,
-      "width": 0.1507,
-      "mπ": 0.13956755,
-      "d": 4.94,
+      "type": "generic_function",
+      "expression": "1 / (0.7685^2 - m_12_sq - i * 0.7685 * 0.1507 * sqrt(m_12_sq / 4 - 0.13956755^2)^3 / sqrt(0.7685^2 / 4 - 0.13956755^2)^3 * (1+sqrt(0.7685^2 / 4 - 0.13956755^2)^2*4.94^2) / (1+sqrt(m_12_sq / 4 - 0.13956755^2)^2*4.94^2))",
       "name": "R(768)"
     },
     {
       "type": "MultichannelBreitWigner",
+      "x": "m_12_sq",
       "mass": 0.965,
       "channels": [
         {
@@ -1206,6 +1202,31 @@
         "distribution": "compass_3pi_JP=4+_M=1_1540_1560",
         "point": "validation_point4",
         "value": 0.1058334409901948
+      },
+      {
+        "point": "validation_point_m12sq",
+        "distribution": "R(1274)",
+        "value": "1.682682255119889 + 0.62086927105196i"
+      },
+      {
+        "point": "validation_point_m12sq",
+        "distribution": "R(1690)",
+        "value": "0.5643082293246228 + 0.10318283266108788i"
+      },
+      {
+        "point": "validation_point_m12sq",
+        "distribution": "R(600)",
+        "value": "0.10172436035046228 + 1.0273440332286132i"
+      },
+      {
+        "point": "validation_point_m12sq",
+        "distribution": "R(768)",
+        "value": "-1.7321826562432676 + 0.6323990884902008i"
+      },
+      {
+        "point": "validation_point_m12sq",
+        "distribution": "R(965)",
+        "value": "-0.9212576583634395 + 2.1470398931994485i"
       }
     ]
   },
@@ -1323,6 +1344,15 @@
         {
           "name": "cos_theta_23",
           "value": -0.6113011797354894
+        }
+      ]
+    },
+    {
+      "name": "validation_point_m12sq",
+      "parameters": [
+        {
+          "name": "m_12_sq",
+          "value": 1.1
         }
       ]
     }

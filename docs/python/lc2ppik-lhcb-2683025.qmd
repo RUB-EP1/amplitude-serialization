@@ -403,7 +403,7 @@ The following serves as a numerical check on whether the amplitude model has bee
 
 ```{python}
 checksums = {
-    misc_key: {checksum["name"]: checksum["value"] for checksum in misc_value}
+    misc_key: {checksum["point"]: checksum["value"] for checksum in misc_value}
     for misc_key, misc_value in MODEL_DEFINITION["misc"].items()
     if "checksum" in misc_key
 }
@@ -440,6 +440,8 @@ array = []
 for distribution_name, checksum in checksums.items():
     for point_name, expected in checksum.items():
         parameters = checksum_points[point_name]
+        if len(parameters) < 6:
+            continue
         s2 = parameters["m_31"] ** 2
         cos_theta_31 = parameters["cos_theta_31"]
         s1 = float(sigma1_of_sigma2_cos_theta(

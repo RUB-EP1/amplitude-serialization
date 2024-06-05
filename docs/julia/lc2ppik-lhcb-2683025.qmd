@@ -47,7 +47,7 @@ struct BreitWignerWidthExpLikeBugg <: HadronicLineshapes.AbstractFlexFunc
     Γ::Float64
     γ::Float64
 end
-function (BW::BreitWignerWidthExpLikeBugg)(σ)
+function (BW::BreitWignerWidthExpLikeBugg)(σ::Number)
     mK = 0.493677
     mπ = 0.13957018
     σA = mK^2 - mπ^2 / 2
@@ -56,8 +56,8 @@ function (BW::BreitWignerWidthExpLikeBugg)(σ)
     1 / (m^2 - σ - 1im * m * Γt)
 end
 function ThreeBodyDecaysIO.dict2instance(::Type{BreitWignerWidthExpLikeBugg}, dict)
-    @unpack mass, width, slope = dict
-    return BreitWignerWidthExpLikeBugg(mass, width, slope)
+    @unpack mass, width, slope, x = dict
+    return NamedArgFunc(BreitWignerWidthExpLikeBugg(mass, width, slope), [x])
 end
 ```
 
@@ -101,7 +101,7 @@ let
     @unpack amplitude_model_checksums = misc
 
     map(amplitude_model_checksums) do check_point_info
-        @unpack name, value, distribution = check_point_info
+        @unpack point, value, distribution = check_point_info
         #
         # pull distribution
         dist = workspace[distribution]
@@ -109,15 +109,26 @@ let
         # pull correct parameter point
         parameter_points_dict = array2dict(parameter_points; key="name")
         # find the point in the list of points
-        parameter_point = parameter_points_dict[name]
+        parameter_point = parameter_points_dict[point]
         # compute, compare
         _parameters = array2dict(parameter_point["parameters"];
             key="name", apply=v -> v["value"])
         #
+        function label_diff(diff; levels=[1e-2, 1e-10])
+            _diff = abs(diff)
+            _diff < levels[2] && return '🟢'
+            _diff < levels[1] && return '🟡'
+            return '🔴'
+        end
         computed_value = dist(_parameters)
-        status = label_diff(value - computed_value; levels=[1e-2, 1e-10])
+        #
+        tonumber(X::Number) = X
+        tonumber(X::String) = string2complex(X)
+        reference_value = tonumber(value)
+        status = label_diff(reference_value - computed_value)
+        #
         (; Distribution=distribution,
-            Point=name, Status=status)
+            Point=point, Status=status)
     end |> DataFrame
 end
 ```

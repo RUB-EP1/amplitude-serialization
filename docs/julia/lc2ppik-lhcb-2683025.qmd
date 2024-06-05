@@ -114,12 +114,6 @@ let
         _parameters = array2dict(parameter_point["parameters"];
             key="name", apply=v -> v["value"])
         #
-        function label_diff(diff; levels=[1e-2, 1e-10])
-            _diff = abs(diff)
-            _diff < levels[2] && return '🟢'
-            _diff < levels[1] && return '🟡'
-            return '🔴'
-        end
         computed_value = dist(_parameters)
         #
         tonumber(X::Number) = X

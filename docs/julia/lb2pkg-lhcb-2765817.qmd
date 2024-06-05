@@ -42,17 +42,6 @@ theme(:wong2, frame=:box, grid=false, minorticks=true,
 Non-standard lineshapes are used to model resonances that do not conform to a simple `BreitWigner` distributions, or a `MultichannelBreitWigner` has to be defined explicitly.
 The code below defines a new `NonResonant` lineshape, and its deserialization method. In this case this is just a constant.
 
-```{julia}
-struct Constant <: HadronicLineshapes.AbstractFlexFunc
-end
-(X::Constant)(σ::Number) = 1
-
-import ThreeBodyDecaysIO: dict2instance
-function dict2instance(::Type{Constant}, dict)
-    return NamedArgFunc(Constant(), [""])
-end
-```
-
 ## Deserialization of Objects to a Workspace
 
 Model components are deserialized from a JSON file into computational objects within a workspace for further manipulation. First, functions representing lineshapes and form-factors are built. Following this, distributions are processed and added to the workspace.

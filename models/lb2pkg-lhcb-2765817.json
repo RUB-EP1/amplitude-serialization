@@ -2227,8 +2227,9 @@
       "name": "MomentumPower3"
     },
     {
-      "type": "Constant",
-      "mass": 3.5,
+      "type": "Polynomial",
+      "coefficients": [1.0],
+      "x": "m_12_sq",
       "name": "LNR30_NR"
     },
     {
@@ -2486,6 +2487,11 @@
         "point": "validation_point_m12sq",
         "distribution": "L1690_BW",
         "value": "-1.8597288296334098 + 1.396126484908448i"
+      },
+      {
+        "point": "validation_point_m12sq",
+        "distribution": "LNR30_NR",
+        "value": "1.0 + 0.0i"
       }
     ]
   },

@@ -865,19 +865,13 @@
     },
     {
       "name": "K700_BuggBW",
-      "slope": 0.94106,
-      "type": "BreitWignerWidthExpLikeBugg",
-      "x": "m_23_sq",
-      "mass": 0.824,
-      "width": 0.478
+      "type": "generic_function",
+      "expression": "1/(0.824^2 - σ - i * 0.824 * (σ - 0.23397706275638377) / (0.824^2 - 0.23397706275638377) * 0.478 * exp(-0.941060 * σ))"
     },
     {
       "name": "K1430_BuggBW",
-      "slope": 0.020981,
-      "type": "BreitWignerWidthExpLikeBugg",
-      "x": "m_23_sq",
-      "mass": 1.375,
-      "width": 0.19
+      "type": "generic_function",
+      "expression": "1/(1.375^2 - σ - i * 1.375 * (σ - 0.23397706275638377) / (1.375^2 - 0.23397706275638377) * 0.190 * exp(-0.020981 * σ))"
     },
     {
       "name": "L1670_BW",

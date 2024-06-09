@@ -1,4 +1,27 @@
 {
+  "metadata": {
+    "hs3_version": "0.2.9",
+    "packages": [
+      {
+        "name": "COMPASSPWA",
+        "comment": "Building and fitting the model."
+      },
+      {
+        "name": "ROOTPWA",
+        "comment": "Cross check of the implementations."
+      },
+      {
+        "name": "ThreeBodyDecaysIO.jl",
+        "version": "0.4.2",
+        "comment": "Used to cross check and serialize the model."
+      }
+    ],
+    "authors": ["The LHCb Collaboration"],
+    "description": "The COMPASS collaboration has collected the currently largest data set on diffractively produced $3\\pi$ final states using a negative pion beam of 190\\GeV/c momentum impinging on a stationary proton target. This data set allows for a systematic partial-wave analysis in 100~bins of three-pion mass, $0.5 < m_{3\\pi} < 2.5\\,\\GeV/c^2$, and in 11~bins of the reduced four-momentum transfer squared, $0.1 < t' < 1.0 \\,\\mathrm{GeV}^2/c^2$. This two-dimensional analysis offers sensitivity to genuine one-step resonance production, i.e. the production of a state followed by its decay, as well as to more complex dynamical effects in nonresonant $3pi$ production. In this paper, we present detailed studies on selected $3pi$ partial waves with $J^{PC} = 0^{-+}$, $1^{++}$, $2^{-+}$, $2^{++}$, and $4^{++}$. In these waves, we observe the well-known ground-state mesons as well as a new narrow axial-vector meson $a_{1}(1420)$ decaying into $f_0(980)\\pi\\,$P-wave. In addition, we present the results of a novel method to extract the amplitude of the $\\pi^+\\pi^-$ subsystem with $I\\,J^{PC} = 0^+\\,0^{++}$ in various partial waves from the $3\\pi$ data. Evidence is found for correlation of the $f_{0}(980)$ and $f_0(1500)$ appearing as intermediate $\\pi^+\\pi^-$ isobars in the decay of the known $\\pi(1800)$ and $pi_2(1880)$.",
+    "summary": "Amplitude Analysis of 3pi diffractive production",
+    "identifier": "1391643",
+    "Keywords": ["dalitz plot", "diffraction", "lighr mesons"]
+  },
   "distributions": [
     {
       "type": "HadronicUnpolarizedIntensity",

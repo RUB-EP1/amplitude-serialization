@@ -1,4 +1,33 @@
 {
+  "metadata": {
+    "hs3_version": "0.2.9",
+    "packages": [
+      {
+        "name": "TensorFlowAnalysis",
+        "version": "5fc11725",
+        "comment": "Used to build and fit the model."
+      },
+      {
+        "name": "ThreeBodyDecaysIO.jl",
+        "version": "0.4.2",
+        "comment": "Used to cross check and serialize the model."
+      }
+    ],
+    "authors": ["The LHCb Collaboration"],
+    "description": "The resonant structure of the radiative decay $\\Lambda_b\\to pK^-\\gamma$ in the region of proton-kaon invariant-mass up to 2.5\\,GeV is studied using proton-proton collision data recorded at centre-of-mass energies of 7, 8, and 13 \tev collected with the LHCb detector, corresponding to a total integrated luminosity of 9\\,fb$^{-1}$. Results are given in terms of fit and interference fractions between the different components contributing to this final state. Only $\\Lambda^0$ resonances decaying to $pK^{-}$ are found to be relevant, where the largest contributions stem from the $\\Lambda(1520)$, $\\Lambda(1600)$, $\\Lambda(1800)$, and $\\Lambda(1890)$ states.",
+    "summary": "Lb2pKg Dalitz plot modeling",
+    "identifier": 2765817,
+    "publications": [
+      {
+        "bibtex": "LHCb:2024vtc",
+        "authors": ["The LHCb Collaboration"],
+        "title": "Amplitude analysis of the $\\Lambda_b^0\to pK^-\\gamma$ decay",
+        "eprint": "2403.03710",
+        "identifier": 2765817
+      }
+    ],
+    "keywords": ["dalitz plot", "radiative decays", "hyperons"]
+  },
   "distributions": [
     {
       "name": "default_model",

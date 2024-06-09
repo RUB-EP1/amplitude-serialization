@@ -21,8 +21,24 @@
     "authors": ["The LHCb Collaboration"],
     "description": "An amplitude analysis of $\\Lambda_c^+ \tp p K^-\\pi^+$ decays together with a measurement of the $\\Lambda_c^+$ polarization vector in semileptonic beauty hadron decays is presented. A sample of $400\\,000$ candidates is selected from proton-proton collisions recorded by the LHCb detector at a center-of-mass energy of 13\\,TeV. An amplitude model is developed and the resonance fractions as well as two- and three-body decay parameters are reported. The mass and width of the $\\Lambda(2000)$ state are also determined. A significant \\Lalmbda_c^+ polarization is found. A large sensitivity of the $\\Lambda_c^+ \tp p K^-\\pi^+$ decay to the polarization is seen, making the amplitude model suitable for $\\Lambda_c^+$ polarization measurements in other systems.",
     "summary": "Lb2pKpi Amplitude Analysis",
-    "identifier": "2683025",
-    "Keywords": ["dalitz plot", "weak decays", "hyperons"]
+    "identifier": 2683025,
+    "publications": [
+      {
+        "bibtex": "LHCb:2022sck",
+        "authors": ["The LHCb Collaboration"],
+        "title": "{Amplitude analysis of the $\\Lambda_c^+ \\to pK^-\\pi^+$ decay and $\\Lambda_c^+$ baryon polarization measurement in semileptonic beauty hadron decays}",
+        "eprint": "2208.03262",
+        "identifier": 2683025
+      },
+      {
+        "bibtex": "LHCb:2023crj",
+        "authors": ["The LHCb Collaboration"],
+        "title": "{$\\Lambda_c^{+}$ polarimetry using the dominant hadronic mode}",
+        "eprint": "2301.07010",
+        "identifier": 2623821
+      }
+    ],
+    "keywords": ["dalitz plot", "weak decays", "hyperons"]
   },
   "distributions": [
     {

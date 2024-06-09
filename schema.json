@@ -283,7 +283,7 @@
           "description": "One line summary of the model."
         },
         "identifier": {
-          "type": "string",
+          "type": "number",
           "description": "Inspire-HEP identifier used to reference the encoding."
         },
         "hs3_version": {

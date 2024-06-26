@@ -987,17 +987,29 @@
     },
     {
       "type": "generic_function",
-      "expression": "sqrt(sqrt(m_12_sq)) / (1.69^2 - m_12_sq - 1im * 1.69 * 0.19)",
+      "expression": "sqrt(sqrt(m_12_sq)) / (m_rho_prime^2 - m_12_sq - 1im * m_rho_prime * Gamma_rho_prime)",
+      "m_rho_prime": 1.69,
+      "Gamma_rho_prime": 0.69,
       "name": "R(1690)"
     },
     {
       "type": "generic_function",
-      "expression": "1.0 / (0.1131 / (m_12_sq + 0.0073999) + 0.0337 - 0.3185 * (m_12_sq / 0.982657846681 - 1.0) - 0.0942 * (m_12_sq / 0.982657846681 - 1.0)^2 -0.5927 * (m_12_sq / 0.982657846681 - 1.0)^3 - i * sqrt(1 - 4*0.13956755^2 / m_12_sq))",
+      "expression": "1.0 / (0.1131 / (m_12_sq + 0.0073999) + c0 + c1 * (m_12_sq / scale - 1.0) +c2 * (m_12_sq / scale - 1.0)^2 + c3 * (m_12_sq / scale - 1.0)^3 - i * sqrt(1 - 4*m_pi^2 / m_12_sq))",
+      "scale": 0.982657846681,
+      "m_pi": 0.13956755,
+      "c0": 0.0337,
+      "c1": -0.3185,
+      "c2": -0.0942,
+      "c3": -0.5927,
       "name": "R(600)"
     },
     {
       "type": "generic_function",
-      "expression": "1 / (0.7685^2 - m_12_sq - i * 0.7685 * 0.1507 * sqrt(m_12_sq / 4 - 0.13956755^2)^3 / sqrt(0.7685^2 / 4 - 0.13956755^2)^3 * (1+sqrt(0.7685^2 / 4 - 0.13956755^2)^2*4.94^2) / (1+sqrt(m_12_sq / 4 - 0.13956755^2)^2*4.94^2))",
+      "expression": "1 / (m_rho^2 - m_12_sq - i * m_rho * Gamma_rho * sqrt(m_12_sq / 4 - m_pi^2)^3 / sqrt(m_rho^2 / 4 - m_pi^2)^3 * (1+sqrt(m_rho^2 / 4 - m_pi^2)^2*d^2) / (1+sqrt(m_12_sq / 4 - m_pi^2)^2*d^2))",
+      "m_rho": 0.7685,
+      "d": 4.94,
+      "Gamma_rho": 0.1507,
+      "m_pi": 0.13956755,
       "name": "R(768)"
     },
     {

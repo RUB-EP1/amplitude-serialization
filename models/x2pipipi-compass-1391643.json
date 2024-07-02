@@ -989,7 +989,7 @@
       "type": "generic_function",
       "expression": "sqrt(sqrt(m_12_sq)) / (m_rho_prime^2 - m_12_sq - 1im * m_rho_prime * Gamma_rho_prime)",
       "m_rho_prime": 1.69,
-      "Gamma_rho_prime": 0.69,
+      "Gamma_rho_prime": 0.19,
       "name": "R(1690)"
     },
     {

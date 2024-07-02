@@ -994,13 +994,15 @@
     },
     {
       "type": "generic_function",
-      "expression": "1.0 / (0.1131 / (m_12_sq + 0.0073999) + c0 + c1 * (m_12_sq / scale - 1.0) +c2 * (m_12_sq / scale - 1.0)^2 + c3 * (m_12_sq / scale - 1.0)^3 - i * sqrt(1 - 4*m_pi^2 / m_12_sq))",
+      "expression": "1.0 / (residue / (m_12_sq - pole) + c0 + c1 * (m_12_sq / scale - 1.0) + c2 * (m_12_sq / scale - 1.0)^2 + c3 * (m_12_sq / scale - 1.0)^3 - i * sqrt(1 - 4*m_pi^2 / m_12_sq))",
       "scale": 0.982657846681,
       "m_pi": 0.13956755,
       "c0": 0.0337,
       "c1": -0.3185,
       "c2": -0.0942,
       "c3": -0.5927,
+      "residue": 0.1131,
+      "pole": -0.0073999,
       "name": "R(600)"
     },
     {

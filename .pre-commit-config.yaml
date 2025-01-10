@@ -21,7 +21,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.30.0
+    rev: 0.31.0
     hooks:
       - id: check-jsonschema
         args: ["--schemafile", "schema.json"]
@@ -37,10 +37,10 @@ repos:
     hooks:
       - id: prettier
 
-  - repo: https://github.com/redeboer/taplo-pre-commit
-    rev: 0.9.1rc1
+  - repo: https://github.com/ComPWA/taplo-pre-commit
+    rev: v0.9.3
     hooks:
-      - id: taplo
+      - id: taplo-format
 
   - repo: https://github.com/pappasam/toml-sort
     rev: v0.24.2

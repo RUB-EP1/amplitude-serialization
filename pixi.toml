@@ -59,8 +59,8 @@ env = {PYTHONHASHSEED = "0"}
 
 [tasks.install-julia]
 cmd = """
-juliaup add 1.10.3 && \
-juliaup default 1.10.3 && \
+juliaup add 1.11.5 && \
+juliaup default 1.11.5 && \
 julia --project -e '
     using Pkg
     Pkg.add("IJulia")

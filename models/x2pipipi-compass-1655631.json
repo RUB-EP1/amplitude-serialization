@@ -1228,7 +1228,12 @@
         "distribution": "R(965)",
         "value": "-0.9212576583634395 + 2.1470398931994485i"
       }
-    ]
+    ],
+    "details": {
+      "scientific_context": "This amplitude model was originally developed and tuned in the COMPASS collaboration paper 'Observation of a J^PC = 1^−+ exotic resonance in diffractive dissociation of 190 GeV/c π^− into π^−π^−π^+' (InspireHEP: 1391643). The second paper 'Partial-wave analysis of the π^−π^−π^+ and π^−π^0π^0 systems produced in π^−p collisions at 190 GeV/c' (InspireHEP: 1655631) focused on using a collection of individual models (for each bin) and interpreted them in terms of resonance parameters by performing a mass-dependent fit. The model parameters from the first paper (1391643) are published with the second paper (1655631) and are available at https://www.hepdata.net/record/ins1655631.",
+      "data_attribution": "InspireHEP: 1655631",
+      "model_origin": "InspireHEP: 1391643"
+    }
   },
   "parameter_points": [
     {

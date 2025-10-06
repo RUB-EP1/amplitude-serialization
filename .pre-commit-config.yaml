@@ -9,7 +9,7 @@ repos:
       - id: check-useless-excludes
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: check-case-conflict
       - id: check-json
@@ -21,14 +21,14 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.31.0
+    rev: 0.34.0
     hooks:
       - id: check-jsonschema
         args: ["--schemafile", "schema.json"]
         files: ^models/.*\.(json|yaml|yml)$
 
   - repo: https://github.com/streetsidesoftware/cspell-cli
-    rev: v8.17.0
+    rev: v9.2.0
     hooks:
       - id: cspell
 
@@ -43,7 +43,7 @@ repos:
       - id: taplo-format
 
   - repo: https://github.com/pappasam/toml-sort
-    rev: v0.24.2
+    rev: v0.24.3
     hooks:
       - id: toml-sort
         args:

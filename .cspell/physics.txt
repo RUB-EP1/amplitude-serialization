@@ -3,11 +3,13 @@ Breit
 Bugg
 Clebsch
 Dalitz
+diffractively
 Flatté
 Gordan
 helicities
 helicity
 Jpsi
+Katchaev
 lineshape
 lineshapes
 parametrizations

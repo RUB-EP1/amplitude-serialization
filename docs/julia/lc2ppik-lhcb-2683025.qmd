@@ -4,6 +4,10 @@ jupyter: julia-amplitude-serialization-1.10
 
 # $\Lambda_c^+ \to p K^- \pi^+$
 
+::: {.callout-note appearance="simple"}
+Model definition: [`lc2ppik-lhcb-2683025.json`](https://github.com/RUB-EP1/amplitude-serialization/blob/main/models/lc2ppik-lhcb-2683025.json).
+:::
+
 This page demonstrates deserialization and evaluation of an amplitude model for the decay $\Lambda_c^+ \to p K^- \pi^+$. The amplitude analysis is performed based on roughly half a million of $\Lambda_c^{\pm}$ decay candidates by the LHCb collaboration, [INSPIRE-HEP 2683025](https://inspirehep.net/literature/2683025). Details on the mapped of the amplitude model onto the standard helicity formalism can be found in appendix of [INSPIRE-HEP 2623821](https://inspirehep.net/literature/2623821).
 
 ```{julia}
@@ -32,37 +36,13 @@ theme(:wong2, frame=:box, grid=false, minorticks=true,
     lab="")
 ```
 
-## Function definitions
-
-The model contains non-standard lineshapes that do not conform to a simple `BreitWigner` or `MultichannelBreitWigner` distribution, so they have to be defined explicitly.
-The code below defines a new lineshape and implements its deserialization method (specializing `dict2instance()` using [multiple dispatch](https://docs.julialang.org/en/v1/manual/methods/#man-method-specializations)).
-
-```{julia}
-struct BreitWignerWidthExpLikeBugg <: HadronicLineshapes.AbstractFlexFunc
-    m::Float64
-    Γ::Float64
-    γ::Float64
-end
-function (BW::BreitWignerWidthExpLikeBugg)(σ)
-    mK = 0.493677
-    mπ = 0.13957018
-    σA = mK^2 - mπ^2 / 2
-    @unpack m, Γ, γ = BW
-    Γt = (σ - σA) / (m^2 - σA) * Γ * exp(-γ * σ)
-    1 / (m^2 - σ - 1im * m * Γt)
-end
-function ThreeBodyDecaysIO.dict2instance(::Type{BreitWignerWidthExpLikeBugg}, dict)
-    @unpack mass, width, slope = dict
-    return BreitWignerWidthExpLikeBugg(mass, width, slope)
-end
-```
 
 ## Deserialization of Objects to a Workspace
 
 Model components are deserialized from a JSON file into computational objects within a workspace for further manipulation. First, functions representing lineshapes and form factors are built. Following this, distributions are processed and added to the workspace.
 
 ```{julia}
-input = open(joinpath(@__DIR__, "..", "..", "models", "Lc2ppiK.json")) do io
+input = open(joinpath(@__DIR__, "..", "..", "models", "lc2ppik-lhcb-2683025.json")) do io
     JSON.parse(io)
 end
 
@@ -97,7 +77,7 @@ let
     @unpack amplitude_model_checksums = misc
 
     map(amplitude_model_checksums) do check_point_info
-        @unpack name, value, distribution = check_point_info
+        @unpack point, value, distribution = check_point_info
         #
         # pull distribution
         dist = workspace[distribution]
@@ -105,15 +85,20 @@ let
         # pull correct parameter point
         parameter_points_dict = array2dict(parameter_points; key="name")
         # find the point in the list of points
-        parameter_point = parameter_points_dict[name]
+        parameter_point = parameter_points_dict[point]
         # compute, compare
         _parameters = array2dict(parameter_point["parameters"];
             key="name", apply=v -> v["value"])
         #
         computed_value = dist(_parameters)
-        status = label_diff(value - computed_value; levels=[1e-2, 1e-10])
+        #
+        tonumber(X::Number) = X
+        tonumber(X::String) = string2complex(X)
+        reference_value = tonumber(value)
+        status = label_diff(reference_value - computed_value)
+        #
         (; Distribution=distribution,
-            Point=name, Status=status)
+            Point=point, Status=status)
     end |> DataFrame
 end
 ```

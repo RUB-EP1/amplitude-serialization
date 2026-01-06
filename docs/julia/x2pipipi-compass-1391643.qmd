@@ -1,0 +1,143 @@
+---
+jupyter: julia-amplitude-serialization-1.10
+---
+
+# $X\to \pi^-\pi^+\pi^-$
+
+::: {.callout-note appearance="simple"}
+Model definition: [`x2pipipi-compass-1391643.json`](https://github.com/RUB-EP1/amplitude-serialization/blob/main/models/x2pipipi-compass-1391643.json).
+:::
+
+This page demonstrates deserialization and evaluation the a partial wave analysis of diffractively produced $3\pi$ system. The analysis is performed independently in bins of $3\pi$ mass, and transferred momentum. The total number of bins is 100.
+For every bin, the model includes about 170 decay chains (about 88 waves, symmetrized for two $\pi^+\pi^-$ pairs). The main paper describing details of the analysis is [INSPIRE-HEP 1391643](https://inspirehep.net/literature/1391643).
+
+```{julia}
+#| code-fold: true
+#| code-summary: Activate environment
+#| output: false
+import Pkg
+Pkg.activate(@__DIR__)
+Pkg.instantiate()
+
+using ThreeBodyDecaysIO
+using ThreeBodyDecaysIO.ThreeBodyDecays
+using ThreeBodyDecaysIO.HadronicLineshapes
+using ThreeBodyDecaysIO.Parameters
+using ThreeBodyDecaysIO.DataFrames
+using ThreeBodyDecaysIO.JSON
+using Measurements
+using Statistics
+using QuadGK
+using Plots
+
+theme(:wong2, frame=:box, grid=false, minorticks=true,
+    guidefontvalign=:top, guidefonthalign=:right,
+    foreground_color_legend=nothing,
+    xlim=(:auto, :auto), ylim=(:auto, :auto),
+    lab="")
+```
+
+
+## Deserialization of Objects to a Workspace
+
+Model components are deserialized from a JSON file into computational objects within a workspace for further manipulation. First, functions representing lineshapes and form factors are built. Following this, distributions are processed and added to the workspace.
+
+```{julia}
+#| code-fold: true
+#| code-summary: All `functions` and `distributution` are parsed here
+#| output: false
+input = open(joinpath(@__DIR__, "..", "..", "models", "x2pipipi-compass-1391643.json")) do io
+    JSON.parse(io)
+end
+
+workspace = Dict{String,Any}()
+
+@unpack functions = input
+for fn in functions
+    @unpack name, type = fn
+    instance_type = eval(Symbol(type))
+    workspace[name] = dict2instance(instance_type, fn)
+end
+
+@unpack distributions = input
+for dist in distributions
+    @unpack name, type = dist
+    instance_type = eval(Symbol(type))
+    workspace[name] = dict2instance(instance_type, dist; workspace)
+end
+```
+
+## Validation
+
+The integrity of the model is checked by validating the value of distributions at a few phase space points.
+The table lists the validation checks and their status. The marks "🟢", "🟡", and "🔴" indicate
+an accuracy of $<10^{-10}$, $<10^{-2}$, or $\ge10^{-2}$, respectively, for the difference between the reference and computed values.
+
+```{julia}
+#| code-fold: true
+#| code-summary: A loop over validation points
+let
+    @unpack misc, parameter_points = input
+    @unpack amplitude_model_checksums = misc
+
+    map(amplitude_model_checksums) do check_point_info
+        @unpack point, value, distribution = check_point_info
+        #
+        # pull distribution
+        dist = workspace[distribution]
+
+        # pull correct parameter point
+        parameter_points_dict = array2dict(parameter_points; key="name")
+        # find the point in the list of points
+        parameter_point = parameter_points_dict[point]
+        # compute, compare
+        _parameters = array2dict(parameter_point["parameters"];
+            key="name", apply=v -> v["value"])
+        #
+        computed_value = dist(_parameters)
+        #
+        tonumber(X::Number) = X
+        tonumber(X::String) = string2complex(X)
+        reference_value = tonumber(value)
+        status = label_diff(reference_value - computed_value)
+        #
+        (; Distribution=distribution,
+            Point=point, computed_value, value, Status=status)
+    end |> DataFrame
+end
+```
+
+## Visualization
+
+The model describing the decay is fetched from the workspace
+
+```{julia}
+model_names = [k for (k, v) in workspace if v isa HadronicUnpolarizedIntensity]
+```
+
+### Dalitz plot
+
+The Dalitz plot shows the probability distribution across two dimensional phase space of the decay. Below the distribution is shown for all models in the file
+
+```{julia}
+#| code-fold: true
+#| code-summary: Dalitz plot plotting
+let iσx = 3, iσy = 1
+    n_models = length(model_names)
+    Nx, Ny = 2, div(n_models + 1, 2)
+    plot(
+        map(model_names) do model_name
+            model = workspace[model_name].model
+            #
+            xlab = ((i, j) = ij_from_k(iσx);
+            "m²($i$j) [GeV²]")
+            ylab = ((i, j) = ij_from_k(iσy);
+            "m²($i$j) [GeV²]")
+
+            plot(masses(model), Base.Fix1(unpolarized_intensity, model);
+                iσx, iσy, xlab, ylab, title=model_name[13:end], aspect_ratio=1)
+        end...,
+        layout=grid(Ny, Nx),
+        size=(350 * Nx, 350 * Ny))
+end
+```

@@ -4,6 +4,10 @@ jupyter: julia-amplitude-serialization-1.10
 
 # $\Lambda_b^0 \to p K^- \gamma$
 
+::: {.callout-note appearance="simple"}
+Model definition: [`lb2pkg-lhcb-2765817.json`](https://github.com/RUB-EP1/amplitude-serialization/blob/main/models/lb2pkg-lhcb-2765817.json).
+:::
+
 This page demonstrates deserialization and evaluation of an amplitude model for the decay $\Lambda_b^0 \to p K^- \gamma$. The resonant structure is studied using proton-proton collision data recorded at centre-of-mass energies of $7$, $8$, and $13$ TeV collected with the LHCb detector, [INSPIRE-HEP 2765817](https://inspirehep.net/literature/2765817).
 
 ```{julia}
@@ -38,22 +42,12 @@ theme(:wong2, frame=:box, grid=false, minorticks=true,
 Non-standard lineshapes are used to model resonances that do not conform to a simple `BreitWigner` distributions, or a `MultichannelBreitWigner` has to be defined explicitly.
 The code below defines a new `NonResonant` lineshape, and its deserialization method. In this case this is just a constant.
 
-```{julia}
-struct Constant <: HadronicLineshapes.AbstractFlexFunc
-end
-(X::Constant)(σ) = 1
-
-function ThreeBodyDecaysIO.dict2instance(::Type{Constant}, dict)
-    return Constant()
-end
-```
-
 ## Deserialization of Objects to a Workspace
 
 Model components are deserialized from a JSON file into computational objects within a workspace for further manipulation. First, functions representing lineshapes and form-factors are built. Following this, distributions are processed and added to the workspace.
 
 ```{julia}
-input = open(joinpath(@__DIR__, "..", "..", "models", "Lb2pKg.json")) do io
+input = open(joinpath(@__DIR__, "..", "..", "models", "lb2pkg-lhcb-2765817.json")) do io
     JSON.parse(io)
 end
 
@@ -70,7 +64,7 @@ end
 for dist in distributions
     @unpack name, type = dist
     instance_type = eval(Symbol(type))
-    workspace[name] = dict2instance(instance_type, distributions[1]; workspace)
+    workspace[name] = dict2instance(instance_type, dist; workspace)
 end
 ```
 
@@ -88,7 +82,7 @@ df = let
     @unpack amplitude_model_checksums = misc
 
     map(amplitude_model_checksums) do check_point_info
-        @unpack name, value, distribution = check_point_info
+        @unpack point, value, distribution = check_point_info
         #
         # pull distribution
         dist = workspace[distribution]
@@ -96,15 +90,20 @@ df = let
         # pull correct parameter point
         parameter_points_dict = array2dict(parameter_points; key="name")
         # find the point in the list of points
-        parameter_point = parameter_points_dict[name]
+        parameter_point = parameter_points_dict[point]
         # compute, compare
         _parameters = array2dict(parameter_point["parameters"];
             key="name", apply=v -> v["value"])
         #
         computed_value = dist(_parameters)
-        status = label_diff(value - computed_value; levels=[1e-2, 1e-12])
+        #
+        tonumber(X::Number) = X
+        tonumber(X::String) = string2complex(X)
+        reference_value = tonumber(value)
+        status = label_diff(reference_value - computed_value)
+        #
         (; Distribution=distribution, Reference=value, Computed_value=computed_value,
-            Point=name, Status=status)
+            Point=point, Status=status)
     end |> DataFrame
 end
 ```

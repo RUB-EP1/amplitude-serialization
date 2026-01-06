@@ -7,6 +7,7 @@ sort_first = [
     "project",
     "tool.setuptools",
     "tool.setuptools_scm",
+    "workspace",
 ]
 sort_table_keys = true
 spaces_indent_inline_array = 4

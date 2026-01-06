@@ -1,4 +1,4 @@
-[project]
+[workspace]
 authors = [
     "Ilya Segal",
     "Mikhail Mikhasenko",
@@ -48,13 +48,13 @@ ampform-dpd = {version = "==0.2.1rc0"}
 [tasks.doc]
 cmd = "quarto render"
 cwd = "docs"
-depends_on = ["install-julia"]
+depends-on = ["install-julia"]
 env = {PYTHONHASHSEED = "0"}
 
 [tasks.doclive]
 cmd = "quarto preview"
 cwd = "docs"
-depends_on = ["install-julia"]
+depends-on = ["install-julia"]
 env = {PYTHONHASHSEED = "0"}
 
 [tasks.install-julia]

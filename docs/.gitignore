@@ -1,6 +1,7 @@
 .jupyter_cache/
 *.html
 *.ipynb
+**/*.quarto_ipynb
 /.quarto/
 execute-results/
 site_libs/

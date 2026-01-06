@@ -14,7 +14,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/bzip2-1.0.8-hd590300_5.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/ca-certificates-2024.2.2-hbcca054_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/icu-78.1-h33c6efd_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/juliaup-1.14.7-he8a937b_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/juliaup-1.18.9-hdab8a38_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/ld_impl_linux-64-2.40-hf3520f5_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libexpat-2.7.3-hecca717_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/libffi-3.5.2-h9ec8514_0.conda
@@ -204,7 +204,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-64/bzip2-1.0.8-h10d778d_5.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/ca-certificates-2024.2.2-h8857fd0_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/icu-78.1-h14c5de8_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/osx-64/juliaup-1.14.7-hf4330d5_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-64/juliaup-1.18.9-h98d9f3c_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/libexpat-2.7.3-heffb93a_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/libffi-3.5.2-h750e83c_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/liblzma-5.8.1-hd471939_2.conda
@@ -388,7 +388,7 @@ environments:
       osx-arm64:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/bzip2-1.0.8-h93a5062_5.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/ca-certificates-2024.2.2-hf0a4a13_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/juliaup-1.14.7-h67a62a2_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/juliaup-1.18.9-hd1458d2_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/libexpat-2.7.3-haf25636_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/libffi-3.5.2-he5f378a_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/liblzma-5.8.1-h39f12f2_2.conda
@@ -1819,31 +1819,34 @@ packages:
   requires_dist:
   - referencing>=0.31.0
   requires_python: '>=3.9'
-- conda: https://conda.anaconda.org/conda-forge/linux-64/juliaup-1.14.7-he8a937b_0.conda
-  sha256: aeceaef96c9bff58cec324f4266d0a81137df2dbe0884ab6c2aa71847d8b0fe8
-  md5: 3994d5329948d26cc994e9501aba9d31
+- conda: https://conda.anaconda.org/conda-forge/linux-64/juliaup-1.18.9-hdab8a38_0.conda
+  sha256: 97606405d90edd1dacaa1cc67c243c72acc58856cd1f1582ef35dce0f8579f32
+  md5: ad16f11e214e345f20c54b8a5e3386c0
   depends:
-  - libgcc-ng >=12
+  - __glibc >=2.17,<3.0.a0
+  - libgcc >=14
+  constrains:
+  - __glibc >=2.17
   license: MIT
   license_family: MIT
   purls: []
-  size: 3972578
-  timestamp: 1711138639418
-- conda: https://conda.anaconda.org/conda-forge/osx-64/juliaup-1.14.7-hf4330d5_0.conda
-  sha256: 9d9c5655af4b028baa425402d29d5ff5c553317d671bfaf01fee7ffaa3affde3
-  md5: f5cc6d64ade1fa88cbe2eaa553b4798c
+  size: 2785881
+  timestamp: 1761863974257
+- conda: https://conda.anaconda.org/conda-forge/osx-64/juliaup-1.18.9-h98d9f3c_0.conda
+  sha256: e08033194e12d4aecc1aeb504febbc093d198294e3bdce7d68b9b8a72209af5f
+  md5: 8d9e7e4628fcb66be10cd1c3e97a2e12
   depends:
   - __osx >=10.15
   constrains:
-  - __osx >=10.12
+  - __osx >=10.13
   license: MIT
   license_family: MIT
   purls: []
-  size: 2249558
-  timestamp: 1711139417930
-- conda: https://conda.anaconda.org/conda-forge/osx-arm64/juliaup-1.14.7-h67a62a2_0.conda
-  sha256: ab533c4b87f2e9c0d4cc085828fd40e5edba27bc732a8e672485c309adde8c90
-  md5: 591cd935e82adfa28f8fa51fade68cd7
+  size: 2117455
+  timestamp: 1761864667338
+- conda: https://conda.anaconda.org/conda-forge/osx-arm64/juliaup-1.18.9-hd1458d2_0.conda
+  sha256: f089e7db2a0417472145511b27ecf1f81de16f2ce572ecc91aa4a17a8d903376
+  md5: 88bb45b0526f38fbac6452d8de18b2da
   depends:
   - __osx >=11.0
   constrains:
@@ -1851,8 +1854,8 @@ packages:
   license: MIT
   license_family: MIT
   purls: []
-  size: 2181928
-  timestamp: 1711139346144
+  size: 2031761
+  timestamp: 1761864253227
 - pypi: https://files.pythonhosted.org/packages/38/64/285f20a31679bf547b75602702f7800e74dbabae36ef324f716c02804753/jupyter-1.1.1-py2.py3-none-any.whl
   name: jupyter
   version: 1.1.1

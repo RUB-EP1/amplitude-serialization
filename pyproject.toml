@@ -6,26 +6,10 @@ authors = [
 ]
 dependencies = [
     "ampform-dpd~=0.2.1",
-    "black",
-    "ipykernel",
-    "ipywidgets",
-    "isort",
     "jupyter-cache",
-    "jupyterlab",
-    "jupyterlab-code-formatter",
-    "jupyterlab-git",
-    "jupyterlab-lsp",
     "matplotlib",
-    "nbclient",
-    "nbformat",
     "pandas",
-    "pre-commit",
-    "python-lsp-ruff",
-    "python-lsp-server",
     "quarto-cli",
-    "rope",
-    "ruff",
-    "scipy",
 ]
 description = "Prototype for the amplitude model serialization format"
 license = {file = "LICENSE"}

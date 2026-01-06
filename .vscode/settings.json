@@ -11,6 +11,9 @@
   "[quarto]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml"
+  },
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -22,8 +25,11 @@
     }
   ],
   "julia.executablePath": "${workspaceFolder}/.pixi/envs/default/bin/julia",
+  "julia.environmentPath": "${workspaceFolder}/docs/julia",
+  "julia.juliaup.install.hint": false,
   "livePreview.defaultPreviewPath": "docs/_build/html",
   "python.defaultInterpreterPath": ".pixi/envs/default/bin/python",
+  "python.terminal.activateEnvironment": false,
   "quarto.path": ".pixi/envs/default/bin/quarto",
   "search.exclude": {
     "**/*.code-search": true,

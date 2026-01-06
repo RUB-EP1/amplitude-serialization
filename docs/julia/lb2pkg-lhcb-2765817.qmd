@@ -1,5 +1,5 @@
 ---
-jupyter: julia-amplitude-serialization-1.11
+jupyter: julia-amplitude-serialization-1.12
 ---
 
 # $\Lambda_b^0 \to p K^- \gamma$

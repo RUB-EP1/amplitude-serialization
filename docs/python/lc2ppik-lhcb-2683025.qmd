@@ -78,8 +78,8 @@ simplify_latex_rendering()
 ```
 
 ```{python}
-with open(THIS_DIR.parent.parent / "models" / "lc2ppik-lhcb-2683025.json") as stream:
-    MODEL_DEFINITION = json.load(stream)
+with open(THIS_DIR.parent.parent / "models" / "lc2ppik-lhcb-2683025.json") as f:
+    MODEL_DEFINITION = json.load(f)
 ```
 
 ## Construct `ThreeBodyDecay`
@@ -175,6 +175,7 @@ Math(aslatex(K892_BW))
 
 ```{python}
 #| code-fold: true
+#| column: page-inset-right
 x, y, z = sp.symbols("x:z")
 s, m0, Γ0, m1, m2, L, d = sp.symbols("s m0 Gamma0 m1 m2 L R", nonnegative=True)
 channels = tuple(
@@ -202,6 +203,7 @@ Math(aslatex({e: e.doit(deep=False) for e in exprs}))
 ```
 
 ```{python}
+#| column: page-inset-right
 L1405_Flatte = formulate_multichannel_breit_wigner(
     propagator=CHAIN_DEFS[0]["propagators"][0],
     resonance=to_latex(CHAIN_DEFS[0]["name"]),
@@ -215,6 +217,7 @@ Math(aslatex(L1405_Flatte))
 ### Unpolarized intensity
 
 ```{python}
+#| column: page-inset-right
 λ0, λ1, λ2, λ3 = sp.symbols("lambda(:4)", rational=True)
 amplitude_expr, _ = formulate_aligned_amplitude(MODEL_DEFINITION, λ0, λ1, λ2, λ3)
 amplitude_expr.cleanup()
@@ -257,6 +260,7 @@ Math(aslatex({e: e.doit(deep=False) for e in recouplings}))
 #### Chain amplitudes
 
 ```{python}
+#| column: page-inset-right
 definitions = formulate_chain_amplitude(λ0, λ1, λ2, λ3, MODEL_DEFINITION, chain_idx=0)
 Math(aslatex(definitions))
 ```

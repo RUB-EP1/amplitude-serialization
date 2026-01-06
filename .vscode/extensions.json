@@ -9,6 +9,7 @@
     "ms-toolsai.jupyter",
     "ms-vscode.live-server",
     "quarto.quarto",
+    "redhat.vscode-yaml",
     "tamasfe.even-better-toml",
     "yzhang.markdown-all-in-one"
   ]

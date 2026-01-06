@@ -1,4 +1,5 @@
 .jupyter_cache/
+*_files/
 *.html
 *.ipynb
 **/*.quarto_ipynb

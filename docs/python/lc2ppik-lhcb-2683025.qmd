@@ -78,8 +78,8 @@ simplify_latex_rendering()
 ```
 
 ```{python}
-with open(THIS_DIR.parent.parent / "models" / "lc2ppik-lhcb-2683025.json") as stream:
-    MODEL_DEFINITION = json.load(stream)
+with open(THIS_DIR.parent.parent / "models" / "lc2ppik-lhcb-2683025.json") as f:
+    MODEL_DEFINITION = json.load(f)
 ```
 
 ## Construct `ThreeBodyDecay`

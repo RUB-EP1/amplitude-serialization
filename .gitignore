@@ -1,4 +1,6 @@
 *.egg-info/
+.env
+.envrc
 .ipynb_checkpoints/
 .pixi/
 .virtual_documents/

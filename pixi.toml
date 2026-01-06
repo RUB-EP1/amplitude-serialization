@@ -18,6 +18,9 @@ platforms = [
 ]
 repository = "https://github.com/RUB-EP1/amplitude-serialization"
 
+[activation.env]
+PYTHONHASHSEED = "0"
+
 [dependencies]
 black = "*"
 ipykernel = "*"
@@ -49,13 +52,11 @@ ampform-dpd = {version = "==0.2.1rc0"}
 cmd = "quarto render"
 cwd = "docs"
 depends-on = ["install-julia"]
-env = {PYTHONHASHSEED = "0"}
 
 [tasks.doclive]
 cmd = "quarto preview"
 cwd = "docs"
 depends-on = ["install-julia"]
-env = {PYTHONHASHSEED = "0"}
 
 [tasks.install-julia]
 cmd = """

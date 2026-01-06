@@ -35,7 +35,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/tk-8.6.13-noxft_ha0e22de_103.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2024a-h0c530f3_0.conda
       - pypi: https://files.pythonhosted.org/packages/8f/fc/380fad7f18e911596e60e80047355f5ed3b683db1f4233eed5b13ebfb6a0/ampform-0.15.11-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/3b/7e/750da64f99a625bf629418e09cdf0a73bbceba4fadb28375687a9ac6c212/ampform_dpd-0.2.1rc0-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/7c/41/fdf5d0b22bf612d1be21734539b50bb231e5de79f776253ca1a5644be812/ampform_dpd-0.2.4-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/38/0e/27be9fdef66e72d64c0cdc3cc2823101b80585f8119b5c112c2e8f5f7dab/anyio-4.12.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/4f/d3/a8b22fa575b297cd6e3e3b0155c7e25db170edf1c74783d6a31a2490b8d9/argon2_cffi-25.1.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/09/52/94108adfdd6e2ddf58be64f959a0b9c7d4ef2fa71086c38356d22dc501ea/argon2_cffi_bindings-25.1.0-cp39-abi3-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl
@@ -219,7 +219,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-64/tk-8.6.13-hf689a15_3.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2024a-h0c530f3_0.conda
       - pypi: https://files.pythonhosted.org/packages/8f/fc/380fad7f18e911596e60e80047355f5ed3b683db1f4233eed5b13ebfb6a0/ampform-0.15.11-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/3b/7e/750da64f99a625bf629418e09cdf0a73bbceba4fadb28375687a9ac6c212/ampform_dpd-0.2.1rc0-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/7c/41/fdf5d0b22bf612d1be21734539b50bb231e5de79f776253ca1a5644be812/ampform_dpd-0.2.4-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/38/0e/27be9fdef66e72d64c0cdc3cc2823101b80585f8119b5c112c2e8f5f7dab/anyio-4.12.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/81/29/5ecc3a15d5a33e31b26c11426c45c501e439cb865d0bff96315d86443b78/appnope-0.1.4-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/4f/d3/a8b22fa575b297cd6e3e3b0155c7e25db170edf1c74783d6a31a2490b8d9/argon2_cffi-25.1.0-py3-none-any.whl
@@ -403,7 +403,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/tk-8.6.13-h892fb3f_3.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2024a-h0c530f3_0.conda
       - pypi: https://files.pythonhosted.org/packages/8f/fc/380fad7f18e911596e60e80047355f5ed3b683db1f4233eed5b13ebfb6a0/ampform-0.15.11-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/3b/7e/750da64f99a625bf629418e09cdf0a73bbceba4fadb28375687a9ac6c212/ampform_dpd-0.2.1rc0-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/7c/41/fdf5d0b22bf612d1be21734539b50bb231e5de79f776253ca1a5644be812/ampform_dpd-0.2.4-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/38/0e/27be9fdef66e72d64c0cdc3cc2823101b80585f8119b5c112c2e8f5f7dab/anyio-4.12.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/81/29/5ecc3a15d5a33e31b26c11426c45c501e439cb865d0bff96315d86443b78/appnope-0.1.4-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/4f/d3/a8b22fa575b297cd6e3e3b0155c7e25db170edf1c74783d6a31a2490b8d9/argon2_cffi-25.1.0-py3-none-any.whl
@@ -602,71 +602,23 @@ packages:
   - scipy ; extra == 'scipy'
   - graphviz ; extra == 'viz'
   requires_python: '>=3.10'
-- pypi: https://files.pythonhosted.org/packages/3b/7e/750da64f99a625bf629418e09cdf0a73bbceba4fadb28375687a9ac6c212/ampform_dpd-0.2.1rc0-py3-none-any.whl
+- pypi: https://files.pythonhosted.org/packages/7c/41/fdf5d0b22bf612d1be21734539b50bb231e5de79f776253ca1a5644be812/ampform_dpd-0.2.4-py3-none-any.whl
   name: ampform-dpd
-  version: 0.2.1rc0
-  sha256: 820f09dedb596f5b845ccdf62288c6b9345ae0d292752e06dd32f8b6a0501a1d
+  version: 0.2.4
+  sha256: ad762de8ecec1792f6112134bda98686690d810c6cedee293e41c19bc778d475
   requires_dist:
-  - ampform>=0.15.1
+  - ampform>=0.15.7
   - attrs>=20.1.0
   - cloudpickle
+  - frozendict
+  - numpy
   - qrules>=0.10.0
   - sympy>=1.10
   - tensorwaves[jax]
   - typing-extensions ; python_full_version < '3.11'
-  - ampform-dpd[doc] ; extra == 'dev'
-  - ampform-dpd[jupyter] ; extra == 'dev'
-  - ampform-dpd[sty] ; extra == 'dev'
-  - ampform-dpd[test] ; extra == 'dev'
-  - sphinx-autobuild!=2024.4.* ; extra == 'dev'
-  - sphinx-autobuild ; extra == 'dev'
-  - tox>=1.9 ; extra == 'dev'
-  - graphviz ; extra == 'doc'
-  - ipympl ; extra == 'doc'
-  - ipywidgets ; extra == 'doc'
-  - matplotlib ; extra == 'doc'
-  - myst-nb>=0.14 ; extra == 'doc'
-  - pandas ; extra == 'doc'
-  - sphinx-api-relink>=0.0.4 ; extra == 'doc'
-  - sphinx-book-theme ; extra == 'doc'
-  - sphinx-codeautolink[ipython] ; extra == 'doc'
-  - sphinx-copybutton ; extra == 'doc'
-  - sphinx-design ; extra == 'doc'
-  - sphinx-pybtex-etal-style ; extra == 'doc'
-  - sphinx-togglebutton ; extra == 'doc'
-  - sphinxcontrib-bibtex ; extra == 'doc'
-  - tensorwaves[phsp] ; extra == 'doc'
-  - tqdm ; extra == 'doc'
-  - tensorwaves[jax] ; extra == 'jax'
-  - ampform-dpd[doc] ; extra == 'jupyter'
-  - black ; extra == 'jupyter'
-  - isort ; extra == 'jupyter'
-  - jupyterlab>=3.0 ; extra == 'jupyter'
-  - jupyterlab ; extra == 'jupyter'
-  - jupyterlab-code-formatter ; extra == 'jupyter'
-  - jupyterlab-git ; extra == 'jupyter'
-  - jupyterlab-lsp ; extra == 'jupyter'
-  - jupyterlab-myst ; extra == 'jupyter'
-  - python-lsp-ruff ; extra == 'jupyter'
-  - python-lsp-server[rope] ; extra == 'jupyter'
   - tensorwaves[numba] ; extra == 'numba'
-  - ampform-dpd[types] ; extra == 'sty'
-  - mypy ; extra == 'sty'
-  - pre-commit>=1.4.0 ; extra == 'sty'
-  - ruff ; extra == 'sty'
-  - ampform-dpd[tf] ; extra == 'tensorflow'
-  - nbmake ; extra == 'test'
-  - numpy ; extra == 'test'
-  - pytest>=6.0 ; extra == 'test'
-  - pytest-cov ; extra == 'test'
-  - pytest-xdist ; extra == 'test'
   - tensorwaves[tf] ; extra == 'tf'
-  - docutils ; extra == 'types'
-  - pybtex ; extra == 'types'
-  - pytest ; extra == 'types'
-  - sphinx ; extra == 'types'
-  - sphinx-api-relink>=0.0.4 ; extra == 'types'
-  requires_python: '>=3.8'
+  requires_python: '>=3.9'
 - pypi: https://files.pythonhosted.org/packages/38/0e/27be9fdef66e72d64c0cdc3cc2823101b80585f8119b5c112c2e8f5f7dab/anyio-4.12.1-py3-none-any.whl
   name: anyio
   version: 4.12.1

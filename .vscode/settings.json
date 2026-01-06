@@ -27,6 +27,7 @@
   "julia.executablePath": "${workspaceFolder}/.pixi/envs/default/bin/julia",
   "livePreview.defaultPreviewPath": "docs/_build/html",
   "python.defaultInterpreterPath": ".pixi/envs/default/bin/python",
+  "python.terminal.activateEnvironment": false,
   "quarto.path": ".pixi/envs/default/bin/quarto",
   "search.exclude": {
     "**/*.code-search": true,

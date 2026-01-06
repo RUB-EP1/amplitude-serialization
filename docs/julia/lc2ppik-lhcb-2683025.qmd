@@ -1,5 +1,5 @@
 ---
-jupyter: julia-amplitude-serialization-1.10
+jupyter: julia-amplitude-serialization-1.12
 ---
 
 # $\Lambda_c^+ \to p K^- \pi^+$

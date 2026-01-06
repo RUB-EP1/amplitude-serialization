@@ -27,6 +27,7 @@
     ".cspell.json",
     ".cspell/*.txt",
     ".editorconfig",
+    ".github/dependabot.yml",
     ".github/workflows",
     ".gitignore",
     ".pre-commit-config.yaml",

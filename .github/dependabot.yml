@@ -1,0 +1,19 @@
+version: 2
+
+multi-ecosystem-groups:
+  infrastructure:
+    assignees:
+      - mmikhasenko
+      - redeboer
+    commit-message:
+      prefix: MAINT
+    labels:
+      - ⬆️ Lock
+    schedule:
+      interval: semiannually
+
+updates:
+  - package-ecosystem: github-actions
+    directory: "/"
+    patterns: ["*"]
+    multi-ecosystem-group: infrastructure

@@ -17,9 +17,8 @@ The [`ampform_dpd.io.serialization`](https://ampform-dpd.readthedocs.io/0.2.1rc0
 ## Import model
 
 ```{python}
-#| code-fold: true
-#| code-summary: Import Python libraries
-from __future__ import annotations
+# | code-fold: true
+# | code-summary: Import Python libraries
 from pathlib import Path
 import json
 import logging
@@ -84,8 +83,8 @@ with open(THIS_DIR.parent.parent / "models" / "lc2ppik-lhcb-2683025.json") as f:
 ## Construct `ThreeBodyDecay`
 
 ```{python}
-#| code-fold: true
-#| code-summary: Name-to-LaTeX converter
+# | code-fold: true
+# | code-summary: Name-to-LaTeX converter
 def to_latex(name: str) -> str:
     latex = {
         "Lc": R"\Lambda_c^+",
@@ -123,7 +122,7 @@ CHAIN_DEFS = get_decay_chains(MODEL_DEFINITION)
 #### Blatt-Weisskopf form factor
 
 ```{python}
-#| code-fold: true
+# | code-fold: true
 z = sp.Symbol("z", nonnegative=True)
 s, m1, m2, L, d = sp.symbols("s m1 m2 L R", nonnegative=True)
 exprs = [
@@ -147,7 +146,7 @@ Math(aslatex(ff_L1520))
 #### Breit-Wigner
 
 ```{python}
-#| code-fold: true
+# | code-fold: true
 x, y, z = sp.symbols("x:z")
 s, m0, Γ0, m1, m2, L, d = sp.symbols("s m0 Gamma0 m1 m2 L R", nonnegative=True)
 exprs = [
@@ -172,8 +171,8 @@ Math(aslatex(K892_BW))
 #### Multi-channel Breit-Wigner
 
 ```{python}
-#| code-fold: true
-#| column: page-inset-right
+# | code-fold: true
+# | column: page-inset-right
 x, y, z = sp.symbols("x:z")
 s, m0, Γ0, m1, m2, L, d = sp.symbols("s m0 Gamma0 m1 m2 L R", nonnegative=True)
 channels = tuple(
@@ -200,7 +199,7 @@ Math(aslatex({e: e.doit(deep=False) for e in exprs}))
 ```
 
 ```{python}
-#| column: page-inset-right
+# | column: page-inset-right
 L1405_Flatte = formulate_multichannel_breit_wigner(
     propagator=CHAIN_DEFS[0]["propagators"][0],
     resonance=to_latex(CHAIN_DEFS[0]["name"]),
@@ -214,7 +213,7 @@ Math(aslatex(L1405_Flatte))
 ### Unpolarized intensity
 
 ```{python}
-#| column: page-inset-right
+# | column: page-inset-right
 λ0, λ1, λ2, λ3 = sp.symbols("lambda(:4)", rational=True)
 amplitude_expr, _ = formulate_aligned_amplitude(MODEL_DEFINITION, λ0, λ1, λ2, λ3)
 amplitude_expr.cleanup()
@@ -225,7 +224,7 @@ amplitude_expr.cleanup()
 #### Helicity recouplings
 
 ```{python}
-#| code-fold: true
+# | code-fold: true
 λa = sp.Symbol(R"\lambda_a", rational=True)
 λb = sp.Symbol(R"\lambda_b", rational=True)
 λa0 = sp.Symbol(R"\lambda_a^0", rational=True)
@@ -247,7 +246,7 @@ Math(aslatex({e: e.doit(deep=False) for e in exprs}))
 #### Recoupling deserialization
 
 ```{python}
-#| code-fold: true
+# | code-fold: true
 recouplings = [
     formulate_recoupling(MODEL_DEFINITION, chain_idx=0, vertex_idx=i) for i in range(2)
 ]
@@ -257,7 +256,7 @@ Math(aslatex({e: e.doit(deep=False) for e in recouplings}))
 #### Chain amplitudes
 
 ```{python}
-#| column: page-inset-right
+# | column: page-inset-right
 definitions = formulate_chain_amplitude(λ0, λ1, λ2, λ3, MODEL_DEFINITION, chain_idx=0)
 Math(aslatex(definitions))
 ```

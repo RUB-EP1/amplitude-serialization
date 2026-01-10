@@ -56,6 +56,9 @@ julia --project -e '
 channels = ["conda-forge"]
 platforms = ["linux-64", "osx-64", "osx-arm64"]
 
+[tool.ruff]
+preview = true
+
 [tool.tomlsort]
 all = false
 ignore_case = true

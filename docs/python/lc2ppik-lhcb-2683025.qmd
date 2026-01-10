@@ -41,7 +41,6 @@ from ampform_dpd.dynamics import (
     ChannelArguments,
     EnergyDependentWidth,
     MultichannelBreitWigner,
-    P,
     SimpleBreitWigner,
 )
 from ampform_dpd.io import aslatex, perform_cached_lambdify, simplify_latex_rendering
@@ -156,7 +155,6 @@ exprs = [
     SimpleBreitWigner(s, m0, Γ0),
     EnergyDependentWidth(s, m0, Γ0, m1, m2, L, d),
     FormFactor(s, m1, m2, L, d),
-    P(s, m1, m2),
     Kallen(x, y, z),
 ]
 Math(aslatex({e: e.doit(deep=False) for e in exprs}))
@@ -196,7 +194,6 @@ exprs = [
     BreitWigner(s, m0, Γ0),
     EnergyDependentWidth(s, m0, Γ0, m1, m2, L, d),
     FormFactor(s, m1, m2, L, d),
-    P(s, m1, m2),
     Kallen(x, y, z),
 ]
 Math(aslatex({e: e.doit(deep=False) for e in exprs}))

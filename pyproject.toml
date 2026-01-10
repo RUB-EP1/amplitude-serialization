@@ -42,8 +42,8 @@ depends-on = ["install-julia"]
 
 [tool.pixi.tasks.install-julia]
 cmd = """
-juliaup add 1.12.3 && \
-juliaup default 1.12.3 && \
+juliaup add 1.12.4 && \
+juliaup default 1.12.4 && \
 julia --project -e '
     using Pkg
     Pkg.add("IJulia")

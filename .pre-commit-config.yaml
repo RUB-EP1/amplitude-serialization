@@ -21,19 +21,19 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.36.0
+    rev: 0.37.1
     hooks:
       - id: check-jsonschema
         args: ["--schemafile", "schema.json"]
         files: ^models/.*\.(json|yaml|yml)$
 
   - repo: https://github.com/streetsidesoftware/cspell-cli
-    rev: v9.4.0
+    rev: v9.8.0
     hooks:
       - id: cspell
 
   - repo: https://github.com/ComPWA/prettier-pre-commit
-    rev: v3.4.2
+    rev: v3.8.1
     hooks:
       - id: prettier
 
@@ -43,7 +43,7 @@ repos:
       - id: taplo-format
 
   - repo: https://github.com/pappasam/toml-sort
-    rev: v0.24.3
+    rev: v0.24.4
     hooks:
       - id: toml-sort
         args: [--in-place]

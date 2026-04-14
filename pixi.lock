@@ -34,7 +34,7 @@ environments:
         - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2025c-hc9c84f9_1.conda
         - conda: https://conda.anaconda.org/conda-forge/linux-64/zstd-1.5.7-hb78ec9c_6.conda
         - pypi: https://files.pythonhosted.org/packages/62/3e/c5959630b8fbb520d6b82cd686e6bd775b7e6053c67b3ee4c71b22c95983/ampform-0.16.0-py3-none-any.whl
-        - pypi: https://files.pythonhosted.org/packages/7c/41/fdf5d0b22bf612d1be21734539b50bb231e5de79f776253ca1a5644be812/ampform_dpd-0.2.4-py3-none-any.whl
+        - pypi: https://files.pythonhosted.org/packages/e2/67/b78fba3e3031ecc5dafca4a39b0d8895f10db878823e207d69a32f6d1882/ampform_dpd-0.4.0-py3-none-any.whl
         - pypi: https://files.pythonhosted.org/packages/da/42/e921fccf5015463e32a3cf6ee7f980a6ed0f395ceeaa45060b61d86486c2/anyio-4.13.0-py3-none-any.whl
         - pypi: https://files.pythonhosted.org/packages/4f/d3/a8b22fa575b297cd6e3e3b0155c7e25db170edf1c74783d6a31a2490b8d9/argon2_cffi-25.1.0-py3-none-any.whl
         - pypi: https://files.pythonhosted.org/packages/09/52/94108adfdd6e2ddf58be64f959a0b9c7d4ef2fa71086c38356d22dc501ea/argon2_cffi_bindings-25.1.0-cp39-abi3-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl
@@ -185,7 +185,7 @@ environments:
         - conda: https://conda.anaconda.org/conda-forge/osx-64/tk-8.6.13-h7142dee_3.conda
         - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2025c-hc9c84f9_1.conda
         - pypi: https://files.pythonhosted.org/packages/62/3e/c5959630b8fbb520d6b82cd686e6bd775b7e6053c67b3ee4c71b22c95983/ampform-0.16.0-py3-none-any.whl
-        - pypi: https://files.pythonhosted.org/packages/7c/41/fdf5d0b22bf612d1be21734539b50bb231e5de79f776253ca1a5644be812/ampform_dpd-0.2.4-py3-none-any.whl
+        - pypi: https://files.pythonhosted.org/packages/e2/67/b78fba3e3031ecc5dafca4a39b0d8895f10db878823e207d69a32f6d1882/ampform_dpd-0.4.0-py3-none-any.whl
         - pypi: https://files.pythonhosted.org/packages/da/42/e921fccf5015463e32a3cf6ee7f980a6ed0f395ceeaa45060b61d86486c2/anyio-4.13.0-py3-none-any.whl
         - pypi: https://files.pythonhosted.org/packages/81/29/5ecc3a15d5a33e31b26c11426c45c501e439cb865d0bff96315d86443b78/appnope-0.1.4-py2.py3-none-any.whl
         - pypi: https://files.pythonhosted.org/packages/4f/d3/a8b22fa575b297cd6e3e3b0155c7e25db170edf1c74783d6a31a2490b8d9/argon2_cffi-25.1.0-py3-none-any.whl
@@ -336,7 +336,7 @@ environments:
         - conda: https://conda.anaconda.org/conda-forge/osx-arm64/tk-8.6.13-h010d191_3.conda
         - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2025c-hc9c84f9_1.conda
         - pypi: https://files.pythonhosted.org/packages/62/3e/c5959630b8fbb520d6b82cd686e6bd775b7e6053c67b3ee4c71b22c95983/ampform-0.16.0-py3-none-any.whl
-        - pypi: https://files.pythonhosted.org/packages/7c/41/fdf5d0b22bf612d1be21734539b50bb231e5de79f776253ca1a5644be812/ampform_dpd-0.2.4-py3-none-any.whl
+        - pypi: https://files.pythonhosted.org/packages/e2/67/b78fba3e3031ecc5dafca4a39b0d8895f10db878823e207d69a32f6d1882/ampform_dpd-0.4.0-py3-none-any.whl
         - pypi: https://files.pythonhosted.org/packages/da/42/e921fccf5015463e32a3cf6ee7f980a6ed0f395ceeaa45060b61d86486c2/anyio-4.13.0-py3-none-any.whl
         - pypi: https://files.pythonhosted.org/packages/81/29/5ecc3a15d5a33e31b26c11426c45c501e439cb865d0bff96315d86443b78/appnope-0.1.4-py2.py3-none-any.whl
         - pypi: https://files.pythonhosted.org/packages/4f/d3/a8b22fa575b297cd6e3e3b0155c7e25db170edf1c74783d6a31a2490b8d9/argon2_cffi-25.1.0-py3-none-any.whl
@@ -495,12 +495,12 @@ packages:
       - scipy ; extra == 'scipy'
       - graphviz ; extra == 'viz'
     requires_python: ">=3.10"
-  - pypi: https://files.pythonhosted.org/packages/7c/41/fdf5d0b22bf612d1be21734539b50bb231e5de79f776253ca1a5644be812/ampform_dpd-0.2.4-py3-none-any.whl
+  - pypi: https://files.pythonhosted.org/packages/e2/67/b78fba3e3031ecc5dafca4a39b0d8895f10db878823e207d69a32f6d1882/ampform_dpd-0.4.0-py3-none-any.whl
     name: ampform-dpd
-    version: 0.2.4
-    sha256: ad762de8ecec1792f6112134bda98686690d810c6cedee293e41c19bc778d475
+    version: 0.4.0
+    sha256: 28ac25b814d5467b825c9a906ee050fba5c66ad2da7a645f70202684060c3047
     requires_dist:
-      - ampform>=0.15.7
+      - ampform>=0.15.10
       - attrs>=20.1.0
       - cloudpickle
       - frozendict
@@ -511,7 +511,7 @@ packages:
       - typing-extensions ; python_full_version < '3.11'
       - tensorwaves[numba] ; extra == 'numba'
       - tensorwaves[tf] ; extra == 'tf'
-    requires_python: ">=3.9"
+    requires_python: ">=3.10"
   - pypi: https://files.pythonhosted.org/packages/da/42/e921fccf5015463e32a3cf6ee7f980a6ed0f395ceeaa45060b61d86486c2/anyio-4.13.0-py3-none-any.whl
     name: anyio
     version: 4.13.0

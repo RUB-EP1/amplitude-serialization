@@ -1,8 +1,14 @@
 [project]
+name = "amplitude-serialization"
+version = "0.1.0"
+description = "Prototype for the amplitude model serialization format"
+requires-python = "~=3.13.0"
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [
-    {name = "Ilya Segal"},
-    {name = "Mikhail Mikhasenko"},
-    {name = "Remco de Boer"},
+    { name = "Ilya Segal" },
+    { name = "Mikhail Mikhasenko" },
+    { name = "Remco de Boer" },
 ]
 dependencies = [
     "ampform-dpd",
@@ -11,11 +17,6 @@ dependencies = [
     "pandas",
     "quarto-cli",
 ]
-description = "Prototype for the amplitude model serialization format"
-license = {file = "LICENSE"}
-name = "amplitude-serialization"
-requires-python = "~=3.13.0"
-version = "0.1.0"
 
 [project.urls]
 changelog = "https://github.com/RUB-EP1/amplitude-serialization/releases"
@@ -29,6 +30,7 @@ PYTHONHASHSEED = "0"
 
 [tool.pixi.dependencies]
 juliaup = "*"
+python = "3.13.*"
 
 [tool.pixi.tasks.doc]
 cmd = "quarto render"
@@ -59,16 +61,12 @@ platforms = ["linux-64", "osx-64", "osx-arm64"]
 [tool.ruff]
 preview = true
 
-[tool.tomlsort]
-all = false
-ignore_case = true
-in_place = true
-sort_first = [
-    "build-system",
-    "project",
-    "tool.setuptools",
-    "tool.setuptools_scm",
+[tool.tombi.files]
+exclude = [
+    "**/Manifest.toml",
+    "**/Project.toml",
 ]
-sort_table_keys = true
-spaces_indent_inline_array = 4
-trailing_comma_inline_array = true
+
+[tool.tombi.format.rules]
+indent-width = 4
+line-width = 88

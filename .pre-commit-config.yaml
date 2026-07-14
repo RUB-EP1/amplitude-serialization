@@ -2,6 +2,12 @@ ci:
   autoupdate_commit_msg: "MAINT: upgrade lock files"
   autoupdate_schedule: quarterly
 
+  autofix_commit_msg: "MAINT: implement pre-commit autofixes"
+  skip:
+    - check-jsonschema
+    - tombi-format
+    - tombi-lint
+
 repos:
   - repo: meta
     hooks:
@@ -20,6 +26,18 @@ repos:
       - id: mixed-line-ending
       - id: trailing-whitespace
 
+  - repo: https://github.com/tombi-toml/tombi-pre-commit
+    rev: v1.2.0
+    hooks:
+      - id: tombi-format
+      - id: tombi-lint
+        args: [--error-on-warnings]
+
+  - repo: https://github.com/ComPWA/prettier-pre-commit
+    rev: v3.8.1
+    hooks:
+      - id: prettier
+
   - repo: https://github.com/python-jsonschema/check-jsonschema
     rev: 0.37.4
     hooks:
@@ -33,19 +51,9 @@ repos:
       - id: cspell
         language_version: 25.9.0
 
-  - repo: https://github.com/ComPWA/prettier-pre-commit
-    rev: v3.8.1
+  - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
+    rev: 3.6.1
     hooks:
-      - id: prettier
-
-  - repo: https://github.com/ComPWA/taplo-pre-commit
-    rev: v0.9.3
-    hooks:
-      - id: taplo-format
-
-  - repo: https://github.com/pappasam/toml-sort
-    rev: v0.24.4
-    hooks:
-      - id: toml-sort
-        args: [--in-place]
-        exclude: (?x)^(.*/Manifest\.toml|.*/Project\.toml)$
+      - id: editorconfig-checker
+        name: editorconfig
+        alias: ec

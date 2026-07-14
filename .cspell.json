@@ -8,13 +8,13 @@
     },
     {
       "addWords": true,
-      "name": "project",
-      "path": "./.cspell/project.txt"
+      "name": "physics",
+      "path": "./.cspell/physics.txt"
     },
     {
       "addWords": true,
-      "name": "physics",
-      "path": "./.cspell/physics.txt"
+      "name": "project",
+      "path": "./.cspell/project.txt"
     },
     {
       "addWords": true,

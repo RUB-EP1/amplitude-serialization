@@ -32,6 +32,18 @@ PYTHONHASHSEED = "0"
 juliaup = "*"
 python = "3.13.*"
 
+[tool.pixi.tasks.all]
+depends-on = [
+    "style",
+    "_clean-doc",
+    "doc",
+]
+description = "Run all continuous integration (CI) tasks locally"
+
+[tool.pixi.tasks._clean-doc]
+cmd = "rm -rf docs/.quarto docs/_build"
+description = "Remove generated documentation build files"
+
 [tool.pixi.tasks.doc]
 cmd = "quarto render"
 cwd = "docs"

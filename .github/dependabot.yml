@@ -1,19 +1,24 @@
 version: 2
 
 multi-ecosystem-groups:
-  infrastructure:
-    assignees:
-      - mmikhasenko
-      - redeboer
-    commit-message:
-      prefix: MAINT
-    labels:
-      - ⬆️ Lock
-    schedule:
-      interval: semiannually
+  lock:
+    assignees: [redeboer]
+    commit-message: { prefix: MAINT }
+    schedule: { interval: semiannually }
 
 updates:
   - package-ecosystem: github-actions
     directory: "/"
+    labels: [⬆️ Lock]
+    multi-ecosystem-group: lock
     patterns: ["*"]
-    multi-ecosystem-group: infrastructure
+  - package-ecosystem: julia
+    directory: "/"
+    labels: [⬆️ Lock]
+    multi-ecosystem-group: lock
+    patterns: ["*"]
+  - package-ecosystem: pre-commit
+    directory: "/"
+    labels: [⬆️ Lock]
+    multi-ecosystem-group: lock
+    patterns: ["*"]

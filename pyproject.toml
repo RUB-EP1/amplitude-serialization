@@ -11,7 +11,7 @@ authors = [
     { name = "Remco de Boer" },
 ]
 dependencies = [
-    "ampform-dpd",
+    "ampform-dpd @ git+https://github.com/ComPWA/ampform-dpd.git@ef80b1a6aad6a386de87009da00916f3749b036a?rev_type=rev",
     "jupyter-cache",
     "matplotlib",
     "pandas",

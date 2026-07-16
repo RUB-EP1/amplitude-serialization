@@ -54,6 +54,10 @@ julia --project -e '
 '
 """
 
+[tool.pixi.tasks.style]
+cmd = "pre-commit run --all-files"
+description = "Perform all linting, formatting, and spelling checks"
+
 [tool.pixi.tasks.upgrade]
 depends-on = [
     "_upgrade-pixi",

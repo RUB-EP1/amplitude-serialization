@@ -39,7 +39,7 @@ jobs:
         uses: actions/cache@v6
         with:
           key: |
-            jupyter-cache-${{hashFiles('pixi.lock')}}-${{hashFiles('docs/*/*.md')}}
+            jupyter-cache-${{hashFiles('pixi.lock')}}-${{hashFiles('docs/*/*.qmd')}}
           restore-keys: |
             jupyter-cache-${{hashFiles('pixi.lock')}}
             jupyter-cache
@@ -49,7 +49,7 @@ jobs:
         uses: actions/cache@v6
         with:
           key: |
-            home-cache-${{hashFiles('pixi.lock')}}-${{hashFiles('docs/*/*.md')}}
+            home-cache-${{hashFiles('pixi.lock')}}-${{hashFiles('docs/*/*.qmd')}}
           restore-keys: |
             home-cache-${{hashFiles('pixi.lock')}}
             home-cache

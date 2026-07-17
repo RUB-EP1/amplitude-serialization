@@ -61,8 +61,7 @@ jobs:
         with:
           path: docs/_build/html
 
-  pr-preview:
-    name: Push PR preview
+  preview:
     if: >-
       github.event_name == 'pull_request' &&
       github.event.pull_request.head.repo.full_name == github.repository
@@ -72,26 +71,40 @@ jobs:
       - uses: actions/download-artifact@v7
         with:
           name: github-pages
-      - name: Extract artifact
-        run: |
-          tar xf artifact.tar
-          rm artifact.tar
       - name: Configure Git credentials
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-      - name: Initialize repository and commit results
+      - name: Check out preview branch
         run: |
+          mkdir preview
+          cd preview
           git init
-          git checkout --orphan gh-pages
-          git add -A
-          git commit -m "Push preview for https://github.com/RUB-EP1/amplitude-serialization/pull/${{ github.event.number }}"
-      - name: Push results to GitHub Pages
-        run: |
           git remote add origin https://x-access-token:${{ secrets.PAT }}@github.com/RUB-EP1/amplitude-serialization-pr-preview
-          git push origin gh-pages --force
-      - name: Show notice with link to PR preview
-        run: echo "::notice title=Documentation preview::https://rub-ep1.github.io/amplitude-serialization-pr-preview"
+          if git fetch --depth=1 origin gh-pages; then
+            git checkout -B gh-pages FETCH_HEAD
+            git rm -rf .
+          else
+            git checkout --orphan gh-pages
+          fi
+      - name: Extract artifact
+        run: |
+          tar xf artifact.tar -C preview
+          rm artifact.tar
+      - name: Commit results
+        working-directory: preview
+        run: |
+          git add -A
+          if git rev-parse --verify HEAD; then
+            git commit --amend -m "https://github.com/RUB-EP1/amplitude-serialization/pull/${{ github.event.number }} preview at https://rub-ep1.github.io/amplitude-serialization-pr-preview"
+          else
+            git commit -m "https://github.com/RUB-EP1/amplitude-serialization/pull/${{ github.event.number }} preview at https://rub-ep1.github.io/amplitude-serialization-pr-preview"
+          fi
+      - name: Push results to GitHub Pages
+        working-directory: preview
+        run: git push origin gh-pages --force
+      - name: Show link to PR preview
+        run: echo "Documentation preview available on [rub-ep1.github.io/amplitude-serialization-pr-preview](https://rub-ep1.github.io/amplitude-serialization-pr-preview)" >> $GITHUB_STEP_SUMMARY
 
   deploy:
     environment:

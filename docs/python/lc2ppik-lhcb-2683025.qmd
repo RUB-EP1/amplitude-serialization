@@ -269,21 +269,59 @@ The following serves as a numerical check on whether the amplitude model has bee
 
 ```{python}
 # | code-fold: true
-# | column: page-inset-right
-checksums = {
-    misc_key: {checksum["point"]: checksum["value"] for checksum in misc_value}
-    for misc_key, misc_value in MODEL_DEFINITION["misc"].items()
-    if "checksum" in misc_key
-}
-assert len(checksums) == 1, "Expected only one checksum entry"
-checksums["amplitude_model_checksums"]
-```
-
-```{python}
-# | code-fold: true
 checksum_points = {
     point["name"]: {par["name"]: par["value"] for par in point["parameters"]}
     for point in MODEL_DEFINITION["parameter_points"]
 }
-checksum_points
+```
+
+The table lists the validation checks and their status. The marks "🟢", "🟡", and "🔴"
+indicate an accuracy of $<10^{-10}$, $<10^{-2}$, or $\ge10^{-2}$, respectively, for
+the difference between the reference and computed values.
+
+```{python}
+# | code-fold: true
+# | code-summary: Validate serialized propagators
+def to_complex(value: float | str) -> complex:
+    if isinstance(value, str):
+        return complex(value.replace(" ", "").replace("i", "j"))
+    return complex(value)
+
+
+def label_diff(difference: complex) -> str:
+    absolute_difference = abs(difference)
+    if absolute_difference < 1e-10:
+        return "🟢"
+    if absolute_difference < 1e-2:
+        return "🟡"
+    return "🔴"
+
+
+chains_by_propagator = {
+    propagator["parametrization"]: chain
+    for chain in CHAIN_DEFS
+    for propagator in chain["propagators"]
+}
+validation_results = []
+for checksum in MODEL_DEFINITION["misc"]["amplitude_model_checksums"]:
+    distribution_name = checksum["distribution"]
+    chain = chains_by_propagator.get(distribution_name)
+    if chain is None:
+        continue
+    dynamics = formulate_dynamics(chain, MODEL_DEFINITION)
+    function = perform_cached_lambdify(
+        dynamics.expression.doit(),
+        parameters=dynamics.parameters,
+    )
+    point = checksum_points[checksum["point"]]
+    variable = next(iter(dynamics.expression.free_symbols - dynamics.parameters.keys()))
+    computed_value = function({str(variable): next(iter(point.values()))})
+    reference_value = to_complex(checksum["value"])
+    validation_results.append({
+        "Distribution": distribution_name,
+        "Point": checksum["point"],
+        "Status": label_diff(reference_value - computed_value),
+    })
+
+pd.DataFrame(validation_results)
 ```

@@ -62,7 +62,7 @@ jobs:
           path: docs/_build/html
 
   pr-preview:
-    name: Push PR preview
+    name: PR preview
     if: >-
       github.event_name == 'pull_request' &&
       github.event.pull_request.head.repo.full_name == github.repository
@@ -85,13 +85,13 @@ jobs:
           git init
           git checkout --orphan gh-pages
           git add -A
-          git commit -m "Push preview for https://github.com/RUB-EP1/amplitude-serialization/pull/${{ github.event.number }}"
+          git commit -m "https://github.com/RUB-EP1/amplitude-serialization/pull/${{ github.event.number }} preview at https://rub-ep1.github.io/amplitude-serialization-pr-preview"
       - name: Push results to GitHub Pages
         run: |
           git remote add origin https://x-access-token:${{ secrets.PAT }}@github.com/RUB-EP1/amplitude-serialization-pr-preview
           git push origin gh-pages --force
-      - name: Show notice with link to PR preview
-        run: echo "::notice title=Documentation preview::https://rub-ep1.github.io/amplitude-serialization-pr-preview"
+      - name: Show link to PR preview
+        run: echo "Documentation preview available on [rub-ep1.github.io/amplitude-serialization-pr-preview](https://rub-ep1.github.io/amplitude-serialization-pr-preview)" >> $GITHUB_STEP_SUMMARY
 
   deploy:
     environment:

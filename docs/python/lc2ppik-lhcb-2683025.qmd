@@ -263,10 +263,6 @@ Math(aslatex(definitions))
 
 ### Validation
 
-::: {.callout-warning}
-The following serves as a numerical check on whether the amplitude model has been deserialized correctly. For now, this is not the case, see [ComPWA/ampform-dpd#133](https://github.com/ComPWA/ampform-dpd/issues/133) for updates.
-:::
-
 ```{python}
 # | code-fold: true
 checksum_points = {

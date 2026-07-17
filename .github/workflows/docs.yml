@@ -61,8 +61,7 @@ jobs:
         with:
           path: docs/_build/html
 
-  pr-preview:
-    name: PR preview
+  preview:
     if: >-
       github.event_name == 'pull_request' &&
       github.event.pull_request.head.repo.full_name == github.repository

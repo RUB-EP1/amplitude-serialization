@@ -30,8 +30,7 @@ import pandas as pd
 import sympy as sp
 from ampform.dynamics import BlattWeisskopfSquared
 from ampform.dynamics.form_factor import FormFactor
-from ampform.dynamics.phasespace import BreakupMomentumSquared
-from ampform.kinematics.phasespace import Kallen
+from ampform.dynamics.phasespace import BreakupMomentumSquared, PhaseSpaceFactor
 from ampform.sympy import perform_cached_doit
 from ampform_dpd import DefinedExpression
 from ampform_dpd.decay import FinalStateID, State, ThreeBodyDecay
@@ -147,14 +146,13 @@ Math(aslatex(ff_L1520))
 
 ```{python}
 # | code-fold: true
-x, y, z = sp.symbols("x:z")
 s, m0, Γ0, m1, m2, L, d = sp.symbols("s m0 Gamma0 m1 m2 L R", nonnegative=True)
 exprs = [
     BreitWigner(s, m0, Γ0, m1, m2, L, d),
     SimpleBreitWigner(s, m0, Γ0),
     EnergyDependentWidth(s, m0, Γ0, m1, m2, L, d),
     FormFactor(s, m1, m2, L, d),
-    Kallen(x, y, z),
+    PhaseSpaceFactor(s, m1, m2),
 ]
 Math(aslatex({e: e.doit(deep=False) for e in exprs}))
 ```
@@ -170,16 +168,18 @@ Math(aslatex(K892_BW))
 
 #### Multi-channel Breit-Wigner
 
+The `gsq` value that is serialized for each channel is the **coupling squared**, not an energy width. The channel term $\Gamma^\text{ch}$ below follows the same convention as [`HadronicLineshapes.jl`](https://mmikhasenko.github.io/HadronicLineshapes.jl/dev/10-breitwigner/#Multichannel-Breit-Wigner-Function). See [ComPWA/ampform-dpd#199](https://github.com/ComPWA/ampform-dpd/pull/199).
+
 ```{python}
 # | code-fold: true
 # | column: page-inset-right
-x, y, z = sp.symbols("x:z")
 s, m0, Γ0, m1, m2, L, d = sp.symbols("s m0 Gamma0 m1 m2 L R", nonnegative=True)
+gsq = sp.Symbol("g^2", nonnegative=True)
 channels = tuple(
     ChannelArguments(
         s,
         m0,
-        width=sp.Symbol(f"Gamma{i}", nonnegative=True),
+        coupling_squared=sp.Symbol(f"g_{{{i}}}^2", nonnegative=True),
         m1=sp.Symbol(f"m_{{a,{i}}}", nonnegative=True),
         m2=sp.Symbol(f"m_{{b,{i}}}", nonnegative=True),
         angular_momentum=sp.Symbol(f"L{i}", integer=True, nonnegative=True),
@@ -189,11 +189,10 @@ channels = tuple(
 )
 exprs = [
     MultichannelBreitWigner(s, m0, channels),
-    BreitWigner(s, m0, Γ0, m1, m2, L, d),
+    ChannelArguments(s, m0, gsq, m1, m2, L, d),
     BreitWigner(s, m0, Γ0),
-    EnergyDependentWidth(s, m0, Γ0, m1, m2, L, d),
     FormFactor(s, m1, m2, L, d),
-    Kallen(x, y, z),
+    PhaseSpaceFactor(s, m1, m2),
 ]
 Math(aslatex({e: e.doit(deep=False) for e in exprs}))
 ```

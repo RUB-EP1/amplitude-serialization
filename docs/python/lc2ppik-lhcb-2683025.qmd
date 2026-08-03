@@ -28,20 +28,21 @@ import jax.numpy as jnp
 import matplotlib.pyplot as plt
 import pandas as pd
 import sympy as sp
-from ampform.dynamics import BlattWeisskopfSquared
 from ampform.dynamics.form_factor import FormFactor
-from ampform.dynamics.phasespace import BreakupMomentumSquared, PhaseSpaceFactor
 from ampform.sympy import perform_cached_doit
 from ampform_dpd import DefinedExpression
 from ampform_dpd.decay import FinalStateID, State, ThreeBodyDecay
 from ampform_dpd.dynamics import (
     BreitWigner,
     ChannelArguments,
-    EnergyDependentWidth,
     MultichannelBreitWigner,
-    SimpleBreitWigner,
 )
-from ampform_dpd.io import aslatex, perform_cached_lambdify, simplify_latex_rendering
+from ampform_dpd.io import (
+    aslatex,
+    perform_cached_lambdify,
+    simplify_latex_rendering,
+    unfold_definitions,
+)
 from ampform_dpd.io.serialization.amplitude import (
     HelicityRecoupling,
     LSRecoupling,
@@ -122,14 +123,9 @@ CHAIN_DEFS = get_decay_chains(MODEL_DEFINITION)
 
 ```{python}
 # | code-fold: true
-z = sp.Symbol("z", nonnegative=True)
 s, m1, m2, L, d = sp.symbols("s m1 m2 L R", nonnegative=True)
-exprs = [
-    FormFactor(s, m1, m2, L, d),
-    BlattWeisskopfSquared(z, L),
-    BreakupMomentumSquared(s, m1, m2),
-]
-Math(aslatex({e: e.doit(deep=False) for e in exprs}))
+expr = FormFactor(s, m1, m2, L, d)
+Math(aslatex(unfold_definitions(expr)))
 ```
 
 ```{python}
@@ -147,14 +143,8 @@ Math(aslatex(ff_L1520))
 ```{python}
 # | code-fold: true
 s, m0, Γ0, m1, m2, L, d = sp.symbols("s m0 Gamma0 m1 m2 L R", nonnegative=True)
-exprs = [
-    BreitWigner(s, m0, Γ0, m1, m2, L, d),
-    SimpleBreitWigner(s, m0, Γ0),
-    EnergyDependentWidth(s, m0, Γ0, m1, m2, L, d),
-    FormFactor(s, m1, m2, L, d),
-    PhaseSpaceFactor(s, m1, m2),
-]
-Math(aslatex({e: e.doit(deep=False) for e in exprs}))
+expr = BreitWigner(s, m0, Γ0, m1, m2, L, d)
+Math(aslatex(unfold_definitions(expr)))
 ```
 
 ```{python}
@@ -173,8 +163,7 @@ The `gsq` value that is serialized for each channel is the **coupling squared**,
 ```{python}
 # | code-fold: true
 # | column: page-inset-right
-s, m0, Γ0, m1, m2, L, d = sp.symbols("s m0 Gamma0 m1 m2 L R", nonnegative=True)
-gsq = sp.Symbol("g^2", nonnegative=True)
+s, m0, m1, m2, L, d = sp.symbols("s m0 m1 m2 L R", nonnegative=True)
 channels = tuple(
     ChannelArguments(
         s,
@@ -187,14 +176,8 @@ channels = tuple(
     )
     for i in [1, 2]
 )
-exprs = [
-    MultichannelBreitWigner(s, m0, channels),
-    ChannelArguments(s, m0, gsq, m1, m2, L, d),
-    BreitWigner(s, m0, Γ0),
-    FormFactor(s, m1, m2, L, d),
-    PhaseSpaceFactor(s, m1, m2),
-]
-Math(aslatex({e: e.doit(deep=False) for e in exprs}))
+expr = MultichannelBreitWigner(s, m0, channels)
+Math(aslatex(unfold_definitions(expr)))
 ```
 
 ```{python}

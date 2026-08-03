@@ -30,7 +30,6 @@ import pandas as pd
 import sympy as sp
 from ampform.dynamics.form_factor import FormFactor
 from ampform.sympy import perform_cached_doit
-from ampform_dpd import DefinedExpression
 from ampform_dpd.decay import FinalStateID, State, ThreeBodyDecay
 from ampform_dpd.dynamics import (
     BreitWigner,
@@ -52,18 +51,14 @@ from ampform_dpd.io.serialization.amplitude import (
     formulate_chain_amplitude,
     formulate_recoupling,
 )
-from ampform_dpd.io.serialization.decay import get_final_state, to_decay
+from ampform_dpd.io.serialization.decay import to_decay
 from ampform_dpd.io.serialization.dynamics import (
     formulate_breit_wigner,
     formulate_dynamics,
     formulate_form_factor,
     formulate_multichannel_breit_wigner,
-    to_mandelstam_symbol,
-    to_mass_symbol,
 )
 from ampform_dpd.io.serialization.format import (
-    ModelDefinition,
-    Propagator,
     get_decay_chains,
     get_function_definition,
 )
@@ -188,6 +183,19 @@ L1405_Flatte = formulate_multichannel_breit_wigner(
     model=MODEL_DEFINITION,
 )
 Math(aslatex(L1405_Flatte))
+```
+
+#### Breit-Wigner with exponential
+
+The Bugg lineshapes are serialized as `generic_function` expression strings. The built-in dynamics builder parses these expressions and substitutes $i$ and $\sigma$ with the imaginary unit and the Mandelstam variable of the propagator node, respectively.
+
+```{python}
+get_function_definition("K700_BuggBW", MODEL_DEFINITION)
+```
+
+```{python}
+K700_BuggBW = formulate_dynamics(CHAIN_DEFS[18], MODEL_DEFINITION, to_latex)
+Math(aslatex(K700_BuggBW))
 ```
 
 ## Construct `AmplitudeModel`

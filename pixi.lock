@@ -46,7 +46,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2026.6.17-hbd8a1cb_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/python_abi-3.13-8_cp313.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2025c-hc9c84f9_1.conda
-      - pypi: git+https://github.com/ComPWA/ampform-dpd.git?rev=ef80b1a6aad6a386de87009da00916f3749b036a#ef80b1a6aad6a386de87009da00916f3749b036a
+      - pypi: git+https://github.com/ComPWA/ampform-dpd.git?rev=6ba6a8511a5564d2ea9d88095e9a6a29ad657ee4#6ba6a8511a5564d2ea9d88095e9a6a29ad657ee4
       - pypi: https://files.pythonhosted.org/packages/04/4b/29cac41a4d98d144bf5f6d33995617b185d14b22401f75ca86f384e87ff1/h11-0.16.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/05/7f/798705f5296a58ca505d600456748d1be48078eac8a7050d8a98bc9edb89/decorator-5.3.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/06/53/be20af6713c2d498cfa5be89aa004933bd199ed63694417fac9d6f57523f/qrules-0.10.9-py3-none-any.whl
@@ -200,7 +200,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-64/python-3.13.14-h3d5d122_100_cp313.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/readline-8.3-h68b038d_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/tk-8.6.13-h7142dee_3.conda
-      - pypi: git+https://github.com/ComPWA/ampform-dpd.git?rev=ef80b1a6aad6a386de87009da00916f3749b036a#ef80b1a6aad6a386de87009da00916f3749b036a
+      - pypi: git+https://github.com/ComPWA/ampform-dpd.git?rev=6ba6a8511a5564d2ea9d88095e9a6a29ad657ee4#6ba6a8511a5564d2ea9d88095e9a6a29ad657ee4
       - pypi: https://files.pythonhosted.org/packages/04/4b/29cac41a4d98d144bf5f6d33995617b185d14b22401f75ca86f384e87ff1/h11-0.16.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/05/52/9c0136c2de7ae0779b7b366447766cec6d9f0702c56bb8ffeb04c8fd3af4/scipy-1.18.0-cp313-cp313-macosx_10_15_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/05/7f/798705f5296a58ca505d600456748d1be48078eac8a7050d8a98bc9edb89/decorator-5.3.1-py3-none-any.whl
@@ -354,7 +354,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/python-3.13.14-h448ec07_100_cp313.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/readline-8.3-h46df422_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/tk-8.6.13-h010d191_3.conda
-      - pypi: git+https://github.com/ComPWA/ampform-dpd.git?rev=ef80b1a6aad6a386de87009da00916f3749b036a#ef80b1a6aad6a386de87009da00916f3749b036a
+      - pypi: git+https://github.com/ComPWA/ampform-dpd.git?rev=6ba6a8511a5564d2ea9d88095e9a6a29ad657ee4#6ba6a8511a5564d2ea9d88095e9a6a29ad657ee4
       - pypi: https://files.pythonhosted.org/packages/00/49/c183a9ee8fd022ffb9c20fc615ddafe19ed6b74a2ab668ac12e35d19f5a0/iminuit-2.32.0-cp313-cp313-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/02/73/0291a64843270f4efb86cdcf2ee0f2048631b65ec6b405398b2b4dbf11bf/scipy-1.18.0-cp313-cp313-macosx_12_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/02/dc/c7043cab6fed8ae159fc1923ce829ada35c4dbd797d408a43858ffaf9639/tornado-6.5.7-cp39-abi3-macosx_10_9_universal2.whl
@@ -1202,9 +1202,9 @@ packages:
     - tk >=8.6.13,<8.7.0a0
   size: 3127137
   timestamp: 1769460817696
-- pypi: git+https://github.com/ComPWA/ampform-dpd.git?rev=ef80b1a6aad6a386de87009da00916f3749b036a#ef80b1a6aad6a386de87009da00916f3749b036a
+- pypi: git+https://github.com/ComPWA/ampform-dpd.git?rev=6ba6a8511a5564d2ea9d88095e9a6a29ad657ee4#6ba6a8511a5564d2ea9d88095e9a6a29ad657ee4
   name: ampform-dpd
-  version: 0.4.1.dev8+gef80b1a6a
+  version: 0.4.1.dev24+g6ba6a8511
   requires_dist:
   - ampform>=0.15.10
   - attrs>=20.1.0

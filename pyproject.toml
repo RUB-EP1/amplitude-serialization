@@ -41,7 +41,7 @@ depends-on = [
 description = "Run all continuous integration (CI) tasks locally"
 
 [tool.pixi.tasks._clean-doc]
-cmd = "rm -rf docs/.quarto docs/_build"
+cmd = "rm -rf docs/*/.jupyter_cache docs/.quarto docs/_build"
 description = "Remove generated documentation build files"
 
 [tool.pixi.tasks.doc]

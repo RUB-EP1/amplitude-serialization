@@ -1,7 +1,6 @@
 ---
 jupyter: python3
 ---
-
 # $\Lambda_c^+ \to p K^- \pi^+$
 
 ::: {.callout-note appearance="simple"}
@@ -38,6 +37,7 @@ from ampform_dpd.dynamics import (
 )
 from ampform_dpd.io import (
     aslatex,
+    cached,
     perform_cached_lambdify,
     simplify_latex_rendering,
     unfold_definitions,
@@ -303,11 +303,79 @@ for checksum in MODEL_DEFINITION["misc"]["amplitude_model_checksums"]:
     variable = next(iter(dynamics.expression.free_symbols - dynamics.parameters.keys()))
     computed_value = function({str(variable): next(iter(point.values()))})
     reference_value = to_complex(checksum["value"])
+    difference = abs(reference_value - computed_value)
+    assert difference < 1e-10, (
+        f"{distribution_name} at {checksum['point']} differs by {difference}"
+    )
     validation_results.append({
         "Distribution": distribution_name,
         "Point": checksum["point"],
         "Status": label_diff(reference_value - computed_value),
     })
+```
 
+```{python}
+# | code-fold: true
+# | code-summary: Validate the serialized intensity
+def evaluate_intensity(model, point: dict[str, float]) -> float:
+    _, _, sigma3 = sorted(model.invariants, key=str)
+    intensity_expr = cached.xreplace(cached.unfold(model), model.variables)
+    intensity_expr = cached.xreplace(intensity_expr, model.parameter_defaults)
+    sigma3_expr = model.invariants[sigma3].xreplace(model.masses).doit()
+    intensity_expr = cached.doit(intensity_expr.xreplace({sigma3: sigma3_expr}))
+    intensity_function = cached.lambdify(intensity_expr, backend="jax")
+    sigma2_value = point["m_31"] ** 2
+    sigma1_value = solve_sigma1_from_cos_theta31(
+        model,
+        cos_theta31=point["cos_theta_31"],
+        sigma2_value=sigma2_value,
+    )
+    return float(
+        intensity_function({
+            "sigma1": sigma1_value,
+            "sigma2": sigma2_value,
+        })
+    )
+
+
+def solve_sigma1_from_cos_theta31(
+    model,
+    cos_theta31: float,
+    sigma2_value: float,
+) -> float:
+    sigma1, sigma2, _ = sorted(model.invariants, key=str)
+    theta31_expr = next(
+        expression
+        for angle, expression in model.variables.items()
+        if str(angle) == "theta_31"
+    )
+    solutions = sp.solve(
+        sp.Eq(
+            sp.cos(theta31_expr).xreplace(model.parameter_defaults),
+            cos_theta31,
+        ),
+        sigma1,
+    )
+    return float(solutions[0].xreplace({sigma2: sigma2_value}))
+
+
+intensity_checksum = next(
+    checksum
+    for checksum in MODEL_DEFINITION["misc"]["amplitude_model_checksums"]
+    if checksum["distribution"] == MODEL_DEFINITION["distributions"][0]["name"]
+)
+model = formulate(MODEL_DEFINITION, cleanup_summations=True, to_latex=to_latex)
+point = checksum_points[intensity_checksum["point"]]
+computed_value = evaluate_intensity(model, point)
+reference_value = to_complex(intensity_checksum["value"])
+difference = abs(reference_value - computed_value)
+assert difference < 1e-10, (
+    f"default_model at {intensity_checksum['point']} differs by {difference}"
+)
+validation_results.append({
+    "Distribution": intensity_checksum["distribution"],
+    "Point": intensity_checksum["point"],
+    "Status": label_diff(reference_value - computed_value),
+})
 pd.DataFrame(validation_results)
 ```

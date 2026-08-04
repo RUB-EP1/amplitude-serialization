@@ -75,7 +75,7 @@ with open(THIS_DIR.parent.parent / "models" / "lc2ppik-lhcb-2683025.json") as f:
     MODEL_DEFINITION = json.load(f)
 ```
 
-## Construct `ThreeBodyDecay`
+## Construct three-body decay
 
 ```{python}
 # | code-fold: true
@@ -198,7 +198,7 @@ K700_BuggBW = formulate_dynamics(CHAIN_DEFS[18], MODEL_DEFINITION, to_latex)
 Math(aslatex(K700_BuggBW))
 ```
 
-## Construct `AmplitudeModel`
+## Construct amplitude model
 
 ### Unpolarized intensity
 

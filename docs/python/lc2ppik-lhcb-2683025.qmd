@@ -1,6 +1,7 @@
 ---
 jupyter: python3
 ---
+
 # $\Lambda_c^+ \to p K^- \pi^+$
 
 ::: {.callout-note appearance="simple"}

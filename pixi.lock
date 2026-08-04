@@ -135,6 +135,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/ab/b5/36c712098e6191d1b4e349304ef73a8d06aed77e56ceaac8c0a306c7bda1/jupyterlab_widgets-3.0.16-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ab/e3/de3c69c04bb0459199264e5f4fdc38755560d196630e13835c5fd57e2fcb/qrules-0.10.10-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ac/fe/11a2e7dead90c694c9ba8514bee059b9a2a4bb2ba9aa613e8859ce634fef/quarto_cli-1.10.18.tar.gz
+      - pypi: https://files.pythonhosted.org/packages/ad/0d/bbb5b15ef5a9a3eb82ac7dc03ff18f5f49d291b030cb1609bfeadb937d64/ampform_dpd-0.4.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ad/66/0d785f0bc5e4315a96c989bb476d0fc07ea4f85132550c7b156ca2035d52/traitlets-5.16.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/b1/dd/ead9d8ea85bf202d90cc513b533f9c363121c7792674f78e0d8a854b63b4/jupyterlab_pygments-0.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/b3/38/89ba8ad64ae25be8de66a6d463314cf1eb366222074cfda9ee839c56a4b4/mdurl-0.1.2-py3-none-any.whl
@@ -154,7 +155,6 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/d9/33/1f075bf72b0b747cb3288d011319aaf64083cf2efef8354174e3ed4540e2/ipython_pygments_lexers-1.1.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/da/35/f2287558c17e29fafc8ef3daf819bb9834061cfa43bff8014f7df7f63bdc/anyio-4.14.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e0/07/a000fe835f76b7e1143242ab1122e6362ef1c03f23f83a045c38859c2ae0/jupyterlab_server-2.28.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/e2/67/b78fba3e3031ecc5dafca4a39b0d8895f10db878823e207d69a32f6d1882/ampform_dpd-0.4.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e2/cc/e097523dd85c9cf5d354f78310927f1656c422bd7b2613b2db3e3f9a0f2c/webcolors-25.10.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e3/70/4363150359f95b4cb4bcbb34ca23572bb5495749a621a8f3d5a1ddfd293c/pandas-3.0.5-cp313-cp313-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/e5/6d/b53b99a9f2766d095985947a5782f1702cabb129a34f7a802d7197af832f/tzdata-2026.3-py2.py3-none-any.whl
@@ -288,6 +288,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/ab/b5/36c712098e6191d1b4e349304ef73a8d06aed77e56ceaac8c0a306c7bda1/jupyterlab_widgets-3.0.16-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ab/e3/de3c69c04bb0459199264e5f4fdc38755560d196630e13835c5fd57e2fcb/qrules-0.10.10-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ac/fe/11a2e7dead90c694c9ba8514bee059b9a2a4bb2ba9aa613e8859ce634fef/quarto_cli-1.10.18.tar.gz
+      - pypi: https://files.pythonhosted.org/packages/ad/0d/bbb5b15ef5a9a3eb82ac7dc03ff18f5f49d291b030cb1609bfeadb937d64/ampform_dpd-0.4.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ad/66/0d785f0bc5e4315a96c989bb476d0fc07ea4f85132550c7b156ca2035d52/traitlets-5.16.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/b1/dd/ead9d8ea85bf202d90cc513b533f9c363121c7792674f78e0d8a854b63b4/jupyterlab_pygments-0.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/b2/06/97ec2aeae780b31d742b6352218b43841a6871e2564578ca522dce4a45c3/charset_normalizer-3.4.9-cp313-cp313-macosx_10_13_universal2.whl
@@ -312,7 +313,6 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/da/35/f2287558c17e29fafc8ef3daf819bb9834061cfa43bff8014f7df7f63bdc/anyio-4.14.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e0/07/a000fe835f76b7e1143242ab1122e6362ef1c03f23f83a045c38859c2ae0/jupyterlab_server-2.28.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e2/22/dbf013a12ec759e54a34a119e9e217435b3f71b2dd5c61a7ade0a25dae87/sqlalchemy-2.0.51-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/e2/67/b78fba3e3031ecc5dafca4a39b0d8895f10db878823e207d69a32f6d1882/ampform_dpd-0.4.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e2/cc/e097523dd85c9cf5d354f78310927f1656c422bd7b2613b2db3e3f9a0f2c/webcolors-25.10.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e5/6d/b53b99a9f2766d095985947a5782f1702cabb129a34f7a802d7197af832f/tzdata-2026.3-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e5/e2/c2e3abf398f80732e58b03be77bde9022550d221dd8781bf586bd4d97cc1/async_lru-2.3.0-py3-none-any.whl
@@ -446,6 +446,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/ab/b5/36c712098e6191d1b4e349304ef73a8d06aed77e56ceaac8c0a306c7bda1/jupyterlab_widgets-3.0.16-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ab/e3/de3c69c04bb0459199264e5f4fdc38755560d196630e13835c5fd57e2fcb/qrules-0.10.10-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ac/fe/11a2e7dead90c694c9ba8514bee059b9a2a4bb2ba9aa613e8859ce634fef/quarto_cli-1.10.18.tar.gz
+      - pypi: https://files.pythonhosted.org/packages/ad/0d/bbb5b15ef5a9a3eb82ac7dc03ff18f5f49d291b030cb1609bfeadb937d64/ampform_dpd-0.4.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ad/66/0d785f0bc5e4315a96c989bb476d0fc07ea4f85132550c7b156ca2035d52/traitlets-5.16.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/b1/16/95309993f1d3748cd644e02e38b75d50cbc0d9561d21f390a76242ce073f/pyyaml-6.0.3-cp313-cp313-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/b1/dd/ead9d8ea85bf202d90cc513b533f9c363121c7792674f78e0d8a854b63b4/jupyterlab_pygments-0.3.0-py3-none-any.whl
@@ -467,7 +468,6 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/d9/a1/4008f14bbc616cfb1ac5b39ea485f9c63031c4634ab3f4cf72e7541f816a/ml_dtypes-0.5.4-cp313-cp313-macosx_10_13_universal2.whl
       - pypi: https://files.pythonhosted.org/packages/da/35/f2287558c17e29fafc8ef3daf819bb9834061cfa43bff8014f7df7f63bdc/anyio-4.14.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e0/07/a000fe835f76b7e1143242ab1122e6362ef1c03f23f83a045c38859c2ae0/jupyterlab_server-2.28.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/e2/67/b78fba3e3031ecc5dafca4a39b0d8895f10db878823e207d69a32f6d1882/ampform_dpd-0.4.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e2/cc/e097523dd85c9cf5d354f78310927f1656c422bd7b2613b2db3e3f9a0f2c/webcolors-25.10.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e5/6d/b53b99a9f2766d095985947a5782f1702cabb129a34f7a802d7197af832f/tzdata-2026.3-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e5/e2/c2e3abf398f80732e58b03be77bde9022550d221dd8781bf586bd4d97cc1/async_lru-2.3.0-py3-none-any.whl
@@ -2985,6 +2985,23 @@ packages:
   - jupyter
   - nbclient
   - wheel
+- pypi: https://files.pythonhosted.org/packages/ad/0d/bbb5b15ef5a9a3eb82ac7dc03ff18f5f49d291b030cb1609bfeadb937d64/ampform_dpd-0.4.1-py3-none-any.whl
+  name: ampform-dpd
+  version: 0.4.1
+  sha256: 445df5c64b75203bf9c9f053db8c29ce358d39bfef1217146eae7fcacdc20cd2
+  requires_dist:
+  - ampform>=0.15.10
+  - attrs>=20.1.0
+  - cloudpickle
+  - frozendict
+  - numpy
+  - qrules>=0.10.0
+  - sympy>=1.10
+  - tensorwaves[jax]
+  - typing-extensions ; python_full_version < '3.11'
+  - tensorwaves[numba] ; extra == 'numba'
+  - tensorwaves[tf] ; extra == 'tf'
+  requires_python: '>=3.10'
 - pypi: https://files.pythonhosted.org/packages/ad/66/0d785f0bc5e4315a96c989bb476d0fc07ea4f85132550c7b156ca2035d52/traitlets-5.16.1-py3-none-any.whl
   name: traitlets
   version: 5.16.1
@@ -3567,23 +3584,6 @@ packages:
   - typing-extensions!=3.10.0.1 ; extra == 'aiosqlite'
   - sqlcipher3-binary ; extra == 'sqlcipher'
   requires_python: '>=3.7'
-- pypi: https://files.pythonhosted.org/packages/e2/67/b78fba3e3031ecc5dafca4a39b0d8895f10db878823e207d69a32f6d1882/ampform_dpd-0.4.0-py3-none-any.whl
-  name: ampform-dpd
-  version: 0.4.0
-  sha256: 28ac25b814d5467b825c9a906ee050fba5c66ad2da7a645f70202684060c3047
-  requires_dist:
-  - ampform>=0.15.10
-  - attrs>=20.1.0
-  - cloudpickle
-  - frozendict
-  - numpy
-  - qrules>=0.10.0
-  - sympy>=1.10
-  - tensorwaves[jax]
-  - typing-extensions ; python_full_version < '3.11'
-  - tensorwaves[numba] ; extra == 'numba'
-  - tensorwaves[tf] ; extra == 'tf'
-  requires_python: '>=3.10'
 - pypi: https://files.pythonhosted.org/packages/e2/cc/e097523dd85c9cf5d354f78310927f1656c422bd7b2613b2db3e3f9a0f2c/webcolors-25.10.0-py3-none-any.whl
   name: webcolors
   version: 25.10.0

@@ -63,11 +63,14 @@ from ampform_dpd.io.serialization.format import (
     get_function_definition,
 )
 from IPython.display import JSON, Math
+from matplotlib_inline.backend_inline import set_matplotlib_formats
+from mpl_toolkits.axes_grid1 import make_axes_locatable  # cspell:ignore mpl_toolkits
 from tqdm.auto import tqdm
 
 THIS_DIR = Path(".").absolute()
 logging.getLogger("ampform.sympy").setLevel(logging.ERROR)
 simplify_latex_rendering()
+set_matplotlib_formats("svg")
 ```
 
 ```{python}
@@ -318,12 +321,7 @@ for checksum in MODEL_DEFINITION["misc"]["amplitude_model_checksums"]:
 # | code-fold: true
 # | code-summary: Validate the serialized intensity
 def evaluate_intensity(model, point: dict[str, float]) -> float:
-    _, _, sigma3 = sorted(model.invariants, key=str)
-    intensity_expr = cached.xreplace(cached.unfold(model), model.variables)
-    intensity_expr = cached.xreplace(intensity_expr, model.parameter_defaults)
-    sigma3_expr = model.invariants[sigma3].xreplace(model.masses).doit()
-    intensity_expr = cached.doit(intensity_expr.xreplace({sigma3: sigma3_expr}))
-    intensity_function = cached.lambdify(intensity_expr, backend="jax")
+    intensity_function = create_intensity_function(model, subsystem=3)
     sigma2_value = point["m_31"] ** 2
     sigma1_value = solve_sigma1_from_cos_theta31(
         model,
@@ -336,6 +334,31 @@ def evaluate_intensity(model, point: dict[str, float]) -> float:
             "sigma2": sigma2_value,
         })
     )
+
+
+def create_intensity_function(
+    model,
+    subsystem: int,
+    resonance_name: str | None = None,
+):
+    invariant = next(s for s in model.invariants if str(s) == f"sigma{subsystem}")
+    intensity_expr = cached.xreplace(cached.unfold(model), model.variables)
+    parameter_defaults = select_resonance_parameters(model, resonance_name)
+    intensity_expr = cached.xreplace(intensity_expr, parameter_defaults)
+    invariant_expr = model.invariants[invariant].xreplace(model.masses).doit()
+    intensity_expr = cached.doit(intensity_expr.xreplace({invariant: invariant_expr}))
+    return cached.lambdify(intensity_expr, backend="jax")
+
+
+def select_resonance_parameters(model, resonance_name: str | None):
+    if resonance_name is None:
+        return model.parameter_defaults
+    return {
+        symbol: value
+        if not str(symbol).startswith("c^") or resonance_name in str(symbol)
+        else 0
+        for symbol, value in model.parameter_defaults.items()
+    }
 
 
 def solve_sigma1_from_cos_theta31(
@@ -378,4 +401,138 @@ validation_results.append({
     "Status": label_diff(reference_value - computed_value),
 })
 pd.DataFrame(validation_results)
+```
+
+## Visualization
+
+```{python}
+# | code-fold: true
+# | code-summary: Configure the visualizations
+i, j = 2, 1
+k, *_ = {1, 2, 3} - {i, j}
+resolution = 1_000
+masses = sorted(model.masses, key=str)
+x_min = float(((masses[j] + masses[k]) ** 2).xreplace(model.masses))
+x_max = float(((masses[0] - masses[i]) ** 2).xreplace(model.masses))
+y_min = float(((masses[i] + masses[k]) ** 2).xreplace(model.masses))
+y_max = float(((masses[0] - masses[j]) ** 2).xreplace(model.masses))
+x_margin = 0.05 * (x_max - x_min)
+y_margin = 0.05 * (y_max - y_min)
+X, Y = jnp.meshgrid(
+    jnp.linspace(x_min - x_margin, x_max + x_margin, num=resolution),
+    jnp.linspace(y_min - y_margin, y_max + y_margin, num=resolution),
+)
+intensity_function = create_intensity_function(model, subsystem=k)
+intensities = intensity_function({f"sigma{i}": X, f"sigma{j}": Y})
+normalized_intensities = intensities / jnp.nansum(intensities)
+
+
+def get_decay_products(
+    decay: ThreeBodyDecay,
+    subsystem: FinalStateID,
+) -> tuple[State, State]:
+    return tuple(s for s in decay.final_state.values() if s.index != subsystem)
+
+
+sigma_labels = {
+    subsystem: Rf"$\sigma_{subsystem} = M^2\left({' '.join(p.latex for p in get_decay_products(DECAY, subsystem))}\right)$"
+    for subsystem in (1, 2, 3)
+}
+# cspell:ignore bbox edgecolor facecolor fontset fontsize labelcolor mathtext ncol savefig
+# cspell:ignore sharey startswith STIX wspace xtick ytick
+plt.rcParams.update({
+    "axes.edgecolor": "#808080",
+    "axes.facecolor": "none",
+    "axes.labelcolor": "#808080",
+    "figure.facecolor": "none",
+    "font.family": "serif",
+    "font.serif": ["STIXGeneral", "DejaVu Serif"],
+    "font.size": 18,
+    "mathtext.fontset": "stix",
+    "savefig.transparent": True,
+    "text.color": "#808080",
+    "xtick.color": "#808080",
+    "ytick.color": "#808080",
+})
+```
+
+```{python}
+# | code-fold: true
+# | code-summary: Render the Dalitz plot
+fig, ax = plt.subplots(figsize=(10, 8))
+mesh = ax.pcolormesh(X, Y, normalized_intensities, rasterized=True)
+ax.set_aspect("equal")
+ax.set_xlabel(sigma_labels[i])
+ax.set_ylabel(sigma_labels[j])
+divider = make_axes_locatable(ax)
+colorbar_axes = divider.append_axes("right", size="5%", pad=0.1)
+colorbar = fig.colorbar(mesh, cax=colorbar_axes)
+colorbar.ax.set_ylabel("Normalized intensity (a.u.)")
+plt.show()
+```
+
+```{python}
+# | code-fold: true
+# | code-summary: Render the mass projection
+# | column: page-inset-right
+resonance_names = sorted({chain["name"].split("[")[0] for chain in CHAIN_DEFS})
+
+
+def project(intensity_values, subsystem: int):
+    if subsystem == i:
+        mass_values = jnp.sqrt(X[0])
+        projection = jnp.nansum(intensity_values, axis=0)
+    else:
+        mass_values = jnp.sqrt(Y[:, 0])
+        projection = jnp.nansum(intensity_values, axis=1)
+    return mass_values, mass_values * projection
+
+
+projections = {}
+normalizations = {}
+for subsystem in (i, j):
+    mass_values, total_projection = project(intensities, subsystem)
+    projections[subsystem] = (mass_values, total_projection)
+    normalizations[subsystem] = jnp.trapezoid(total_projection, mass_values)
+
+fig, axes = plt.subplots(1, 2, figsize=(14, 6), sharey=True)
+for axis, subsystem in zip(axes, (i, j), strict=True):
+    mass_values, total_projection = projections[subsystem]
+    axis.plot(
+        mass_values,
+        total_projection / normalizations[subsystem],
+        color="#808080",
+        lw=3,
+        label="Total",
+    )
+for resonance_name in resonance_names:
+    component_function = create_intensity_function(
+        model,
+        subsystem=k,
+        resonance_name=to_latex(resonance_name),
+    )
+    component = component_function({"sigma1": Y, "sigma2": X})
+    component = jnp.where(jnp.isnan(intensities), jnp.nan, component)
+    for axis, subsystem in zip(axes, (i, j), strict=True):
+        mass_values, component_projection = project(component, subsystem)
+        axis.plot(
+            mass_values,
+            component_projection / normalizations[subsystem],
+            label=resonance_name,
+        )
+axes[0].set_xlabel(R"$m_{13}$ [GeV]")
+axes[1].set_xlabel(R"$m_{23}$ [GeV]")
+axes[0].set_ylabel("Normalized intensity (a.u.)")
+axes[0].set_ylim(bottom=0)
+handles, labels = axes[0].get_legend_handles_labels()
+fig.legend(
+    handles,
+    labels,
+    bbox_to_anchor=(0.5, 0.97),
+    fontsize="small",
+    loc="upper center",
+    ncol=7,
+)
+fig.subplots_adjust(top=0.8, wspace=0.05)
+plt.show()
 ```

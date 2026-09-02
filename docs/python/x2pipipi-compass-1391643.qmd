@@ -2,7 +2,7 @@
 jupyter: python3
 ---
 
-<!-- cspell:ignore deepcopy dtype imag removeprefix -->
+<!-- cspell:ignore dtype imag removeprefix -->
 
 # $X\to \pi^-\pi^+\pi^-$
 
@@ -15,33 +15,18 @@ This page demonstrates deserialization and evaluation of a partial-wave analysis
 ```{python}
 # | code-fold: true
 # | code-summary: Import Python libraries
-from copy import deepcopy
-from pathlib import Path
-import json
 import logging
+from pathlib import Path
 
 import jax.numpy as jnp
 import matplotlib.pyplot as plt
 import pandas as pd
-import sympy as sp
-from ampform.dynamics.form_factor import FormFactor
-from ampform.dynamics.phasespace import PhaseSpaceFactorComplex
-from ampform_dpd import DefinedExpression
-from ampform_dpd.io import cached, perform_cached_lambdify
-from ampform_dpd.io.serialization import amplitude as serialization_amplitude
-from ampform_dpd.io.serialization.amplitude import formulate
-from ampform_dpd.io.serialization.decay import get_final_state, to_decay
-from ampform_dpd.io.serialization.dynamics import (
-    formulate_dynamics,
-    formulate_multichannel_breit_wigner,
-    to_mandelstam_symbol,
-)
-from ampform_dpd.io.serialization.format import (
-    get_decay_chains,
-    get_function_definition,
+from ampform_dpd.io.serialization import (
+    compile_workspace,
+    load_workspace,
+    validate_checksums,
 )
 from matplotlib_inline.backend_inline import set_matplotlib_formats
-from sympy.parsing.sympy_parser import parse_expr
 
 THIS_DIR = Path(".").absolute()
 logging.getLogger("ampform.sympy").setLevel(logging.ERROR)
@@ -49,221 +34,47 @@ set_matplotlib_formats("svg")
 ```
 
 ```{python}
-with open(THIS_DIR.parent.parent / "models" / "x2pipipi-compass-1391643.json") as f:
-    MODEL_DEFINITION = json.load(f)
+MODEL_PATH = THIS_DIR.parent.parent / "models" / "x2pipipi-compass-1391643.json"
+WORKSPACE = load_workspace(MODEL_PATH)
 ```
 
 ## Construct amplitude models
 
-The JSON file contains four distributions from the same mass bin. Since the Python deserializer constructs one distribution at a time, each distribution is selected and formulated separately.
+The JSON file contains four distributions from the same mass bin. `load_workspace`
+formulates all of them, their decays, and their named dynamics functions in one step.
 
 ```{python}
-# | code-fold: true
-# | code-summary: Compatibility adapters for LS-coupled models
-def select_distribution(model_definition: dict, distribution: dict) -> dict:
-    selected = deepcopy(model_definition)
-    selected["distributions"] = [deepcopy(distribution)]
-    for chain_idx, chain in enumerate(get_decay_chains(selected)):
-        for vertex in chain["vertices"]:
-            if "helicities" in vertex:
-                continue
-            has_isobar = any(isinstance(item, list) for item in vertex["node"])
-            vertex["helicities"] = [str(chain_idx), "0"] if has_isobar else ["0", "0"]
-    return selected
-
-
-def get_ls_child_spins(model_definition, chain_idx, vertex_idx):
-    chain = get_decay_chains(model_definition)[chain_idx]
-    vertex = chain["vertices"][vertex_idx]
-    final_state = get_final_state(model_definition)
-    resonance_spin = sp.Rational(chain["propagators"][0]["spin"])
-    return tuple(
-        final_state[item].spin if isinstance(item, int) else resonance_spin
-        for item in vertex["node"]
-    )
-
-
-def formulate_generic_function(propagator, resonance, model):
-    definition = get_function_definition(propagator["parametrization"], model)
-    expression = definition["expression"]
-    expression = expression.replace("^", "**").replace("1im", "I")
-    expression = expression.replace("m_12_sq", "sigma")
-    mandelstam = to_mandelstam_symbol(propagator["node"])
-    return DefinedExpression(
-        expression=parse_expr(
-            expression,
-            local_dict={"i": sp.I, "I": sp.I, "sigma": mandelstam},
-        )
-    )
-
-
-def formulate_analytic_multichannel_breit_wigner(propagator, resonance, model):
-    dynamics = formulate_multichannel_breit_wigner(propagator, resonance, model)
-    s, mass, channels = dynamics.expression.args
-    channel_terms = (
-        channel.coupling_squared
-        * PhaseSpaceFactorComplex(channel.s, channel.m1, channel.m2)
-        * FormFactor(
-            channel.s,
-            channel.m1,
-            channel.m2,
-            channel.angular_momentum,
-            channel.meson_radius,
-        )
-        ** 2
-        for channel in channels
-    )
-    expression = 1 / (mass**2 - s - sp.I * sum(channel_terms))
-    return DefinedExpression(expression=expression, parameters=dynamics.parameters)
-
-
-serialization_amplitude._get_child_spins = get_ls_child_spins
-ADDITIONAL_BUILDERS = {
-    "generic_function": formulate_generic_function,
-    "MultichannelBreitWigner": formulate_analytic_multichannel_breit_wigner,
-}
-SELECTED_DEFINITIONS = {
-    distribution["name"]: select_distribution(MODEL_DEFINITION, distribution)
-    for distribution in MODEL_DEFINITION["distributions"]
-}
-```
-
-```{python}
-# | output: false
-MODELS = {
-    name: formulate(
-        definition,
-        cleanup_summations=True,
-        additional_builders=ADDITIONAL_BUILDERS,
-    )
-    for name, definition in SELECTED_DEFINITIONS.items()
-}
+MODELS = WORKSPACE.distributions
 ```
 
 ```{python}
 pd.DataFrame({
     "Distribution": list(MODELS),
-    "Decay chains": [len(get_decay_chains(model)) for model in SELECTED_DEFINITIONS.values()],
+    "Decay chains": [len(decay.chains) for decay in WORKSPACE.decays.values()],
 })
 ```
 
 ## Validation
 
-The table compares all serialized checkpoints with the Python implementation. The marks "🟢", "🟡", and "🔴" indicate an absolute difference of $<10^{-10}$, $<10^{-2}$, or $\ge10^{-2}$, respectively. The numerical results are shown even when a checkpoint does not agree with the reference value.
-
-```{python}
-# | code-fold: true
-# | code-summary: Validation helpers
-checksum_points = {
-    point["name"]: {parameter["name"]: parameter["value"] for parameter in point["parameters"]}
-    for point in MODEL_DEFINITION["parameter_points"]
-}
-
-
-def to_number(value: float | str) -> float | complex:
-    if isinstance(value, str):
-        value = complex(value.replace(" ", "").replace("i", "j"))
-    number = complex(value)
-    return number.real if number.imag == 0 else number
-
-
-def round_number(value: float | complex, digits: int = 6) -> float | complex:
-    number = complex(value)
-    if number.imag == 0:
-        return round(number.real, digits)
-    return complex(round(number.real, digits), round(number.imag, digits))
-
-
-def label_diff(difference: complex) -> str:
-    absolute_difference = abs(difference)
-    if absolute_difference < 1e-10:
-        return "🟢"
-    if absolute_difference < 1e-2:
-        return "🟡"
-    return "🔴"
-
-
-def create_intensity_function(model, subsystem: int):
-    invariant = next(s for s in model.invariants if str(s) == f"sigma{subsystem}")
-    intensity_expr = cached.xreplace(cached.unfold(model), model.variables)
-    intensity_expr = cached.xreplace(intensity_expr, model.parameter_defaults)
-    invariant_expr = model.invariants[invariant].xreplace(model.masses).doit()
-    intensity_expr = cached.doit(intensity_expr.xreplace({invariant: invariant_expr}))
-    return cached.lambdify(intensity_expr, backend="jax")
-
-
-def evaluate_intensity(model, point: dict[str, float], pair: tuple[int, int]) -> float:
-    i, j = pair
-    k, *_ = {1, 2, 3} - set(pair)
-    invariants = {str(s): s for s in model.invariants}
-    sigma_j = invariants[f"sigma{j}"]
-    sigma_k = invariants[f"sigma{k}"]
-    angle_expr = next(
-        expression
-        for angle, expression in model.variables.items()
-        if str(angle) == f"theta_{i}{j}"
-    )
-    sigma_k_value = point[f"m_{i}{j}"] ** 2
-    equation = sp.Eq(
-        sp.cos(angle_expr).xreplace(model.parameter_defaults),
-        point[f"cos_theta_{i}{j}"],
-    )
-    sigma_j_value = sp.solve(equation.subs(sigma_k, sigma_k_value), sigma_j)[0]
-    function = create_intensity_function(model, subsystem=i)
-    value = function({str(sigma_j): float(sigma_j_value), str(sigma_k): sigma_k_value})
-    return float(jnp.real(value))
-```
+`validate_checksums` converts real and complex references, transforms serialized
+coordinates, and returns one structured result per checkpoint. Failed comparisons or
+evaluations retain their diagnostics without interrupting the remaining checks.
 
 ```{python}
 # | code-fold: true
 # | code-summary: Compute every serialized checkpoint
 # | column: page-inset
-chains_by_propagator = {
-    propagator["parametrization"]: chain
-    for definition in SELECTED_DEFINITIONS.values()
-    for chain in get_decay_chains(definition)
-    for propagator in chain["propagators"]
-}
-validation_results = []
-for checksum in MODEL_DEFINITION["misc"]["amplitude_model_checksums"]:
-    distribution_name = checksum["distribution"]
-    point = checksum_points[checksum["point"]]
-    reference_value = to_number(checksum["value"])
-    chain = chains_by_propagator.get(distribution_name)
-    if chain is None:
-        computed_value = evaluate_intensity(
-            MODELS[distribution_name],
-            point,
-            pair=(2, 3),
-        )
-    else:
-        dynamics = formulate_dynamics(
-            chain,
-            MODEL_DEFINITION,
-            additional_definitions=ADDITIONAL_BUILDERS,
-        )
-        expression = dynamics.expression.doit()
-        variables = expression.free_symbols - dynamics.parameters.keys()
-        if variables:
-            function = perform_cached_lambdify(
-                expression,
-                parameters=dynamics.parameters,
-            )
-            variable = next(iter(variables))
-            computed_value = function({str(variable): next(iter(point.values()))})
-        else:
-            computed_value = complex(expression.xreplace(dynamics.parameters))
-    difference = abs(reference_value - computed_value)
-    validation_results.append({
-        "Distribution": distribution_name,
-        "Point": checksum["point"],
-        "Reference": round_number(reference_value),
-        "Computed": round_number(computed_value),
-        "Difference": difference,
-        "Status": label_diff(reference_value - computed_value),
-    })
-
-pd.DataFrame(validation_results, dtype=object)
+compiled_workspace = compile_workspace(WORKSPACE, backend="jax")
+checksum_results = validate_checksums(compiled_workspace)
+pd.DataFrame({
+    "Distribution": [result.target for result in checksum_results],
+    "Point": [result.point_name for result in checksum_results],
+    "Reference": [result.reference for result in checksum_results],
+    "Computed": [result.value for result in checksum_results],
+    "Difference": [result.difference for result in checksum_results],
+    "Passed": [result.passed for result in checksum_results],
+    "Diagnostic": [result.diagnostic for result in checksum_results],
+})
 ```
 
 ## Visualization
@@ -276,7 +87,6 @@ The four distributions in the selected $3\pi$ mass bin are shown over the same p
 # | code-fold: true
 # | code-summary: Compute the four Dalitz plots
 x_subsystem, y_subsystem = 3, 1
-eliminated_subsystem, *_ = {1, 2, 3} - {x_subsystem, y_subsystem}
 resolution = 200
 intensity_grids = {}
 for name, model in MODELS.items():
@@ -299,7 +109,7 @@ for name, model in MODELS.items():
         jnp.linspace(x_min - x_margin, x_max + x_margin, resolution),
         jnp.linspace(y_min - y_margin, y_max + y_margin, resolution),
     )
-    function = create_intensity_function(model, subsystem=eliminated_subsystem)
+    function = compiled_workspace.functions[name]
     values = jnp.real(
         function({f"sigma{x_subsystem}": X, f"sigma{y_subsystem}": Y})
     )

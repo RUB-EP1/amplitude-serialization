@@ -8,10 +8,10 @@ jupyter: python3
 Model definition: [`lc2ppik-lhcb-2683025.json`](https://github.com/RUB-EP1/amplitude-serialization/blob/main/models/lc2ppik-lhcb-2683025.json).
 :::
 
-This notebooks illustrates the use of the [`ampform_dpd.io.serialization`](https://ampform-dpd.rtfd.io/0.2.1rc1/api/ampform_dpd.io.serialization.html) module for the decay $\Lambda_c^+ \to p K^- \pi^+$. The corresponding model was optimized to a data sample of roughly half a million $\Lambda_c^{\pm}$ decay candidates by the LHCb collaboration, [INSPIRE-HEP 2683025](https://inspirehep.net/literature/2683025).
+This notebook illustrates the use of the [`ampform_dpd.io.serialization`](https://ampform-dpd.readthedocs.io/latest/api/ampform_dpd.io.serialization.html) module for the decay $\Lambda_c^+ \to p K^- \pi^+$. The corresponding model was optimized to a data sample of roughly half a million $\Lambda_c^{\pm}$ decay candidates by the LHCb collaboration, [INSPIRE-HEP 2683025](https://inspirehep.net/literature/2683025).
 
 ::: {.callout-warning}
-The [`ampform_dpd.io.serialization`](https://ampform-dpd.readthedocs.io/0.2.1rc0/api/ampform_dpd.io.serializatoin/) module is a preview feature. This notebook illustrates the deserialization of the amplitude model JSON file to symbolic expressions. Keep an eye on [ComPWA/ampform-dpd#133](https://github.com/ComPWA/ampform-dpd/issues/133) for a list of tracked issues.
+The `ampform_dpd.io.serialization` module is a preview feature. This notebook illustrates the complete workflow for loading the amplitude model JSON file into a symbolic workspace, compiling it, and validating its serialized checksums.
 :::
 
 ## Import model
@@ -19,17 +19,14 @@ The [`ampform_dpd.io.serialization`](https://ampform-dpd.readthedocs.io/0.2.1rc0
 ```{python}
 # | code-fold: true
 # | code-summary: Import Python libraries
-from pathlib import Path
-import json
 import logging
-import os
+from pathlib import Path
 
 import jax.numpy as jnp
 import matplotlib.pyplot as plt
 import pandas as pd
 import sympy as sp
 from ampform.dynamics.form_factor import FormFactor
-from ampform.sympy import perform_cached_doit
 from ampform_dpd.decay import FinalStateID, State, ThreeBodyDecay
 from ampform_dpd.dynamics import (
     BreitWigner,
@@ -38,21 +35,22 @@ from ampform_dpd.dynamics import (
 )
 from ampform_dpd.io import (
     aslatex,
-    cached,
-    perform_cached_lambdify,
     simplify_latex_rendering,
     unfold_definitions,
+)
+from ampform_dpd.io.serialization import (
+    compile_workspace,
+    load_workspace,
+    validate_checksums,
 )
 from ampform_dpd.io.serialization.amplitude import (
     HelicityRecoupling,
     LSRecoupling,
     ParityRecoupling,
-    formulate,
     formulate_aligned_amplitude,
     formulate_chain_amplitude,
     formulate_recoupling,
 )
-from ampform_dpd.io.serialization.decay import to_decay
 from ampform_dpd.io.serialization.dynamics import (
     formulate_breit_wigner,
     formulate_dynamics,
@@ -75,8 +73,7 @@ set_matplotlib_formats("svg")
 ```
 
 ```{python}
-with open(THIS_DIR.parent.parent / "models" / "lc2ppik-lhcb-2683025.json") as f:
-    MODEL_DEFINITION = json.load(f)
+MODEL_PATH = THIS_DIR.parent.parent / "models" / "lc2ppik-lhcb-2683025.json"
 ```
 
 ## Construct three-body decay
@@ -102,7 +99,9 @@ def to_latex(name: str) -> str:
 ```
 
 ```{python}
-DECAY = to_decay(MODEL_DEFINITION, to_latex=to_latex)
+WORKSPACE = load_workspace(MODEL_PATH, to_latex=to_latex)
+MODEL_DEFINITION = WORKSPACE.definition
+((INTENSITY_NAME, DECAY),) = WORKSPACE.decays.items()
 Math(aslatex(DECAY, with_jp=True))
 ```
 
@@ -213,6 +212,13 @@ amplitude_expr, _ = formulate_aligned_amplitude(MODEL_DEFINITION, λ0, λ1, λ2,
 amplitude_expr.cleanup()
 ```
 
+The workspace formulates every serialized distribution while it is loaded. The full
+intensity model is therefore available without another formulation step.
+
+```{python}
+model = WORKSPACE.distributions[INTENSITY_NAME]
+```
+
 ### Amplitude for the decay chain
 
 #### Helicity recouplings
@@ -257,151 +263,28 @@ Math(aslatex(definitions))
 
 ### Validation
 
-```{python}
-# | code-fold: true
-checksum_points = {
-    point["name"]: {par["name"]: par["value"] for par in point["parameters"]}
-    for point in MODEL_DEFINITION["parameter_points"]
-}
-```
-
-The table lists the validation checks and their status. The marks "🟢", "🟡", and "🔴"
-indicate an accuracy of $<10^{-10}$, $<10^{-2}$, or $\ge10^{-2}$, respectively, for
-the difference between the reference and computed values.
+`compile_workspace` turns the symbolic workspace into numerical TensorWaves
+functions. Its default targets are the distributions and named functions referenced
+by the serialized checksums. `validate_checksums` transforms each reference point to
+the required coordinates and returns a structured result without aborting the other
+checks when an individual evaluation fails.
 
 ```{python}
 # | code-fold: true
-# | code-summary: Validate serialized propagators
-def to_complex(value: float | str) -> complex:
-    if isinstance(value, str):
-        return complex(value.replace(" ", "").replace("i", "j"))
-    return complex(value)
-
-
-def label_diff(difference: complex) -> str:
-    absolute_difference = abs(difference)
-    if absolute_difference < 1e-10:
-        return "🟢"
-    if absolute_difference < 1e-2:
-        return "🟡"
-    return "🔴"
-
-
-chains_by_propagator = {
-    propagator["parametrization"]: chain
-    for chain in CHAIN_DEFS
-    for propagator in chain["propagators"]
-}
-validation_results = []
-for checksum in MODEL_DEFINITION["misc"]["amplitude_model_checksums"]:
-    distribution_name = checksum["distribution"]
-    chain = chains_by_propagator.get(distribution_name)
-    if chain is None:
-        continue
-    dynamics = formulate_dynamics(chain, MODEL_DEFINITION)
-    function = perform_cached_lambdify(
-        dynamics.expression.doit(),
-        parameters=dynamics.parameters,
-    )
-    point = checksum_points[checksum["point"]]
-    variable = next(iter(dynamics.expression.free_symbols - dynamics.parameters.keys()))
-    computed_value = function({str(variable): next(iter(point.values()))})
-    reference_value = to_complex(checksum["value"])
-    difference = abs(reference_value - computed_value)
-    assert difference < 1e-10, (
-        f"{distribution_name} at {checksum['point']} differs by {difference}"
-    )
-    validation_results.append({
-        "Distribution": distribution_name,
-        "Point": checksum["point"],
-        "Status": label_diff(reference_value - computed_value),
-    })
-```
-
-```{python}
-# | code-fold: true
-# | code-summary: Validate the serialized intensity
-def evaluate_intensity(model, point: dict[str, float]) -> float:
-    intensity_function = create_intensity_function(model, subsystem=3)
-    sigma2_value = point["m_31"] ** 2
-    sigma1_value = solve_sigma1_from_cos_theta31(
-        model,
-        cos_theta31=point["cos_theta_31"],
-        sigma2_value=sigma2_value,
-    )
-    return float(
-        intensity_function({
-            "sigma1": sigma1_value,
-            "sigma2": sigma2_value,
-        })
-    )
-
-
-def create_intensity_function(
-    model,
-    subsystem: int,
-    resonance_name: str | None = None,
-):
-    invariant = next(s for s in model.invariants if str(s) == f"sigma{subsystem}")
-    intensity_expr = cached.xreplace(cached.unfold(model), model.variables)
-    parameter_defaults = select_resonance_parameters(model, resonance_name)
-    intensity_expr = cached.xreplace(intensity_expr, parameter_defaults)
-    invariant_expr = model.invariants[invariant].xreplace(model.masses).doit()
-    intensity_expr = cached.doit(intensity_expr.xreplace({invariant: invariant_expr}))
-    return cached.lambdify(intensity_expr, backend="jax")
-
-
-def select_resonance_parameters(model, resonance_name: str | None):
-    if resonance_name is None:
-        return model.parameter_defaults
-    return {
-        symbol: value
-        if not str(symbol).startswith("c^") or resonance_name in str(symbol)
-        else 0
-        for symbol, value in model.parameter_defaults.items()
-    }
-
-
-def solve_sigma1_from_cos_theta31(
-    model,
-    cos_theta31: float,
-    sigma2_value: float,
-) -> float:
-    sigma1, sigma2, _ = sorted(model.invariants, key=str)
-    theta31_expr = next(
-        expression
-        for angle, expression in model.variables.items()
-        if str(angle) == "theta_31"
-    )
-    solutions = sp.solve(
-        sp.Eq(
-            sp.cos(theta31_expr).xreplace(model.parameter_defaults),
-            cos_theta31,
-        ),
-        sigma1,
-    )
-    return float(solutions[0].xreplace({sigma2: sigma2_value}))
-
-
-intensity_checksum = next(
-    checksum
-    for checksum in MODEL_DEFINITION["misc"]["amplitude_model_checksums"]
-    if checksum["distribution"] == MODEL_DEFINITION["distributions"][0]["name"]
-)
-model = formulate(MODEL_DEFINITION, cleanup_summations=True, to_latex=to_latex)
-point = checksum_points[intensity_checksum["point"]]
-computed_value = evaluate_intensity(model, point)
-reference_value = to_complex(intensity_checksum["value"])
-difference = abs(reference_value - computed_value)
-assert difference < 1e-10, (
-    f"default_model at {intensity_checksum['point']} differs by {difference}"
-)
-validation_results.append({
-    "Distribution": intensity_checksum["distribution"],
-    "Point": intensity_checksum["point"],
-    "Status": label_diff(reference_value - computed_value),
+# | code-summary: Compile and validate all checksum targets
+compiled_workspace = compile_workspace(WORKSPACE, backend="jax")
+checksum_results = validate_checksums(compiled_workspace)
+validation_table = pd.DataFrame({
+    "Distribution": [result.target for result in checksum_results],
+    "Point": [result.point_name for result in checksum_results],
+    "Computed": [result.value for result in checksum_results],
+    "Expected": [result.reference for result in checksum_results],
+    "Difference": [result.difference for result in checksum_results],
+    "Passed": [result.passed for result in checksum_results],
+    "Diagnostic": [result.diagnostic for result in checksum_results],
 })
-pd.DataFrame(validation_results)
+assert all(result.passed for result in checksum_results)
+validation_table
 ```
 
 ## Visualization
@@ -423,8 +306,9 @@ X, Y = jnp.meshgrid(
     jnp.linspace(x_min - x_margin, x_max + x_margin, num=resolution),
     jnp.linspace(y_min - y_margin, y_max + y_margin, num=resolution),
 )
-intensity_function = create_intensity_function(model, subsystem=k)
-intensities = intensity_function({f"sigma{i}": X, f"sigma{j}": Y})
+dalitz_data = {f"sigma{i}": X, f"sigma{j}": Y}
+intensity_function = compiled_workspace.functions[INTENSITY_NAME]
+intensities = intensity_function(dalitz_data)
 normalized_intensities = intensities / jnp.nansum(intensities)
 
 
@@ -507,12 +391,19 @@ for axis, subsystem in zip(axes, (i, j), strict=True):
         label="Total",
     )
 for resonance_name in resonance_names:
-    component_function = create_intensity_function(
-        model,
-        subsystem=k,
-        resonance_name=to_latex(resonance_name),
+    resonance_latex = to_latex(resonance_name)
+    coupling_overrides = {
+        symbol: value if resonance_latex in str(symbol) else 0
+        for symbol, value in model.parameter_defaults.items()
+        if str(symbol).startswith("c^")
+    }
+    component_workspace = compile_workspace(
+        WORKSPACE,
+        backend="jax",
+        targets=[INTENSITY_NAME],
+        parameter_overrides=coupling_overrides,
     )
-    component = component_function({"sigma1": Y, "sigma2": X})
+    component = component_workspace.functions[INTENSITY_NAME](dalitz_data)
     component = jnp.where(jnp.isnan(intensities), jnp.nan, component)
     for axis, subsystem in zip(axes, (i, j), strict=True):
         mass_values, component_projection = project(component, subsystem)

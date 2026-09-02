@@ -2,7 +2,7 @@
 jupyter: python3
 ---
 
-<!-- cspell:ignore deepcopy dtype imag isfinite mathrm startswith -->
+<!-- cspell:ignore dtype imag isfinite mathrm startswith -->
 
 # $\Lambda_b^0 \to p K^- \gamma$
 
@@ -15,31 +15,21 @@ This page demonstrates deserialization and evaluation of an amplitude model for 
 ```{python}
 # | code-fold: true
 # | code-summary: Import Python libraries
-from copy import deepcopy
-from pathlib import Path
-import json
 import logging
+from pathlib import Path
 
 import jax.numpy as jnp
 import matplotlib.pyplot as plt
 import pandas as pd
 import sympy as sp
-from ampform.dynamics.form_factor import BreakupMomentumSquared
-from ampform_dpd import DefinedExpression
 from ampform_dpd.decay import FinalStateID, State, ThreeBodyDecay
-from ampform_dpd.io import aslatex, cached, perform_cached_lambdify
-from ampform_dpd.io.serialization import amplitude as serialization_amplitude
-from ampform_dpd.io.serialization.amplitude import formulate
-from ampform_dpd.io.serialization.decay import get_final_state, to_decay
-from ampform_dpd.io.serialization.dynamics import (
-    formulate_dynamics,
-    to_mandelstam_symbol,
-    to_mass_symbol,
+from ampform_dpd.io import aslatex
+from ampform_dpd.io.serialization import (
+    compile_workspace,
+    load_workspace,
+    validate_checksums,
 )
-from ampform_dpd.io.serialization.format import (
-    get_decay_chains,
-    get_function_definition,
-)
+from ampform_dpd.io.serialization.format import get_decay_chains
 from IPython.display import Math
 from matplotlib_inline.backend_inline import set_matplotlib_formats
 from mpl_toolkits.axes_grid1 import make_axes_locatable  # cspell:ignore mpl_toolkits
@@ -50,8 +40,7 @@ set_matplotlib_formats("svg")
 ```
 
 ```{python}
-with open(THIS_DIR.parent.parent / "models" / "lb2pkg-lhcb-2765817.json") as f:
-    MODEL_DEFINITION = json.load(f)
+MODEL_PATH = THIS_DIR.parent.parent / "models" / "lb2pkg-lhcb-2765817.json"
 ```
 
 ## Construct three-body decay
@@ -74,8 +63,9 @@ def to_latex(name: str) -> str:
         return Rf"\Lambda({name[1:]})"
     return name
 
-
-DECAY = to_decay(MODEL_DEFINITION, to_latex=to_latex)
+WORKSPACE = load_workspace(MODEL_PATH, to_latex=to_latex)
+MODEL_DEFINITION = WORKSPACE.definition
+((INTENSITY_NAME, DECAY),) = WORKSPACE.decays.items()
 Math(aslatex(DECAY, with_jp=True))
 ```
 
@@ -85,227 +75,46 @@ The model contains Breit-Wigner and multichannel Breit-Wigner propagators, as we
 
 ```{python}
 CHAIN_DEFS = get_decay_chains(MODEL_DEFINITION)
-chains_by_propagator = {
-    propagator["parametrization"]: chain
-    for chain in CHAIN_DEFS
-    for propagator in chain["propagators"]
-}
 ```
 
 ```{python}
-L1520_BW = formulate_dynamics(chains_by_propagator["L1520_BW"], MODEL_DEFINITION)
+L1520_BW = WORKSPACE.functions["L1520_BW"]
 Math(aslatex(L1520_BW))
 ```
 
 ```{python}
-L1405_Flatte = formulate_dynamics(
-    chains_by_propagator["L1405_Flatte"],
-    MODEL_DEFINITION,
-)
+L1405_Flatte = WORKSPACE.functions["L1405_Flatte"]
 Math(aslatex(L1405_Flatte))
 ```
 
 ## Construct amplitude model
 
-The current Python preview API needs two small compatibility adapters for this older LS-coupled model. They preserve a unique symbol for every serialized LS coupling and implement the serialized `MomentumPower` and constant `Polynomial` functions.
+`load_workspace` formulates LS-coupled models and their serialized dynamics without
+notebook-specific compatibility adapters.
 
 ```{python}
-# | code-fold: true
-# | code-summary: Compatibility adapters for LS-coupled models
-def prepare_ls_model(model_definition: dict) -> dict:
-    model_definition = deepcopy(model_definition)
-    chains = get_decay_chains(model_definition)
-    for chain_idx, chain in enumerate(chains):
-        for vertex in chain["vertices"]:
-            if "helicities" in vertex:
-                continue
-            has_isobar = any(isinstance(item, list) for item in vertex["node"])
-            vertex["helicities"] = [str(chain_idx), "0"] if has_isobar else ["0", "0"]
-    return model_definition
-
-
-def get_ls_child_spins(model_definition, chain_idx, vertex_idx):
-    chain = get_decay_chains(model_definition)[chain_idx]
-    vertex = chain["vertices"][vertex_idx]
-    final_state = get_final_state(model_definition)
-    resonance_spin = sp.Rational(chain["propagators"][0]["spin"])
-    return tuple(
-        final_state[item].spin if isinstance(item, int) else resonance_spin
-        for item in vertex["node"]
-    )
-
-
-def formulate_polynomial(propagator, resonance, model):
-    definition = get_function_definition(propagator["parametrization"], model)
-    variable = to_mandelstam_symbol(propagator["node"])
-    expression = sum(
-        coefficient * variable**power
-        for power, coefficient in enumerate(definition["coefficients"])
-    )
-    return DefinedExpression(expression=expression)
-
-
-_original_formulate_form_factor = serialization_amplitude.formulate_form_factor
-
-
-def formulate_form_factor(vertex, model):
-    function_name = vertex.get("formfactor")
-    if not function_name:
-        return DefinedExpression()
-    definition = get_function_definition(function_name, model)
-    if definition["type"] != "MomentumPower":
-        return _original_formulate_form_factor(vertex, model)
-    node = vertex["node"]
-    if all(isinstance(item, int) for item in node):
-        s = to_mandelstam_symbol(node)
-        m1, m2 = (to_mass_symbol(item) for item in node)
-    else:
-        s = to_mandelstam_symbol(node) ** 2
-        m1, m2 = (to_mass_symbol(item) for item in node)
-        m1 = sp.sqrt(m1)
-    power = sp.Rational(definition["l"], 2)
-    return DefinedExpression(expression=BreakupMomentumSquared(s, m1, m2) ** power)
-
-
-serialization_amplitude._get_child_spins = get_ls_child_spins
-serialization_amplitude.formulate_form_factor = formulate_form_factor
-LS_MODEL_DEFINITION = prepare_ls_model(MODEL_DEFINITION)
-ADDITIONAL_BUILDERS = {"Polynomial": formulate_polynomial}
-```
-
-```{python}
-# | output: false
-model = formulate(
-    LS_MODEL_DEFINITION,
-    cleanup_summations=True,
-    to_latex=to_latex,
-    additional_builders=ADDITIONAL_BUILDERS,
-)
+model = WORKSPACE.distributions[INTENSITY_NAME]
 ```
 
 ## Validation
 
-The table compares all serialized checkpoints with the Python implementation. The marks "🟢", "🟡", and "🔴" indicate an absolute difference of $<10^{-10}$, $<10^{-2}$, or $\ge10^{-2}$, respectively.
-
-```{python}
-# | code-fold: true
-# | code-summary: Validation helpers
-checksum_points = {
-    point["name"]: {parameter["name"]: parameter["value"] for parameter in point["parameters"]}
-    for point in MODEL_DEFINITION["parameter_points"]
-}
-
-
-def to_number(value: float | str) -> float | complex:
-    if isinstance(value, str):
-        value = complex(value.replace(" ", "").replace("i", "j"))
-    number = complex(value)
-    return number.real if number.imag == 0 else number
-
-
-def round_number(value: float | complex, digits: int = 6) -> float | complex:
-    number = complex(value)
-    if number.imag == 0:
-        return round(number.real, digits)
-    return complex(round(number.real, digits), round(number.imag, digits))
-
-
-def label_diff(difference: complex) -> str:
-    absolute_difference = abs(difference)
-    if absolute_difference < 1e-10:
-        return "🟢"
-    if absolute_difference < 1e-2:
-        return "🟡"
-    return "🔴"
-
-
-def create_intensity_function(
-    model,
-    subsystem: int,
-    resonance_name: str | None = None,
-):
-    invariant = next(s for s in model.invariants if str(s) == f"sigma{subsystem}")
-    intensity_expr = cached.xreplace(cached.unfold(model), model.variables)
-    parameter_defaults = select_resonance_parameters(model, resonance_name)
-    intensity_expr = cached.xreplace(intensity_expr, parameter_defaults)
-    invariant_expr = model.invariants[invariant].xreplace(model.masses).doit()
-    intensity_expr = cached.doit(intensity_expr.xreplace({invariant: invariant_expr}))
-    return cached.lambdify(intensity_expr, backend="jax")
-
-
-def select_resonance_parameters(model, resonance_name: str | None):
-    if resonance_name is None:
-        return model.parameter_defaults
-    return {
-        symbol: value
-        if not str(symbol).startswith("c^") or resonance_name in str(symbol)
-        else 0
-        for symbol, value in model.parameter_defaults.items()
-    }
-
-
-def evaluate_intensity(model, point: dict[str, float], pair: tuple[int, int]) -> float:
-    i, j = pair
-    k, *_ = {1, 2, 3} - set(pair)
-    invariants = {str(s): s for s in model.invariants}
-    sigma_j = invariants[f"sigma{j}"]
-    sigma_k = invariants[f"sigma{k}"]
-    angle_expr = next(
-        expression
-        for angle, expression in model.variables.items()
-        if str(angle) == f"theta_{i}{j}"
-    )
-    sigma_k_value = point[f"m_{i}{j}"] ** 2
-    equation = sp.Eq(
-        sp.cos(angle_expr).xreplace(model.parameter_defaults),
-        point[f"cos_theta_{i}{j}"],
-    )
-    sigma_j_value = sp.solve(equation.subs(sigma_k, sigma_k_value), sigma_j)[0]
-    function = create_intensity_function(model, subsystem=i)
-    value = function({str(sigma_j): float(sigma_j_value), str(sigma_k): sigma_k_value})
-    return float(jnp.real(value))
-```
+`validate_checksums` compiles each serialized target independently and records numeric
+differences or diagnostics without aborting the remaining checks.
 
 ```{python}
 # | code-fold: true
 # | code-summary: Compute every serialized checkpoint
 # | column: page-inset
-validation_results = []
-for checksum in MODEL_DEFINITION["misc"]["amplitude_model_checksums"]:
-    distribution_name = checksum["distribution"]
-    point = checksum_points[checksum["point"]]
-    reference_value = to_number(checksum["value"])
-    chain = chains_by_propagator.get(distribution_name)
-    if chain is None:
-        computed_value = evaluate_intensity(model, point, pair=(1, 2))
-    else:
-        dynamics = formulate_dynamics(
-            chain,
-            MODEL_DEFINITION,
-            additional_definitions=ADDITIONAL_BUILDERS,
-        )
-        expression = dynamics.expression.doit()
-        variables = expression.free_symbols - dynamics.parameters.keys()
-        if variables:
-            function = perform_cached_lambdify(
-                expression,
-                parameters=dynamics.parameters,
-            )
-            variable = next(iter(variables))
-            computed_value = function({str(variable): next(iter(point.values()))})
-        else:
-            computed_value = complex(expression.xreplace(dynamics.parameters))
-    difference = abs(reference_value - computed_value)
-    validation_results.append({
-        "Distribution": distribution_name,
-        "Point": checksum["point"],
-        "Reference": round_number(reference_value),
-        "Computed": round_number(computed_value),
-        "Difference": difference,
-        "Status": label_diff(reference_value - computed_value),
-    })
-
-pd.DataFrame(validation_results, dtype=object)
+checksum_results = validate_checksums(WORKSPACE, backend="jax")
+pd.DataFrame({
+    "Distribution": [result.target for result in checksum_results],
+    "Point": [result.point_name for result in checksum_results],
+    "Reference": [result.reference for result in checksum_results],
+    "Computed": [result.value for result in checksum_results],
+    "Difference": [result.difference for result in checksum_results],
+    "Passed": [result.passed for result in checksum_results],
+    "Diagnostic": [result.diagnostic for result in checksum_results],
+})
 ```
 
 ## Visualization
@@ -318,7 +127,6 @@ The Dalitz plot shows the intensity up to $m_{pK^-}=2.5\ \mathrm{GeV}$. The plot
 # | code-fold: true
 # | code-summary: Configure the Dalitz plot
 x_subsystem, y_subsystem = 3, 2
-eliminated_subsystem, *_ = {1, 2, 3} - {x_subsystem, y_subsystem}
 resolution = 250
 x_min, x_max = 1.9, 2.5**2
 y_min, y_max = 5, 27
@@ -326,11 +134,17 @@ X, Y = jnp.meshgrid(
     jnp.linspace(x_min, x_max, resolution),
     jnp.linspace(y_min, y_max, resolution),
 )
-intensity_function = create_intensity_function(model, subsystem=eliminated_subsystem)
-intensities = jnp.real(intensity_function({
+dalitz_data = {
     f"sigma{x_subsystem}": X,
     f"sigma{y_subsystem}": Y,
-}))
+}
+compiled_workspace = compile_workspace(
+    WORKSPACE,
+    backend="jax",
+    targets=[INTENSITY_NAME],
+)
+intensity_function = compiled_workspace.functions[INTENSITY_NAME]
+intensities = jnp.real(intensity_function(dalitz_data))
 normalized_intensities = intensities / jnp.nansum(intensities)
 
 
@@ -421,12 +235,19 @@ ax.plot(
     label="Total",
 )
 for resonance_name in resonance_names:
-    component_function = create_intensity_function(
-        model,
-        subsystem=eliminated_subsystem,
-        resonance_name=to_latex(resonance_name),
+    resonance_latex = to_latex(resonance_name)
+    coupling_overrides = {
+        symbol: value if resonance_latex in str(symbol) else 0
+        for symbol, value in model.parameter_defaults.items()
+        if str(symbol).startswith("c^")
+    }
+    component_workspace = compile_workspace(
+        WORKSPACE,
+        backend="jax",
+        targets=[INTENSITY_NAME],
+        parameter_overrides=coupling_overrides,
     )
-    component = jnp.real(component_function({"sigma2": Y, "sigma3": X}))
+    component = jnp.real(component_workspace.functions[INTENSITY_NAME](dalitz_data))
     component = jnp.where(jnp.isnan(intensities), jnp.nan, component)
     label = Rf"${to_latex(resonance_name)}$"
     ax.plot(

@@ -101,6 +101,8 @@ model = workspace.distributions[intensity_name]
 `validate_checksums` compiles each serialized target independently and records numeric
 differences or diagnostics without aborting the remaining checks.
 
+The status marks 🟢, 🟡, and 🔴 indicate absolute differences of $<10^{-10}$, $<10^{-2}$, and $\ge10^{-2}$, respectively. Failed evaluations are marked 🔴; the diagnostic column provides details.
+
 ```{python}
 # | code-fold: true
 # | code-summary: Compute every serialized checkpoint
@@ -112,7 +114,10 @@ pd.DataFrame({
     "Reference": [result.reference for result in checksum_results],
     "Computed": [result.value for result in checksum_results],
     "Difference": [result.difference for result in checksum_results],
-    "Passed": [result.passed for result in checksum_results],
+    "Status": [
+        "🟢" if result.difference < 1e-10 else "🟡" if result.difference < 1e-2 else "🔴"
+        for result in checksum_results
+    ],
     "Diagnostic": [result.diagnostic for result in checksum_results],
 })
 ```

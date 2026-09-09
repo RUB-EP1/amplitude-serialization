@@ -23,7 +23,7 @@ website:
   repo-subdir: docs
   repo-url: https://github.com/RUB-EP1/amplitude-serialization
   navbar:
-    logo: https://raw.githubusercontent.com/Democratizing-Models/Organization/13ef5e7c107e7af154b86c917d867463f4f81127/logo/v1/DEMOS-Icon.svg?token=GHSAT0AAAAAADZXUYF3LMZIPGRXBOHJ7BRK2S2JQ3Q
+    logo: _images/demos-icon.svg
     logo-alt: Democratizing Models
     left:
       - href: index.md

@@ -34,7 +34,6 @@
   ],
   "julia.environmentPath": "${workspaceFolder}/docs/julia",
   "julia.executablePath": "${workspaceFolder}/.pixi/envs/default/bin/julia",
-  "julia.juliaup.install.hint": false,
   "livePreview.defaultPreviewPath": "docs/_build/html",
   "multiDiffEditor.experimental.enabled": true,
   "python.defaultInterpreterPath": ".pixi/envs/default/bin/python",

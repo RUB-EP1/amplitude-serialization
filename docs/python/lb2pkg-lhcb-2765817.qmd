@@ -34,13 +34,13 @@ from IPython.display import Math
 from matplotlib_inline.backend_inline import set_matplotlib_formats
 from mpl_toolkits.axes_grid1 import make_axes_locatable  # cspell:ignore mpl_toolkits
 
-THIS_DIR = Path(".").absolute()
+this_dir = Path(".").absolute()
 logging.getLogger("ampform.sympy").setLevel(logging.ERROR)
 set_matplotlib_formats("svg")
 ```
 
 ```{python}
-MODEL_PATH = THIS_DIR.parent.parent / "models" / "lb2pkg-lhcb-2765817.json"
+model_path = this_dir.parent.parent / "models" / "lb2pkg-lhcb-2765817.json"
 ```
 
 ## Construct three-body decay
@@ -63,10 +63,10 @@ def to_latex(name: str) -> str:
         return Rf"\Lambda({name[1:]})"
     return name
 
-WORKSPACE = load_workspace(MODEL_PATH, to_latex=to_latex)
-MODEL_DEFINITION = WORKSPACE.definition
-((INTENSITY_NAME, DECAY),) = WORKSPACE.decays.items()
-Math(aslatex(DECAY, with_jp=True))
+workspace = load_workspace(model_path, to_latex=to_latex)
+model_definition = workspace.definition
+((intensity_name, decay),) = workspace.decays.items()
+Math(aslatex(decay, with_jp=True))
 ```
 
 ## Dynamics
@@ -74,17 +74,17 @@ Math(aslatex(DECAY, with_jp=True))
 The model contains Breit-Wigner and multichannel Breit-Wigner propagators, as well as a constant non-resonant term. The latter is serialized as a zeroth-order polynomial.
 
 ```{python}
-CHAIN_DEFS = get_decay_chains(MODEL_DEFINITION)
+chain_defs = get_decay_chains(model_definition)
 ```
 
 ```{python}
-L1520_BW = WORKSPACE.functions["L1520_BW"]
-Math(aslatex(L1520_BW))
+l1520_bw = workspace.functions["L1520_BW"]
+Math(aslatex(l1520_bw))
 ```
 
 ```{python}
-L1405_Flatte = WORKSPACE.functions["L1405_Flatte"]
-Math(aslatex(L1405_Flatte))
+l1405_flatte = workspace.functions["L1405_Flatte"]
+Math(aslatex(l1405_flatte))
 ```
 
 ## Construct amplitude model
@@ -93,7 +93,7 @@ Math(aslatex(L1405_Flatte))
 notebook-specific compatibility adapters.
 
 ```{python}
-model = WORKSPACE.distributions[INTENSITY_NAME]
+model = workspace.distributions[intensity_name]
 ```
 
 ## Validation
@@ -105,7 +105,7 @@ differences or diagnostics without aborting the remaining checks.
 # | code-fold: true
 # | code-summary: Compute every serialized checkpoint
 # | column: page-inset
-checksum_results = validate_checksums(WORKSPACE, backend="jax")
+checksum_results = validate_checksums(workspace, backend="jax")
 pd.DataFrame({
     "Distribution": [result.target for result in checksum_results],
     "Point": [result.point_name for result in checksum_results],
@@ -130,20 +130,20 @@ x_subsystem, y_subsystem = 3, 2
 resolution = 250
 x_min, x_max = 1.9, 2.5**2
 y_min, y_max = 5, 27
-X, Y = jnp.meshgrid(
+x, y = jnp.meshgrid(
     jnp.linspace(x_min, x_max, resolution),
     jnp.linspace(y_min, y_max, resolution),
 )
 dalitz_data = {
-    f"sigma{x_subsystem}": X,
-    f"sigma{y_subsystem}": Y,
+    f"sigma{x_subsystem}": x,
+    f"sigma{y_subsystem}": y,
 }
 compiled_workspace = compile_workspace(
-    WORKSPACE,
+    workspace,
     backend="jax",
-    targets=[INTENSITY_NAME],
+    targets=[intensity_name],
 )
-intensity_function = compiled_workspace.functions[INTENSITY_NAME]
+intensity_function = compiled_workspace.functions[intensity_name]
 intensities = jnp.real(intensity_function(dalitz_data))
 normalized_intensities = intensities / jnp.nansum(intensities)
 
@@ -156,7 +156,7 @@ def get_decay_products(
 
 
 sigma_labels = {
-    subsystem: Rf"$\sigma_{subsystem} = M^2\left({' '.join(p.latex for p in get_decay_products(DECAY, subsystem))}\right)$"
+    subsystem: Rf"$\sigma_{subsystem} = M^2\left({' '.join(p.latex for p in get_decay_products(decay, subsystem))}\right)$"
     for subsystem in (1, 2, 3)
 }
 # cspell:ignore bbox edgecolor facecolor fontset fontsize labelcolor mathtext ncol
@@ -181,10 +181,10 @@ plt.rcParams.update({
 # | code-fold: true
 # | code-summary: Render the Dalitz plot
 fig, ax = plt.subplots(figsize=(10, 8))
-mesh = ax.pcolormesh(X, Y, normalized_intensities, rasterized=True)
+mesh = ax.pcolormesh(x, y, normalized_intensities, rasterized=True)
 ax.contour(
-    X,
-    Y,
+    x,
+    y,
     jnp.isfinite(intensities),
     levels=[0.5],
     colors="black",
@@ -207,8 +207,8 @@ The projection onto the $pK^-$ mass is shown as a black line. The colored curves
 # | code-fold: true
 # | code-summary: Render the proton-kaon mass projection
 # | column: page-inset
-resonance_names = sorted({chain["name"] for chain in CHAIN_DEFS})
-mass_values = jnp.sqrt(X[0])
+resonance_names = sorted({chain["name"] for chain in chain_defs})
+mass_values = jnp.sqrt(x[0])
 minimum_mass = float(
     (
         sp.Symbol("m1", nonnegative=True) + sp.Symbol("m2", nonnegative=True)
@@ -242,12 +242,12 @@ for resonance_name in resonance_names:
         if str(symbol).startswith("c^")
     }
     component_workspace = compile_workspace(
-        WORKSPACE,
+        workspace,
         backend="jax",
-        targets=[INTENSITY_NAME],
+        targets=[intensity_name],
         parameter_overrides=coupling_overrides,
     )
-    component = jnp.real(component_workspace.functions[INTENSITY_NAME](dalitz_data))
+    component = jnp.real(component_workspace.functions[intensity_name](dalitz_data))
     component = jnp.where(jnp.isnan(intensities), jnp.nan, component)
     label = Rf"${to_latex(resonance_name)}$"
     ax.plot(

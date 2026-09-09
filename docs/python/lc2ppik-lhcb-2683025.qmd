@@ -66,14 +66,14 @@ from matplotlib_inline.backend_inline import set_matplotlib_formats
 from mpl_toolkits.axes_grid1 import make_axes_locatable  # cspell:ignore mpl_toolkits
 from tqdm.auto import tqdm
 
-THIS_DIR = Path(".").absolute()
+this_dir = Path(".").absolute()
 logging.getLogger("ampform.sympy").setLevel(logging.ERROR)
 simplify_latex_rendering()
 set_matplotlib_formats("svg")
 ```
 
 ```{python}
-MODEL_PATH = THIS_DIR.parent.parent / "models" / "lc2ppik-lhcb-2683025.json"
+model_path = this_dir.parent.parent / "models" / "lc2ppik-lhcb-2683025.json"
 ```
 
 ## Construct three-body decay
@@ -99,10 +99,10 @@ def to_latex(name: str) -> str:
 ```
 
 ```{python}
-WORKSPACE = load_workspace(MODEL_PATH, to_latex=to_latex)
-MODEL_DEFINITION = WORKSPACE.definition
-((INTENSITY_NAME, DECAY),) = WORKSPACE.decays.items()
-Math(aslatex(DECAY, with_jp=True))
+workspace = load_workspace(model_path, to_latex=to_latex)
+model_definition = workspace.definition
+((intensity_name, decay),) = workspace.decays.items()
+Math(aslatex(decay, with_jp=True))
 ```
 
 ## Dynamics
@@ -112,7 +112,7 @@ See also [RUB-EP1/amplitude-serialization#22](https://github.com/RUB-EP1/amplitu
 :::
 
 ```{python}
-CHAIN_DEFS = get_decay_chains(MODEL_DEFINITION)
+chain_defs = get_decay_chains(model_definition)
 ```
 
 ### Vertices
@@ -121,17 +121,17 @@ CHAIN_DEFS = get_decay_chains(MODEL_DEFINITION)
 
 ```{python}
 # | code-fold: true
-s, m1, m2, L, d = sp.symbols("s m1 m2 L R", nonnegative=True)
-expr = FormFactor(s, m1, m2, L, d)
+s, m1, m2, angular_momentum, d = sp.symbols("s m1 m2 L R", nonnegative=True)
+expr = FormFactor(s, m1, m2, angular_momentum, d)
 Math(aslatex(unfold_definitions(expr)))
 ```
 
 ```{python}
-ff_L1520 = formulate_form_factor(
-    vertex=CHAIN_DEFS[2]["vertices"][0],
-    model=MODEL_DEFINITION,
+ff_l1520 = formulate_form_factor(
+    vertex=chain_defs[2]["vertices"][0],
+    model=model_definition,
 )
-Math(aslatex(ff_L1520))
+Math(aslatex(ff_l1520))
 ```
 
 ### Propagators
@@ -140,18 +140,18 @@ Math(aslatex(ff_L1520))
 
 ```{python}
 # | code-fold: true
-s, m0, Γ0, m1, m2, L, d = sp.symbols("s m0 Gamma0 m1 m2 L R", nonnegative=True)
-expr = BreitWigner(s, m0, Γ0, m1, m2, L, d)
+s, m0, gamma0, m1, m2, angular_momentum, d = sp.symbols("s m0 Gamma0 m1 m2 L R", nonnegative=True)
+expr = BreitWigner(s, m0, gamma0, m1, m2, angular_momentum, d)
 Math(aslatex(unfold_definitions(expr)))
 ```
 
 ```{python}
-K892_BW = formulate_breit_wigner(
-    propagator=CHAIN_DEFS[20]["propagators"][0],
-    resonance=to_latex(CHAIN_DEFS[20]["name"]),
-    model=MODEL_DEFINITION,
+k892_bw = formulate_breit_wigner(
+    propagator=chain_defs[20]["propagators"][0],
+    resonance=to_latex(chain_defs[20]["name"]),
+    model=model_definition,
 )
-Math(aslatex(K892_BW))
+Math(aslatex(k892_bw))
 ```
 
 #### Multi-channel Breit-Wigner
@@ -161,7 +161,7 @@ The `gsq` value that is serialized for each channel is the **coupling squared**,
 ```{python}
 # | code-fold: true
 # | column: page-inset-right
-s, m0, m1, m2, L, d = sp.symbols("s m0 m1 m2 L R", nonnegative=True)
+s, m0, m1, m2, angular_momentum, d = sp.symbols("s m0 m1 m2 L R", nonnegative=True)
 channels = tuple(
     ChannelArguments(
         s,
@@ -180,12 +180,12 @@ Math(aslatex(unfold_definitions(expr)))
 
 ```{python}
 # | column: page-inset-right
-L1405_Flatte = formulate_multichannel_breit_wigner(
-    propagator=CHAIN_DEFS[0]["propagators"][0],
-    resonance=to_latex(CHAIN_DEFS[0]["name"]),
-    model=MODEL_DEFINITION,
+l1405_flatte = formulate_multichannel_breit_wigner(
+    propagator=chain_defs[0]["propagators"][0],
+    resonance=to_latex(chain_defs[0]["name"]),
+    model=model_definition,
 )
-Math(aslatex(L1405_Flatte))
+Math(aslatex(l1405_flatte))
 ```
 
 #### Breit-Wigner with exponential
@@ -193,12 +193,12 @@ Math(aslatex(L1405_Flatte))
 The Bugg lineshapes are serialized as `generic_function` expression strings. The built-in dynamics builder parses these expressions and substitutes $i$ and $\sigma$ with the imaginary unit and the Mandelstam variable of the propagator node, respectively.
 
 ```{python}
-get_function_definition("K700_BuggBW", MODEL_DEFINITION)
+get_function_definition("K700_BuggBW", model_definition)
 ```
 
 ```{python}
-K700_BuggBW = formulate_dynamics(CHAIN_DEFS[18], MODEL_DEFINITION, to_latex)
-Math(aslatex(K700_BuggBW))
+k700_bugg_bw = formulate_dynamics(chain_defs[18], model_definition, to_latex)
+Math(aslatex(k700_bugg_bw))
 ```
 
 ## Construct amplitude model
@@ -208,7 +208,7 @@ Math(aslatex(K700_BuggBW))
 ```{python}
 # | column: page-inset-right
 λ0, λ1, λ2, λ3 = sp.symbols("lambda(:4)", rational=True)
-amplitude_expr, _ = formulate_aligned_amplitude(MODEL_DEFINITION, λ0, λ1, λ2, λ3)
+amplitude_expr, _ = formulate_aligned_amplitude(model_definition, λ0, λ1, λ2, λ3)
 amplitude_expr.cleanup()
 ```
 
@@ -216,7 +216,7 @@ The workspace formulates every serialized distribution while it is loaded. The f
 intensity model is therefore available without another formulation step.
 
 ```{python}
-model = WORKSPACE.distributions[INTENSITY_NAME]
+model = workspace.distributions[intensity_name]
 ```
 
 ### Amplitude for the decay chain
@@ -248,7 +248,7 @@ Math(aslatex({e: e.doit(deep=False) for e in exprs}))
 ```{python}
 # | code-fold: true
 recouplings = [
-    formulate_recoupling(MODEL_DEFINITION, chain_idx=0, vertex_idx=i) for i in range(2)
+    formulate_recoupling(model_definition, chain_idx=0, vertex_idx=i) for i in range(2)
 ]
 Math(aslatex({e: e.doit(deep=False) for e in recouplings}))
 ```
@@ -257,7 +257,7 @@ Math(aslatex({e: e.doit(deep=False) for e in recouplings}))
 
 ```{python}
 # | column: page-inset-right
-definitions = formulate_chain_amplitude(λ0, λ1, λ2, λ3, MODEL_DEFINITION, chain_idx=0)
+definitions = formulate_chain_amplitude(λ0, λ1, λ2, λ3, model_definition, chain_idx=0)
 Math(aslatex(definitions))
 ```
 
@@ -272,7 +272,7 @@ checks when an individual evaluation fails.
 ```{python}
 # | code-fold: true
 # | code-summary: Compile and validate all checksum targets
-compiled_workspace = compile_workspace(WORKSPACE, backend="jax")
+compiled_workspace = compile_workspace(workspace, backend="jax")
 checksum_results = validate_checksums(compiled_workspace)
 validation_table = pd.DataFrame({
     "Distribution": [result.target for result in checksum_results],
@@ -302,12 +302,12 @@ y_min = float(((masses[i] + masses[k]) ** 2).xreplace(model.masses))
 y_max = float(((masses[0] - masses[j]) ** 2).xreplace(model.masses))
 x_margin = 0.05 * (x_max - x_min)
 y_margin = 0.05 * (y_max - y_min)
-X, Y = jnp.meshgrid(
+x, y = jnp.meshgrid(
     jnp.linspace(x_min - x_margin, x_max + x_margin, num=resolution),
     jnp.linspace(y_min - y_margin, y_max + y_margin, num=resolution),
 )
-dalitz_data = {f"sigma{i}": X, f"sigma{j}": Y}
-intensity_function = compiled_workspace.functions[INTENSITY_NAME]
+dalitz_data = {f"sigma{i}": x, f"sigma{j}": y}
+intensity_function = compiled_workspace.functions[intensity_name]
 intensities = intensity_function(dalitz_data)
 normalized_intensities = intensities / jnp.nansum(intensities)
 
@@ -320,7 +320,7 @@ def get_decay_products(
 
 
 sigma_labels = {
-    subsystem: Rf"$\sigma_{subsystem} = M^2\left({' '.join(p.latex for p in get_decay_products(DECAY, subsystem))}\right)$"
+    subsystem: Rf"$\sigma_{subsystem} = M^2\left({' '.join(p.latex for p in get_decay_products(decay, subsystem))}\right)$"
     for subsystem in (1, 2, 3)
 }
 # cspell:ignore bbox edgecolor facecolor fontset fontsize labelcolor mathtext ncol savefig
@@ -345,7 +345,7 @@ plt.rcParams.update({
 # | code-fold: true
 # | code-summary: Render the Dalitz plot
 fig, ax = plt.subplots(figsize=(10, 8))
-mesh = ax.pcolormesh(X, Y, normalized_intensities, rasterized=True)
+mesh = ax.pcolormesh(x, y, normalized_intensities, rasterized=True)
 ax.set_aspect("equal")
 ax.set_xlabel(sigma_labels[i])
 ax.set_ylabel(sigma_labels[j])
@@ -360,15 +360,15 @@ plt.show()
 # | code-fold: true
 # | code-summary: Render the mass projection
 # | column: page-inset-right
-resonance_names = sorted({chain["name"].split("[")[0] for chain in CHAIN_DEFS})
+resonance_names = sorted({chain["name"].split("[")[0] for chain in chain_defs})
 
 
 def project(intensity_values, subsystem: int):
     if subsystem == i:
-        mass_values = jnp.sqrt(X[0])
+        mass_values = jnp.sqrt(x[0])
         projection = jnp.nansum(intensity_values, axis=0)
     else:
-        mass_values = jnp.sqrt(Y[:, 0])
+        mass_values = jnp.sqrt(y[:, 0])
         projection = jnp.nansum(intensity_values, axis=1)
     return mass_values, mass_values * projection
 
@@ -398,12 +398,12 @@ for resonance_name in resonance_names:
         if str(symbol).startswith("c^")
     }
     component_workspace = compile_workspace(
-        WORKSPACE,
+        workspace,
         backend="jax",
-        targets=[INTENSITY_NAME],
+        targets=[intensity_name],
         parameter_overrides=coupling_overrides,
     )
-    component = component_workspace.functions[INTENSITY_NAME](dalitz_data)
+    component = component_workspace.functions[intensity_name](dalitz_data)
     component = jnp.where(jnp.isnan(intensities), jnp.nan, component)
     for axis, subsystem in zip(axes, (i, j), strict=True):
         mass_values, component_projection = project(component, subsystem)

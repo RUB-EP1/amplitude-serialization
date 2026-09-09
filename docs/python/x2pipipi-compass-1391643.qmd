@@ -28,14 +28,14 @@ from ampform_dpd.io.serialization import (
 )
 from matplotlib_inline.backend_inline import set_matplotlib_formats
 
-THIS_DIR = Path(".").absolute()
+this_dir = Path(".").absolute()
 logging.getLogger("ampform.sympy").setLevel(logging.ERROR)
 set_matplotlib_formats("svg")
 ```
 
 ```{python}
-MODEL_PATH = THIS_DIR.parent.parent / "models" / "x2pipipi-compass-1391643.json"
-WORKSPACE = load_workspace(MODEL_PATH)
+model_path = this_dir.parent.parent / "models" / "x2pipipi-compass-1391643.json"
+workspace = load_workspace(model_path)
 ```
 
 ## Construct amplitude models
@@ -44,13 +44,13 @@ The JSON file contains four distributions from the same mass bin. `load_workspac
 formulates all of them, their decays, and their named dynamics functions in one step.
 
 ```{python}
-MODELS = WORKSPACE.distributions
+models = workspace.distributions
 ```
 
 ```{python}
 pd.DataFrame({
-    "Distribution": list(MODELS),
-    "Decay chains": [len(decay.chains) for decay in WORKSPACE.decays.values()],
+    "Distribution": list(models),
+    "Decay chains": [len(decay.chains) for decay in workspace.decays.values()],
 })
 ```
 
@@ -64,7 +64,7 @@ evaluations retain their diagnostics without interrupting the remaining checks.
 # | code-fold: true
 # | code-summary: Compute every serialized checkpoint
 # | column: page-inset
-compiled_workspace = compile_workspace(WORKSPACE, backend="jax")
+compiled_workspace = compile_workspace(workspace, backend="jax")
 checksum_results = validate_checksums(compiled_workspace)
 pd.DataFrame({
     "Distribution": [result.target for result in checksum_results],
@@ -89,7 +89,7 @@ The four distributions in the selected $3\pi$ mass bin are shown over the same p
 x_subsystem, y_subsystem = 3, 1
 resolution = 200
 intensity_grids = {}
-for name, model in MODELS.items():
+for name, model in models.items():
     masses = sorted(model.masses, key=str)
 
     def invariant_limits(subsystem: int) -> tuple[float, float]:
@@ -105,15 +105,15 @@ for name, model in MODELS.items():
     y_min, y_max = invariant_limits(y_subsystem)
     x_margin = 0.05 * (x_max - x_min)
     y_margin = 0.05 * (y_max - y_min)
-    X, Y = jnp.meshgrid(
+    x, y = jnp.meshgrid(
         jnp.linspace(x_min - x_margin, x_max + x_margin, resolution),
         jnp.linspace(y_min - y_margin, y_max + y_margin, resolution),
     )
     function = compiled_workspace.functions[name]
     values = jnp.real(
-        function({f"sigma{x_subsystem}": X, f"sigma{y_subsystem}": Y})
+        function({f"sigma{x_subsystem}": x, f"sigma{y_subsystem}": y})
     )
-    intensity_grids[name] = (X, Y, values / jnp.nansum(values))
+    intensity_grids[name] = (x, y, values / jnp.nansum(values))
 
 # cspell:ignore bbox edgecolor facecolor fontset fontsize labelcolor mathtext ncol
 # cspell:ignore hspace savefig sharey STIX wspace xtick ytick
@@ -144,8 +144,8 @@ subplot_titles = {
     "compass_3pi_JP=4+_M=1_1540_1560": R"$J^P=4^+,\ M=1$",
 }
 fig, axes = plt.subplots(2, 2, figsize=(14, 11))
-for ax, (name, (X, Y, values)) in zip(axes.flat, intensity_grids.items(), strict=True):
-    ax.pcolormesh(X, Y, values, rasterized=True)
+for ax, (name, (x, y, values)) in zip(axes.flat, intensity_grids.items(), strict=True):
+    ax.pcolormesh(x, y, values, rasterized=True)
     ax.set_aspect("equal")
     ax.set_title(subplot_titles[name])
     ax.set_xlabel(R"$m^2(\pi^-\pi^+)$ [GeV$^2$]")

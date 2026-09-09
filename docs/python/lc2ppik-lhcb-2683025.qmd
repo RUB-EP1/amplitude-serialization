@@ -269,7 +269,7 @@ by the serialized checksums. `validate_checksums` transforms each reference poin
 the required coordinates and returns a structured result without aborting the other
 checks when an individual evaluation fails.
 
-The status marks 🟢, 🟡, and 🔴 indicate absolute differences of $<10^{-10}$, $<10^{-2}$, and $\ge10^{-2}$, respectively. Failed evaluations are marked 🔴; the diagnostic column provides details.
+The status marks 🟢, 🟡, and 🔴 indicate absolute differences of $<10^{-10}$, $<10^{-2}$, and $\ge10^{-2}$, respectively. Failed evaluations are marked 🔴; the diagnostic column provides details. The diagnostic column is hidden when all statuses are 🟢.
 
 ```{python}
 # | code-fold: true
@@ -288,6 +288,8 @@ validation_table = pd.DataFrame({
     ],
     "Diagnostic": [result.diagnostic for result in checksum_results],
 })
+if validation_table["Status"].eq("🟢").all():
+    validation_table = validation_table.drop(columns="Diagnostic")
 assert all(result.passed for result in checksum_results)
 validation_table
 ```

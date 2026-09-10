@@ -50,6 +50,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/python_abi-3.13-9_cp313.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2026c-h151e31d_0.conda
       - conda: https://prefix.dev/julia-forge/linux-64/julia-1.12.7-hb0f4dca_0.conda
+      - pypi: git+https://github.com/ComPWA/ampform-dpd.git?rev=55d49656ac82f01bb003372fb6b068341183f9de#55d49656ac82f01bb003372fb6b068341183f9de
       - pypi: https://files.pythonhosted.org/packages/04/4b/29cac41a4d98d144bf5f6d33995617b185d14b22401f75ca86f384e87ff1/h11-0.16.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/04/5b/73c844f4e3467ffad53afe9d53e08e687192a2b235f7af0bd77ab3af1e96/tensorwaves-0.4.17-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/07/6c/aa3f2f849e01cb6a001cd8554a88d4c77c5c1a31c95bdf1cf9301e6d9ef4/defusedxml-0.7.1-py2.py3-none-any.whl
@@ -80,7 +81,6 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/41/45/1a4ed80516f02155c51f51e8cedb3c1902296743db0bbc66608a0db2814f/jsonschema_specifications-2025.9.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/41/48/6450ed9243315322bbc19ac57b9b70d66a20bf1d38d124c96bc4bf6af9ea/scipy-1.18.1-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/48/c7/cebb5a83f79d65eea8554e58afb597abd5daccc618eec304e8a05a75e641/ampform_dpd-0.4.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/49/82/2755c7c982086f00d4dab85bc120ec35045a9fc2191893a6ce79afe94443/fastjsonschema-2.22.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/4b/32/e0f13a1c5b0f8572d0ec6ae2f6c677b7991fafd95da523159c19eff0696a/contourpy-1.3.3-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
@@ -257,6 +257,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-64/tk-8.6.13-ha6c374e_4.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/zlib-1.3.2-hbb4bfdb_3.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/zstd-1.5.7-hbc1a06c_7.conda
+      - pypi: git+https://github.com/ComPWA/ampform-dpd.git?rev=55d49656ac82f01bb003372fb6b068341183f9de#55d49656ac82f01bb003372fb6b068341183f9de
       - pypi: https://files.pythonhosted.org/packages/04/4b/29cac41a4d98d144bf5f6d33995617b185d14b22401f75ca86f384e87ff1/h11-0.16.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/04/5b/73c844f4e3467ffad53afe9d53e08e687192a2b235f7af0bd77ab3af1e96/tensorwaves-0.4.17-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/04/6c/4798363b7fb5644e309fe1fac30216e9146c9f70859d80d588c18caf5317/matplotlib-3.11.1-cp313-cp313-macosx_10_13_x86_64.whl
@@ -290,7 +291,6 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/42/92/2fc3ffad878ae8dd5469ec1bc8eb83b71f48e13efdf68f02709003982a32/pillow-12.3.0-cp313-cp313-macosx_10_13_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/46/c7/6b687cb0f83d2a51017d47953f2ee430ffad6fec2a8ebc964e0718a33eb1/appnope-1.0.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/48/c7/cebb5a83f79d65eea8554e58afb597abd5daccc618eec304e8a05a75e641/ampform_dpd-0.4.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/49/82/2755c7c982086f00d4dab85bc120ec35045a9fc2191893a6ce79afe94443/fastjsonschema-2.22.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/4f/d3/a8b22fa575b297cd6e3e3b0155c7e25db170edf1c74783d6a31a2490b8d9/argon2_cffi-25.1.0-py3-none-any.whl
@@ -413,6 +413,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/readline-8.3-h8b90a29_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/tk-8.6.13-hbeba79b_4.conda
       - conda: https://prefix.dev/julia-forge/osx-arm64/julia-1.12.7-h60d57d3_0.conda
+      - pypi: git+https://github.com/ComPWA/ampform-dpd.git?rev=55d49656ac82f01bb003372fb6b068341183f9de#55d49656ac82f01bb003372fb6b068341183f9de
       - pypi: https://files.pythonhosted.org/packages/00/49/c183a9ee8fd022ffb9c20fc615ddafe19ed6b74a2ab668ac12e35d19f5a0/iminuit-2.32.0-cp313-cp313-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/04/4b/29cac41a4d98d144bf5f6d33995617b185d14b22401f75ca86f384e87ff1/h11-0.16.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/04/5b/73c844f4e3467ffad53afe9d53e08e687192a2b235f7af0bd77ab3af1e96/tensorwaves-0.4.17-py3-none-any.whl
@@ -447,7 +448,6 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/44/7b/49b0054a79b9ed918c018e70e09b56eb5678ee8b44e59e126c79de4d8d73/fonttools-4.64.0-cp313-cp313-macosx_10_13_universal2.whl
       - pypi: https://files.pythonhosted.org/packages/46/c7/6b687cb0f83d2a51017d47953f2ee430ffad6fec2a8ebc964e0718a33eb1/appnope-1.0.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/47/8b/40d33ffd2f378094ed462e9a9a0907e59d4de9845e65a59561272da350d4/kiwisolver-1.5.1-cp313-cp313-macosx_11_0_arm64.whl
-      - pypi: https://files.pythonhosted.org/packages/48/c7/cebb5a83f79d65eea8554e58afb597abd5daccc618eec304e8a05a75e641/ampform_dpd-0.4.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/49/82/2755c7c982086f00d4dab85bc120ec35045a9fc2191893a6ce79afe94443/fastjsonschema-2.22.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/4f/d3/a8b22fa575b297cd6e3e3b0155c7e25db170edf1c74783d6a31a2490b8d9/argon2_cffi-25.1.0-py3-none-any.whl
@@ -2203,6 +2203,22 @@ packages:
   run_exports: {}
   size: 198087653
   timestamp: 1786911656725
+- pypi: git+https://github.com/ComPWA/ampform-dpd.git?rev=55d49656ac82f01bb003372fb6b068341183f9de#55d49656ac82f01bb003372fb6b068341183f9de
+  name: ampform-dpd
+  version: 0.4.3.dev2+g55d49656a
+  requires_dist:
+  - ampform>=0.15.10
+  - attrs>=20.1.0
+  - cloudpickle
+  - frozendict
+  - numpy
+  - qrules>=0.10.0
+  - sympy>=1.10
+  - tensorwaves[jax]
+  - typing-extensions ; python_full_version < '3.13'
+  - tensorwaves[numba] ; extra == 'numba'
+  - tensorwaves[tf] ; extra == 'tf'
+  requires_python: '>=3.10'
 - pypi: https://files.pythonhosted.org/packages/00/49/c183a9ee8fd022ffb9c20fc615ddafe19ed6b74a2ab668ac12e35d19f5a0/iminuit-2.32.0-cp313-cp313-macosx_11_0_arm64.whl
   name: iminuit
   version: 2.32.0
@@ -2897,23 +2913,6 @@ packages:
   name: kiwisolver
   version: 1.5.1
   sha256: 77a4c8187a5948d7f8795adb765a3c7b553d07d86d88e43038fc32fc1fb9a3f3
-  requires_python: '>=3.10'
-- pypi: https://files.pythonhosted.org/packages/48/c7/cebb5a83f79d65eea8554e58afb597abd5daccc618eec304e8a05a75e641/ampform_dpd-0.4.2-py3-none-any.whl
-  name: ampform-dpd
-  version: 0.4.2
-  sha256: 4e950f9c2ff83d5a4b08c76c40a7316e39743acd79be6c903fa130ddff903cfb
-  requires_dist:
-  - ampform>=0.15.10
-  - attrs>=20.1.0
-  - cloudpickle
-  - frozendict
-  - numpy
-  - qrules>=0.10.0
-  - sympy>=1.10
-  - tensorwaves[jax]
-  - typing-extensions ; python_full_version < '3.13'
-  - tensorwaves[numba] ; extra == 'numba'
-  - tensorwaves[tf] ; extra == 'tf'
   requires_python: '>=3.10'
 - pypi: https://files.pythonhosted.org/packages/49/82/2755c7c982086f00d4dab85bc120ec35045a9fc2191893a6ce79afe94443/fastjsonschema-2.22.2-py3-none-any.whl
   name: fastjsonschema

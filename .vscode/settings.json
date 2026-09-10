@@ -1,6 +1,11 @@
 {
+  "[git-commit]": {
+    "editor.rulers": [72],
+    "rewrap.wrappingColumn": 72
+  },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.wordWrap": "on"
   },
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -9,28 +14,33 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[quarto]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "quarto.quarto"
+  },
+  "[toml]": {
+    "editor.defaultFormatter": "tombi-toml.tombi"
   },
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "diffEditor.experimental.showMoves": true,
   "editor.formatOnSave": true,
+  "github-actions.workflows.pinned.workflows": [".github/workflows/ci.yml"],
+  "gitlens.telemetry.enabled": false,
   "json.schemas": [
     {
       "fileMatch": ["models/*.json"],
       "url": "./schema.json"
     }
   ],
+  "julia.environmentPath": "${workspaceFolder}/docs/julia",
   "julia.executablePath": "${workspaceFolder}/.pixi/envs/default/bin/julia",
   "livePreview.defaultPreviewPath": "docs/_build/html",
+  "multiDiffEditor.experimental.enabled": true,
   "python.defaultInterpreterPath": ".pixi/envs/default/bin/python",
+  "python.terminal.activateEnvironment": false,
   "quarto.path": ".pixi/envs/default/bin/quarto",
-  "search.exclude": {
-    "**/*.code-search": true,
-    "**/bower_components": true,
-    "**/node_modules": true,
-    "**/pixi.lock": true
-  },
+  "redhat.telemetry.enabled": false,
+  "telemetry.telemetryLevel": "off",
   "yaml.schemas": {
     "./schema.json": ["models/*.yaml", "models/*.yml"]
   }

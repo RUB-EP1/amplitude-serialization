@@ -1,13 +1,104 @@
-[tool.tomlsort]
-all = false
-ignore_case = true
-in_place = true
-sort_first = [
-    "build-system",
-    "project",
-    "tool.setuptools",
-    "tool.setuptools_scm",
+[project]
+name = "amplitude-serialization"
+version = "0.1.0"
+description = "Prototype for the amplitude model serialization format"
+requires-python = "~=3.13.0"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Ilya Segal" },
+    { name = "Mikhail Mikhasenko" },
+    { name = "Remco de Boer" },
 ]
-sort_table_keys = true
-spaces_indent_inline_array = 4
-trailing_comma_inline_array = true
+dependencies = [
+    "ampform-dpd>=0.4.3",
+    "jupyter-cache",
+    "matplotlib",
+    "pandas",
+    "quarto-cli",
+]
+
+[project.urls]
+changelog = "https://github.com/RUB-EP1/amplitude-serialization/releases"
+documentation = "https://rub-ep1.github.io/amplitude-serialization"
+homepage = "https://rub-ep1.github.io/amplitude-serialization"
+issues = "https://github.com/RUB-EP1/amplitude-serialization/issues"
+source = "https://github.com/RUB-EP1/amplitude-serialization"
+
+[tool.pixi.activation.env]
+PYTHONHASHSEED = "0"
+
+[tool.pixi.dependencies]
+julia = "1.12.*"
+python = "3.13.*"
+
+[tool.pixi.tasks.all]
+depends-on = [
+    "style",
+    "_clean-doc",
+    "doc",
+]
+description = "Run all continuous integration (CI) tasks locally"
+
+[tool.pixi.tasks._clean-doc]
+cmd = "rm -rf docs/*/.jupyter_cache docs/.quarto docs/_build"
+description = "Remove generated documentation build files"
+
+[tool.pixi.tasks.doc]
+cmd = "quarto render"
+cwd = "docs"
+depends-on = ["install-julia"]
+
+[tool.pixi.tasks.doclive]
+cmd = "quarto preview"
+cwd = "docs"
+depends-on = ["install-julia"]
+
+[tool.pixi.tasks.install-julia]
+cmd = """
+julia --project -e '
+    using Pkg
+    Pkg.add("IJulia")
+    import IJulia
+    IJulia.installkernel("julia-amplitude-serialization")
+'
+"""
+description = "Install IJulia and register the Julia notebook kernel"
+
+[tool.pixi.tasks.style]
+cmd = "pre-commit run --all-files"
+description = "Perform all linting, formatting, and spelling checks"
+
+[tool.pixi.tasks.upgrade]
+depends-on = [
+    "_upgrade-pixi",
+    "_upgrade-precommit",
+    "_upgrade-julia",
+]
+description = "Upgrade all lock files"
+
+[tool.pixi.tasks._upgrade-pixi]
+cmd = "pixi update"
+
+[tool.pixi.tasks._upgrade-precommit]
+cmd = "pre-commit autoupdate -j8"
+
+[tool.pixi.tasks._upgrade-julia]
+cmd = "julia --eval='using Pkg; Pkg.update()' --project=docs/julia"
+
+[tool.pixi.workspace]
+channels = ["https://prefix.dev/julia-forge", "conda-forge"]
+platforms = ["linux-64", "osx-64", "osx-arm64"]
+
+[tool.ruff]
+preview = true
+
+[tool.tombi.files]
+exclude = [
+    "**/Manifest.toml",
+    "**/Project.toml",
+]
+
+[tool.tombi.format.rules]
+indent-width = 4
+line-width = 88

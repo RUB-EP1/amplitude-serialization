@@ -1,5 +1,5 @@
 ---
-jupyter: julia-amplitude-serialization-1.10
+jupyter: julia-amplitude-serialization-1.12
 ---
 
 # $\Lambda_c^+ \to p K^- \pi^+$
@@ -36,34 +36,6 @@ theme(:wong2, frame=:box, grid=false, minorticks=true,
     lab="")
 ```
 
-## Function definitions
-
-The model contains non-standard lineshapes that do not conform to a simple `BreitWigner` or `MultichannelBreitWigner` distribution, so they have to be defined explicitly.
-The code below defines a new lineshape and implements its deserialization method (specializing `dict2instance()` using [multiple dispatch](https://docs.julialang.org/en/v1/manual/methods/#man-method-specializations)).
-
-```{julia}
-struct BreitWignerWidthExpLikeBugg <: HadronicLineshapes.AbstractFlexFunc
-    m::Float64
-    Γ::Float64
-    γ::Float64
-end
-function (BW::BreitWignerWidthExpLikeBugg)(σ)
-    mK = 0.493677
-    mπ = 0.13957018
-    σA = mK^2 - mπ^2 / 2
-    @unpack m, Γ, γ = BW
-    Γt = (σ - σA) / (m^2 - σA) * Γ * exp(-γ * σ)
-    1 / (m^2 - σ - 1im * m * Γt)
-end
-function ThreeBodyDecaysIO.dict2instance(::Type{BreitWignerWidthExpLikeBugg}, dict)
-    @unpack mass, width, slope = dict
-    return BreitWignerWidthExpLikeBugg(mass, width, slope)
-end
-
-# type piracy, not good
-(bw::HadronicLineshapes.BreitWigner)(x::Dict) = bw(first(values(x)))
-(bw::HadronicLineshapes.MultichannelBreitWigner)(x::Dict) = bw(first(values(x)))
-```
 
 ## Deserialization of Objects to a Workspace
 
@@ -93,9 +65,7 @@ end
 
 ## Validation
 
-The integrity of the model is checked by validating the value of distributions at a few phase space points.
-The table lists the validation checks and their status. The marks "🟢", "🟡", and "🔴" indicate
-an accuracy of $<10^{-10}$, $<10^{-2}$, or $\ge10^{-2}$, respectively, for the difference between the reference and computed values.
+The integrity of the model is checked by validating the value of distributions at a few phase space points. The table lists the validation checks and their status. The marks "🟢", "🟡", and "🔴" indicate an accuracy of $<10^{-10}$, $<10^{-2}$, or $\ge10^{-2}$, respectively, for the difference between the reference and computed values.
 
 ```{julia}
 #| code-fold: true
@@ -118,18 +88,12 @@ let
         _parameters = array2dict(parameter_point["parameters"];
             key="name", apply=v -> v["value"])
         #
-        function label_diff(diff; levels=[1e-2, 1e-10])
-            _diff = abs(diff)
-            _diff < levels[2] && return '🟢'
-            _diff < levels[1] && return '🟡'
-            return '🔴'
-        end
         computed_value = dist(_parameters)
         #
         tonumber(X::Number) = X
         tonumber(X::String) = string2complex(X)
         reference_value = tonumber(value)
-        status = label_diff(reference_value - computed_value)
+        status = label_diff(reference_value - computed_value; levels=[1e-2, 1e-10])
         #
         (; Distribution=distribution,
             Point=point, Status=status)

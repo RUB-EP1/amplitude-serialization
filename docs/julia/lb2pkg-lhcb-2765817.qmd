@@ -1,5 +1,5 @@
 ---
-jupyter: julia-amplitude-serialization-1.10
+jupyter: julia-amplitude-serialization-1.12
 ---
 
 # $\Lambda_b^0 \to p K^- \gamma$
@@ -42,20 +42,6 @@ theme(:wong2, frame=:box, grid=false, minorticks=true,
 Non-standard lineshapes are used to model resonances that do not conform to a simple `BreitWigner` distributions, or a `MultichannelBreitWigner` has to be defined explicitly.
 The code below defines a new `NonResonant` lineshape, and its deserialization method. In this case this is just a constant.
 
-```{julia}
-struct Constant <: HadronicLineshapes.AbstractFlexFunc
-end
-(X::Constant)(σ) = 1
-
-function ThreeBodyDecaysIO.dict2instance(::Type{Constant}, dict)
-    return Constant()
-end
-
-# type piracy, not good
-(bw::HadronicLineshapes.BreitWigner)(x::Dict) = bw(first(values(x)))
-(bw::HadronicLineshapes.MultichannelBreitWigner)(x::Dict) = bw(first(values(x)))
-```
-
 ## Deserialization of Objects to a Workspace
 
 Model components are deserialized from a JSON file into computational objects within a workspace for further manipulation. First, functions representing lineshapes and form-factors are built. Following this, distributions are processed and added to the workspace.
@@ -78,7 +64,7 @@ end
 for dist in distributions
     @unpack name, type = dist
     instance_type = eval(Symbol(type))
-    workspace[name] = dict2instance(instance_type, distributions[1]; workspace)
+    workspace[name] = dict2instance(instance_type, dist; workspace)
 end
 ```
 
@@ -86,7 +72,7 @@ end
 
 The integrity of the model is checked by validating the value of distributions at a few phase space points.
 The table lists the validation checks and their status. The marks "🟢", "🟡", and "🔴" indicate
-an accuracy of $<10^{-12}$, $<10^{-2}$, or $\ge10^{-2}$, respectively, for the difference between the reference and computed values.
+an accuracy of $<10^{-10}$, $<10^{-2}$, or $\ge10^{-2}$, respectively, for the difference between the reference and computed values.
 
 ```{julia}
 #| code-fold: true
@@ -114,7 +100,7 @@ df = let
         tonumber(X::Number) = X
         tonumber(X::String) = string2complex(X)
         reference_value = tonumber(value)
-        status = label_diff(reference_value - computed_value)
+        status = label_diff(reference_value - computed_value; levels=[1e-2, 1e-10])
         #
         (; Distribution=distribution, Reference=value, Computed_value=computed_value,
             Point=point, Status=status)

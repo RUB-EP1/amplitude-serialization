@@ -74,6 +74,7 @@ The integrity of the model is checked by validating the value of distributions a
 ```{julia}
 #| code-fold: true
 #| code-summary: A loop over validation points
+#| column: page
 let
     @unpack misc, parameter_points = input
     @unpack amplitude_model_checksums = misc

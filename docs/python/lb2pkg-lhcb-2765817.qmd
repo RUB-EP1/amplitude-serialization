@@ -1,0 +1,269 @@
+---
+jupyter: python3
+---
+
+<!-- cspell:ignore dtype imag isfinite mathrm startswith -->
+
+# $\Lambda_b^0 \to p K^- \gamma$
+
+::: {.callout-note appearance="simple"}
+Model definition: [`lb2pkg-lhcb-2765817.json`](https://github.com/RUB-EP1/amplitude-serialization/blob/main/models/lb2pkg-lhcb-2765817.json).
+:::
+
+This page demonstrates deserialization and evaluation of an amplitude model for the decay $\Lambda_b^0 \to p K^- \gamma$. The resonant structure was studied using proton-proton collision data recorded at centre-of-mass energies of $7$, $8$, and $13$ TeV with the LHCb detector, [INSPIRE-HEP 2765817](https://inspirehep.net/literature/2765817).
+
+```{python}
+# | code-fold: true
+# | code-summary: Import Python libraries
+import logging
+from pathlib import Path
+
+import jax.numpy as jnp
+import matplotlib.pyplot as plt
+import pandas as pd
+import sympy as sp
+from ampform_dpd.decay import FinalStateID, State, ThreeBodyDecay
+from ampform_dpd.io import aslatex
+from ampform_dpd.io.serialization import (
+    compile_workspace,
+    load_workspace,
+    validate_checksums,
+)
+from ampform_dpd.io.serialization.format import get_decay_chains
+from IPython.display import Math
+from matplotlib_inline.backend_inline import set_matplotlib_formats
+from mpl_toolkits.axes_grid1 import make_axes_locatable  # cspell:ignore mpl_toolkits
+
+this_dir = Path(".").absolute()
+logging.getLogger("ampform.sympy").setLevel(logging.ERROR)
+set_matplotlib_formats("svg")
+```
+
+```{python}
+model_path = this_dir.parent.parent / "models" / "lb2pkg-lhcb-2765817.json"
+```
+
+## Construct three-body decay
+
+```{python}
+# | code-fold: true
+# | code-summary: Name-to-LaTeX converter
+def to_latex(name: str) -> str:
+    latex = {
+        "Lb": R"\Lambda_b^0",
+        "g": R"\gamma",
+        "K": "K^-",
+        "p": "p",
+    }.get(name)
+    if latex is not None:
+        return latex
+    if name.startswith("LNR"):
+        return R"\Lambda_\mathrm{NR}"
+    if name.startswith("L"):
+        return Rf"\Lambda({name[1:]})"
+    return name
+
+workspace = load_workspace(model_path, to_latex=to_latex)
+model_definition = workspace.definition
+((intensity_name, decay),) = workspace.decays.items()
+Math(aslatex(decay, with_jp=True))
+```
+
+## Dynamics
+
+The model contains Breit-Wigner and multichannel Breit-Wigner propagators, as well as a constant non-resonant term. The latter is serialized as a zeroth-order polynomial.
+
+```{python}
+chain_defs = get_decay_chains(model_definition)
+```
+
+```{python}
+l1520_bw = workspace.functions["L1520_BW"]
+Math(aslatex(l1520_bw))
+```
+
+```{python}
+l1405_flatte = workspace.functions["L1405_Flatte"]
+Math(aslatex(l1405_flatte))
+```
+
+## Construct amplitude model
+
+`load_workspace` formulates LS-coupled models and their serialized dynamics without
+notebook-specific compatibility adapters.
+
+```{python}
+model = workspace.distributions[intensity_name]
+```
+
+## Validation
+
+`validate_checksums` compiles each serialized target independently and records numeric
+differences or diagnostics without aborting the remaining checks.
+
+The status marks 🟢, 🟡, and 🔴 indicate absolute differences of $<10^{-10}$, $<10^{-2}$, and $\ge10^{-2}$, respectively. Failed evaluations are marked 🔴; the diagnostic column provides details.
+
+```{python}
+# | code-fold: true
+# | code-summary: Compute every serialized checkpoint
+# | column: page-inset
+checksum_results = validate_checksums(workspace, backend="jax")
+pd.DataFrame({
+    "Distribution": [result.target for result in checksum_results],
+    "Point": [result.point_name for result in checksum_results],
+    "Reference": [result.reference for result in checksum_results],
+    "Computed": [result.value for result in checksum_results],
+    "Difference": [result.difference for result in checksum_results],
+    "Status": [
+        "🟢" if result.difference < 1e-10 else "🟡" if result.difference < 1e-2 else "🔴"
+        for result in checksum_results
+    ],
+    "Diagnostic": [result.diagnostic for result in checksum_results],
+})
+```
+
+## Visualization
+
+### Dalitz plot
+
+The Dalitz plot shows the intensity up to $m_{pK^-}=2.5\ \mathrm{GeV}$. The plotting range includes a margin below the physical threshold so that the left phase-space boundary remains visible, as in the Julia implementation.
+
+```{python}
+# | code-fold: true
+# | code-summary: Configure the Dalitz plot
+x_subsystem, y_subsystem = 3, 2
+resolution = 250
+x_min, x_max = 1.9, 2.5**2
+y_min, y_max = 5, 27
+x, y = jnp.meshgrid(
+    jnp.linspace(x_min, x_max, resolution),
+    jnp.linspace(y_min, y_max, resolution),
+)
+dalitz_data = {
+    f"sigma{x_subsystem}": x,
+    f"sigma{y_subsystem}": y,
+}
+compiled_workspace = compile_workspace(
+    workspace,
+    backend="jax",
+    targets=[intensity_name],
+)
+intensity_function = compiled_workspace.functions[intensity_name]
+intensities = jnp.real(intensity_function(dalitz_data))
+normalized_intensities = intensities / jnp.nansum(intensities)
+
+
+def get_decay_products(
+    decay: ThreeBodyDecay,
+    subsystem: FinalStateID,
+) -> tuple[State, State]:
+    return tuple(state for state in decay.final_state.values() if state.index != subsystem)
+
+
+sigma_labels = {
+    subsystem: Rf"$\sigma_{subsystem} = M^2\left({' '.join(p.latex for p in get_decay_products(decay, subsystem))}\right)$"
+    for subsystem in (1, 2, 3)
+}
+# cspell:ignore bbox edgecolor facecolor fontset fontsize labelcolor mathtext ncol
+# cspell:ignore savefig sharey startswith STIX wspace xtick ytick
+plt.rcParams.update({
+    "axes.edgecolor": "#808080",
+    "axes.facecolor": "none",
+    "axes.labelcolor": "#808080",
+    "figure.facecolor": "none",
+    "font.family": "serif",
+    "font.serif": ["STIXGeneral", "DejaVu Serif"],
+    "font.size": 18,
+    "mathtext.fontset": "stix",
+    "savefig.transparent": True,
+    "text.color": "#808080",
+    "xtick.color": "#808080",
+    "ytick.color": "#808080",
+})
+```
+
+```{python}
+# | code-fold: true
+# | code-summary: Render the Dalitz plot
+fig, ax = plt.subplots(figsize=(10, 8))
+mesh = ax.pcolormesh(x, y, normalized_intensities, rasterized=True)
+ax.contour(
+    x,
+    y,
+    jnp.isfinite(intensities),
+    levels=[0.5],
+    colors="black",
+    linewidths=3,
+)
+ax.set_xlabel(sigma_labels[x_subsystem])
+ax.set_ylabel(sigma_labels[y_subsystem])
+divider = make_axes_locatable(ax)
+colorbar_axes = divider.append_axes("right", size="5%", pad=0.1)
+colorbar = fig.colorbar(mesh, cax=colorbar_axes)
+colorbar.ax.set_ylabel("Normalized intensity (a.u.)")
+plt.show()
+```
+
+### Mass projection
+
+The projection onto the $pK^-$ mass is shown as a black line. The colored curves show the incoherent contribution from each $\Lambda$ resonance.
+
+```{python}
+# | code-fold: true
+# | code-summary: Render the proton-kaon mass projection
+# | column: page-inset
+resonance_names = sorted({chain["name"] for chain in chain_defs})
+mass_values = jnp.sqrt(x[0])
+minimum_mass = float(
+    (
+        sp.Symbol("m1", nonnegative=True) + sp.Symbol("m2", nonnegative=True)
+    ).xreplace(model.masses)
+)
+physical_region = mass_values >= minimum_mass
+mass_values = mass_values[physical_region]
+
+
+def project_to_pk(intensity_values):
+    projection = jnp.nansum(intensity_values, axis=0)
+    return mass_values * projection[physical_region]
+
+
+total_projection = project_to_pk(intensities)
+normalization = jnp.trapezoid(total_projection, mass_values)
+
+fig, ax = plt.subplots(figsize=(12, 7))
+ax.plot(
+    mass_values,
+    total_projection / normalization,
+    color="#202020",
+    lw=3,
+    label="Total",
+)
+for resonance_name in resonance_names:
+    resonance_latex = to_latex(resonance_name)
+    coupling_overrides = {
+        symbol: value if resonance_latex in str(symbol) else 0
+        for symbol, value in model.parameter_defaults.items()
+        if str(symbol).startswith("c^")
+    }
+    component_workspace = compile_workspace(
+        workspace,
+        backend="jax",
+        targets=[intensity_name],
+        parameter_overrides=coupling_overrides,
+    )
+    component = jnp.real(component_workspace.functions[intensity_name](dalitz_data))
+    component = jnp.where(jnp.isnan(intensities), jnp.nan, component)
+    label = Rf"${to_latex(resonance_name)}$"
+    ax.plot(
+        mass_values,
+        project_to_pk(component) / normalization,
+        label=label,
+    )
+ax.set_xlabel(R"$m_{pK^-}$ [GeV]")
+ax.set_ylabel("Normalized intensity (a.u.)")
+ax.set_xlim(minimum_mass, 2.5)
+ax.set_ylim(bottom=0)
+ax.legend(fontsize="small", loc="upper right", ncol=3)
+plt.show()
+```

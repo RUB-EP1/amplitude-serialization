@@ -1,7 +1,12 @@
 *.egg-info/
+.agents/
+.claude/
+.codex/
 .ipynb_checkpoints/
 .pixi/
 .virtual_documents/
 _build/
+AGENTS.md
+CLAUDE.md
 node_modules/
 .DS_Store

@@ -7,7 +7,7 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{ipynb,md}]
+[*.{ipynb,md,qmd}]
 indent_size = unset
 
 [*.{py,toml}]

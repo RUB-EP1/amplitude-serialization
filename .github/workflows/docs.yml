@@ -6,7 +6,8 @@ concurrency:
     ${{ github.ref != format('refs/heads/{0}', github.event.repository.default_branch) }}
 
 env:
-  PYTHONHASHSEED: "0"
+  CI: true
+  FORCE_COLOR: yes
 
 on:
   pull_request:
@@ -20,9 +21,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Julia cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           key: |
             julia-${{hashFiles('Manifest.toml')}}-${{hashFiles('**/*.jl')}}
@@ -31,24 +32,24 @@ jobs:
             julia
           path: |
             ~/.julia/
-      - uses: prefix-dev/setup-pixi@v0.6.0
+      - uses: prefix-dev/setup-pixi@v0.10.0
         with:
           cache: true
       - name: Jupyter cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           key: |
-            jupyter-cache-${{hashFiles('pixi.lock')}}-${{hashFiles('docs/*/*.md')}}
+            jupyter-cache-${{hashFiles('pixi.lock')}}-${{hashFiles('docs/*/*.qmd', 'models/*.json')}}
           restore-keys: |
             jupyter-cache-${{hashFiles('pixi.lock')}}
             jupyter-cache
           path: |
             **/.jupyter_cache
       - name: General caches
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           key: |
-            home-cache-${{hashFiles('pixi.lock')}}-${{hashFiles('docs/*/*.md')}}
+            home-cache-${{hashFiles('pixi.lock')}}-${{hashFiles('docs/*/*.qmd', 'models/*.json')}}
           restore-keys: |
             home-cache-${{hashFiles('pixi.lock')}}
             home-cache
@@ -56,9 +57,55 @@ jobs:
             ~/.cache
       - run: pixi run doc
       - if: always()
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: docs/_build/html
+
+  preview:
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v7
+        with:
+          name: github-pages
+      - name: Configure Git credentials
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Check out preview branch
+        run: |
+          mkdir preview
+          cd preview
+          git init
+          git remote add origin https://x-access-token:${{ secrets.PAT }}@github.com/RUB-EP1/amplitude-serialization-pr-preview
+          if git fetch --depth=1 origin gh-pages; then
+            git checkout -B gh-pages FETCH_HEAD
+            git rm -rf .
+          else
+            git checkout --orphan gh-pages
+          fi
+      - name: Extract artifact
+        run: |
+          tar xf artifact.tar -C preview
+          rm artifact.tar
+      - name: Commit results
+        working-directory: preview
+        run: |
+          touch .nojekyll
+          git add -A
+          if git rev-parse --verify HEAD; then
+            git commit --amend -m "https://github.com/RUB-EP1/amplitude-serialization/pull/${{ github.event.number }} preview at https://rub-ep1.github.io/amplitude-serialization-pr-preview"
+          else
+            git commit -m "https://github.com/RUB-EP1/amplitude-serialization/pull/${{ github.event.number }} preview at https://rub-ep1.github.io/amplitude-serialization-pr-preview"
+          fi
+      - name: Push results to GitHub Pages
+        working-directory: preview
+        run: git push origin gh-pages --force
+      - name: Show link to PR preview
+        run: echo "Documentation preview available on [rub-ep1.github.io/amplitude-serialization-pr-preview](https://rub-ep1.github.io/amplitude-serialization-pr-preview)" >> $GITHUB_STEP_SUMMARY
 
   deploy:
     environment:
@@ -73,4 +120,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

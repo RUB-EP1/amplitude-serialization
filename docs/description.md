@@ -181,7 +181,6 @@ Vertices define the nodes in the decay graphs, where one particle transits into 
 - **`type`:** Specifies how the helicity recoupling factor `H_{l1,l2}` is computed.
   Three types are defined: `ls`, `parity`, and `helicity`.
   These reflect different ways of relating combinations of the helicity indices to a real-valued "recoupling coefficient".
-
   - `helicity` indicates no recoupling: the factor is $1$ for a pair of selected helicities ($\lambda_a^0$ and $\lambda_b^0$) and zero for other combinations.
     $$
     H^\text{helicity}(\lambda_a,\lambda_b|\lambda_a^0,\lambda_b^0) = \delta_{\lambda_a,\lambda_a^0}\delta_{\lambda_b,\lambda_b^0}

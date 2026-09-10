@@ -2,6 +2,7 @@ ampform
 aslatex
 figsize
 funcs
+getattr
 isnan
 Kallen
 lambdify

@@ -1228,7 +1228,9 @@
         "distribution": "R(965)",
         "value": "-0.9212576583634395 + 2.1470398931994485i"
       }
-    ]
+    ],
+    "hepdata": "https://www.hepdata.net/record/ins1655631",
+    "details": "This JSON encodes the COMPASS (3π) PWA model for π−p→π−π−π+ p at 190 GeV/c. The wave set and dynamical isobar parametrizations were defined and tuned in the 2017 analysis (Phys. Rev. D 95 (2017) 032004; INSPIRE:1391643) using 100×11 (m3π, t′) binning and an 88-wave model. The 2018 paper (Phys. Rev. D 98 (2018) 092003; INSPIRE:1655631) performs a resonance-model fit with 11 resonances across 14 selected waves, using the binned PWA transition amplitudes from each t′ bin as input to extract masses, widths, branching fractions, and t′ dependences. The numerical PWA inputs—complex transition amplitudes T_a(m3π, t′), covariance matrices, and phase-space integrals I_aa—are not attached to the 2017 publication but instead published with the 2018 HEPData record (INSPIRE:1655631). This creates a possible source of confusion: although the model itself originates in the 2017 paper (1391643), the parameters and data products are distributed via the 2018 record (1655631)."
   },
   "parameter_points": [
     {

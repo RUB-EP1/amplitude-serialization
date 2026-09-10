@@ -5,6 +5,7 @@ execute:
 
 format:
   html:
+    respect-user-color-scheme: true
     theme:
       light: flatly
       dark: darkly
@@ -22,6 +23,8 @@ website:
   repo-subdir: docs
   repo-url: https://github.com/RUB-EP1/amplitude-serialization
   navbar:
+    logo: _images/demos-icon.svg
+    logo-alt: Democratizing Models
     left:
       - href: index.md
         text: Home
@@ -41,3 +44,5 @@ website:
       - section: Python
         contents:
           - python/lc2ppik-lhcb-2683025.qmd
+          - python/lb2pkg-lhcb-2765817.qmd
+          - python/x2pipipi-compass-1391643.qmd

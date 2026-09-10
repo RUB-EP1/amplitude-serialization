@@ -1,0 +1,160 @@
+---
+jupyter: python3
+---
+
+<!-- cspell:ignore dtype imag removeprefix -->
+
+# $X\to \pi^-\pi^+\pi^-$
+
+::: {.callout-note appearance="simple"}
+Model definition: [`x2pipipi-compass-1391643.json`](https://github.com/RUB-EP1/amplitude-serialization/blob/main/models/x2pipipi-compass-1391643.json).
+:::
+
+This page demonstrates deserialization and evaluation of a partial-wave analysis of a diffractively produced $3\pi$ system. The analysis is performed independently in bins of $3\pi$ mass and transferred momentum. The full analysis contains about 170 decay chains (about 88 waves, symmetrized for the two $\pi^+\pi^-$ pairs) per bin. See [INSPIRE-HEP 1391643](https://inspirehep.net/literature/1391643) for details.
+
+```{python}
+# | code-fold: true
+# | code-summary: Import Python libraries
+import logging
+from pathlib import Path
+
+import jax.numpy as jnp
+import matplotlib.pyplot as plt
+import pandas as pd
+from ampform_dpd.io.serialization import (
+    compile_workspace,
+    load_workspace,
+    validate_checksums,
+)
+from matplotlib_inline.backend_inline import set_matplotlib_formats
+
+this_dir = Path(".").absolute()
+logging.getLogger("ampform.sympy").setLevel(logging.ERROR)
+set_matplotlib_formats("svg")
+```
+
+```{python}
+model_path = this_dir.parent.parent / "models" / "x2pipipi-compass-1391643.json"
+workspace = load_workspace(model_path)
+```
+
+## Construct amplitude models
+
+The JSON file contains four distributions from the same mass bin. `load_workspace`
+formulates all of them, their decays, and their named dynamics functions in one step.
+
+```{python}
+models = workspace.distributions
+```
+
+```{python}
+pd.DataFrame({
+    "Distribution": list(models),
+    "Decay chains": [len(decay.chains) for decay in workspace.decays.values()],
+})
+```
+
+## Validation
+
+`validate_checksums` converts real and complex references, transforms serialized
+coordinates, and returns one structured result per checkpoint. Failed comparisons or
+evaluations retain their diagnostics without interrupting the remaining checks.
+
+The status marks 🟢, 🟡, and 🔴 indicate absolute differences of $<10^{-10}$, $<10^{-2}$, and $\ge10^{-2}$, respectively. Failed evaluations are marked 🔴; the diagnostic column provides details.
+
+```{python}
+# | code-fold: true
+# | code-summary: Compute every serialized checkpoint
+# | column: page-inset
+compiled_workspace = compile_workspace(workspace, backend="jax")
+checksum_results = validate_checksums(compiled_workspace)
+pd.DataFrame({
+    "Distribution": [result.target for result in checksum_results],
+    "Point": [result.point_name for result in checksum_results],
+    "Reference": [result.reference for result in checksum_results],
+    "Computed": [result.value for result in checksum_results],
+    "Difference": [result.difference for result in checksum_results],
+    "Status": [
+        "🟢" if result.difference < 1e-10 else "🟡" if result.difference < 1e-2 else "🔴"
+        for result in checksum_results
+    ],
+    "Diagnostic": [result.diagnostic for result in checksum_results],
+})
+```
+
+## Visualization
+
+### Dalitz plots
+
+The four distributions in the selected $3\pi$ mass bin are shown over the same pair of Mandelstam variables.
+
+```{python}
+# | code-fold: true
+# | code-summary: Compute the four Dalitz plots
+x_subsystem, y_subsystem = 3, 1
+resolution = 200
+intensity_grids = {}
+for name, model in models.items():
+    masses = sorted(model.masses, key=str)
+
+    def invariant_limits(subsystem: int) -> tuple[float, float]:
+        a, b = sorted({1, 2, 3} - {subsystem})
+        minimum = (masses[a] + masses[b]) ** 2
+        maximum = (masses[0] - masses[subsystem]) ** 2
+        return (
+            float(minimum.xreplace(model.masses)),
+            float(maximum.xreplace(model.masses)),
+        )
+
+    x_min, x_max = invariant_limits(x_subsystem)
+    y_min, y_max = invariant_limits(y_subsystem)
+    x_margin = 0.05 * (x_max - x_min)
+    y_margin = 0.05 * (y_max - y_min)
+    x, y = jnp.meshgrid(
+        jnp.linspace(x_min - x_margin, x_max + x_margin, resolution),
+        jnp.linspace(y_min - y_margin, y_max + y_margin, resolution),
+    )
+    function = compiled_workspace.functions[name]
+    values = jnp.real(
+        function({f"sigma{x_subsystem}": x, f"sigma{y_subsystem}": y})
+    )
+    intensity_grids[name] = (x, y, values / jnp.nansum(values))
+
+# cspell:ignore bbox edgecolor facecolor fontset fontsize labelcolor mathtext ncol
+# cspell:ignore hspace savefig sharey STIX wspace xtick ytick
+plt.rcParams.update({
+    "axes.edgecolor": "#808080",
+    "axes.facecolor": "none",
+    "axes.labelcolor": "#808080",
+    "figure.facecolor": "none",
+    "font.family": "serif",
+    "font.serif": ["STIXGeneral", "DejaVu Serif"],
+    "font.size": 18,
+    "mathtext.fontset": "stix",
+    "savefig.transparent": True,
+    "text.color": "#808080",
+    "xtick.color": "#808080",
+    "ytick.color": "#808080",
+})
+```
+
+```{python}
+# | code-fold: true
+# | code-summary: Render the four Dalitz plots
+# | column: page-inset
+subplot_titles = {
+    "compass_3pi_JP=1+_M=0_1540_1560": R"$J^P=1^+,\ M=0$",
+    "compass_3pi_JP=1-_M=1_1540_1560": R"$J^P=1^-,\ M=1$",
+    "compass_3pi_JP=2+_M=1_1540_1560": R"$J^P=2^+,\ M=1$",
+    "compass_3pi_JP=4+_M=1_1540_1560": R"$J^P=4^+,\ M=1$",
+}
+fig, axes = plt.subplots(2, 2, figsize=(14, 11))
+for ax, (name, (x, y, values)) in zip(axes.flat, intensity_grids.items(), strict=True):
+    ax.pcolormesh(x, y, values, rasterized=True)
+    ax.set_aspect("equal")
+    ax.set_title(subplot_titles[name])
+    ax.set_xlabel(R"$m^2(\pi^-\pi^+)$ [GeV$^2$]")
+    ax.set_ylabel(R"$m^2(\pi^+\pi^-)$ [GeV$^2$]")
+fig.subplots_adjust(hspace=0.38, wspace=0.08)
+plt.show()
+```

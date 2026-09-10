@@ -34,6 +34,7 @@
     ".prettierignore",
     ".taplo.toml",
     ".vscode/*.json",
+    "docs/_images/*.svg",
     "json_options.jl",
     "Manifest.toml",
     "models/*.json",

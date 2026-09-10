@@ -94,6 +94,7 @@ jobs:
       - name: Commit results
         working-directory: preview
         run: |
+          touch .nojekyll
           git add -A
           if git rev-parse --verify HEAD; then
             git commit --amend -m "https://github.com/RUB-EP1/amplitude-serialization/pull/${{ github.event.number }} preview at https://rub-ep1.github.io/amplitude-serialization-pr-preview"

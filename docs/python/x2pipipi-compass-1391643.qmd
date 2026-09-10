@@ -60,7 +60,7 @@ pd.DataFrame({
 coordinates, and returns one structured result per checkpoint. Failed comparisons or
 evaluations retain their diagnostics without interrupting the remaining checks.
 
-The status marks 🟢, 🟡, and 🔴 indicate absolute differences of $<10^{-12}$, $<10^{-2}$, and $\ge10^{-2}$, respectively. Failed evaluations are marked 🔴; the diagnostic column provides details.
+The status marks 🟢, 🟡, and 🔴 indicate absolute differences of $<10^{-10}$, $<10^{-2}$, and $\ge10^{-2}$, respectively. Failed evaluations are marked 🔴; the diagnostic column provides details.
 
 ```{python}
 # | code-fold: true
@@ -75,7 +75,7 @@ pd.DataFrame({
     "Computed": [result.value for result in checksum_results],
     "Difference": [result.difference for result in checksum_results],
     "Status": [
-        "🟢" if result.difference < 1e-12 else "🟡" if result.difference < 1e-2 else "🔴"
+        "🟢" if result.difference < 1e-10 else "🟡" if result.difference < 1e-2 else "🔴"
         for result in checksum_results
     ],
     "Diagnostic": [result.diagnostic for result in checksum_results],

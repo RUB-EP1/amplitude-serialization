@@ -21,21 +21,61 @@ from pathlib import Path
 import jax.numpy as jnp
 import matplotlib.pyplot as plt
 import pandas as pd
+import sympy as sp
 from ampform_dpd.io.serialization import (
     compile_workspace,
     load_workspace,
     validate_checksums,
 )
+from ampform_dpd.io.serialization.dynamics import (
+    DefinedExpression,
+    ModelDefinition,
+    Propagator,
+    get_function_definition,
+    to_mandelstam_symbol,
+)
 from matplotlib_inline.backend_inline import set_matplotlib_formats
+from sympy.parsing.sympy_parser import parse_expr
 
 this_dir = Path(".").absolute()
 logging.getLogger("ampform.sympy").setLevel(logging.ERROR)
 set_matplotlib_formats("svg")
 ```
 
+The serialized `generic_function` expressions carry their constants as sibling keys next
+to the expression itself. The default builder in `ampform_dpd` only substitutes the
+imaginary unit and the Mandelstam variable, so the workspace is loaded with a builder
+that also substitutes those named constants.
+
+```{python}
+# | code-fold: true
+# | code-summary: Builder for parametrized generic functions
+mandelstam_aliases = ("sigma", "σ", "m_12_sq", "m_23_sq", "m_31_sq")
+reserved_generic_function_keys = {"name", "type", "expression"}
+
+
+def formulate_parametric_generic_function(
+    propagator: Propagator, resonance: str, model: ModelDefinition
+) -> DefinedExpression:
+    definition = get_function_definition(propagator["parametrization"], model)
+    mandelstam = to_mandelstam_symbol(propagator["node"])
+    local_dict = {"i": sp.I, "I": sp.I}
+    local_dict.update(dict.fromkeys(mandelstam_aliases, mandelstam))
+    local_dict.update({
+        key: sp.sympify(value)
+        for key, value in definition.items()
+        if key not in reserved_generic_function_keys
+    })
+    expression = definition["expression"].replace("^", "**").replace("1im", "I")
+    return DefinedExpression(expression=parse_expr(expression, local_dict=local_dict))
+```
+
 ```{python}
 model_path = this_dir.parent.parent / "models" / "x2pipipi-compass-1391643.json"
-workspace = load_workspace(model_path)
+workspace = load_workspace(
+    model_path,
+    builders={"generic_function": formulate_parametric_generic_function},
+)
 ```
 
 ## Construct amplitude models

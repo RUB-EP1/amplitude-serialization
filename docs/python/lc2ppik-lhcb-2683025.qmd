@@ -118,7 +118,7 @@ chain_defs = get_decay_chains(model_definition)
 ```{python}
 # | code-fold: true
 s, m1, m2, angular_momentum, d = sp.symbols("s m1 m2 L R", nonnegative=True)
-expr = FormFactor(s, m1, m2, angular_momentum, d)
+expr = FormFactor(s, m1, m2, angular_momentum, d, normalize=False)
 Math(aslatex(unfold_definitions(expr)))
 ```
 

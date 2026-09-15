@@ -26,13 +26,9 @@ import jax.numpy as jnp
 import matplotlib.pyplot as plt
 import pandas as pd
 import sympy as sp
+from ampform.dynamics import BreitWigner, ChannelArguments, MultichannelBreitWigner
 from ampform.dynamics.form_factor import FormFactor
 from ampform_dpd.decay import FinalStateID, State, ThreeBodyDecay
-from ampform_dpd.dynamics import (
-    BreitWigner,
-    ChannelArguments,
-    MultichannelBreitWigner,
-)
 from ampform_dpd.io import (
     aslatex,
     simplify_latex_rendering,
@@ -141,7 +137,7 @@ Math(aslatex(ff_l1520))
 ```{python}
 # | code-fold: true
 s, m0, gamma0, m1, m2, angular_momentum, d = sp.symbols("s m0 Gamma0 m1 m2 L R", nonnegative=True)
-expr = BreitWigner(s, m0, gamma0, m1, m2, angular_momentum, d)
+expr = BreitWigner(s, m0, gamma0, m1, m2, angular_momentum, d, numerator="unity")
 Math(aslatex(unfold_definitions(expr)))
 ```
 

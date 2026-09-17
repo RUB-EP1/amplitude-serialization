@@ -1,8 +1,11 @@
+bigl
+bigr
 callout
 isinstance
 lhcb
 Mikhasenko
 Misha
+mathrm
 multline
 pdfs
 pipipi

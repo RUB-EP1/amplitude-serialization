@@ -40,9 +40,6 @@ jobs:
         with:
           key: |
             jupyter-cache-${{hashFiles('pixi.lock')}}-${{hashFiles('docs/*/*.qmd', 'models/*.json')}}
-          restore-keys: |
-            jupyter-cache-${{hashFiles('pixi.lock')}}
-            jupyter-cache
           path: |
             **/.jupyter_cache
       - name: General caches

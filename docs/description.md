@@ -46,20 +46,17 @@ Here $\tau$ denotes the kinematic variables and $\text{pars}$ the model paramete
 
 ```json
 {
-    "distributions": [
-        {
-            "name": "my-amazing-model",
-            "type": "HadronicUnpolarizedIntensity",
-            "decay_description": {
-                "kinematics": {},
-                "reference_topology": [[1, 2], 3],
-                "chains": [
-                    {},
-                    {}
-                ]
-            }
-        }
-    ]
+  "distributions": [
+    {
+      "name": "my-amazing-model",
+      "type": "HadronicUnpolarizedIntensity",
+      "decay_description": {
+        "kinematics": {},
+        "reference_topology": [[1, 2], 3],
+        "chains": [{}, {}]
+      }
+    }
+  ]
 }
 ```
 
@@ -146,7 +143,7 @@ The same nested array is used as an **address** in two related ways:
 
 The `reference_topology` serves two purposes. First, it defines how the decay kinematics are parametrized: which combination of invariant masses and helicity angles describes the phase space. Second, it fixes the quantization axes of the **external** helicities. Helicity is the projection of a particle's spin along its momentum, so its value depends on the frame in which it is evaluated.
 
-Because the `reference_topology` specifies a unique path from the initial state to the final-state particles, it defines the frame for each external helicity. The helicity indices on Wigner $D$-functions and on couplings refer to those frames. A chain whose `topology` coincides with the reference is already written in these frames. A chain with a different topology is evaluated in its own local frames and then aligned to the reference by Wigner rotations on the external lines ([Habermann and Mikhasenko, *Wigner rotations for cascade reactions*](https://inspirehep.net/literature/2827198)).
+Because the `reference_topology` specifies a unique path from the initial state to the final-state particles, it defines the frame for each external helicity. The helicity indices on Wigner $D$-functions and on couplings refer to those frames. A chain whose `topology` coincides with the reference is already written in these frames. A chain with a different topology is evaluated in its own local frames and then aligned to the reference by Wigner rotations on the external lines ([Habermann and Mikhasenko, _Wigner rotations for cascade reactions_](https://inspirehep.net/literature/2827198)).
 
 ### Amplitude of a cascade chain
 

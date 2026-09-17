@@ -71,6 +71,23 @@
       "required": ["name", "propagators", "topology", "vertices", "weight"],
       "additionalProperties": false
     },
+    "FourVector": {
+      "type": "object",
+      "description": "On-shell four-momentum of a final-state particle, in GeV. Components are those of the Minkowski vector p^μ = (E, p_x, p_y, p_z).",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Final-state particle index. Matches kinematics.final_state[].index."
+        },
+        "E": { "type": "number", "description": "Energy in GeV." },
+        "px": { "type": "number", "description": "x-component of momentum in GeV." },
+        "py": { "type": "number", "description": "y-component of momentum in GeV." },
+        "pz": { "type": "number", "description": "z-component of momentum in GeV." }
+      },
+      "required": ["index", "E", "px", "py", "pz"],
+      "additionalProperties": false
+    },
     "Function": {
       "type": "object",
       "properties": {
@@ -329,14 +346,26 @@
         "type": "object",
         "properties": {
           "name": {
-            "description": "Identifier for the distribution. Can be referred to from elsewhere in the model description.",
+            "description": "Identifier for the domain. Can be referred to from phase-space points.",
             "type": "string"
           },
           "type": {
-            "enum": ["product_domain"],
+            "enum": ["product_domain", "phase_space"],
             "enumDescriptions": [
-              "Box-shaped domain defined by min-max values over each variable."
+              "Box-shaped domain defined by min-max values over each variable.",
+              "n-body phase space determined by the initial-state mass m0 = √s and the final-state masses m1, m2, …"
             ]
+          },
+          "m0": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Invariant mass of the initial state (√s), in GeV."
+          },
+          "final_state_masses": {
+            "type": "array",
+            "description": "Masses of the final-state particles in index order 1, 2, …, in GeV.",
+            "items": { "type": "number", "minimum": 0 },
+            "minItems": 2
           },
           "parameters": {
             "type": "array",
@@ -368,6 +397,10 @@
           {
             "if": { "properties": { "type": { "const": "product_domain" } } },
             "then": { "required": ["axes"] }
+          },
+          {
+            "if": { "properties": { "type": { "const": "phase_space" } } },
+            "then": { "required": ["m0", "final_state_masses"] }
           }
         ],
         "additionalProperties": false
@@ -390,7 +423,7 @@
           "items": {
             "properties": {
               "point": {
-                "description": "Parameter point over which to evaluate the distribution.",
+                "description": "Name of the evaluation point. For an amplitude checksum this is a phase-space point of four-vectors; for a lineshape checksum it may be a parameter point (for example an invariant mass squared).",
                 "type": "string"
               },
               "distribution": {
@@ -410,17 +443,28 @@
     },
     "parameter_points": {
       "type": "array",
-      "description": "Definition of points in parameter space over which the model can be evaluated.",
+      "description": "Named evaluation points. An amplitude point is a set of final-state four-vectors in a phase_space domain. A lineshape point may instead list invariant-mass (or other) parameters.",
       "items": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
-            "description": "Identifier for the parameter point. Can be referred to from elsewhere in the model description."
+            "description": "Identifier for the point. Can be referred to from checksums and elsewhere in the model description."
+          },
+          "domain": {
+            "type": "string",
+            "description": "Name of the phase_space domain that contains this point."
+          },
+          "four_vectors": {
+            "type": "array",
+            "description": "Final-state four-momenta. Together they are one point of the phase-space domain and the input to the amplitude.",
+            "items": { "$ref": "#/definitions/FourVector" },
+            "minItems": 2,
+            "uniqueItems": true
           },
           "parameters": {
             "type": "array",
-            "description": "List of parameters and their values that together describe a point in phase space.",
+            "description": "Named scalar parameters, used for lineshape checks (for example an invariant mass squared).",
             "items": { "$ref": "#/definitions/Parameter" },
             "uniqueItems": true
           }

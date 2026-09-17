@@ -138,10 +138,9 @@ The use of strings for complex numbers follows physics conventions for ease of r
 
 The string values that are not expanded in the `"appendix"` should be identifiers declared in the serialization document.
 
-### Validation Block
+### Validation
 
-The last block `validation` provides reference values of the amplitude for every chain at a single kinematic point.
-This section acts as a model integrity check, providing reference amplitudes for comparison against calculated values.
+`misc.amplitude_model_checksums` stores reference values of the amplitude (and of individual lineshapes) at named points. An amplitude point is a set of final-state four-vectors in the `phase_space` domain. Lineshape checks may use a scalar invariant such as $m_{ij}^2$.
 
 <details>
   <summary>See the full example</summary>

@@ -42,7 +42,7 @@ $$
 I_\text{unpolarized}(\tau | \text{pars}) = \sum_{\lambda_{\mathrm{ext}}} \bigl|A_{\lambda_{\mathrm{ext}}}(\tau | \text{pars})\bigr|^2.
 $$
 
-Here $\tau$ denotes the kinematic variables and $\text{pars}$ the model parameters. This observable is used when particle polarizations are not measured.
+Here $\tau$ is a point of the phase-space domain: the final-state four-vectors. $\text{pars}$ denotes the model parameters. This observable is used when particle polarizations are not measured.
 
 ```json
 {
@@ -91,7 +91,7 @@ A `decay_description` is organized around several mandatory components:
 
 ### Purpose of the `kinematics` object
 
-The `kinematics` object lists the external particles of the decay and their properties (spin, mass, name, and index). These are the lines that appear as leaves and as the root of every topology. Event-dependent invariants and helicity angles are not stored here; they are implied by the topology and the four-momenta of an event.
+The `kinematics` object lists the external particles of the decay and their properties (spin, mass, name, and index). These are the lines that appear as leaves and as the root of every topology. Event-dependent invariants and helicity angles are not stored here: they are computed from a phase-space point, which is a set of final-state four-vectors.
 
 ### Detailed field descriptions
 
@@ -133,6 +133,23 @@ The `kinematics` object lists the external particles of the decay and their prop
   }
   ```
 
+## Phase-space domain
+
+The kinematic domain of a decay is the $n$-body phase space. It is fixed by the initial-state mass $m_0=\sqrt{s}$ and the final-state masses $m_1,m_2,\ldots$. A point in this domain is a set of on-shell four-vectors $p_1,p_2,\ldots$ for the final-state particles. In the rest frame of the decaying system they satisfy $\sum_i p_i=(m_0,\mathbf{0})$.
+
+These four-vectors are the input to the amplitude. The invariant masses and helicity angles that appear in the cascade factorization are computed from them, using the chain topology and the reference topology.
+
+```json
+"domains": [
+    {
+        "name": "default",
+        "type": "phase_space",
+        "m0": 2.28646,
+        "final_state_masses": [0.938272046, 0.13957018, 0.493677]
+    }
+]
+```
+
 ## Topology and reference topology
 
 A topology is a **nested binary tree** of final-state indices, written in JSON as nested two-element arrays. Each pair is an ordered two-body decay $0\to 1+2$: the left entry is child 1, the right entry is child 2. For $n$ final-state particles there are $n-1$ vertices and $n-2$ internal lines (plus the root line).
@@ -144,7 +161,7 @@ The same nested array is used as an **address** in two related ways:
 - as a **vertex**: the two-body decay of that subsystem;
 - as an **internal line**: the resonance (the parent particle of that decay).
 
-The `reference_topology` serves two purposes. First, it defines how the decay kinematics are parametrized: which combination of invariant masses and helicity angles describes the phase space. Second, it fixes the quantization axes of the **external** helicities. Helicity is the projection of a particle's spin along its momentum, so its value depends on the frame in which it is evaluated.
+The `reference_topology` serves two purposes. First, it defines how a set of final-state four-vectors is turned into the invariant masses and helicity angles of the cascade. Second, it fixes the quantization axes of the **external** helicities. Helicity is the projection of a particle's spin along its momentum, so its value depends on the frame in which it is evaluated.
 
 Because the `reference_topology` specifies a unique path from the initial state to the final-state particles, it defines the frame for each external helicity. The helicity indices on Wigner $D$-functions and on couplings refer to those frames. A chain whose `topology` coincides with the reference is already written in these frames. A chain with a different topology is evaluated in its own local frames and then aligned to the reference by Wigner rotations on the external lines ([Habermann and Mikhasenko, *Wigner rotations for cascade reactions*](https://inspirehep.net/literature/2827198)).
 
@@ -278,3 +295,21 @@ A propagator is attached to an **internal line**, not to the root or to a final-
 ### Weight
 
 The `weight` of a chain is the complex coefficient that multiplies that chain's matrix element. The total amplitude is the sum of the weighted, aligned chains, so the weights set both the strength of each chain and the interference between chains.
+
+## Validation
+
+Checksums in `misc.amplitude_model_checksums` are reference values used to check an implementation. An **amplitude** checksum is evaluated at a phase-space point given as final-state four-vectors:
+
+```json
+{
+    "name": "validation_point",
+    "domain": "default",
+    "four_vectors": [
+        {"index": 1, "E": 1.161, "px": -0.598, "py": 0.0, "pz": 0.332},
+        {"index": 2, "E": 0.350, "px": 0.0, "py": 0.0, "pz": -0.321},
+        {"index": 3, "E": 0.776, "px": 0.598, "py": 0.0, "pz": -0.012}
+    ]
+}
+```
+
+A **lineshape** checksum may still use a scalar parameter point, for example an invariant mass squared $m_{ij}^2$, because a propagator is a function of one line invariant.

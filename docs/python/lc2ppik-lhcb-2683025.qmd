@@ -41,8 +41,8 @@ from ampform_dpd.io import (
 from ampform_dpd.io.serialization import (
     compile_workspace,
     load_workspace,
-    validate_checksums,
 )
+from checksums import evaluate_checksum, install_four_vector_kinematics, label_diff
 from ampform_dpd.io.serialization.amplitude import (
     HelicityRecoupling,
     LSRecoupling,
@@ -70,6 +70,7 @@ this_dir = Path(".").absolute()
 logging.getLogger("ampform.sympy").setLevel(logging.ERROR)
 simplify_latex_rendering()
 set_matplotlib_formats("svg")
+install_four_vector_kinematics()
 ```
 
 ```{python}
@@ -263,34 +264,34 @@ Math(aslatex(definitions))
 
 ### Validation
 
-`compile_workspace` turns the symbolic workspace into numerical TensorWaves
-functions. Its default targets are the distributions and named functions referenced
-by the serialized checksums. `validate_checksums` transforms each reference point to
-the required coordinates and returns a structured result without aborting the other
-checks when an individual evaluation fails.
-
-The status marks 🟢, 🟡, and 🔴 indicate absolute differences of $<10^{-10}$, $<10^{-2}$, and $\ge10^{-2}$, respectively. Failed evaluations are marked 🔴; the diagnostic column provides details. The diagnostic column is hidden when all statuses are 🟢.
+Amplitude checksums are evaluated on final-state four-vectors from the `phase_space` domain. Lineshape checksums still use a scalar invariant. The status marks 🟢, 🟡, and 🔴 indicate absolute differences of $<10^{-10}$, $<10^{-2}$, and $\ge10^{-2}$, respectively.
 
 ```{python}
 # | code-fold: true
 # | code-summary: Compile and validate all checksum targets
+from ampform_dpd.io.serialization.validation import _to_number
+
+install_four_vector_kinematics()
 compiled_workspace = compile_workspace(workspace, backend="jax")
-checksum_results = validate_checksums(compiled_workspace)
-validation_table = pd.DataFrame({
-    "Distribution": [result.target for result in checksum_results],
-    "Point": [result.point_name for result in checksum_results],
-    "Computed": [result.value for result in checksum_results],
-    "Expected": [result.reference for result in checksum_results],
-    "Difference": [result.difference for result in checksum_results],
-    "Status": [
-        "🟢" if result.difference < 1e-10 else "🟡" if result.difference < 1e-2 else "🔴"
-        for result in checksum_results
-    ],
-    "Diagnostic": [result.diagnostic for result in checksum_results],
-})
-if validation_table["Status"].eq("🟢").all():
-    validation_table = validation_table.drop(columns="Diagnostic")
-assert all(result.passed for result in checksum_results)
+points = {point["name"]: point for point in workspace.reference_points}
+rows = []
+passed = True
+for checksum in workspace.checksums:
+    computed = evaluate_checksum(compiled_workspace, checksum, points)
+    reference = _to_number(checksum["value"])
+    difference = abs(complex(computed) - complex(reference))
+    status = label_diff(difference)
+    passed = passed and status == "🟢"
+    rows.append({
+        "Distribution": checksum["distribution"],
+        "Point": checksum["point"],
+        "Computed": computed,
+        "Expected": reference,
+        "Difference": difference,
+        "Status": status,
+    })
+validation_table = pd.DataFrame(rows)
+assert passed
 validation_table
 ```
 

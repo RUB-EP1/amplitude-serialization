@@ -2107,17 +2107,7 @@
             "name": "LNR3O"
           }
         ]
-      },
-      "variables": [
-        {
-          "mass_phi_costheta": ["m_12", "phi_12", "cos_theta_12"],
-          "node": [1, 2]
-        },
-        {
-          "mass_phi_costheta": ["m_12_3", "phi_12_3", "cos_theta_12_3"],
-          "node": [[1, 2], 3]
-        }
-      ]
+      }
     }
   ],
   "functions": [
@@ -2365,45 +2355,14 @@
   ],
   "domains": [
     {
+      "final_state_masses": [
+        0.938,
+        0.493,
+        0.0
+      ],
+      "m0": 5.62,
       "name": "default",
-      "type": "product_domain",
-      "axes": [
-        {
-          "name": "cos_theta_12",
-          "min": -1.0,
-          "max": 1.0
-        },
-        {
-          "name": "phi_12",
-          "min": -3.14,
-          "max": 3.14
-        },
-        {
-          "name": "m_12",
-          "min": 1.0,
-          "max": 5.5
-        },
-        {
-          "name": "cos_theta_12_3",
-          "min": -1.0,
-          "max": 1.0
-        },
-        {
-          "name": "phi_12_3",
-          "min": -3.14,
-          "max": 3.14
-        },
-        {
-          "name": "m_12_3",
-          "min": 1.0,
-          "max": 5.5
-        },
-        {
-          "name": "L_1520_mass",
-          "min": 3.0,
-          "max": 6.5
-        }
-      ]
+      "type": "phase_space"
     }
   ],
   "misc": {
@@ -2498,88 +2457,82 @@
   "parameter_points": [
     {
       "name": "validation_point1",
-      "parameters": [
+      "domain": "default",
+      "four_vectors": [
         {
-          "name": "cos_theta_12",
-          "value": -0.2260000000000005
+          "E": 1.686981672078911,
+          "index": 1,
+          "px": 0.5129256327991917,
+          "py": 0,
+          "pz": 1.3049791021881183
         },
         {
-          "name": "phi_12",
-          "value": 0.0
+          "E": 1.4103160645758934,
+          "index": 2,
+          "px": -0.5129256327991917,
+          "py": 0,
+          "pz": 1.2177231611570773
         },
         {
-          "name": "m_12",
-          "value": 1.797004885914337
-        },
-        {
-          "name": "cos_theta_12_3",
-          "value": 0.0
-        },
-        {
-          "name": "phi_12_3",
-          "value": 0.0
-        },
-        {
-          "name": "m_12_3",
-          "value": 5.62
+          "E": 2.5227022633451957,
+          "index": 3,
+          "px": 0,
+          "py": 0,
+          "pz": -2.5227022633451957
         }
       ]
     },
     {
       "name": "validation_point2",
-      "parameters": [
+      "domain": "default",
+      "four_vectors": [
         {
-          "name": "cos_theta_12",
-          "value": -0.6259999999999996
+          "E": 2.3305004092674686,
+          "index": 1,
+          "px": 1.8153324072175658,
+          "py": 0,
+          "pz": -1.1206946100082382
         },
         {
-          "name": "phi_12",
-          "value": 0.0
+          "E": 2.606267727743208,
+          "index": 2,
+          "px": -1.8153324072175658,
+          "py": 0,
+          "pz": 1.8039264729975621
         },
         {
-          "name": "m_12",
-          "value": 4.889261075050094
-        },
-        {
-          "name": "cos_theta_12_3",
-          "value": 0.0
-        },
-        {
-          "name": "phi_12_3",
-          "value": 0.0
-        },
-        {
-          "name": "m_12_3",
-          "value": 5.62
+          "E": 0.6832318629893235,
+          "index": 3,
+          "px": 0,
+          "py": 0,
+          "pz": -0.6832318629893238
         }
       ]
     },
     {
       "name": "validation_point3",
-      "parameters": [
+      "domain": "default",
+      "four_vectors": [
         {
-          "name": "cos_theta_12",
-          "value": 0.5739999999999997
+          "E": 2.4950722069297417,
+          "index": 1,
+          "px": 1.286800060217128,
+          "py": 0,
+          "pz": 1.9208557787659248
         },
         {
-          "name": "phi_12",
-          "value": 0.0
+          "E": 1.3905699870204364,
+          "index": 2,
+          "px": -1.286800060217128,
+          "py": 0,
+          "pz": -0.1864979727161027
         },
         {
-          "name": "m_12",
-          "value": 3.477099115642233
-        },
-        {
-          "name": "cos_theta_12_3",
-          "value": 0.0
-        },
-        {
-          "name": "phi_12_3",
-          "value": 0.0
-        },
-        {
-          "name": "m_12_3",
-          "value": 5.62
+          "E": 1.7343578060498221,
+          "index": 3,
+          "px": 0,
+          "py": 0,
+          "pz": -1.7343578060498221
         }
       ]
     },

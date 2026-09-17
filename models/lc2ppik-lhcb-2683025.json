@@ -739,16 +739,6 @@
         ],
         "appendix": {}
       },
-      "variables": [
-        {
-          "node": [3, 1],
-          "mass_phi_costheta": ["m_31", "phi_31", "cos_theta_31"]
-        },
-        {
-          "node": [[3, 1], 2],
-          "mass_phi_costheta": ["m_31_2", "phi_31_2", "cos_theta_31_2"]
-        }
-      ],
       "parameters": []
     }
   ],
@@ -905,40 +895,14 @@
   ],
   "domains": [
     {
+      "final_state_masses": [
+        0.938272046,
+        0.13957018,
+        0.493677
+      ],
+      "m0": 2.28646,
       "name": "default",
-      "type": "product_domain",
-      "axes": [
-        {
-          "name": "cos_theta_12",
-          "min": -1.0,
-          "max": 1.0
-        },
-        {
-          "name": "phi_12",
-          "min": -3.14,
-          "max": 3.14
-        },
-        {
-          "name": "m_12",
-          "min": 1.0,
-          "max": 5.5
-        },
-        {
-          "name": "cos_theta_12_3",
-          "min": -1.0,
-          "max": 1.0
-        },
-        {
-          "name": "phi_12_3",
-          "min": -3.14,
-          "max": 3.14
-        },
-        {
-          "name": "m_12_3",
-          "min": 1.0,
-          "max": 5.5
-        }
-      ]
+      "type": "phase_space"
     }
   ],
   "misc": {
@@ -1003,30 +967,28 @@
   "parameter_points": [
     {
       "name": "validation_point",
-      "parameters": [
+      "domain": "default",
+      "four_vectors": [
         {
-          "name": "cos_theta_31",
-          "value": -0.2309352648098208
+          "E": 1.1612237735510647,
+          "index": 1,
+          "px": -0.5981125714430022,
+          "py": 0,
+          "pz": 0.33218605003369345
         },
         {
-          "name": "phi_31",
-          "value": 0.0
+          "E": 0.3496131693790965,
+          "index": 2,
+          "px": 0,
+          "py": 0,
+          "pz": -0.3205456801425721
         },
         {
-          "name": "m_31",
-          "value": 1.9101377207489973
-        },
-        {
-          "name": "cos_theta_31_2",
-          "value": 0.0
-        },
-        {
-          "name": "phi_31_2",
-          "value": 0.0
-        },
-        {
-          "name": "m_31_2",
-          "value": 2.28646
+          "E": 0.7756230570698389,
+          "index": 3,
+          "px": 0.5981125714430022,
+          "py": 0,
+          "pz": -0.011640369891121334
         }
       ]
     },

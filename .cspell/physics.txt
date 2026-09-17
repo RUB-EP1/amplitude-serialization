@@ -14,6 +14,7 @@ Jpsi
 Katchaev
 lineshape
 lineshapes
+Minkowski
 parametrizations
 recoupling
 recouplings

@@ -2,108 +2,108 @@
 
 ## Introduction
 
-The Amplitude Model Serialization Format defines a structured, JSON-based specification that is designed to facilitate reproducibility and validation of theoretical frameworks within the hadron physics community. It provides a standardized, minimal approach to describing particle kinematics, lineshapes, and interaction chains.
+The Amplitude Model Serialization Format is a structured, JSON-based specification for hadronic amplitude models. It is designed to support reproducibility and validation of computational and theoretical frameworks in the hadron-physics community. It provides a standardized, minimal way to describe particle kinematics, lineshapes, and cascade decay chains.
 
-This document targets framework developers and experts engaged in high-energy physics, computational physics, and related fields. The format is designed to be extensible, allowing for the incorporation of new features and enhancements as the field evolves. Feedback can be provided via [our issues page](https://github.com/RUB-EP1/amplitude-serialization/issues) or the [discussions page](https://github.com/RUB-EP1/amplitude-serialization/discussions).
+This document is intended for framework developers and experts in high-energy physics, computational physics, and related fields. The format is extensible, so that new features can be added as the field evolves. Feedback can be provided via [our issues page](https://github.com/RUB-EP1/amplitude-serialization/issues) or the [discussions page](https://github.com/RUB-EP1/amplitude-serialization/discussions).
 
 ### Objectives
 
-- **Reproducibility and Open Science**<br>
-  By standardizing model descriptions, this format aims to enhance the reproducibility of computational experiments and theoretical analyses. It supports open science initiatives by making it easier for researchers to share, validate, and build upon each other's work.
-- **Inference from amplitude analysis results**<br>
-  The format is designed to facilitate the interpretation of amplitude analysis results by the theory community. By providing a clear and comprehensive model description, it helps bridge the gap between experimental data and theoretical insights.
+- **Reproducibility and open science**<br>
+  By standardizing model descriptions, the format makes computational experiments and theoretical analyses easier to reproduce. It supports open science by making it easier for researchers to share, validate, and build upon each other's work.
+- **Interpretation of amplitude-analysis results**<br>
+  The format is designed to help the theory community interpret amplitude-analysis results. A complete model description helps connect experimental measurements to theoretical interpretation.
 
-- **Correctness/Validity check for new Frameworks**<br>
-  As new computational frameworks and models are developed, this format serves as a benchmark check for validating their correctness. It ensures that new tools and approaches adhere to established standards, fostering innovation while maintaining scientific rigor.
+- **Correctness checks for new frameworks**<br>
+  As new computational frameworks and models are developed, this format provides a benchmark for checking their correctness. It encourages new tools to follow a common standard while remaining scientifically rigorous.
 
 - **Integration with Monte Carlo (MC) generators**<br>
-  The format is compatible with MC generators, enabling seamless integration and simulation workflows. This compatibility is critical for testing theoretical models against experimental data and for conducting high-fidelity simulations.
+  The format is intended to be compatible with MC generators, so that the same model can be used in simulation workflows. This is important for testing theoretical models against experimental data and for producing high-fidelity simulations.
 
-- **Benchmark for new computational devices**<br>
-  The structured nature of the model description format makes it an ideal benchmark for new processing units (GPU, CPU, ...) or accelerated computation techniques. By providing a common material for benchmarking, it aids in evaluating the performance enhancements offered by new hardware and software technologies.
+- **Benchmark for new computational hardware**<br>
+  A structured model description is a useful benchmark for new processors (GPUs, CPUs, and related accelerators) and for accelerated computation. A shared model makes it easier to compare the performance of new hardware and software.
 
-This document presents the specifications of the model description format in detail, outlining its structure, components, and applications. It is intended as a comprehensive guide for developers and theorists working at the intersection of computational and theoretical physics, ensuring that the tools and models they develop are both accurate and interoperable.
+This document specifies the model description format: its structure, components, and intended applications. It is a reference for developers and theorists working at the intersection of computational and theoretical physics, with the aim that the tools and models they develop are accurate and interoperable.
 
 ## Amplitude model and observables
 
-In modeling, the Probability Density Function (PDF) serves as a fundamental concept for predicting and analyzing the outcomes of particle interactions. PDFs are real-valued, normalizable functions that depends on kinematic variables and parameters, providing a quantitative framework to describe the likelihood of observing a particular configuration or outcome in a particle decay or collision event.
+An amplitude model predicts a probability density function (PDF) over the kinematic variables of a decay. The PDF is a real-valued, normalizable function of kinematics and model parameters. It is constructed from transition amplitudes and is the quantity compared with experimental distributions.
+
+The elementary object is the **external-helicity amplitude** $A_{\lambda_{\mathrm{ext}}}(\tau\mid\mathrm{pars})$: a complex array with one index per external particle (the final-state helicities, and the helicity of the decaying particle). Observables are obtained from this array.
 
 ### Observables
 
-Observables are measurable quantities derived from the model that offer insight into the underlying physics governing particle interactions. In the context of amplitude models, observables are calculated from transition amplitudes, which represent the probability amplitudes of the system to transition from an initial to a final state. Two primary observables are defined in this framework:
+This format defines two primary observables.
 
-#### Unpolarized Intensity
+#### Unpolarized intensity
 
-The unpolarized intensity is an observable that represents the overall likelihood of a transition without considering the polarization states of the particles involved. It is computed as the squared magnitude of the transition amplitude, summed over all spin projections. Mathematically, the unpolarized is given by
+The unpolarized intensity retains no polarization information. It is the squared modulus of the external-helicity amplitude, summed over all external helicities:
 
 $$
-I_\text{unpolarized}(\tau | \text{pars}) = \sum_{\text{helicities}} |A_{\text{helicities}}(\tau | \text{pars})|^2,
+I_\text{unpolarized}(\tau | \text{pars}) = \sum_{\lambda_{\mathrm{ext}}} \bigl|A_{\lambda_{\mathrm{ext}}}(\tau | \text{pars})\bigr|^2.
 $$
 
-where $A_{\text{helicities}}(\tau | \text{pars})$ denotes the transition amplitude for a given set of helicities, $\tau$ represents the kinematic variables, and $\text{pars}$ symbolizes the model parameters. This observable is crucial for experiments where the polarization of the particles is not measured or considered.
+Here $\tau$ denotes the kinematic variables and $\text{pars}$ the model parameters. This observable is used when particle polarizations are not measured.
 
 ```json
 {
-    "distributions" : []
-    {
-        "type": "unpolarized_intensity",
-        "model": "my-amazing-model"
-    },
-    {
-        "name": "my-amazing-model",
-        "kinematics": {},
-        "reference_topology": {},
-        "chains": [
-            {},  // chain 1
-            {},  // chain 2
-        ]
-    }
+    "distributions": [
+        {
+            "name": "my-amazing-model",
+            "type": "HadronicUnpolarizedIntensity",
+            "decay_description": {
+                "kinematics": {},
+                "reference_topology": [[1, 2], 3],
+                "chains": [
+                    {},
+                    {}
+                ]
+            }
+        }
+    ]
 }
 ```
 
-#### Polarized Intensity
+#### Polarized intensity
 
-In contrast, the polarized intensity accounts for the polarization states of the particles involved in the interaction. It is computed by contracting the transition amplitude and its complex conjugate with the polarization matrix ($\rho$). This process involves summing over the final helicities while keeping the initial helicity states ($\lambda_0, \lambda_0'$) explicit in the calculation:
+The polarized intensity includes the polarization of the initial state. It is obtained by contracting the amplitude and its complex conjugate with the initial-state density matrix $\rho$, and summing over final-state helicities:
 
 $$
-I_\text{polarized}(\tau | \text{pars}) = \sum_{\text{final\_helicities}} A^*_{\lambda_0, \text{final\_helicities}}(\tau | \text{pars}) \times \rho_{\lambda_0,\lambda_0'} \times A_{\lambda_0', \text{final\_helicities}}(\tau | \text{pars})\,.
+I_\text{polarized}(\tau | \text{pars}) = \sum_{\lambda_0,\lambda_0'} \sum_{\lambda_{\mathrm{final}}} A^*_{\lambda_0,\,\lambda_{\mathrm{final}}}(\tau | \text{pars})\, \rho_{\lambda_0\lambda_0'}\, A_{\lambda_0',\,\lambda_{\mathrm{final}}}(\tau | \text{pars})\,.
 $$
 
-Here, $A^*_{\lambda_0', \text{final\_helicities}}$ represents the complex conjugate of the amplitude for initial helicity $\lambda_0'$ and a sum over final helicities. The polarization matrix $\rho_{\lambda_0,\lambda_0'}$ encapsulates the initial polarization states of the system, allowing for a detailed analysis of how polarization affects the transition probabilities.
+Here $A_{\lambda_0,\,\lambda_{\mathrm{final}}}$ is the amplitude for initial helicity $\lambda_0$ and a given set of final helicities, $A^*$ is its complex conjugate, and $\rho_{\lambda_0\lambda_0'}$ is the initial-state polarization density matrix. The corresponding distribution type is `HadronicPolarizedIntensity`.
 
-## Model Structure Overview
+## Model structure overview
 
-The model description is designed to encapsulate all elements of transition models, including the characteristics of particles involved, the shapes of their interaction lines, and the overarching topology of particle interactions. The format's hierarchical nature allows for detailed specification of models while maintaining readability and ease of manipulation by software tools.
+The decay description collects the ingredients of a cascade amplitude: the external particles, a reference topology, and a list of decay chains. Each chain is an ordered binary cascade: nested two-body decays, with a recoupling at every vertex and a lineshape on every internal line. Chains are summed coherently.
 
-### Mandatory Top-Level Components
+### Mandatory components of a decay description
 
-The model description is organized around several mandatory root-level components, each serving a distinct purpose in defining the physical model:
+A `decay_description` is organized around several mandatory components:
 
-- **[`kinematics`](#kinematics-section):** This section contains information about the particles involved in the model, including their spins, indices for identification, names, and masses. It establishes the foundational elements of the model by specifying the properties of each particle.
+- **[`kinematics`](#kinematics-section):** Lists the external particles, including their spins, indices, names, and masses. This section defines the initial and final states.
 
-- **[`reference_topology`](#topology-and-reference-topology):** This array defines the basic interaction structure or topology of the model which is used to define the reference quantization axes. It outlines the decay chain for which the amplitude is written without a need for the alignment rotations. All other chains that have different decay topology must be aligned to the reference one.
+- **[`reference_topology`](#topology-and-reference-topology):** A nested array of particle indices that defines the reference cascade. It parametrizes the kinematics and fixes the quantization axes of the external helicities. A chain written in this topology needs no alignment rotations. Chains with a different topology must be rotated into this reference.
 
-- **[`chains`](#chains-section):** The chains section lists specific interactions within the model, detailing the propagators, vertices with parametrization scheme and a complex coupling. Each chain is a cascade of decays that follows the chain topology. For every node one specifies the vertex propertied,
-  and a parametrization (the lineshape) of an intermediate resonance that ends on the node.
+- **[`chains`](#chains-section):** Lists the cascade sequences that contribute to the amplitude. Each chain has its own topology, one vertex per two-body decay, and one propagator per internal line. Chains are summed coherently, each multiplied by a complex weight.
 
-## Kinematics Section
+## Kinematics section
 
-### Purpose of the `Kinematics` Object
+### Purpose of the `kinematics` object
 
-The `kinematics` object within the model description characterizes particles involved in a model.
-It species the main properties such as spin, and masses of all particles.
+The `kinematics` object lists the external particles of the decay and their properties (spin, mass, name, and index). These are the lines that appear as leaves and as the root of every topology. Event-dependent invariants and helicity angles are not stored here; they are implied by the topology and the four-momenta of an event.
 
-### Detailed Field Descriptions
+### Detailed field descriptions
 
-- **`initial_state` and `final_state`:** These fields categorize particles as either initiating or resulting from the decay. Each entry includes:
-  - **`index`:** A unique identifier for each particle, with zero reserved for the initial state particle.
-  - **`name`:** A label for each particle, used for clarity and not as a standardized identifier.
-  - **`spin`:** The quantum spin number of the particle, represented in string format.
-  - **`mass`:** The mass of the particle, noted in GeV/c².
+- **`initial_state` and `final_state`:** These fields identify the decaying particle and the particles in the final state. Each entry includes:
+  - **`index`:** A unique identifier for the particle. Index `0` is reserved for the initial-state particle. Final-state indices start at `1` and are the integers that appear as leaves in topology brackets.
+  - **`name`:** A label for the particle. It is for readability and is not a standardized identifier.
+  - **`spin`:** The spin quantum number of the particle, written as a string (for example `"0"`, `"1/2"`, `"1"`).
+  - **`mass`:** The mass of the particle, in GeV.
 
-### Examples of the `kinematics` Sections
+### Examples of the `kinematics` section
 
-- **Three-body decay example (Lambda baryon to J/psi, kaon, and pion):**
+- **Three-body decay example ($\Lambda_b \to J/\psi\, K\, \pi$):**
 
   ```json
   "kinematics": {
@@ -118,7 +118,7 @@ It species the main properties such as spin, and masses of all particles.
   }
   ```
 
-- **Four-body decay example (B meson to psi meson, kaon, and two pions):**
+- **Four-body decay example ($B \to \psi\, K\, \pi\, \pi$):**
   ```json
   "kinematics": {
     "initial_state" : {
@@ -133,81 +133,148 @@ It species the main properties such as spin, and masses of all particles.
   }
   ```
 
-## Topology and Reference Topology
+## Topology and reference topology
 
-Purpose of the `reference_topology` is two folded. First, it defines how kinematics of the decay is parametrized, i.e. which combination of masses and angles is used to describe the phase space. Second, the `reference_topology` plays crucial role in defining how helicity amplitudes are computed. The reference topology is used to fix the quantization axes for particle helicities. Since helicity is the projection of a particle's spin along its direction of motion, its precise definition depends upon the frame of reference in which it is evaluated.
-As the `reference_topology` unambiguously defines the path to traverse the decay graph from initial to the final states, it sets a frame for each helicity, where it is defined. The helicity values employed in the indices of Wigner rotations `D_{λ1, λ2}` and couplings `H_{λ1, λ2}` are thus indicative of this frame.
+A topology is a **nested binary tree** of final-state indices, written in JSON as nested two-element arrays. Each pair is an ordered two-body decay $0\to 1+2$: the left entry is child 1, the right entry is child 2. For $n$ final-state particles there are $n-1$ vertices and $n-2$ internal lines (plus the root line).
 
-### An example of four-body decay
+Child order is part of the physics. The arrays `[3, 1]` and `[1, 3]` are different topologies: they assign child 1 and child 2 differently, and therefore change the helicity difference $\lambda_1-\lambda_2$, the Jacob–Wick particle-2 phase, the local angles, and the Wigner-rotation path. Bracket pairs must not be treated as unordered sets.
 
-Understanding the relation between the decay frames and the helicity definitions is crucial for accurately computing decay amplitudes within the conventional helicity formalism.
-As an example, let's investigate a four-body decay topology, specifically `[[[3,1],4],2]`.
-This topology outlines the decay sequence and the respective frames that define the helicities of the involved particles.
+The same nested array is used as an **address** in two related ways:
 
-The decay amplitude reads as a series of Wigner&nbsp;$D$-functions, each corresponding to a spacial rotation in the reads frame of particle system indicated by the node of the graph:
+- as a **vertex**: the two-body decay of that subsystem;
+- as an **internal line**: the resonance (the parent particle of that decay).
+
+The `reference_topology` serves two purposes. First, it defines how the decay kinematics are parametrized: which combination of invariant masses and helicity angles describes the phase space. Second, it fixes the quantization axes of the **external** helicities. Helicity is the projection of a particle's spin along its momentum, so its value depends on the frame in which it is evaluated.
+
+Because the `reference_topology` specifies a unique path from the initial state to the final-state particles, it defines the frame for each external helicity. The helicity indices on Wigner $D$-functions and on couplings refer to those frames. A chain whose `topology` coincides with the reference is already written in these frames. A chain with a different topology is evaluated in its own local frames and then aligned to the reference by Wigner rotations on the external lines ([Habermann and Mikhasenko, *Wigner rotations for cascade reactions*](https://inspirehep.net/literature/2827198)).
+
+### Amplitude of a cascade chain
+
+For one chain, the external-helicity amplitude has the factorization
 
 $$
-\begin{align}
-A &= n_{j_0} D_{m_0, \tau-\lambda_2}^{j_0}(\text{angles}_{[[3,1],4]}) \,\, H_{\tau,\lambda_2} \\
-%
-&\quad \cdot n_{j_{[[3,1],4]}} D_{\tau, \nu-\lambda_4}^{j_{[[3,1],4]}}(\text{angles}_{[3,1]}) \\
-%
-&\quad \cdot n_{j_{[3,1]}} D_{\nu, \lambda_3-\lambda_1}^{j_{[3,1]}}(\text{angles}_3) \,\, H_{\lambda_3,\lambda_1}
-\end{align}
+A_{\lambda_{\mathrm{ext}}}(\tau) =
+\sqrt{\prod_R (2J_R+1)}\;
+\prod_R P_R(\sigma_R)\;
+\sum_{\lambda_{\mathrm{int}}}
+\prod_v
+D^{J_0*}_{\lambda_0,\,\lambda_1-\lambda_2}(\phi_v,\theta_v,0)\,
+H^v_{\lambda_1\lambda_2}(\tau).
 $$
 
-- $D_{m_0, \tau - \lambda_2}^{j_0}(\text{angles}_{[[3,1],4]})$ describes the decay of particle 0 into a system `[3,1,4]`, and a particle&nbsp;`2` with helicities $\nu$, and $\lambda_2$, respectively. The decay is considered in the overall rest frame of the system (comprising particles `3`, `1`, `4`, and `2`).
-  Here is the first appearance of the $\lambda_2$, hence the helicity state of particle&nbsp;`2` is defined from its rest frame by boost-z and rotation to the total center of momentum.
-  The index $m_0$ is the spin projection of the decaying particle (0). It's a canonical state as the particle is at rest.
+- $R$ runs over **internal lines** (propagating resonances). $P_R(\sigma_R)$ is the lineshape evaluated at the invariant mass squared of that line. The root and the final-state lines have no propagator. The factor $\sqrt{2J_R+1}$ is a spin normalization for each internal line.
+- $v$ runs over **binary vertices**. At vertex $v$, line $0$ is the parent and lines $1,2$ are the ordered children. $(\phi_v,\theta_v)$ are the polar angles of child 1 in the parent rest frame. The third Euler angle is zero.
+- The sum is over helicities on the internal lines. The free indices $\lambda_{\mathrm{ext}}$ are the helicities of the final-state particles and of the root.
 
-- $D_{\tau,\nu-\lambda_4}^{j_{[[3,1],4]}}(\text{angles}_{[3,1]})$: For particle `4`, its helicity, $\lambda_4$, is defined within the rest frame of the `[3,1,4]` system. This frame is obtained from the overall rest frame by applying a rotation and boost, signifying the progression of the decay sequence.
+The helicity coupling $H$ used in this product is not identical to the recoupling $h$ stored in the vertex (see [Vertices](#vertices)). Following the Jacob–Wick particle-2 convention,
 
-- $D_{\nu, \lambda_3-\lambda_1}^{j_{[3,1]}}(\text{angles}_3)$: The helicities of particles `3` and `1`, $\lambda_3$ and $\lambda_1$, are defined within the `[3,1]` rest frame. This frame is reached through successive transformations, starting from the overall center-of-momentum frame, first, to the `[3,1,4]` system and then to the `[3,1]` subsystem.
+$$
+H_{\lambda_1\lambda_2} =
+h_{\lambda_1\lambda_2}\,
+(-1)^{j_2-\lambda_2}\,
+F_v(m_0^2,m_1^2,m_2^2),
+$$
 
-## Chains Section
+where $j_2$ is the spin of child 2 (the right-hand entry in the bracket) and $F_v$ is an optional vertex form factor. Parity and $LS$ relations apply to $h$, before this phase.
 
-The `chains` section is a main component of the model description format, outlining the specific interaction sequences and their properties within the model. Chains are components of the model, which are added linearly to each other. The `chains` fields contains a list, `[{}, {}, ...]`, with every element being a chain. The chain contains the field `topology` that describe the cascade decay, the field `propagators` that is a list of the lineshape descriptors, and the field `vertices` that specifies parametrization of every node in the decay-topology graph.
+### An example of a four-body decay
+
+As an example, consider the four-body topology `[[[3,1],4],2]`.
+The nested arrays give both the decay sequence and the rest frames in which the helicities are defined:
+
+```text
+        0
+       / \
+  [[3,1],4]  2
+     / \
+  [3,1]  4
+   / \
+  3   1
+```
+
+The three vertices, in root-first order, are `[[[3,1],4],2]`, `[[3,1],4]`, and `[3,1]`. The two internal lines are `[[3,1],4]` and `[3,1]`. Expanding the product above,
+
+$$
+\begin{aligned}
+A_{m_0\lambda_1\lambda_2\lambda_3\lambda_4}
+&= n_{j_{[[3,1],4]}}\, n_{j_{[3,1]}}\,
+   P_{[[3,1],4]}\, P_{[3,1]} \\
+&\quad\times \sum_{\tau,\nu}
+D^{j_0*}_{m_0,\,\tau-\lambda_2}(\phi,\theta,0)\,
+H_{\tau\lambda_2}
+\\
+&\quad\times
+D^{j_{[[3,1],4]}*}_{\tau,\,\nu-\lambda_4}(\phi,\theta,0)\,
+H_{\nu\lambda_4}
+\\
+&\quad\times
+D^{j_{[3,1]}*}_{\nu,\,\lambda_3-\lambda_1}(\phi,\theta,0)\,
+H_{\lambda_3\lambda_1},
+\end{aligned}
+$$
+
+with $n_j=\sqrt{2j+1}$. The three $D^*$ factors are the local rotations at `[[[3,1],4],2]`, `[[3,1],4]`, and `[3,1]`, respectively.
+
+- At the root, particle 0 decays to the subsystem `[[3,1],4]` (helicity $\tau$) and particle `2` (helicity $\lambda_2$). The decay is evaluated in the overall rest frame. This is the first occurrence of $\lambda_2$, so the helicity of particle `2` is defined in this frame. The index $m_0$ is the spin projection of the decaying particle; it is a canonical (rest-frame) projection, because particle 0 is at rest.
+- At `[[3,1],4]`, that subsystem decays to `[3,1]` (helicity $\nu$) and particle `4` (helicity $\lambda_4$). The helicity of particle `4` is defined in the rest frame of `[[3,1],4]`, reached from the overall rest frame by a rotation and a boost along the decay sequence.
+- At `[3,1]`, the remaining subsystem decays to particles `3` and `1`. Their helicities $\lambda_3$ and $\lambda_1$ are defined in the `[3,1]` rest frame, reached by the successive transformations from the overall center-of-momentum frame through `[[3,1],4]` to `[3,1]`.
+
+## Chains section
+
+The `chains` array lists the cascade sequences that contribute to the amplitude. The total amplitude is the coherent sum of the chain amplitudes, after each chain has been aligned to the `reference_topology`. Each element of `chains` is an object with:
+
+- `topology` — the ordered binary cascade of that chain;
+- `vertices` — one recoupling (and optional form factor) per two-body decay;
+- `propagators` — one lineshape per internal line;
+- `weight` — a complex coefficient multiplying the chain;
+- `name` — a label.
 
 ### Topology
 
-The `topology` field in each chain delineates the structural framework of the interactions, derived from and related to the `reference_topology`. It illustrates the hierarchical sequence of interactions and propagations, providing a visual and logical map of how particles transform and interact within the model. The topology ensures that each chain aligns with the overall model structure, maintaining consistency and coherence in the description of particle dynamics.
+The `topology` of a chain is the nested grouping of final-state indices that defines its decay sequence. It may coincide with the `reference_topology` or differ from it. If it differs, the external helicity axes of that chain must be aligned to the reference by Wigner rotations.
 
 ### Vertices
 
-Vertices define the nodes in the decay graphs, where one particle transits into two. The model format should handle decay nodes with more than two decay products, but a standard has not yet been developed. Each vertex is characterized by:
+Vertices are the nodes of the decay graph, at which one particle decays into two ordered children. Vertices with more than two decay products are not yet standardized. Each vertex is characterized by:
 
-- **`node`:** Defines a node in the topology graph by specifying the particles involved in the interaction.
+- **`node`:** The bracket address of the vertex: the nested array that names the two-body decay $0\to 1+2$.
 
-- **`type`:** Specifies how the helicity recoupling factor `H_{l1,l2}` is computed.
+- **`formfactor`:** Optional name of a function $F_v(m_0^2,m_1^2,m_2^2)$, defined in the `functions` section, evaluated at the event-dependent masses of the parent and the two children. An empty string means $F_v=1$.
+
+- **`type`:** Specifies how the recoupling amplitude $h_{\lambda_1\lambda_2}$ is computed.
   Three types are defined: `ls`, `parity`, and `helicity`.
-  These reflect different ways of relating combinations of the helicity indices to a real-valued "recoupling coefficient".
-  - `helicity` indicates no recoupling: the factor is $1$ for a pair of selected helicities ($\lambda_a^0$ and $\lambda_b^0$) and zero for other combinations.
+  They relate helicity combinations to a real-valued recoupling coefficient. The helicity coupling in the chain amplitude is then $H_{\lambda_1\lambda_2}=h_{\lambda_1\lambda_2}\,(-1)^{j_2-\lambda_2}\,F_v$.
+  - `helicity` means no recoupling: the factor is $1$ for one selected helicity pair $(\lambda_1^0,\lambda_2^0)$ and zero otherwise.
     $$
-    H^\text{helicity}(\lambda_a,\lambda_b|\lambda_a^0,\lambda_b^0) = \delta_{\lambda_a,\lambda_a^0}\delta_{\lambda_b,\lambda_b^0}
+    h^\text{helicity}(\lambda_1,\lambda_2|\lambda_1^0,\lambda_2^0) = \delta_{\lambda_1,\lambda_1^0}\delta_{\lambda_2,\lambda_2^0}
     $$
-  - `parity` recoupling is non-zero value for two combination of the helicity pair, the selected one ($\lambda_a^0$ and $\lambda_b^0$), and the opposite ($-\lambda_a^0$ and $-\lambda_b^0$). The recoupling coefficient for the former is 1, while for the latter is equal to the `parity factor`.
+  - `parity` is non-zero for two helicity combinations: the selected pair $(\lambda_1^0,\lambda_2^0)$ and the opposite pair $(-\lambda_1^0,-\lambda_2^0)$. The coefficient is $1$ for the selected pair and equal to the `parity_factor` for the opposite pair.
     $$
-    H^\text{parity}(\lambda_a,\lambda_b|\lambda_a^0,\lambda_b^0, f) =
-      \delta_{\lambda_a,\lambda_a^0}\delta_{\lambda_b,\lambda_b^0} + f \delta_{\lambda_a,-\lambda_a^0}\delta_{\lambda_b,-\lambda_b^0}
+    h^\text{parity}(\lambda_1,\lambda_2|\lambda_1^0,\lambda_2^0, f) =
+      \delta_{\lambda_1,\lambda_1^0}\delta_{\lambda_2,\lambda_2^0} + f \delta_{\lambda_1,-\lambda_1^0}\delta_{\lambda_2,-\lambda_2^0}
     $$
-  - `ls` computes the value of the recoupling functions from Clebsch–Gordan coefficients.
+  - `ls` computes the recoupling from Clebsch–Gordan coefficients of the orbital angular momentum $\ell$ and the coupled spin $s$:
     $$
-    \begin{multline}
-    H^\text{ls}(\lambda_a,\lambda_b|l,s,j_a,j_b,j) = \\
-      \sqrt{\frac{2l+1}{2j+1}}
-      \left\langle j_a,\lambda_a; j_b,-\lambda_b|s,\lambda_a-\lambda_b\right\rangle
-      \left\langle l,0; s,\lambda_a-\lambda_b|j,\lambda_a-\lambda_b\right\rangle
-    \end{multline}
+    \begin{aligned}
+    h^\text{ls}(\lambda_1,\lambda_2|\ell,s,j_1,j_2,j_0)
+    &=
+      \sqrt{\frac{2\ell+1}{2j_0+1}}
+      \left\langle j_1,\lambda_1; j_2,-\lambda_2|s,\lambda_1-\lambda_2\right\rangle \\
+    &\quad\times
+      \left\langle \ell,0; s,\lambda_1-\lambda_2|j_0,\lambda_1-\lambda_2\right\rangle
+    \end{aligned}
     $$
 
 ### Propagators
 
-- **`type`:** The `type` field within each propagator specifies the mathematical or physical model used to describe the propagation of a particle between interactions. This type is directly linked to the `lineshapes` section, where the detailed characteristics of each propagator type (e.g., resonance models like Breit-Wigner or Flatté) are defined. The `type` essentially dictates how the propagator influences the chain's overall amplitude, based on its lineshape parameters.
+A propagator is attached to an **internal line**, not to the root or to a final-state particle. There is one propagator per internal line of the chain topology.
 
-- **`spin`:** The `spin` value of a propagator indicates the spin of the particle as it propagates. This is crucial for determining the angular momentum conservation and spin-related effects in the interaction, influencing the selection rules and possible transitions within the chain.
+- **`node`:** The bracket address of the internal line: the nested array that names the propagating subsystem.
 
-- **`node`:** Nodes represent the points of interaction within a chain, defining how particles are grouped and interact. The `node` structure specifies the arrangement of particles before and after an interaction, guiding the construction of the chain's topology and determining the sequence of propagations and interactions.
+- **`parametrization`:** Names the lineshape $P_R(\sigma_R)$. The name refers to a function defined in the `functions` section (for example a Breit–Wigner or Flatté resonance). The function is evaluated at the invariant mass squared of that line.
+
+- **`spin`:** Spin $J_R$ of the propagating particle. It enters the Wigner $D$-function at the decay of this line, the spin factor $\sqrt{2J_R+1}$, and the selection rules of the attached vertices.
 
 ### Weight
 
-The `weight` field in each chain represents the complex amplitude associated with the chain's specific sequence of interactions and propagations. This weight factors into the overall amplitude of the process being modeled, influencing the probability of the chain's occurrence. Weights are crucial for calculating cross sections, decay rates, and other observable quantities, directly impacting the model's predictive accuracy.
+The `weight` of a chain is the complex coefficient that multiplies that chain's matrix element. The total amplitude is the sum of the weighted, aligned chains, so the weights set both the strength of each chain and the interference between chains.

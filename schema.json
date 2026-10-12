@@ -258,6 +258,41 @@
     }
   },
   "properties": {
+    "metadata": {
+      "type": "object",
+      "description": "Meta-information related to the creation of the file",
+      "properties": {
+        "authors": {
+          "type": "array",
+          "description": "List of authors who contributed to the model."
+        },
+        "publications": {
+          "type": "array",
+          "description": "List of authors who contributed to the model."
+        },
+        "packages": {
+          "type": "array",
+          "description": "List of packages used to create the model and this json file."
+        },
+        "description": {
+          "type": "string",
+          "description": "Extended description of the model."
+        },
+        "summary": {
+          "type": "string",
+          "description": "One line summary of the model."
+        },
+        "identifier": {
+          "type": "number",
+          "description": "Inspire-HEP identifier used to reference the encoding."
+        },
+        "hs3_version": {
+          "type": "string",
+          "description": "Version of the HS3 format used to create this description file."
+        }
+      },
+      "required": ["authors", "hs3_version", "summary"]
+    },
     "distributions": {
       "type": "array",
       "description": "List of amplitude model PDF descriptions.",
@@ -436,6 +471,7 @@
     "domains",
     "functions",
     "misc",
+    "metadata",
     "parameter_points"
   ],
   "type": "object"

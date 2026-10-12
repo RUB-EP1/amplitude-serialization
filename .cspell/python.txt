@@ -1,7 +1,10 @@
 ampform
 aslatex
+dtype
 figsize
 funcs
+imag
+isfinite
 isnan
 Kallen
 lambdify

@@ -81,9 +81,18 @@
           "description": "Final-state particle index. Matches kinematics.final_state[].index."
         },
         "E": { "type": "number", "description": "Energy in GeV." },
-        "px": { "type": "number", "description": "x-component of momentum in GeV." },
-        "py": { "type": "number", "description": "y-component of momentum in GeV." },
-        "pz": { "type": "number", "description": "z-component of momentum in GeV." }
+        "px": {
+          "type": "number",
+          "description": "x-component of momentum in GeV."
+        },
+        "py": {
+          "type": "number",
+          "description": "y-component of momentum in GeV."
+        },
+        "pz": {
+          "type": "number",
+          "description": "z-component of momentum in GeV."
+        }
       },
       "required": ["index", "E", "px", "py", "pz"],
       "additionalProperties": false

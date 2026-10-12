@@ -895,11 +895,7 @@
   ],
   "domains": [
     {
-      "final_state_masses": [
-        0.938272046,
-        0.13957018,
-        0.493677
-      ],
+      "final_state_masses": [0.938272046, 0.13957018, 0.493677],
       "m0": 2.28646,
       "name": "default",
       "type": "phase_space"

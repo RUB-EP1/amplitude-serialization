@@ -6,8 +6,10 @@ Dalitz
 diffractively
 Flatté
 Gordan
+Habermann
 helicities
 helicity
+Jacob
 Jpsi
 Katchaev
 lineshape
@@ -16,3 +18,4 @@ parametrizations
 recoupling
 recouplings
 Weisskopf
+Wick

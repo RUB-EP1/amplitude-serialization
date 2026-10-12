@@ -1,6 +1,7 @@
 ampform
 aslatex
 figsize
+fromkeys
 funcs
 isnan
 Kallen
@@ -14,6 +15,7 @@ pathlib
 pcolormesh
 phasespace
 pyplot
+sympify
 sympy
 tqdm
 xlabel

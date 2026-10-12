@@ -52,10 +52,14 @@ from ampform_dpd.io.serialization.amplitude import (
     formulate_recoupling,
 )
 from ampform_dpd.io.serialization.dynamics import (
+    DefinedExpression,
+    ModelDefinition,
+    Propagator,
     formulate_breit_wigner,
     formulate_dynamics,
     formulate_form_factor,
     formulate_multichannel_breit_wigner,
+    to_mandelstam_symbol,
 )
 from ampform_dpd.io.serialization.format import (
     get_decay_chains,
@@ -63,6 +67,7 @@ from ampform_dpd.io.serialization.format import (
 )
 from IPython.display import JSON, Math
 from matplotlib_inline.backend_inline import set_matplotlib_formats
+from sympy.parsing.sympy_parser import parse_expr
 from mpl_toolkits.axes_grid1 import make_axes_locatable  # cspell:ignore mpl_toolkits
 from tqdm.auto import tqdm
 
@@ -98,8 +103,41 @@ def to_latex(name: str) -> str:
     return f"{subsystem}({mass_str})"
 ```
 
+The serialized `generic_function` expressions carry their constants as sibling keys next
+to the expression itself. The default builder in `ampform_dpd` only substitutes the
+imaginary unit and the Mandelstam variable, so the workspace is loaded with a builder
+that also substitutes those named constants.
+
 ```{python}
-workspace = load_workspace(model_path, to_latex=to_latex)
+# | code-fold: true
+# | code-summary: Builder for parametrized generic functions
+mandelstam_aliases = ("sigma", "σ", "m_12_sq", "m_23_sq", "m_31_sq")
+reserved_generic_function_keys = {"name", "type", "expression"}
+
+
+def formulate_parametric_generic_function(
+    propagator: Propagator, resonance: str, model: ModelDefinition
+) -> DefinedExpression:
+    definition = get_function_definition(propagator["parametrization"], model)
+    mandelstam = to_mandelstam_symbol(propagator["node"])
+    local_dict = {"i": sp.I, "I": sp.I}
+    local_dict.update(dict.fromkeys(mandelstam_aliases, mandelstam))
+    local_dict.update({
+        key: sp.sympify(value)
+        for key, value in definition.items()
+        if key not in reserved_generic_function_keys
+    })
+    expression = definition["expression"].replace("^", "**").replace("1im", "I")
+    return DefinedExpression(expression=parse_expr(expression, local_dict=local_dict))
+
+
+generic_function_builders = {"generic_function": formulate_parametric_generic_function}
+```
+
+```{python}
+workspace = load_workspace(
+    model_path, builders=generic_function_builders, to_latex=to_latex
+)
 model_definition = workspace.definition
 ((intensity_name, decay),) = workspace.decays.items()
 Math(aslatex(decay, with_jp=True))
@@ -190,14 +228,19 @@ Math(aslatex(l1405_flatte))
 
 #### Breit-Wigner with exponential
 
-The Bugg lineshapes are serialized as `generic_function` expression strings. The built-in dynamics builder parses these expressions and substitutes $i$ and $\sigma$ with the imaginary unit and the Mandelstam variable of the propagator node, respectively.
+The Bugg lineshapes are serialized as `generic_function` expression strings with their masses, widths and slopes as named constants. The dynamics builder parses these expressions, substitutes $i$ with the imaginary unit, `m_23_sq` with the Mandelstam variable of the propagator node, and each named constant with its serialized value.
 
 ```{python}
 get_function_definition("K700_BuggBW", model_definition)
 ```
 
 ```{python}
-k700_bugg_bw = formulate_dynamics(chain_defs[18], model_definition, to_latex)
+k700_bugg_bw = formulate_dynamics(
+    chain_defs[18],
+    model_definition,
+    to_latex,
+    additional_definitions=generic_function_builders,
+)
 Math(aslatex(k700_bugg_bw))
 ```
 

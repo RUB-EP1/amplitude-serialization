@@ -7,10 +7,10 @@ jupyter: python3
 # $X\to \pi^-\pi^+\pi^-$
 
 ::: {.callout-note appearance="simple"}
-Model definition: [`x2pipipi-compass-1391643.json`](https://github.com/RUB-EP1/amplitude-serialization/blob/main/models/x2pipipi-compass-1391643.json).
+Model definition: [`x2pipipi-compass-1655631.json`](https://github.com/RUB-EP1/amplitude-serialization/blob/main/models/x2pipipi-compass-1655631.json).
 :::
 
-This page demonstrates deserialization and evaluation of a partial-wave analysis of a diffractively produced $3\pi$ system. The analysis is performed independently in bins of $3\pi$ mass and transferred momentum. The full analysis contains about 170 decay chains (about 88 waves, symmetrized for the two $\pi^+\pi^-$ pairs) per bin. See [INSPIRE-HEP 1391643](https://inspirehep.net/literature/1391643) for details.
+This page demonstrates deserialization and evaluation of a partial-wave analysis of a diffractively produced $3\pi$ system. The analysis is performed independently in bins of $3\pi$ mass and transferred momentum. The full analysis contains about 170 decay chains (about 88 waves, symmetrized for the two $\pi^+\pi^-$ pairs) per bin. See [INSPIRE-HEP 1655631](https://inspirehep.net/literature/1655631) for details.
 
 ```{python}
 # | code-fold: true
@@ -34,7 +34,7 @@ set_matplotlib_formats("svg")
 ```
 
 ```{python}
-model_path = this_dir.parent.parent / "models" / "x2pipipi-compass-1391643.json"
+model_path = this_dir.parent.parent / "models" / "x2pipipi-compass-1655631.json"
 workspace = load_workspace(model_path)
 ```
 

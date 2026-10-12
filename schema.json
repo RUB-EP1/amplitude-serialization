@@ -384,6 +384,15 @@
       "type": "object",
       "description": "Any additional information about the model.",
       "properties": {
+        "hepdata": {
+          "type": "string",
+          "description": "URL of the HEPData record that publishes the numerical inputs of the model.",
+          "format": "uri"
+        },
+        "details": {
+          "type": "string",
+          "description": "Free-form notes on the provenance of the model and of its parameter values."
+        },
         "amplitude_model_checksums": {
           "type": "array",
           "description": "A list of checksums that can be used to validate whether the computational implementation of the serialized amplitude model is correct.",

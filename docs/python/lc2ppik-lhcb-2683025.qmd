@@ -156,7 +156,7 @@ Math(aslatex(k892_bw))
 
 #### Multi-channel Breit-Wigner
 
-The `gsq` value that is serialized for each channel is the **coupling squared**, not an energy width. The channel term $\Gamma^\text{ch}$ below follows the same convention as [`HadronicLineshapes.jl`](https://mmikhasenko.github.io/HadronicLineshapes.jl/dev/10-breitwigner/#Multichannel-Breit-Wigner-Function). See [ComPWA/ampform-dpd#199](https://github.com/ComPWA/ampform-dpd/pull/199).
+The `gsq` value that is serialized for each channel is the **coupling squared**, not an energy width. The channel term $\Gamma^\text{ch}$ below follows the same convention as [`HadronicLineshapes.jl`](https://mmikhasenko.github.io/HadronicLineshapes.jl/10-breitwigner/#Multichannel-Breit-Wigner-Function). See [ComPWA/ampform-dpd#199](https://github.com/ComPWA/ampform-dpd/pull/199).
 
 ```{python}
 # | code-fold: true

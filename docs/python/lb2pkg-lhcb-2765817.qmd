@@ -28,7 +28,12 @@ from ampform_dpd.io.serialization import (
     compile_workspace,
     load_workspace,
 )
-from checksums import evaluate_checksum, install_four_vector_kinematics, label_diff
+from checksums import (
+    complete_dalitz_data,
+    evaluate_checksum,
+    install_four_vector_kinematics,
+    label_diff,
+)
 from ampform_dpd.io.serialization.format import get_decay_chains
 from IPython.display import Math
 from matplotlib_inline.backend_inline import set_matplotlib_formats
@@ -145,10 +150,10 @@ x, y = jnp.meshgrid(
     jnp.linspace(x_min, x_max, resolution),
     jnp.linspace(y_min, y_max, resolution),
 )
-dalitz_data = {
-    f"sigma{x_subsystem}": x,
-    f"sigma{y_subsystem}": y,
-}
+dalitz_data = complete_dalitz_data(
+    {f"sigma{x_subsystem}": x, f"sigma{y_subsystem}": y},
+    workspace.distributions[intensity_name].masses,
+)
 compiled_workspace = compile_workspace(
     workspace,
     backend="jax",

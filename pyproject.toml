@@ -25,6 +25,30 @@ homepage = "https://rub-ep1.github.io/amplitude-serialization"
 issues = "https://github.com/RUB-EP1/amplitude-serialization/issues"
 source = "https://github.com/RUB-EP1/amplitude-serialization"
 
+[tool.lychee]
+cache = true
+cache_exclude_status = "400.."
+extensions = [
+    "css",
+    "htm",
+    "html",
+    "markdown",
+    "md",
+    "mdown",
+    "mdwn",
+    "mdx",
+    "mkd",
+    "mkdn",
+    "mkdown",
+    "qmd",
+    "txt",
+    "xml",
+]
+hidden = true
+include_fragments = "anchor-only"
+include_verbatim = true
+max_cache_age = "7d"
+
 [tool.pixi.activation.env]
 PYTHONHASHSEED = "0"
 
@@ -36,6 +60,7 @@ prek = "*"
 [tool.pixi.tasks.all]
 depends-on = [
     "style",
+    "linkcheck",
     "_clean-doc",
     "doc",
 ]
@@ -65,6 +90,10 @@ julia --project -e '
 '
 """
 description = "Install IJulia and register the Julia notebook kernel"
+
+[tool.pixi.tasks.linkcheck]
+cmd = "uvx --from lychee-bin lychee . --quiet"
+description = "Check links in repository sources (requires internet connection)"
 
 [tool.pixi.tasks.style]
 cmd = "prek run --all-files"

@@ -4,6 +4,7 @@
 .codex/
 .ipynb_checkpoints/
 .pixi/
+.lycheecache
 .virtual_documents/
 _build/
 AGENTS.md

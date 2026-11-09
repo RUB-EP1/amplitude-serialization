@@ -51,6 +51,17 @@ def install_four_vector_kinematics() -> None:
     compiler.formulate_kinematic_map = formulate_kinematic_map
 
 
+def complete_dalitz_data(data: Mapping[str, Any], masses: Mapping) -> dict[str, Any]:
+    """Add the missing σ_k through σ₁ + σ₂ + σ₃ = m₀² + m₁² + m₂² + m₃².
+
+    Distributions compiled with :func:`identity_kinematic_map` take all three
+    invariants as arguments, while Dalitz plots only scan two of them.
+    """
+    (missing,) = {f"sigma{k}" for k in (1, 2, 3)} - set(data)
+    mass_squared_sum = sum(float(value) ** 2 for value in masses.values())
+    return {**data, missing: mass_squared_sum - sum(data.values())}
+
+
 def evaluate_checksum(compiled, checksum: Mapping[str, Any], points: Mapping[str, Any]):
     from ampform_dpd.io.serialization.validation import _to_number, _transform_point
 

@@ -25,7 +25,12 @@ from ampform_dpd.io.serialization import (
     compile_workspace,
     load_workspace,
 )
-from checksums import evaluate_checksum, install_four_vector_kinematics, label_diff
+from checksums import (
+    complete_dalitz_data,
+    evaluate_checksum,
+    install_four_vector_kinematics,
+    label_diff,
+)
 from matplotlib_inline.backend_inline import set_matplotlib_formats
 
 this_dir = Path(".").absolute()
@@ -120,7 +125,11 @@ for name, model in models.items():
     )
     function = compiled_workspace.functions[name]
     values = jnp.real(
-        function({f"sigma{x_subsystem}": x, f"sigma{y_subsystem}": y})
+        function(
+            complete_dalitz_data(
+                {f"sigma{x_subsystem}": x, f"sigma{y_subsystem}": y}, model.masses
+            )
+        )
     )
     intensity_grids[name] = (x, y, values / jnp.nansum(values))
 

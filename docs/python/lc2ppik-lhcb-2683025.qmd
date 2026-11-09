@@ -42,7 +42,12 @@ from ampform_dpd.io.serialization import (
     compile_workspace,
     load_workspace,
 )
-from checksums import evaluate_checksum, install_four_vector_kinematics, label_diff
+from checksums import (
+    complete_dalitz_data,
+    evaluate_checksum,
+    install_four_vector_kinematics,
+    label_diff,
+)
 from ampform_dpd.io.serialization.amplitude import (
     HelicityRecoupling,
     LSRecoupling,
@@ -314,7 +319,7 @@ x, y = jnp.meshgrid(
     jnp.linspace(x_min - x_margin, x_max + x_margin, num=resolution),
     jnp.linspace(y_min - y_margin, y_max + y_margin, num=resolution),
 )
-dalitz_data = {f"sigma{i}": x, f"sigma{j}": y}
+dalitz_data = complete_dalitz_data({f"sigma{i}": x, f"sigma{j}": y}, model.masses)
 intensity_function = compiled_workspace.functions[intensity_name]
 intensities = intensity_function(dalitz_data)
 normalized_intensities = intensities / jnp.nansum(intensities)

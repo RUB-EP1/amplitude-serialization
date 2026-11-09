@@ -46,20 +46,17 @@ Here $\tau$ is a point of the phase-space domain: the final-state four-vectors. 
 
 ```json
 {
-    "distributions": [
-        {
-            "name": "my-amazing-model",
-            "type": "HadronicUnpolarizedIntensity",
-            "decay_description": {
-                "kinematics": {},
-                "reference_topology": [[1, 2], 3],
-                "chains": [
-                    {},
-                    {}
-                ]
-            }
-        }
-    ]
+  "distributions": [
+    {
+      "name": "my-amazing-model",
+      "type": "HadronicUnpolarizedIntensity",
+      "decay_description": {
+        "kinematics": {},
+        "reference_topology": [[1, 2], 3],
+        "chains": [{}, {}]
+      }
+    }
+  ]
 }
 ```
 
@@ -81,7 +78,7 @@ The decay description collects the ingredients of a cascade amplitude: the exter
 
 A `decay_description` is organized around several mandatory components:
 
-- **[`kinematics`](#kinematics-section):** Lists the external particles, including their spins, indices, names, and masses. This section defines the initial and final states.
+- **[`kinematics`](#kinematics-section):** Lists the external particles, including their spins, indices, and names. This section defines the initial and final states. Particle masses are not part of the decay description: they are given by the [phase-space domain](#phase-space-domain).
 
 - **[`reference_topology`](#topology-and-reference-topology):** A nested array of particle indices that defines the reference cascade. It parametrizes the kinematics and fixes the quantization axes of the external helicities. A chain written in this topology needs no alignment rotations. Chains with a different topology must be rotated into this reference.
 
@@ -91,7 +88,7 @@ A `decay_description` is organized around several mandatory components:
 
 ### Purpose of the `kinematics` object
 
-The `kinematics` object lists the external particles of the decay and their properties (spin, mass, name, and index). These are the lines that appear as leaves and as the root of every topology. Event-dependent invariants and helicity angles are not stored here: they are computed from a phase-space point, which is a set of final-state four-vectors.
+The `kinematics` object lists the external particles of the decay and their properties (spin, name, and index). These are the lines that appear as leaves and as the root of every topology. Event-dependent invariants and helicity angles are not stored here: they are computed from a phase-space point, which is a set of final-state four-vectors.
 
 ### Detailed field descriptions
 
@@ -99,7 +96,6 @@ The `kinematics` object lists the external particles of the decay and their prop
   - **`index`:** A unique identifier for the particle. Index `0` is reserved for the initial-state particle. Final-state indices start at `1` and are the integers that appear as leaves in topology brackets.
   - **`name`:** A label for the particle. It is for readability and is not a standardized identifier.
   - **`spin`:** The spin quantum number of the particle, written as a string (for example `"0"`, `"1/2"`, `"1"`).
-  - **`mass`:** The mass of the particle, in GeV.
 
 ### Examples of the `kinematics` section
 
@@ -108,12 +104,12 @@ The `kinematics` object lists the external particles of the decay and their prop
   ```json
   "kinematics": {
     "initial_state" : {
-      "index" : 0, "name" : "Lb",    "spin" : "1/2", "mass" : 5.62
+      "index" : 0, "name" : "Lb",    "spin" : "1/2"
     },
     "final_state" : [
-      {"index" : 1, "name" : "Jpsi", "spin" : "1", "mass" : 3.097},
-      {"index" : 2, "name" : "K",    "spin" : "0", "mass" : 0.493},
-      {"index" : 3, "name" : "pi",   "spin" : "0", "mass" : 0.140}
+      {"index" : 1, "name" : "Jpsi", "spin" : "1"},
+      {"index" : 2, "name" : "K",    "spin" : "0"},
+      {"index" : 3, "name" : "pi",   "spin" : "0"}
     ]
   }
   ```
@@ -122,20 +118,20 @@ The `kinematics` object lists the external particles of the decay and their prop
   ```json
   "kinematics": {
     "initial_state" : {
-      "index" : 0, "name" : "B",    "spin" : "0", "mass" : 5.279
+      "index" : 0, "name" : "B",    "spin" : "0"
     },
     "final_state" : [
-      {"index" : 1, "name" : "psi", "spin" : "1", "mass" : 3.686},
-      {"index" : 2, "name" : "K",   "spin" : "0", "mass" : 0.493},
-      {"index" : 3, "name" : "pi",  "spin" : "0", "mass" : 0.140},
-      {"index" : 4, "name" : "pi",  "spin" : "0", "mass" : 0.140}
+      {"index" : 1, "name" : "psi", "spin" : "1"},
+      {"index" : 2, "name" : "K",   "spin" : "0"},
+      {"index" : 3, "name" : "pi",  "spin" : "0"},
+      {"index" : 4, "name" : "pi",  "spin" : "0"}
     ]
   }
   ```
 
 ## Phase-space domain
 
-The kinematic domain of a decay is the $n$-body phase space. It is fixed by the initial-state mass $m_0=\sqrt{s}$ and the final-state masses $m_1,m_2,\ldots$. A point in this domain is a set of on-shell four-vectors $p_1,p_2,\ldots$ for the final-state particles. In the rest frame of the decaying system they satisfy $\sum_i p_i=(m_0,\mathbf{0})$.
+The kinematic domain of a decay is the $n$-body phase space. It is fixed by the initial-state mass $m_0=\sqrt{s}$ and the final-state masses $m_1,m_2,\ldots$. The domain is the only place where these masses are stored. Each mass is listed with the `index` of its particle, the same index used in `kinematics` and in the topologies, so particles are matched by index and never by their position in a list. A point in this domain is a set of on-shell four-vectors $p_1,p_2,\ldots$ for the final-state particles. In the rest frame of the decaying system they satisfy $\sum_i p_i=(m_0,\mathbf{0})$.
 
 These four-vectors are the input to the amplitude. The invariant masses and helicity angles that appear in the cascade factorization are computed from them, using the chain topology and the reference topology.
 
@@ -144,8 +140,12 @@ These four-vectors are the input to the amplitude. The invariant masses and heli
     {
         "name": "default",
         "type": "phase_space",
-        "m0": 2.28646,
-        "final_state_masses": [0.938272046, 0.13957018, 0.493677]
+        "initial_state": {"index": 0, "mass": 2.28646},
+        "final_state": [
+            {"index": 1, "mass": 0.938272046},
+            {"index": 2, "mass": 0.13957018},
+            {"index": 3, "mass": 0.493677}
+        ]
     }
 ]
 ```
@@ -163,7 +163,7 @@ The same nested array is used as an **address** in two related ways:
 
 The `reference_topology` serves two purposes. First, it defines how a set of final-state four-vectors is turned into the invariant masses and helicity angles of the cascade. Second, it fixes the quantization axes of the **external** helicities. Helicity is the projection of a particle's spin along its momentum, so its value depends on the frame in which it is evaluated.
 
-Because the `reference_topology` specifies a unique path from the initial state to the final-state particles, it defines the frame for each external helicity. The helicity indices on Wigner $D$-functions and on couplings refer to those frames. A chain whose `topology` coincides with the reference is already written in these frames. A chain with a different topology is evaluated in its own local frames and then aligned to the reference by Wigner rotations on the external lines ([Habermann and Mikhasenko, *Wigner rotations for cascade reactions*](https://inspirehep.net/literature/2827198)).
+Because the `reference_topology` specifies a unique path from the initial state to the final-state particles, it defines the frame for each external helicity. The helicity indices on Wigner $D$-functions and on couplings refer to those frames. A chain whose `topology` coincides with the reference is already written in these frames. A chain with a different topology is evaluated in its own local frames and then aligned to the reference by Wigner rotations on the external lines ([Habermann and Mikhasenko, _Wigner rotations for cascade reactions_](https://inspirehep.net/literature/2827198)).
 
 ### Amplitude of a cascade chain
 
@@ -298,18 +298,18 @@ The `weight` of a chain is the complex coefficient that multiplies that chain's 
 
 ## Validation
 
-Checksums in `misc.amplitude_model_checksums` are reference values used to check an implementation. An **amplitude** checksum is evaluated at a phase-space point given as final-state four-vectors:
+Checksums in `misc.amplitude_model_checksums` are reference values used to check an implementation. Each checksum names a `distribution` and a `point`. The point is an entry of `parameter_points`: a phase-space point of the referenced `domain`, given as the four-momenta of the final-state particles. Each entry carries the particle `index` and its four-momentum $p^\mu=(E,p_x,p_y,p_z)$ in GeV under `p`:
 
 ```json
 {
-    "name": "validation_point",
-    "domain": "default",
-    "four_vectors": [
-        {"index": 1, "E": 1.161, "px": -0.598, "py": 0.0, "pz": 0.332},
-        {"index": 2, "E": 0.350, "px": 0.0, "py": 0.0, "pz": -0.321},
-        {"index": 3, "E": 0.776, "px": 0.598, "py": 0.0, "pz": -0.012}
-    ]
+  "name": "validation_point",
+  "domain": "default",
+  "final_state": [
+    { "index": 1, "p": { "E": 1.161, "px": 0.332, "py": 0.0, "pz": 0.598 } },
+    { "index": 2, "p": { "E": 0.35, "px": -0.321, "py": 0.0, "pz": 0.0 } },
+    { "index": 3, "p": { "E": 0.776, "px": -0.012, "py": 0.0, "pz": -0.598 } }
+  ]
 }
 ```
 
-A **lineshape** checksum may still use a scalar parameter point, for example an invariant mass squared $m_{ij}^2$, because a propagator is a function of one line invariant.
+The four-momenta must be on shell with the domain masses, $p_i^2=m_i^2$, and in the rest frame of the decaying system they sum to $(m_0,\mathbf{0})$. Lineshapes are not validated on their own: every checksum is a value of a full distribution at a phase-space point.

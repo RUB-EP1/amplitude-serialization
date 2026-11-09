@@ -20,7 +20,7 @@ For a description of a three body decay amplitude, one must provide several mand
 
 The `kinematics` section details the particle states involved in decay processes:
 
-- `initial_state`: Specifies the decaying particle at the start of the process. Contains keys for `index` (unique identifier), `name` (label), `spin` (quantum spin number), and `mass` (in GeV/c²).
+- `initial_state`: Specifies the decaying particle at the start of the process. Contains keys for `index` (unique identifier), `name` (label), and `spin` (quantum spin number). Masses are not stored here; they are given by the phase-space domain (see [Validation](#validation)).
 - `final_state`: An array detailing each resulting particle from the decay. Each entry includes the same keys as `initial_state`, defining the properties of these particles.
 
 For example, the kinematics of the decay Lc2pKpi would look like,
@@ -30,27 +30,23 @@ For example, the kinematics of the decay Lc2pKpi would look like,
     "initial_state" : {
         "index" : 0,
         "name" : "Lc",
-        "spin" : "1/2",
-        "mass" : 2.28646
+        "spin" : "1/2"
     },
     "final_state" : [
     {
         "index" : 1,
         "name" : "p",
-        "spin" : "1/2",
-        "mass" : 0.938272046
+        "spin" : "1/2"
     },
     {
         "index" : 2,
         "name" : "pi",
-        "spin" : "0",
-        "mass" : 0.13957018
+        "spin" : "0"
     },
     {
         "index" : 3,
         "name" : "K",
-        "spin" : "0",
-        "mass" : 0.493677
+        "spin" : "0"
     }]
 }
 ```
@@ -140,7 +136,9 @@ The string values that are not expanded in the `"appendix"` should be identifier
 
 ### Validation
 
-`misc.amplitude_model_checksums` stores reference values of the amplitude (and of individual lineshapes) at named points. An amplitude point is a set of final-state four-vectors in the `phase_space` domain. Lineshape checks may use a scalar invariant such as $m_{ij}^2$.
+`domains` holds the `phase_space` domain: the initial-state mass $\sqrt{s}$ and the final-state masses, each listed with its particle `index`.
+`misc.amplitude_model_checksums` stores reference values of each distribution at named points in `parameter_points`.
+A point is a set of final-state four-momenta in that domain, given per particle `index` as `{"index": 1, "p": {"E": …, "px": …, "py": …, "pz": …}}`.
 
 <details>
   <summary>See the full example</summary>

@@ -4,6 +4,7 @@ compat
 eachslice
 guidefonthalign
 guidefontvalign
+haskey
 joinpath
 Kallen
 latexstring

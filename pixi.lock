@@ -226,7 +226,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-64/libnghttp2-1.71.0-h180c657_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/libopenblas-0.3.34-openmp_h5c7ac21_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/libopenblas-ilp64-0.3.34-openmp_h2e7cd45_1.conda
-      - conda: https://conda.anaconda.org/conda-forge/osx-64/libopenlibm4-0.8.7-hd115831_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-64/libopenlibm4-0.8.8-hd115831_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/libosxunwind-0.0.6-h940c156_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/osx-64/libparu-1.0.0-hf1a04d7_7100102.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/libpsl-0.23.1-h99f47fa_2.conda
@@ -245,7 +245,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-64/mpfr-4.2.2-ha50206a_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/ncurses-6.6-hcc0dc9a_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/openblas-ilp64-0.3.34-openmp_ha601604_1.conda
-      - conda: https://conda.anaconda.org/conda-forge/osx-64/openlibm-0.8.7-hd115831_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-64/openlibm-0.8.8-hd115831_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/openssl-3.6.5-h332eb6d_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/p7zip-16.02-he49afe7_1001.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/osx-64/pcre2-10.47-h31793e3_1.conda
@@ -1504,18 +1504,18 @@ packages:
     - libopenblas-ilp64 >=0.3.34,<1.0a0
   size: 6171820
   timestamp: 1788059357319
-- conda: https://conda.anaconda.org/conda-forge/osx-64/libopenlibm4-0.8.7-hd115831_1.conda
-  sha256: 78aabb9062891302aed5422a94aa6da1342cb50caa608a6274f3a736dab90700
-  md5: 46b42a9e6f2d70a3d2e26e31d05eea97
+- conda: https://conda.anaconda.org/conda-forge/osx-64/libopenlibm4-0.8.8-hd115831_0.conda
+  sha256: d33b37eec3ec480a5f38cc7a3b4a7cd5c77a093ebb920e6ac690263d1457092f
+  md5: 754efcdbbbbb9b47c9f3fabba1297d15
   depends:
   - __osx >=11.0
   license: MIT AND ISC AND BSD-2-Clause
   purls: []
   run_exports:
     weak:
-    - libopenlibm4 >=0.8.7,<1.0a0
-  size: 87227
-  timestamp: 1793991878389
+    - libopenlibm4 >=0.8.8,<1.0a0
+  size: 87067
+  timestamp: 1794099074080
 - conda: https://conda.anaconda.org/conda-forge/osx-64/libosxunwind-0.0.6-h940c156_0.tar.bz2
   sha256: 88800fcd2b2064daeed6f31def22e29ddb71fe11cf70b4a77d5c9b4f0a004997
   md5: 01662161c29ec05885b4d5a284345e21
@@ -1779,19 +1779,19 @@ packages:
   run_exports: {}
   size: 5547900
   timestamp: 1788059372612
-- conda: https://conda.anaconda.org/conda-forge/osx-64/openlibm-0.8.7-hd115831_1.conda
-  sha256: 9eb4e74b9857878c25c4e502d6df910895f19b89c5d95c88dbcd3a6e56ad0aed
-  md5: e19f295373f94a1d4ccd27e9b957ec7c
+- conda: https://conda.anaconda.org/conda-forge/osx-64/openlibm-0.8.8-hd115831_0.conda
+  sha256: c050cef00274b6c58b7c12fdc10c59bdc0c30f619106f041e41b48b8b1e2d6a2
+  md5: 8b904beb1160b16cc03dc550398fe0f6
   depends:
   - __osx >=11.0
-  - libopenlibm4 0.8.7 hd115831_1
+  - libopenlibm4 0.8.8 hd115831_0
   license: MIT AND ISC AND BSD-2-Clause
   purls: []
   run_exports:
     weak:
-    - libopenlibm4 >=0.8.7,<1.0a0
-  size: 32058
-  timestamp: 1793991887129
+    - libopenlibm4 >=0.8.8,<1.0a0
+  size: 31982
+  timestamp: 1794099079124
 - conda: https://conda.anaconda.org/conda-forge/osx-64/openssl-3.6.5-h332eb6d_0.conda
   sha256: d992d27aec2f1beac81f792c85b449546c030f06937b5b3ea7cf58431861dde4
   md5: 615ac6cff316565b442cd1af8b94837f

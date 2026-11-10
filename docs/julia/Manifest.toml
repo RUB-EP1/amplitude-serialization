@@ -153,9 +153,9 @@ version = "1.9.1"
 
 [[deps.DiffRules]]
 deps = ["IrrationalConstants", "LogExpFunctions", "NaNMath", "Random", "SpecialFunctions"]
-git-tree-sha1 = "79a2aca180a85c690c58a020d47b426954b590f8"
+git-tree-sha1 = "3d20476f68b524304f3fde071c3f34a559965c84"
 uuid = "b552c78f-8df3-52c6-915a-8e097449b14b"
-version = "1.16.0"
+version = "1.17.0"
 
 [[deps.DocStringExtensions]]
 git-tree-sha1 = "38ef52f18cbdfa783ec6c25acc23fb1e8525ec16"
@@ -481,9 +481,9 @@ version = "1.12.0"
 
 [[deps.LogExpFunctions]]
 deps = ["DocStringExtensions", "IrrationalConstants", "LinearAlgebra"]
-git-tree-sha1 = "28d620bcdb37a3fb02de9f521928ee453690f414"
+git-tree-sha1 = "d00df9d81118a5b977eae0f16808e442aef3a655"
 uuid = "2ab3a3ac-af41-5b50-aa03-7779005ae688"
-version = "1.0.3"
+version = "1.0.4"
 
     [deps.LogExpFunctions.extensions]
     LogExpFunctionsChainRulesCoreExt = "ChainRulesCore"
@@ -878,9 +878,9 @@ version = "1.12.0"
 
 [[deps.SpecialFunctions]]
 deps = ["IrrationalConstants", "LogExpFunctions", "OpenLibm_jll", "OpenSpecFun_jll"]
-git-tree-sha1 = "88ef0d98204515bc53dd4aaea5f7788882d1b66c"
+git-tree-sha1 = "d1a08b3cb5d1470a2b6dc98ba644f1436d5a740f"
 uuid = "276daf66-3868-5448-9aa4-cd146d93841b"
-version = "2.9.1"
+version = "2.9.2"
 
     [deps.SpecialFunctions.extensions]
     SpecialFunctionsChainRulesCoreExt = "ChainRulesCore"
@@ -1000,14 +1000,14 @@ uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 version = "1.11.0"
 
 [[deps.ThreeBodyDecays]]
-deps = ["Parameters", "PartialWaveFunctions", "PolynomialRoots", "Polynomials", "Random", "RecipesBase", "StaticArrays", "Tullio"]
-git-tree-sha1 = "b192c0798732dcecf1204a45b68001fc356bdc7b"
+deps = ["LinearAlgebra", "Parameters", "PartialWaveFunctions", "PolynomialRoots", "Polynomials", "Random", "RecipesBase", "StaticArrays", "Statistics", "Tullio"]
+git-tree-sha1 = "c1e9348be3f5bf72c0ae76f2026b19b90e70b77f"
 uuid = "e6563dab-9ca1-5843-bde3-2ccf38d63843"
-version = "0.13.2"
+version = "0.15.0"
 
 [[deps.ThreeBodyDecaysIO]]
 deps = ["DataFrames", "HadronicLineshapes", "JSON", "MacroTools", "OrderedCollections", "Parameters", "Polynomials", "Random", "RuntimeGeneratedFunctions", "ThreeBodyDecays"]
-git-tree-sha1 = "94b474b5ef35d3d50a824b2c6242daae4a8ee4ed"
+git-tree-sha1 = "cafce2536e6a051af091564d6aa4ba81922303cc"
 repo-rev = "main"
 repo-url = "https://github.com/mmikhasenko/ThreeBodyDecaysIO.jl"
 uuid = "418e7ecf-680e-4cb5-ad61-5e2f006aefac"

@@ -1,12 +1,16 @@
 *.egg-info/
-.agents/
-.claude/
-.codex/
 .ipynb_checkpoints/
 .pixi/
 .lycheecache
 .virtual_documents/
 _build/
+node_modules/
+
+# Agent tooling
+.agents/
+.claude/
+.codex/
+.gemini/
 AGENTS.md
 CLAUDE.md
-node_modules/
+GEMINI.md

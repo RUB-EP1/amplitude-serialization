@@ -153,9 +153,9 @@ version = "1.9.1"
 
 [[deps.DiffRules]]
 deps = ["IrrationalConstants", "LogExpFunctions", "NaNMath", "Random", "SpecialFunctions"]
-git-tree-sha1 = "3d20476f68b524304f3fde071c3f34a559965c84"
+git-tree-sha1 = "7ab8388b721794863a6e809a2436e639832ee74a"
 uuid = "b552c78f-8df3-52c6-915a-8e097449b14b"
-version = "1.17.0"
+version = "1.17.1"
 
 [[deps.DocStringExtensions]]
 git-tree-sha1 = "38ef52f18cbdfa783ec6c25acc23fb1e8525ec16"
@@ -481,9 +481,9 @@ version = "1.12.0"
 
 [[deps.LogExpFunctions]]
 deps = ["DocStringExtensions", "IrrationalConstants", "LinearAlgebra"]
-git-tree-sha1 = "d00df9d81118a5b977eae0f16808e442aef3a655"
+git-tree-sha1 = "52702dc5aba6392de19d734750c37ffb08515dc0"
 uuid = "2ab3a3ac-af41-5b50-aa03-7779005ae688"
-version = "1.0.4"
+version = "1.0.5"
 
     [deps.LogExpFunctions.extensions]
     LogExpFunctionsChainRulesCoreExt = "ChainRulesCore"

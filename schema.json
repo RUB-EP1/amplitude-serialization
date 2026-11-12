@@ -71,6 +71,59 @@
       "required": ["name", "propagators", "topology", "vertices", "weight"],
       "additionalProperties": false
     },
+    "DomainState": {
+      "type": "object",
+      "description": "Mass of an external particle in a phase_space domain.",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Particle index. Matches kinematics.initial_state.index (0) or kinematics.final_state[].index."
+        },
+        "mass": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Mass in GeV."
+        }
+      },
+      "required": ["index", "mass"],
+      "additionalProperties": false
+    },
+    "FourVector": {
+      "type": "object",
+      "description": "Components of a Minkowski four-vector p^μ = (E, p_x, p_y, p_z), in GeV.",
+      "properties": {
+        "E": { "type": "number", "description": "Energy in GeV." },
+        "px": {
+          "type": "number",
+          "description": "x-component of momentum in GeV."
+        },
+        "py": {
+          "type": "number",
+          "description": "y-component of momentum in GeV."
+        },
+        "pz": {
+          "type": "number",
+          "description": "z-component of momentum in GeV."
+        }
+      },
+      "required": ["E", "px", "py", "pz"],
+      "additionalProperties": false
+    },
+    "FinalStateMomentum": {
+      "type": "object",
+      "description": "On-shell four-momentum of one final-state particle.",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Final-state particle index. Matches kinematics.final_state[].index."
+        },
+        "p": { "$ref": "#/definitions/FourVector" }
+      },
+      "required": ["index", "p"],
+      "additionalProperties": false
+    },
     "Function": {
       "type": "object",
       "properties": {
@@ -173,10 +226,6 @@
           "description": "A unique identifier for each particle, with 0 reserved for the initial state particle.",
           "minimum": 0
         },
-        "mass": {
-          "anyOf": [{ "type": "number" }, { "type": "string" }],
-          "description": "Mass of the particle in GeV. Can be a constant value or a parametrization described under \"functions\" section."
-        },
         "name": {
           "type": "string",
           "description": "A label for each particle, used for clarity and not as a standardized identifier."
@@ -186,7 +235,7 @@
           "$ref": "#/definitions/Spin"
         }
       },
-      "required": ["index", "name", "spin", "mass"]
+      "required": ["index", "name", "spin"]
     },
     "Topology": {
       "type": "array",
@@ -329,14 +378,26 @@
         "type": "object",
         "properties": {
           "name": {
-            "description": "Identifier for the distribution. Can be referred to from elsewhere in the model description.",
+            "description": "Identifier for the domain. Can be referred to from phase-space points.",
             "type": "string"
           },
           "type": {
-            "enum": ["product_domain"],
+            "enum": ["product_domain", "phase_space"],
             "enumDescriptions": [
-              "Box-shaped domain defined by min-max values over each variable."
+              "Box-shaped domain defined by min-max values over each variable.",
+              "n-body phase space fixed by the initial-state mass m0 = √s and the final-state masses m1, m2, …, each given with its particle index."
             ]
+          },
+          "initial_state": {
+            "description": "Initial-state particle of a phase_space domain. Its mass is the invariant mass √s of the decaying system.",
+            "$ref": "#/definitions/DomainState"
+          },
+          "final_state": {
+            "type": "array",
+            "description": "Final-state particles of a phase_space domain, identified by index.",
+            "items": { "$ref": "#/definitions/DomainState" },
+            "minItems": 2,
+            "uniqueItems": true
           },
           "parameters": {
             "type": "array",
@@ -368,6 +429,10 @@
           {
             "if": { "properties": { "type": { "const": "product_domain" } } },
             "then": { "required": ["axes"] }
+          },
+          {
+            "if": { "properties": { "type": { "const": "phase_space" } } },
+            "then": { "required": ["initial_state", "final_state"] }
           }
         ],
         "additionalProperties": false
@@ -390,7 +455,7 @@
           "items": {
             "properties": {
               "point": {
-                "description": "Parameter point over which to evaluate the distribution.",
+                "description": "Name of the phase-space point (in parameter_points) at which the distribution is evaluated.",
                 "type": "string"
               },
               "distribution": {
@@ -410,22 +475,27 @@
     },
     "parameter_points": {
       "type": "array",
-      "description": "Definition of points in parameter space over which the model can be evaluated.",
+      "description": "Named phase-space points at which the model is evaluated. A point is a set of final-state four-momenta in a phase_space domain.",
       "items": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
-            "description": "Identifier for the parameter point. Can be referred to from elsewhere in the model description."
+            "description": "Identifier for the point. Can be referred to from checksums."
           },
-          "parameters": {
+          "domain": {
+            "type": "string",
+            "description": "Name of the phase_space domain that contains this point. It provides the particle masses."
+          },
+          "final_state": {
             "type": "array",
-            "description": "List of parameters and their values that together describe a point in phase space.",
-            "items": { "$ref": "#/definitions/Parameter" },
+            "description": "Four-momenta of the final-state particles, identified by index. Together they are one point of the phase-space domain and the input to the amplitude.",
+            "items": { "$ref": "#/definitions/FinalStateMomentum" },
+            "minItems": 2,
             "uniqueItems": true
           }
         },
-        "required": ["name"],
+        "required": ["name", "domain", "final_state"],
         "additionalProperties": false
       },
       "uniqueItems": true

@@ -1,3 +1,5 @@
+bigl
+bigr
 Blatt
 Breit
 Bugg
@@ -14,6 +16,9 @@ Jpsi
 Katchaev
 lineshape
 lineshapes
+mathbf
+mathrm
+Minkowski
 parametrizations
 recoupling
 recouplings

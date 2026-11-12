@@ -30,6 +30,8 @@ using Statistics
 using QuadGK
 using Plots
 
+include(joinpath(@__DIR__, "checksums.jl"))
+
 theme(:wong2, frame=:box, grid=false, minorticks=true,
     guidefontvalign=:top, guidefonthalign=:right,
     foreground_color_legend=nothing,
@@ -62,14 +64,18 @@ end
 @unpack distributions = input
 for dist in distributions
     @unpack name, type = dist
-    instance_type = eval(Symbol(type))
-    workspace[name] = dict2instance(instance_type, dist; workspace)
+    if type == "HadronicUnpolarizedIntensity"
+        workspace[name] = dict2instance(ThreeBodyDecay, dist["decay_description"]; workspace)
+    else
+        instance_type = eval(Symbol(type))
+        workspace[name] = dict2instance(instance_type, dist; workspace)
+    end
 end
 ```
 
 ## Validation
 
-The integrity of the model is checked by validating the value of distributions at a few phase space points. The table lists the validation checks and their status. The marks "🟢", "🟡", and "🔴" indicate an accuracy of $<10^{-10}$, $<10^{-2}$, or $\ge10^{-2}$, respectively, for the difference between the reference and computed values.
+The integrity of the model is checked by validating distributions at a few phase-space points. Amplitude checks are evaluated on final-state four-vectors. The marks "🟢", "🟡", and "🔴" indicate an accuracy of $<10^{-10}$, $<10^{-2}$, or $\ge10^{-2}$, respectively, for the difference between the reference and computed values.
 
 ```{julia}
 #| code-fold: true
@@ -78,28 +84,16 @@ The integrity of the model is checked by validating the value of distributions a
 let
     @unpack misc, parameter_points = input
     @unpack amplitude_model_checksums = misc
+    parameter_points_dict = array2dict(parameter_points; key="name")
 
     map(amplitude_model_checksums) do check_point_info
         @unpack point, value, distribution = check_point_info
-        #
-        # pull distribution
-        dist = workspace[distribution]
-
-        # pull correct parameter point
-        parameter_points_dict = array2dict(parameter_points; key="name")
-        # find the point in the list of points
-        parameter_point = parameter_points_dict[point]
-        # compute, compare
-        _parameters = array2dict(parameter_point["parameters"];
-            key="name", apply=v -> v["value"])
-        #
-        computed_value = dist(_parameters)
-        #
+        computed_value = evaluate_checksum_target(
+            workspace[distribution], parameter_points_dict[point])
         tonumber(X::Number) = X
         tonumber(X::String) = string2complex(X)
         reference_value = tonumber(value)
         status = label_diff(reference_value - computed_value; levels=[1e-2, 1e-10])
-        #
         (; Distribution=distribution,
             Point=point, computed_value, value, Status=status)
     end |> DataFrame
@@ -111,7 +105,7 @@ end
 The model describing the decay is fetched from the workspace
 
 ```{julia}
-model_names = [k for (k, v) in workspace if v isa HadronicUnpolarizedIntensity]
+model_names = [k for (k, v) in workspace if v isa ThreeBodyDecay]
 ```
 
 ### Dalitz plot
@@ -126,7 +120,7 @@ let iσx = 3, iσy = 1
     Nx, Ny = 2, div(n_models + 1, 2)
     plot(
         map(model_names) do model_name
-            model = workspace[model_name].model
+            model = workspace[model_name]
             #
             xlab = ((i, j) = ij_from_k(iσx);
             "m²($i$j) [GeV²]")

@@ -8,27 +8,23 @@
           "initial_state": {
             "index": 0,
             "spin": "1",
-            "name": "X_3pi",
-            "mass": 1.55
+            "name": "X_3pi"
           },
           "final_state": [
             {
               "index": 1,
               "spin": "0",
-              "name": "pi-",
-              "mass": 0.13956755
+              "name": "pi-"
             },
             {
               "index": 2,
               "spin": "0",
-              "name": "pi+",
-              "mass": 0.13956755
+              "name": "pi+"
             },
             {
               "index": 3,
               "spin": "0",
-              "name": "pi-",
-              "mass": 0.13956755
+              "name": "pi-"
             }
           ]
         },
@@ -483,17 +479,7 @@
             "name": "1-(1++)0+rho3piG"
           }
         ]
-      },
-      "variables": [
-        {
-          "mass_phi_costheta": ["m_23", "phi_23", "cos_theta_23"],
-          "node": [2, 3]
-        },
-        {
-          "mass_phi_costheta": ["m_23_1", "phi_23_1", "cos_theta_23_1"],
-          "node": [[2, 3], 1]
-        }
-      ]
+      }
     },
     {
       "type": "HadronicUnpolarizedIntensity",
@@ -503,27 +489,23 @@
           "initial_state": {
             "index": 0,
             "spin": "1",
-            "name": "X_3pi",
-            "mass": 1.55
+            "name": "X_3pi"
           },
           "final_state": [
             {
               "index": 1,
               "spin": "0",
-              "name": "pi-",
-              "mass": 0.13956755
+              "name": "pi-"
             },
             {
               "index": 2,
               "spin": "0",
-              "name": "pi+",
-              "mass": 0.13956755
+              "name": "pi+"
             },
             {
               "index": 3,
               "spin": "0",
-              "name": "pi-",
-              "mass": 0.13956755
+              "name": "pi-"
             }
           ]
         },
@@ -586,17 +568,7 @@
             "name": "1-(1-+)1+rhopiP"
           }
         ]
-      },
-      "variables": [
-        {
-          "mass_phi_costheta": ["m_23", "phi_23", "cos_theta_23"],
-          "node": [2, 3]
-        },
-        {
-          "mass_phi_costheta": ["m_23_1", "phi_23_1", "cos_theta_23_1"],
-          "node": [[2, 3], 1]
-        }
-      ]
+      }
     },
     {
       "type": "HadronicUnpolarizedIntensity",
@@ -606,27 +578,23 @@
           "initial_state": {
             "index": 0,
             "spin": "2",
-            "name": "X_3pi",
-            "mass": 1.55
+            "name": "X_3pi"
           },
           "final_state": [
             {
               "index": 1,
               "spin": "0",
-              "name": "pi-",
-              "mass": 0.13956755
+              "name": "pi-"
             },
             {
               "index": 2,
               "spin": "0",
-              "name": "pi+",
-              "mass": 0.13956755
+              "name": "pi+"
             },
             {
               "index": 3,
               "spin": "0",
-              "name": "pi-",
-              "mass": 0.13956755
+              "name": "pi-"
             }
           ]
         },
@@ -801,17 +769,7 @@
             "name": "1-(2++)1+rho3piD"
           }
         ]
-      },
-      "variables": [
-        {
-          "mass_phi_costheta": ["m_23", "phi_23", "cos_theta_23"],
-          "node": [2, 3]
-        },
-        {
-          "mass_phi_costheta": ["m_23_1", "phi_23_1", "cos_theta_23_1"],
-          "node": [[2, 3], 1]
-        }
-      ]
+      }
     },
     {
       "type": "HadronicUnpolarizedIntensity",
@@ -821,27 +779,23 @@
           "initial_state": {
             "index": 0,
             "spin": "4",
-            "name": "X_3pi",
-            "mass": 1.55
+            "name": "X_3pi"
           },
           "final_state": [
             {
               "index": 1,
               "spin": "0",
-              "name": "pi-",
-              "mass": 0.13956755
+              "name": "pi-"
             },
             {
               "index": 2,
               "spin": "0",
-              "name": "pi+",
-              "mass": 0.13956755
+              "name": "pi+"
             },
             {
               "index": 3,
               "spin": "0",
-              "name": "pi-",
-              "mass": 0.13956755
+              "name": "pi-"
             }
           ]
         },
@@ -960,17 +914,7 @@
             "name": "1-(4++)1+f2piF"
           }
         ]
-      },
-      "variables": [
-        {
-          "mass_phi_costheta": ["m_23", "phi_23", "cos_theta_23"],
-          "node": [2, 3]
-        },
-        {
-          "mass_phi_costheta": ["m_23_1", "phi_23_1", "cos_theta_23_1"],
-          "node": [[2, 3], 1]
-        }
-      ]
+      }
     }
   ],
   "functions": [
@@ -1014,7 +958,6 @@
         },
         {
           "gsq": 0.69465,
-
           "ma": 0.493677,
           "mb": 0.493677,
           "l": 0,
@@ -1087,37 +1030,23 @@
   "domains": [
     {
       "name": "default",
-      "type": "product_domain",
-      "axes": [
+      "type": "phase_space",
+      "initial_state": {
+        "index": 0,
+        "mass": 1.55
+      },
+      "final_state": [
         {
-          "name": "m_23",
-          "min": -1,
-          "max": 1
+          "index": 1,
+          "mass": 0.13956755
         },
         {
-          "name": "phi_23",
-          "min": -1,
-          "max": 1
+          "index": 2,
+          "mass": 0.13956755
         },
         {
-          "name": "cos_theta_23",
-          "min": -1,
-          "max": 1
-        },
-        {
-          "name": "m_23_1",
-          "min": -1,
-          "max": 1
-        },
-        {
-          "name": "phi_23_1",
-          "min": -1,
-          "max": 1
-        },
-        {
-          "name": "cos_theta_23_1",
-          "min": -1,
-          "max": 1
+          "index": 3,
+          "mass": 0.13956755
         }
       ]
     }
@@ -1203,157 +1132,139 @@
         "distribution": "compass_3pi_JP=4+_M=1_1540_1560",
         "point": "validation_point4",
         "value": 0.1058334409901948
-      },
-      {
-        "point": "validation_point_m12sq",
-        "distribution": "R(1274)",
-        "value": "1.682682255119889 + 0.62086927105196i"
-      },
-      {
-        "point": "validation_point_m12sq",
-        "distribution": "R(1690)",
-        "value": "0.5643082293246228 + 0.10318283266108788i"
-      },
-      {
-        "point": "validation_point_m12sq",
-        "distribution": "R(600)",
-        "value": "0.10172436035046228 + 1.0273440332286132i"
-      },
-      {
-        "point": "validation_point_m12sq",
-        "distribution": "R(768)",
-        "value": "-1.7321826562432676 + 0.6323990884902008i"
-      },
-      {
-        "point": "validation_point_m12sq",
-        "distribution": "R(965)",
-        "value": "-0.9212576583634395 + 2.1470398931994485i"
       }
     ]
   },
   "parameter_points": [
     {
       "name": "validation_point1",
-      "parameters": [
+      "domain": "default",
+      "final_state": [
         {
-          "name": "m_23_1",
-          "value": 1.55
+          "index": 1,
+          "p": {
+            "E": 0.6944910863757721,
+            "px": -0.6803225470630806,
+            "py": 0,
+            "pz": 0
+          }
         },
         {
-          "name": "phi_23_1",
-          "value": 0.0
+          "index": 2,
+          "p": {
+            "E": 0.3130714443104843,
+            "px": 0.1959468272222577,
+            "py": 0,
+            "pz": -0.2003483694248121
+          }
         },
         {
-          "name": "cos_theta_23_1",
-          "value": 0.0
-        },
-        {
-          "name": "m_23",
-          "value": 0.5187067892828369
-        },
-        {
-          "name": "phi_23",
-          "value": 0.0
-        },
-        {
-          "name": "cos_theta_23",
-          "value": -0.40000000000000013
+          "index": 3,
+          "p": {
+            "E": 0.5424374693137437,
+            "px": 0.4843757198408229,
+            "py": 0,
+            "pz": 0.2003483694248121
+          }
         }
       ]
     },
     {
       "name": "validation_point2",
-      "parameters": [
+      "domain": "default",
+      "final_state": [
         {
-          "name": "m_23_1",
-          "value": 1.55
+          "index": 1,
+          "p": {
+            "E": 0.5424374693137437,
+            "px": -0.5241748821743523,
+            "py": 0,
+            "pz": 0
+          }
         },
         {
-          "name": "phi_23_1",
-          "value": 0.0
+          "index": 2,
+          "p": {
+            "E": 0.6944910863757721,
+            "px": 0.628667520447903,
+            "py": 0,
+            "pz": -0.2600306073835982
+          }
         },
         {
-          "name": "cos_theta_23_1",
-          "value": 0.0
-        },
-        {
-          "name": "m_23",
-          "value": 0.8604783240386694
-        },
-        {
-          "name": "phi_23",
-          "value": 0.0
-        },
-        {
-          "name": "cos_theta_23",
-          "value": 0.7692574254771216
+          "index": 3,
+          "p": {
+            "E": 0.3130714443104845,
+            "px": -0.1044926382735507,
+            "py": 0,
+            "pz": 0.2600306073835982
+          }
         }
       ]
     },
     {
       "name": "validation_point3",
-      "parameters": [
+      "domain": "default",
+      "final_state": [
         {
-          "name": "m_23_1",
-          "value": 1.55
+          "index": 1,
+          "p": {
+            "E": 0.3130714443104845,
+            "px": -0.2802403044346946,
+            "py": 0,
+            "pz": 0
+          }
         },
         {
-          "name": "phi_23_1",
-          "value": 0.0
+          "index": 2,
+          "p": {
+            "E": 0.5424374693137436,
+            "px": -0.1954480333070345,
+            "py": 0,
+            "pz": -0.4863736972523374
+          }
         },
         {
-          "name": "cos_theta_23_1",
-          "value": 0.0
-        },
-        {
-          "name": "m_23",
-          "value": 1.2047645511262774
-        },
-        {
-          "name": "phi_23",
-          "value": 0.0
-        },
-        {
-          "name": "cos_theta_23",
-          "value": -0.5577601618235116
+          "index": 3,
+          "p": {
+            "E": 0.6944910863757721,
+            "px": 0.4756883377417291,
+            "py": 0,
+            "pz": 0.4863736972523375
+          }
         }
       ]
     },
     {
       "name": "validation_point4",
-      "parameters": [
+      "domain": "default",
+      "final_state": [
         {
-          "name": "m_23_1",
-          "value": 1.55
+          "index": 1,
+          "p": {
+            "E": 0.5777028758840429,
+            "px": -0.5605903243828699,
+            "py": 0,
+            "pz": 0
+          }
         },
         {
-          "name": "phi_23_1",
-          "value": 0.0
+          "index": 2,
+          "p": {
+            "E": 0.3257293416623577,
+            "px": 0.002061414908528051,
+            "py": 0,
+            "pz": -0.2943063940443111
+          }
         },
         {
-          "name": "cos_theta_23_1",
-          "value": 0.0
-        },
-        {
-          "name": "m_23",
-          "value": 0.7944181429023822
-        },
-        {
-          "name": "phi_23",
-          "value": 0.0
-        },
-        {
-          "name": "cos_theta_23",
-          "value": -0.6113011797354894
-        }
-      ]
-    },
-    {
-      "name": "validation_point_m12sq",
-      "parameters": [
-        {
-          "name": "m_12_sq",
-          "value": 1.1
+          "index": 3,
+          "p": {
+            "E": 0.6465677824535997,
+            "px": 0.5585289094743419,
+            "py": 0,
+            "pz": 0.2943063940443111
+          }
         }
       ]
     }

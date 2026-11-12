@@ -16,8 +16,8 @@ In parallel to development of the model description format, compatibility with H
 
 ## Example of HS3 file
 
-- [HS3_base.json](../models/HS3_base.json) give description of basic interfaces of the model variables and parameters consistently with HS3. It sets default value of variable, and describes a validation point in HS3 consistent way.
-- [HS3_extended.json](../models/HS3_extended.json) prototypes
+- [HS3_base.json](https://github.com/RUB-EP1/amplitude-serialization/blob/ecee71af8f77bc0360b3c5d8bc85592802652eb0/models/HS3_base.json) give description of basic interfaces of the model variables and parameters consistently with HS3. It sets default value of variable, and describes a validation point in HS3 consistent way.
+- [HS3_extended.json](https://github.com/RUB-EP1/amplitude-serialization/blob/ecee71af8f77bc0360b3c5d8bc85592802652eb0/models/HS3_extended.json) prototypes
   - adding jacobian (prior) for phase space generation,
   - replacing phase space variables
 

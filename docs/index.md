@@ -10,7 +10,7 @@ It enables keeping consistent numerical values for masses, and lineshape paramet
 
 ## Example
 
-A realistic decay description for Lc2pKpi amplitude is produced with [`ThreeBodyDecayIO.jl`](https://github.com/mmikhasenko/ThreeBodyDecaysIO.jl) using the default model of the Lc2ppiK decays,
+A realistic decay description for Lc2pKpi amplitude is produced with [`ThreeBodyDecayIO.jl`](https://github.com/RUB-EP1/ThreeBodyDecaysIO.jl) using the default model of the Lc2ppiK decays,
 [`Lc2ppiKSemileptonicModelLHCb.jl`](https://github.com/mmikhasenko/Lc2ppiKSemileptonicModelLHCb.jl).
 
 For a description of a three body decay amplitude, one must provide several mandatory section at the root of the object,

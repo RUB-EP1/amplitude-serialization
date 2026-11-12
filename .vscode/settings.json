@@ -40,8 +40,5 @@
   "python.terminal.activateEnvironment": false,
   "quarto.path": ".pixi/envs/default/bin/quarto",
   "redhat.telemetry.enabled": false,
-  "telemetry.telemetryLevel": "off",
-  "yaml.schemas": {
-    "./schema.json": ["models/*.yaml", "models/*.yml"]
-  }
+  "telemetry.telemetryLevel": "off"
 }

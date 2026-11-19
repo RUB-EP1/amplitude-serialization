@@ -6,6 +6,7 @@ jupyter: julia-amplitude-serialization-1.12
 
 ::: {.callout-note appearance="simple"}
 Model definition: [`x2pipipi-compass-1391643.json`](https://github.com/RUB-EP1/amplitude-serialization/blob/main/models/x2pipipi-compass-1391643.json).
+[Explore this model](../explorer/index.html?model=x2pipipi-compass-1391643).
 :::
 
 This page demonstrates deserialization and evaluation the a partial wave analysis of diffractively produced $3\pi$ system. The analysis is performed independently in bins of $3\pi$ mass, and transferred momentum. The total number of bins is 100.

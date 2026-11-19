@@ -14,6 +14,13 @@ format:
 project:
   output-dir: _build/html
   type: website
+  pre-render: explorer/manage.py
+  resources:
+    - explorer/index.html
+    - explorer/*.css
+    - explorer/app.mjs
+    - explorer/model.mjs
+    - explorer/models/*.json
 
 website:
   title: Amplitude model serialization
@@ -30,6 +37,8 @@ website:
         text: Home
       - description.md
       - HS3.md
+      - href: explorer/index.html
+        text: Explore models
     right:
       - icon: github
         href: https://github.com/RUB-EP1/amplitude-serialization

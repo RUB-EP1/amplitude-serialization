@@ -47,16 +47,6 @@ h1 {
   font-weight: 650;
   line-height: 1.18;
 }
-h1 span {
-  color: #5e83b9;
-}
-.eyebrow {
-  font-size: 0.75rem;
-  font-weight: 650;
-  letter-spacing: 0.16em;
-  color: var(--muted);
-  margin-bottom: 12px;
-}
 .intro {
   color: var(--muted);
   margin-top: 10px;

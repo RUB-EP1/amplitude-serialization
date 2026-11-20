@@ -28,6 +28,7 @@ source = "https://github.com/RUB-EP1/amplitude-serialization"
 [tool.lychee]
 cache = true
 cache_exclude_status = "400.."
+exclude_loopback = true
 extensions = [
     "css",
     "htm",
@@ -54,12 +55,14 @@ PYTHONHASHSEED = "0"
 
 [tool.pixi.dependencies]
 julia = "1.12.*"
+nodejs = ">=18"
 python = "3.13.*"
 prek = "*"
 
 [tool.pixi.tasks.all]
 depends-on = [
     "style",
+    "test-explorer",
     "linkcheck",
     "_clean-doc",
     "doc",
@@ -80,6 +83,10 @@ cmd = "quarto preview"
 cwd = "docs"
 depends-on = ["install-julia"]
 
+[tool.pixi.tasks.explorer]
+cmd = "python docs/explorer/manage.py --serve --open"
+description = "Open the standalone model explorer without building the notebooks"
+
 [tool.pixi.tasks.install-julia]
 cmd = """
 julia --project -e '
@@ -98,6 +105,13 @@ description = "Check links in repository sources (requires internet connection)"
 [tool.pixi.tasks.style]
 cmd = "prek run --all-files"
 description = "Perform all linting, formatting, and spelling checks"
+
+[tool.pixi.tasks.test-explorer]
+cmd = """
+node --test docs/explorer/model.test.mjs &&
+python -m unittest discover -s docs/explorer -p 'test_*.py'
+"""
+description = "Check model navigation and references in the model explorer"
 
 [tool.pixi.tasks.upgrade]
 depends-on = [

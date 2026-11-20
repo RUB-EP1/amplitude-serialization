@@ -26,32 +26,35 @@ The `kinematics` section details the particle states involved in decay processes
 For example, the kinematics of the decay Lc2pKpi would look like,
 
 ```json
-"kinematics": {
-    "initial_state" : {
-        "index" : 0,
-        "name" : "Lc",
-        "spin" : "1/2",
-        "mass" : 2.28646
+{
+  "kinematics": {
+    "initial_state": {
+      "index": 0,
+      "name": "Lc",
+      "spin": "1/2",
+      "mass": 2.28646
     },
-    "final_state" : [
-    {
-        "index" : 1,
-        "name" : "p",
-        "spin" : "1/2",
-        "mass" : 0.938272046
-    },
-    {
-        "index" : 2,
-        "name" : "pi",
-        "spin" : "0",
-        "mass" : 0.13957018
-    },
-    {
-        "index" : 3,
-        "name" : "K",
-        "spin" : "0",
-        "mass" : 0.493677
-    }]
+    "final_state": [
+      {
+        "index": 1,
+        "name": "p",
+        "spin": "1/2",
+        "mass": 0.938272046
+      },
+      {
+        "index": 2,
+        "name": "pi",
+        "spin": "0",
+        "mass": 0.13957018
+      },
+      {
+        "index": 3,
+        "name": "K",
+        "spin": "0",
+        "mass": 0.493677
+      }
+    ]
+  }
 }
 ```
 
@@ -77,7 +80,9 @@ In this notation, each pair of brackets indicate the node and it's children.
 The name of the node is simply given by its decay in the same bracket notations.
 
 ```json
-  "topology": [[1, 2], 3],
+{
+  "topology": [[1, 2], 3]
+}
 ```
 
 Here the 3-body decay process described by the notation `[[1,2],3]`,
@@ -115,6 +120,7 @@ The `appendix` gives definition to the text keys used elsewhere in the descripti
 The use of strings for complex numbers follows physics conventions for ease of reading.
 
 ```json
+{
   "appendix": {
     "BlattWeisskopf(resonance)": {
       "type": "BlattWeisskopf",
@@ -132,8 +138,9 @@ The use of strings for complex numbers follows physics conventions for ease of r
       "mass": 1.69,
       "ma": 0.493677,
       "width": 0.07
-    },
+    }
   }
+}
 ```
 
 The string values that are not expanded in the `"appendix"` should be identifiers declared in the serialization document.

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Explore serialized amplitude models, decay chains, couplings, and shared function definitions."
+    />
+    <title>Amplitude Model Explorer</title>
+    <link rel="icon" href="favicon.ico" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="app.mjs"></script>
+  </head>
+  <body>
+    <main>
+      <header class="masthead">
+        <div>
+          <h1>Amplitude Model Explorer</h1>
+          <p class="intro">
+            Browse the decay chains, lineshapes, and parameters of serialized
+            amplitude models.
+          </p>
+        </div>
+        <label class="upload"
+          >Open JSON<input
+            id="file"
+            type="file"
+            accept=".json,application/json"
+        /></label>
+      </header>
+      <section class="toolbar" aria-label="Model selection">
+        <label for="model"
+          >Model<select id="model" disabled>
+            <option>Loading models…</option>
+          </select></label
+        >
+        <div class="model-meta">
+          <span id="filename"></span><span id="counts"></span>
+        </div>
+      </section>
+      <p id="error" role="alert" hidden></p>
+      <nav id="breadcrumbs" aria-label="Object path"></nav>
+      <div id="columns" aria-label="Model objects" aria-busy="true"></div>
+      <div id="announcement" class="sr-only" aria-live="polite"></div>
+      <details class="raw">
+        <summary>Selected object <span>JSON</span></summary>
+        <pre><code id="raw"></code></pre>
+      </details>
+      <footer>
+        <span>Indices start at 0 · linked names open their definitions</span
+        ><a id="source" target="_blank" rel="noreferrer">Model source</a
+        ><a href="https://rub-ep1.github.io/amplitude-serialization/"
+          >Documentation</a
+        ><span>Structure viewer · no amplitude evaluation</span>
+      </footer>
+    </main>
+  </body>
+</html>

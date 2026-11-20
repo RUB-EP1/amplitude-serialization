@@ -1,12 +1,15 @@
 ---
 jupyter: python3
+other-links:
+  - text: Model definition
+    icon: filetype-json
+    href: https://github.com/RUB-EP1/amplitude-serialization/blob/main/models/lc2ppik-lhcb-2683025.json
+  - text: Explore this model
+    icon: diagram-3
+    href: ../explorer/index.html?model=lc2ppik-lhcb-2683025
 ---
 
 # $\Lambda_c^+ \to p K^- \pi^+$
-
-::: {.callout-note appearance="simple"}
-Model definition: [`lc2ppik-lhcb-2683025.json`](https://github.com/RUB-EP1/amplitude-serialization/blob/main/models/lc2ppik-lhcb-2683025.json).
-:::
 
 This notebook illustrates the use of the [`ampform_dpd.io.serialization`](https://ampform-dpd.readthedocs.io/latest/api/ampform_dpd.io.serialization.html) module for the decay $\Lambda_c^+ \to p K^- \pi^+$. The corresponding model was optimized to a data sample of roughly half a million $\Lambda_c^{\pm}$ decay candidates by the LHCb collaboration, [INSPIRE-HEP 2683025](https://inspirehep.net/literature/2683025).
 

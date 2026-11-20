@@ -52,6 +52,7 @@ jobs:
             home-cache
           path: |
             ~/.cache
+      - run: pixi run test-explorer
       - run: pixi run doc
       - if: always()
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0

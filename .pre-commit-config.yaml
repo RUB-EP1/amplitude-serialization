@@ -26,14 +26,14 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/tombi-toml/tombi-pre-commit
-    rev: v1.11.2
+    rev: v1.11.3
     hooks:
       - id: tombi-format
       - id: tombi-lint
         args: [--error-on-warnings]
 
   - repo: https://github.com/ComPWA/prettier-pre-commit
-    rev: v3.9.10
+    rev: v3.10.1
     hooks:
       - id: prettier
 
@@ -45,7 +45,7 @@ repos:
         files: ^models/.*\.(json|yaml|yml)$
 
   - repo: https://github.com/streetsidesoftware/cspell-cli
-    rev: v10.4.0
+    rev: v10.4.1
     hooks:
       - id: cspell
 

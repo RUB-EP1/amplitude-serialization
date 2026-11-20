@@ -372,7 +372,7 @@ async function initialize() {
     const response = await fetch("models/index.json");
     if (!response.ok)
       throw new Error(
-        "Model catalog unavailable. Run make display or rebuild the documentation.",
+        "Model catalog unavailable. Run pixi run explorer or rebuild the documentation.",
       );
     catalog = await response.json();
     if (!Array.isArray(catalog) || !catalog.length)

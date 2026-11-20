@@ -12,9 +12,7 @@ The interface has no runtime dependencies, external fonts, or network services.
 
 ## Development
 
-From the repository root, run `make display` (Python 3.9+). This opens the viewer at
-`http://127.0.0.1:8000/`; Ctrl-C stops the server. Use `PORT=8001` for another port.
-`make test-explorer` runs the navigation and reference tests with Node.js 18+.
+From the repository root, run `pixi run explorer`. This opens the viewer at `http://127.0.0.1:8000/` without building the notebooks; Ctrl-C stops the server. Append `--port 8001` to use another port. `pixi run test-explorer` runs the navigation and reference tests. Pixi installs Python and Node.js, so no other tools are needed. To see the explorer within the full website, run `pixi run doc` or `pixi run doclive`.
 
 Quarto invokes `manage.py` before rendering. It generates an ignored catalog and
 copies the canonical `models/*.json` into the explorer resources. Adding a model

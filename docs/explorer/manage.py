@@ -63,7 +63,7 @@ def main():
     try:
         server = ThreadingHTTPServer(("127.0.0.1", args.port), handler)
     except OSError as error:
-        parser.exit(1, f"Cannot start explorer: {error}. Try PORT=8001.\n")
+        parser.exit(1, f"Cannot start explorer: {error}. Try another --port.\n")
     url = f"http://127.0.0.1:{server.server_port}/"
     print(f"Amplitude Model Explorer: {url}\nPress Ctrl-C to stop.", flush=True)
     if args.open_browser:

@@ -25,13 +25,3 @@ static viewer with the rest of the site.
 Links such as `index.html?model=lc2ppik-lhcb-2683025` select a bundled model.
 Navigation within each model is remembered in local browser storage. Object indices
 are zero-based. The topology diagram uses the selected distribution's kinematics.
-
-## Screenshots
-
-Overview of the serialized object hierarchy:
-
-![Model overview](../_images/explorer-overview.jpg)
-
-A decay chain and its referenced function:
-
-![Chain and function](../_images/explorer-chain.jpg)

@@ -17,6 +17,7 @@ project:
   pre-render: explorer/manage.py
   resources:
     - explorer/index.html
+    - explorer/favicon.ico
     - explorer/*.css
     - explorer/app.mjs
     - explorer/model.mjs

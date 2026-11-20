@@ -17,6 +17,9 @@ class CatalogTest(unittest.TestCase):
             explorer = root / "docs" / "explorer"
             models.mkdir()
             explorer.mkdir(parents=True)
+            images = root / "docs" / "_images"
+            images.mkdir()
+            (images / "favicon.ico").write_bytes(b"icon")
             value = {"distributions": []}
             original = json.dumps(value, indent=4) + "\n"
             (models / "new-model.json").write_text(original)

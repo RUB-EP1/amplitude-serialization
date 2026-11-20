@@ -16,7 +16,8 @@ ROOT = EXPLORER.parents[1]
 
 
 def prepare():
-    """Copy canonical models and generate a catalog for the documentation build."""
+    """Copy the site favicon and canonical models, and generate a model catalog."""
+    shutil.copyfile(ROOT / "docs" / "_images" / "favicon.ico", EXPLORER / "favicon.ico")
     destination = EXPLORER / "models"
     destination.mkdir(exist_ok=True)
     catalog = []
